@@ -9,11 +9,34 @@
 >
 > UNITEY PULSE aims to revolutionize business operations by providing a centralized platform for comprehensive management across all aspects of the organization. We aim to simplify tasks such as employee management, finance tracking, task delegation, and communication, ultimately enhancing efficiency and productivity within businesses.
 
-### User Stories
+### User Stories:
+
+#### Business Owner:
 
 - As a business owner, I should be able to track attendance, manage leaves, and evaluate employee performance within the system.
-- As a project manager, I need to create tasks, assign them to team members, and track their status and progress.
-- As a employee, I value having a centralized directory that provides detailed profiles of my colleagues, including their contact information and job roles, allowing for seamless collaboration and efficient communication.
+
+- As a business owner, I should be able to define and update company policies such as code of conduct, HR policies, etc., ensuring all employees are aware and compliant.
+
+- As a business owner, I should define clear goals and objectives for individual employees or teams.
+
+- As a business owner, I should evaluate employee performance within the system.
+
+#### Project Manager:
+
+- As a project manager, I need to schedule and manage team meetings, including sending invites, setting agendas, and tracking attendance, to facilitate effective communication and collaboration.
+
+- As a project manager, I need to manage project budgets, track expenses, and approve expenses submitted by team members, ensuring projects stay within budget constraints.
+
+- As a project manager, I need to allocate resources efficiently across projects, ensuring that tasks are appropriately assigned based on team members' skills and availability to optimize productivity.
+
+#### Employee:
+
+- As an employee, I value having a centralized directory that provides detailed profiles of my colleagues, including their contact information and job roles, allowing for seamless collaboration and efficient communication.
+
+- As an employee, I need to provide feedback on projects, processes, or team dynamics through anonymous surveys or suggestion boxes, fostering a culture of continuous improvement and employee engagement.
+
+- As an employee, I have to be able to request flexible work arrangements such as remote work, flexible hours, or job sharing, supported by the company's policies and systems for managing work arrangements.
+
   <br><br>
 
 <!-- Tech stack -->
