@@ -19,8 +19,6 @@
 
 - As a business owner, I should define clear goals and objectives for individual employees or teams.
 
-- As a business owner, I should evaluate employee performance within the system.
-
 #### Project Manager:
 
 - As a project manager, I need to schedule and manage team meetings, including sending invites, setting agendas, and tracking attendance, to facilitate effective communication and collaboration.
