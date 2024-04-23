@@ -1,5 +1,5 @@
 const styles = {
-  hoverScale: 'hover:scale-105',
+  hoverScale: 'hover:scale-110',
   flexCenter: 'flex justify-center items-center',
   flexStart: 'flex justify-center items-start',
   flexBetween: 'flex justify-between items-center',
