@@ -1,4 +1,4 @@
-import { Navbar } from './components/index';
+import { Hero, Navbar } from './components/index';
 import styles from './home.module.css';
 
 function Home() {
@@ -7,6 +7,10 @@ function Home() {
       <header>
         <Navbar />
       </header>
+
+      <main>
+        <Hero />
+      </main>
     </div>
   );
 }
