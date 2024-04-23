@@ -6,3 +6,8 @@
   color: green;
   background-color: black;
 }
+
+.main {
+  background: linear-gradient(to bottom, #112d4e, #3f72af);
+  min-height: 100vh;
+}

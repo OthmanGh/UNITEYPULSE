@@ -24,3 +24,8 @@ export const navLinks = [
     title: 'Pricing',
   },
 ];
+
+export const Logo = {
+  src: './../assets/logo.png',
+  alt: 'Unity Pulse Logo',
+};

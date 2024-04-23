@@ -3,7 +3,7 @@ import styles from './home.module.css';
 
 function Home() {
   return (
-    <div>
+    <div className={styles.main}>
       <header>
         <Navbar />
       </header>

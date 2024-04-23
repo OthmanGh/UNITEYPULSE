@@ -1,3 +1,73 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+ul {
+  list-style: none;
+}
+
+:root {
+  --clrs-white-: #f9f7f7;
+  --clrs-blue-light-: #366399;
+  --clrs-blue-dark-: #112d4e;
+  --clrs-clear-blue-: #dbe2ef;
+  --clrs-black-: #333;
+}
+
+body {
+  scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* 
+Media Queries BreakPoints : 
+  - 320px — 480px: Mobile devices
+  - 481px — 768px: iPads, Tablets
+  - 769px — 1024px: Small screens, laptops
+  - 1025px — 1200px: Desktops, large screens
+  - 1201px and more —  Extra large screens, TV
+*/
