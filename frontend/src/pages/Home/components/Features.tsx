@@ -57,13 +57,17 @@ const Card = ({ title, text, Icon, buttonText }: CardProps) => {
 
 const CustomNextArrow = (props: any) => (
   <div onClick={props.onClick}>
-    <RightArrow className="text-3xl bg-skyBlue hover:cursor-pointer text-secondary rounded-2xl absolute  z-10 right-[-40px] scale-105" />
+    <RightArrow
+      className={`text-3xl bg-skyBlue hover:cursor-pointer text-secondary rounded-2xl absolute z-10 right-[-20px] hover:scale-110 ${shortStyles.transition}`}
+    />
   </div>
 );
 
 const CustomPrevArrow = (props: any) => (
   <div onClick={props.onClick}>
-    <LeftArrow className="text-3xl bg-skyBlue hover:cursor-pointer text-secondary rounded-2xl absolute z-10 left-[-40px] scale-105" />
+    <LeftArrow
+      className={`text-3xl bg-skyBlue hover:cursor-pointer text-secondary rounded-2xl absolute z-10 left-[-20px] hover:scale-110 ${shortStyles.transition}`}
+    />
   </div>
 );
 
