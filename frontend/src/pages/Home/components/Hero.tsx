@@ -7,7 +7,7 @@ const Hero = () => {
   const handleSubmit = () => {};
 
   return (
-    <section className={`${styles.hero__section} sm:justify-center sm:mx-auto sm:p-10`}>
+    <section className={`${styles.hero__section} sm:justify-center sm:mx-auto sm:p-10 min-h-[100vh]`}>
       <div className="flex flex-col items-start justify-between gap-7 ">
         <h1 className={`text-white font-bold ${shortStyles.titleMobile} sm:max-w-[280px] sm:text-2xl sm:text-start sm:leading-tight sm:mt-6 md:text-3xl`}>
           Unlock Your Business Potential with <span className="text-primary ">UNITEY PULSE</span> Elevate Performance, Drive Success
