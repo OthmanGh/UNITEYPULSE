@@ -12,7 +12,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`w-full p-6 ${shortStyles.flexBetween} ${styles.navbar} border-b-2 border-opacity-60 border-lightBlue text-white  navbar h-20`}>
+    <nav className={`w-full p-6 ${shortStyles.flexBetween} border-b-2 border-opacity-60 border-lightBlue text-white  navbar h-20`}>
       <p className={`${styles.navbar} font-bold ${shortStyles.linksFonts} group ${shortStyles.transition} hover:text-primary`}>
         Unity<span className={`text-primary group-hover:text-white ${shortStyles.transition}`}>Pulse</span>
       </p>
