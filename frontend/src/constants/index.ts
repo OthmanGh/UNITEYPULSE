@@ -60,4 +60,25 @@ export const featuresCard = [
     text: 'Streamline employee management processes with user roles and permissions, employee profiles, attendance tracking, leave management, and performance evaluation',
     buttonText: 'Get Started',
   },
+
+  {
+    Icon: Currency,
+    title: 'Employee Management',
+    text: 'Streamline employee management processes with user roles and permissions, employee profiles, attendance tracking, leave management, and performance evaluation',
+    buttonText: 'Get Started',
+  },
+
+  {
+    Icon: Currency,
+    title: 'Employee Management',
+    text: 'Streamline employee management processes with user roles and permissions, employee profiles, attendance tracking, leave management, and performance evaluation',
+    buttonText: 'Get Started',
+  },
+
+  {
+    Icon: Currency,
+    title: 'Employee Management',
+    text: 'Streamline employee management processes with user roles and permissions, employee profiles, attendance tracking, leave management, and performance evaluation',
+    buttonText: 'Get Started',
+  },
 ];

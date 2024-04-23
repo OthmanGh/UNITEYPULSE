@@ -1,3 +1,48 @@
 .card {
   background: linear-gradient(to top, #e2edf3, #3f72af);
 }
+
+.next-arrow,
+.prev-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  z-index: 10;
+}
+
+.next-arrow i,
+.prev-arrow i {
+  color: blue;
+  font-size: 24px;
+}
+
+.slick-dots {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.slick-dots li {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.slick-dots li button {
+  font-size: 10px;
+  line-height: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: blue;
+  border: none;
+  cursor: pointer;
+}
+
+.slick-dots li.slick-active button {
+  background-color: red;
+}
