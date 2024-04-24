@@ -83,5 +83,7 @@ export const featuresCard = [
   },
 ];
 
-export const aboutusText =
-  "Welcome to UNITEY PULSE, your trusted partner in company management solutions. We're committed to revolutionizing the way businesses operate by providing a comprehensive platform that empowers organizations to streamline their operations and enhance efficiency. Our mission is to simplify business management processes and empower organizations to achieve their full potential, guided by our core values of innovation, integrity, and customer success, which drive everything we do.";
+export const aboutusText = {
+  text: "Welcome to UNITEY PULSE, your trusted partner in company management solutions. We're committed to revolutionizing the way businesses operate by providing a comprehensive platform that empowers organizations to streamline their operations and enhance efficiency. Our mission is to simplify business management processes and empower organizations to achieve their full potential, guided by our core values of innovation, integrity, and customer success, which drive everything we do.",
+  title: 'About us',
+};
