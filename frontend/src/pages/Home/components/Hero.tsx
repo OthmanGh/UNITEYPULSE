@@ -2,7 +2,6 @@ import { useState } from 'react';
 import styles from './Hero.module.css';
 import shortStyles from '../../../components/index';
 import Button from '../../../components/Button';
-import { motion } from 'framer-motion';
 
 const Hero = () => {
   const handleSubmit = () => {};
