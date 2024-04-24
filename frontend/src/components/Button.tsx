@@ -1,7 +1,5 @@
 import styles from '.';
 
-import React from 'react';
-
 type ButtonProps = {
   onClick: () => void;
   text: string;

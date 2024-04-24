@@ -1,26 +1,26 @@
 import React from 'react';
 import { FieldError, UseFormRegister } from 'react-hook-form';
 
-interface InputProps {
+interface SelectProps {
   label: string;
-  type: string;
   name: string;
   register: UseFormRegister<any>;
   error?: FieldError;
   classParent?: string;
   classLabel?: string;
-  classInput?: string;
-  placeholder?: string;
+  classSelect?: string;
 }
 
-const Input: React.FC<InputProps> = ({ label, type, name, register, error, classParent = '', classLabel = '', classInput = '', placeholder = '' }) => {
+const Select: React.FC<SelectProps> = ({ label, name, register, error, classParent = '', classLabel = '', classSelect = '', children }) => {
   return (
     <div className={classParent}>
       <label className={classLabel}>{label}</label>
-      <input type={type} name={name} {...register(name)} className={classInput} placeholder={placeholder} />
+      <select name={name} {...register(name)} className={classSelect}>
+        {children}
+      </select>
       {error && <p className="text-red-500">{error.message}</p>}
     </div>
   );
 };
 
-export default Input;
+export default Select;
