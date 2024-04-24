@@ -17,13 +17,18 @@ export const navLinks = [
   },
 
   {
-    id: 'aboutUs',
+    id: 'aboutus',
     title: 'AboutUs',
   },
 
   {
     id: 'pricing',
     title: 'Pricing',
+  },
+
+  {
+    id: 'getintouch',
+    title: 'getInTouch',
   },
 ];
 

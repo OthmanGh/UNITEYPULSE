@@ -4,6 +4,7 @@ import { navLinks } from '../../../constants';
 import { Close, Menu } from '../../../constants/icons';
 import shortStyles from '../../../components/index';
 import { motion } from 'framer-motion';
+import { Link } from 'react-scroll';
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -30,9 +31,17 @@ const Navbar = () => {
         className={`hidden sm:flex gap-8 md:gap-12 text-sm  ss:text-md  sm:text-lg md:text-xl text-lightBlue font-semibold`}
       >
         {navLinks.map((nav) => (
-          <motion.li key={nav.id} className={`${shortStyles.pointer} hover:text-primary ${shortStyles.transition} ${shortStyles.hoverScale}`}>
-            {nav.title}
-          </motion.li>
+          <Link
+            key={nav.id}
+            to={nav.id}
+            spy={true}
+            smooth={true}
+            duration={500}
+            offset={-70}
+            className={`${shortStyles.pointer} hover:text-primary ${shortStyles.transition} ${shortStyles.hoverScale}`}
+          >
+            <motion.li>{nav.title}</motion.li>
+          </Link>
         ))}
       </motion.ul>
 
@@ -68,12 +77,13 @@ const Navbar = () => {
           className={`${toggle ? 'flex' : 'hidden'} absolute top-[82px] w-full left-[0%] ${shortStyles.flexCenter} flex-col list-none`}
         >
           {navLinks.map((item) => (
-            <li
-              key={item.id}
-              className={` bg-secondary ${shortStyles.transition} bg-opacity-40 text-center border-b-2 border-opacity-60 w-full py-4 border-b-lightBlue text-blue-100 hover:bg-opacity-100 ${shortStyles.pointer} ${shortStyles.hoverScale} font-semibold text-lg`}
-            >
-              {item.title}
-            </li>
+            <Link key={item.id} to={item.section} spy={true} smooth={true} duration={500} offset={-70}>
+              <li
+                className={` bg-secondary ${shortStyles.transition} bg-opacity-40 text-center border-b-2 border-opacity-60 w-full py-4 border-b-lightBlue text-blue-100 hover:bg-opacity-100 ${shortStyles.pointer} ${shortStyles.hoverScale} font-semibold text-lg`}
+              >
+                {item.title}
+              </li>
+            </Link>
           ))}
         </motion.ul>
       </motion.div>
