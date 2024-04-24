@@ -4,7 +4,7 @@ import { aboutusText } from '../../../constants';
 
 const Aboutus = () => {
   return (
-    <section className={`${styles.aboutus__section} h-[60vh] mb-1000px relative`}>
+    <section className={`${styles.aboutus__section} h-[70vh] mb-1000px relative`}>
       <div className=" h-full  text-center text-white flex flex-col justify-center items-center max-w-[80%] m-auto">
         <h2 className="text-center text-white text-lg mb-10 xs:text-xl sm:text-2xl md:text-3xl font-bold z-20">{aboutusText.title}</h2>
 

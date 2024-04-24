@@ -1,5 +1,5 @@
 import Features from './components/Features';
-import { Aboutus, Hero, Navbar } from './components/index';
+import { Aboutus, Getintouch, Hero, Navbar } from './components/index';
 import styles from './home.module.css';
 function Home() {
   return (
@@ -12,6 +12,7 @@ function Home() {
         <Hero />
         <Features />
         <Aboutus />
+        <Getintouch />
       </main>
     </div>
   );
