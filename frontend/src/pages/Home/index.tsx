@@ -1,7 +1,6 @@
 import Features from './components/Features';
-import { Hero, Navbar } from './components/index';
+import { Aboutus, Hero, Navbar } from './components/index';
 import styles from './home.module.css';
-
 function Home() {
   return (
     <div className={styles.main}>
@@ -9,9 +8,10 @@ function Home() {
         <Navbar />
       </header>
 
-      <main className="flex flex-col gap-20">
+      <main className="flex flex-col gap-40">
         <Hero />
         <Features />
+        <Aboutus />
       </main>
     </div>
   );

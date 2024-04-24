@@ -1,4 +1,4 @@
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .hero__section {
     grid-template-columns: 1fr 1fr;
     align-items: center;
@@ -12,7 +12,7 @@
   .hero__section {
     grid-template-columns: 1fr;
   }
-}
+} */
 
 /* xs: '480px',
 ss: '620px',
