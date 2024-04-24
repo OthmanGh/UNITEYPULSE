@@ -1,31 +1,16 @@
-.hero__section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  max-width: 1400px;
-  margin: 30px 20px;
-}
-
-@media (max-width: 620px) {
-}
-
-@media (max-width: 620px) {
+@media (max-width: 768px) {
   .hero__section {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    background-color: red;
+    height: 100%;
   }
 }
 
-@media (max-width: 480px) {
-  .hero__section h1 {
-    max-width: 300px;
-    margin: 0 auto;
-  }
-
-  .hero__section button {
-    font-size: 20px;
-    width: 60%;
+@media (max-width: 768px) {
+  .hero__section {
+    grid-template-columns: 1fr;
   }
 }
 

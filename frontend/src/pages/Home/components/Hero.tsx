@@ -1,26 +1,30 @@
+import { useState } from 'react';
 import styles from './Hero.module.css';
-// import { heroTitle } from '../../../constants';
 import shortStyles from '../../../components/index';
 import Button from '../../../components/Button';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   const handleSubmit = () => {};
 
   return (
-    <section className={`${styles.hero__section} sm:justify-center sm:mx-auto sm:p-10 min-h-[100vh]`}>
-      <div className="flex flex-col items-start justify-between gap-7 ">
-        <h1 className={`text-white font-bold ${shortStyles.titleMobile} sm:max-w-[280px] sm:text-2xl sm:text-start sm:leading-tight sm:mt-6 md:text-3xl`}>
-          Unlock Your Business Potential with <span className="text-primary ">UNITEY PULSE</span> Elevate Performance, Drive Success
+    <section id="home" className={`flex sm:flex-row flex-col sm:py-16 sm:px-4 py-10 gap-10 sm:mx-auto md:gap-48 xl:gap-64`}>
+      <div className={`sm:text-start flex flex-col gap-6 text-center p-6 text-lg sm:justify-center sm:gap-20 sm:py-10`}>
+        <h1
+          className={`text-white font-semibold leading-8 sm:leading-10 text-lg ss:text-xl sm:text-2xl sm:max-w-[280px] md:text-3xl md:max-w-[350px] md:leading-10`}
+        >
+          Unlock Your Business Potential with <br className="sm:block hidden" /> {''} <span className="text-primary">UNITY PULSE</span> Elevate Performance,
+          Drive Success
         </h1>
 
         <Button
           onClick={handleSubmit}
-          classes={`text-white bg-primary w-4/12 py-3 rounded-lg mb-10 mx-auto font-bold ${shortStyles.transition} hover:bg-blue-700 sm:w-6/12 md:w-4/12 sm:text-xl sm:mx-0`}
+          classes={`bg-primary w-[150px] mx-auto py-2  rounded-lg text-white text-semibold hover:bg-secondary ${shortStyles.transition} sm:mx-0 sm:w-[200px] sm:py-4 sm:font-bold`}
           text="Get Started"
         />
       </div>
       <img
-        className="rounded-2xl"
+        className="sm:rounded-xl"
         src="https://images.unsplash.com/photo-1634176866089-b633f4aec882?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZWFydGh8ZW58MHx8MHx8fDA%3D"
         alt="earth"
       />
