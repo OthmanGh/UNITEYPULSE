@@ -74,12 +74,12 @@ const Navbar = () => {
         <motion.ul
           initial={{ opacity: 0, y: -200 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`${toggle ? 'flex' : 'hidden'} absolute top-[82px] w-full left-[0%] ${shortStyles.flexCenter} flex-col list-none`}
+          className={`${toggle ? 'flex' : 'hidden'}  absolute inset-0 flex flex-col top-20 z-10`}
         >
           {navLinks.map((item) => (
             <Link key={item.id} to={item.section} spy={true} smooth={true} duration={500} offset={-70}>
               <li
-                className={` bg-secondary ${shortStyles.transition} bg-opacity-40 text-center border-b-2 border-opacity-60 w-full py-4 border-b-lightBlue text-blue-100 hover:bg-opacity-100 ${shortStyles.pointer} ${shortStyles.hoverScale} font-semibold text-lg`}
+                className={` bg-secondary ${shortStyles.transition} bg-opacity-40 text-center border-b-2 border-opacity-60 bg-blue-300 text-secondary font-semibold py-4 border-b-lightBlue  hover:bg-opacity-100 ${shortStyles.pointer} ${shortStyles.hoverScale} font-semibold text-lg z-40`}
               >
                 {item.title}
               </li>

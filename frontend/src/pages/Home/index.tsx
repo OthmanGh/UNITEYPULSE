@@ -12,16 +12,16 @@ function Home() {
       </header>
 
       <main className="flex flex-col gap-40">
-        <Element name="hero" className="element">
+        <Element name="hero">
           <Hero />
         </Element>
-        <Element name="features" className="element">
+        <Element name="features">
           <Features />
         </Element>
-        <Element name="aboutus" className="element">
+        <Element name="aboutus">
           <Aboutus />
         </Element>
-        <Element name="getintouch" className="element">
+        <Element name="getintouch">
           <Getintouch />
         </Element>
       </main>
