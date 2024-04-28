@@ -5,6 +5,7 @@ import { HiOutlineArrowSmRight } from 'react-icons/hi';
 import { HiOutlineArrowSmLeft } from 'react-icons/hi';
 import { FaArrowCircleUp } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
+import { IoReturnUpBack } from 'react-icons/io5';
 
 export const Menu = CgMenuRight;
 export const Close = IoCloseSharp;
@@ -13,3 +14,4 @@ export const LeftArrow = HiOutlineArrowSmLeft;
 export const RightArrow = HiOutlineArrowSmRight;
 export const ArrowScrollTop = FaArrowCircleUp;
 export const GoogleIcon = FcGoogle;
+export const BackArrow = IoReturnUpBack;

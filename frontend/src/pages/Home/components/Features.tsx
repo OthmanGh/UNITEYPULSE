@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import { LeftArrow, RightArrow } from '../../../constants/icons';
+import { useNavigate } from 'react-router-dom';
 
 type CardProps = {
   title: string;
@@ -62,7 +63,11 @@ const Features = () => {
 };
 
 const Card = ({ title, text, Icon, buttonText }: CardProps) => {
-  const handleSubmit = () => {};
+  const navigator = useNavigate();
+
+  const handleSubmit = () => {
+    navigator('/auth');
+  };
   return (
     <div
       className={`flex flex-col text-center gap-2 mx-auto xs:w-[95%] text-secondary ${styles.card} rounded-xl h-[400px] justify-between px-5 py-6 hover:scale-95 ${shortStyles.transition}`}

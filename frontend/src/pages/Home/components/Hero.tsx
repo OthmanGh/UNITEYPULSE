@@ -2,9 +2,14 @@ import { useState } from 'react';
 import styles from './Hero.module.css';
 import shortStyles from '../../../components/index';
 import Button from '../../../components/Button';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Hero = () => {
-  const handleSubmit = () => {};
+  const navigator = useNavigate();
+
+  const handleSubmit = () => {
+    navigator('/auth');
+  };
 
   return (
     <section id="home" className={`flex xs:w-full  sm:flex-row flex-col sm:py-16 sm:px-4 py-10 gap-10 sm:mx-auto md:gap-48 xl:gap-64 mx-auto md:w-[85%]`}>

@@ -1,14 +1,15 @@
-import { GoogleIcon } from '../../constants/icons';
+import { Link } from 'react-router-dom';
+import { BackArrow, GoogleIcon } from '../../constants/icons';
 import InputField from './components/InputField';
 
 const Auth = () => {
   return (
-    <section className="h-screen grid grid-cols-1 sm:grid-cols-2 items-center justify-center">
+    <section className="h-screen grid grid-cols-1 sm:grid-cols-2 items-center justify-center relative">
       <div className="h-[40vh] sm:h-screen w-full bg-lightBlue flex flex-col items-center text-center justify-center gap-2">
         <h2 className="text-lg  sm:text-3xl font-semibold">Welcome Back!</h2>
         <p className="sm:text-xl sm:max-w-[80%] px-2">To keep connected with us please login with your personal info</p>
         <button className="mt-4 sm:mt-10 border-black border-2 rounded-lg px-6 sm:px-10 py-2 sm:py-3 hover:text-red-500 hover:border-red-500 transition-all duration-500 ">
-          Sign in
+          Login in
         </button>
       </div>
 
@@ -49,6 +50,12 @@ const Auth = () => {
 
         <button className="mt-14 w-[60%] sm:w-2/3 mx-auto h-[50px] bg-primary rounded-[10px] text-white">Create Account</button>
       </div>
+
+      <Link to={'/'}>
+        <div className="absolute top-5 left-10 bg-secondary text-white px-3 py-2 rounded-xl cursor-pointer border-2 border-secondary hover:border-2 hover:border-secondary hover:bg-transparent hover:text-secondary transition-all duration-500">
+          <BackArrow className="text-2xl" />
+        </div>
+      </Link>
     </section>
   );
 };
