@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -25,6 +26,7 @@ export default {
         gradientActiveBlue: '#1C4F8B',
       },
     },
+
     screens: {
       xs: '480px',
       ss: '620px',

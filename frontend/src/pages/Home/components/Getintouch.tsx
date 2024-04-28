@@ -38,7 +38,7 @@ const Getintouch: React.FC = () => {
           label="Full Name"
           placeholder="Jon Smith"
           type="text"
-          name="fullName"
+          nameInput="fullName"
           register={register}
           error={errors.fullName}
           classParent=""
@@ -50,7 +50,7 @@ const Getintouch: React.FC = () => {
           label="Email"
           placeholder="example@example.com"
           type="text"
-          name="email"
+          nameInput="email"
           register={register}
           error={errors.email}
           classParent=""
