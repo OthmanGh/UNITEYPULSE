@@ -28,8 +28,8 @@ function Home() {
 
       <div className="fixed bottom-4 right-4 z-10">
         <Link activeClass="active" to="hero" spy={true} smooth={true} offset={-70} duration={500}>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            <ArrowScrollTop />
+          <button className="rounde-lg font-bold text-3xl">
+            <ArrowScrollTop className="text-secondary bg-white rounded-3xl p-0.5" />
           </button>
         </Link>
       </div>

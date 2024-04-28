@@ -1,93 +1,129 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Navbar.module.css';
 import { navLinks } from '../../../constants';
 import { Close, Menu } from '../../../constants/icons';
 import shortStyles from '../../../components/index';
-import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
+import { motion } from 'framer-motion';
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const handleToggle = () => {
     setToggle((prev) => !prev);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > window.innerHeight) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <motion.nav animate={{ border: 2 }} className={` w-full p-6 ${shortStyles.flexBetween}  border-lightBlue text-white  navbar h-20`}>
-      <motion.p
-        initial={{ x: -250 }}
-        animate={{ x: 2 }}
-        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-        className={`${styles.navbar} font-bold ${shortStyles.linksFonts} group ${shortStyles.transition} hover:text-primary text-lg xs:text-xl ss:text-2xl  sm:text-3xl md:text-4xl`}
-      >
-        Unity<span className={`text-primary group-hover:text-white ${shortStyles.transition}`}>Pulse</span>
-      </motion.p>
+    <>
+      <nav className={`w-full p-6 ${shortStyles.flexBetween} border-lightBlue text-white navbar z-40`}>
+        <p className={`${styles.navbar} font-bold ${shortStyles.linksFonts} group hover:text-primary text-lg xs:text-xl ss:text-2xl  sm:text-3xl md:text-4xl`}>
+          Unity<span className={`text-primary group-hover:text-white`}>Pulse</span>
+        </p>
 
-      <motion.ul
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ type: 'spring', delay: 1 }}
-        className={`hidden sm:flex gap-8 md:gap-12 text-sm  ss:text-md  sm:text-lg md:text-xl text-lightBlue font-semibold`}
-      >
-        {navLinks.map((nav) => (
-          <Link
-            key={nav.id}
-            to={nav.id}
-            spy={true}
-            smooth={true}
-            duration={500}
-            offset={-70}
-            className={`${shortStyles.pointer} hover:text-primary ${shortStyles.transition} ${shortStyles.hoverScale}`}
-          >
-            <motion.li>{nav.title}</motion.li>
-          </Link>
-        ))}
-      </motion.ul>
-
-      <motion.button
-        initial={{ x: 250 }}
-        animate={{ x: 2 }}
-        whileHover={{ scale: 0.9, transition: { duration: 0 } }}
-        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-        className={`hidden ${shortStyles.linksFonts} sm:flex border-2 border-transparent px-4 py-2 rounded-xl ${shortStyles.transition} hover:text-primary hover:border-primary hover:scale-90`}
-      >
-        Signup/Login
-      </motion.button>
-
-      <motion.div
-        initial={{ x: 200, opacity: 0 }}
-        transition={{ delay: 0.7 }}
-        animate={{ x: 0, opacity: 1 }}
-        className="sm:hidden flex flex-1 justify-end items-center"
-      >
-        {toggle ? (
-          <button>
-            <Close onClick={handleToggle} className={styles.icons} />
-          </button>
-        ) : (
-          <button onClick={handleToggle}>
-            <Menu className={styles.icons} />
-          </button>
-        )}
-
-        <motion.ul
-          initial={{ opacity: 0, y: -200 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={`${toggle ? 'flex' : 'hidden'}  absolute inset-0 flex flex-col top-20 z-10`}
-        >
-          {navLinks.map((item) => (
-            <Link key={item.id} to={item.section} spy={true} smooth={true} duration={500} offset={-70}>
-              <li
-                className={` bg-secondary ${shortStyles.transition} bg-opacity-40 text-center border-b-2 border-opacity-60 bg-blue-300 text-secondary font-semibold py-4 border-b-lightBlue  hover:bg-opacity-100 ${shortStyles.pointer} ${shortStyles.hoverScale} font-semibold text-lg z-40`}
-              >
-                {item.title}
-              </li>
+        <ul className={`hidden sm:flex gap-8 md:gap-12 text-sm  ss:text-md  sm:text-lg md:text-xl text-lightBlue font-semibold`}>
+          {navLinks.map((nav) => (
+            <Link key={nav.id} to={nav.id} spy={true} smooth={true} duration={500} offset={-70} className={`${shortStyles.pointer} hover:text-primary`}>
+              <li>{nav.title}</li>
             </Link>
           ))}
-        </motion.ul>
-      </motion.div>
-    </motion.nav>
+        </ul>
+
+        <button
+          className={`hidden ${shortStyles.linksFonts} sm:flex border-2 border-transparent px-4 py-2 rounded-xl hover:text-primary hover:border-primary hover:scale-90`}
+        >
+          Signup/Login
+        </button>
+
+        <div className="sm:hidden flex flex-1 justify-end items-center">
+          {toggle ? (
+            <button>
+              <Close onClick={handleToggle} className={styles.icons} />
+            </button>
+          ) : (
+            <button onClick={handleToggle}>
+              <Menu className={styles.icons} />
+            </button>
+          )}
+
+          <ul className={`${toggle ? 'flex' : 'hidden'} absolute inset-0 flex flex-col top-20 z-10`}>
+            {navLinks.map((item) => (
+              <Link key={item.id} to={item.section} spy={true} smooth={true} duration={500} offset={-70}>
+                <li className="bg-secondary bg-opacity-40 text-center border-b-2 border-opacity-60  text-secondary font-semibold py-4 border-b-lightBlue hover:bg-opacity-100 cursor-pointer text-lg">
+                  {item.title}
+                </li>
+              </Link>
+            ))}
+          </ul>
+        </div>
+      </nav>
+
+      {isScrolled && (
+        <motion.nav
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+          className={`w-full p-6 ${shortStyles.flexBetween} bg-gray-800 fixed top-0 left-0 right-0 h-20 border-lightBlue text-white navbar z-40`}
+        >
+          <p
+            className={`${styles.navbar} font-bold ${shortStyles.linksFonts} group hover:text-primary text-lg xs:text-xl ss:text-2xl  sm:text-3xl md:text-4xl`}
+          >
+            Unity<span className={`text-primary group-hover:text-white`}>Pulse</span>
+          </p>
+
+          <ul className="hidden sm:flex gap-8 md:gap-12 text-sm  ss:text-md  sm:text-lg md:text-xl text-lightBlue font-semibold">
+            {navLinks.map((nav) => (
+              <Link key={nav.id} to={nav.id} spy={true} smooth={true} duration={500} offset={-70} className={`${shortStyles.pointer} hover:text-primary`}>
+                <li>{nav.title}</li>
+              </Link>
+            ))}
+          </ul>
+
+          <button className="hidden sm:flex border-2 border-transparent px-4 py-2 rounded-xl hover:text-primary hover:border-primary hover:scale-90">
+            Signup/Login
+          </button>
+
+          <div className="sm:hidden flex flex-1 justify-end items-center">
+            {toggle ? (
+              <button>
+                <Close onClick={handleToggle} className={styles.icons} />
+              </button>
+            ) : (
+              <button onClick={handleToggle}>
+                <Menu className={styles.icons} />
+              </button>
+            )}
+
+            <ul className={`${toggle ? 'flex' : 'hidden'} absolute inset-0 flex flex-col top-20 z-10`}>
+              {navLinks.map((item) => (
+                <Link key={item.id} to={item.section} spy={true} smooth={true} duration={500} offset={-70}>
+                  <li className="bg-secondary bg-opacity-40 text-center border-b-2 border-opacity-60 bg-blue-300 text-secondary font-semibold py-4 border-b-lightBlue hover:bg-opacity-100 cursor-pointer font-semibold text-lg">
+                    {item.title}
+                  </li>
+                </Link>
+              ))}
+            </ul>
+          </div>
+        </motion.nav>
+      )}
+    </>
   );
 };
 
