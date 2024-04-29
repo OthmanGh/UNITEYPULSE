@@ -8,7 +8,6 @@ import { FcGoogle } from 'react-icons/fc';
 import { IoReturnUpBack } from 'react-icons/io5';
 import { FiSettings } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
-import { MdOutlineCancel } from 'react-icons/md';
 import LogoImg from './../assets/Logo.png';
 
 export const Menu = CgMenuRight;

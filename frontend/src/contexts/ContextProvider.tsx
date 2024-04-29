@@ -10,6 +10,9 @@ interface State {
 interface ContextType {
   activeMenu: boolean;
   setActiveMenu: Dispatch<SetStateAction<boolean>>;
+  isClicked: State;
+  setIsClicked: Dispatch<SetStateAction<State>>;
+  handleClick: (clicked: keyof State) => void;
 }
 
 const StateContext = createContext<ContextType | undefined>(undefined);
@@ -27,8 +30,13 @@ interface Props {
 
 export const ContextProvider: React.FC<Props> = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState<boolean>(true);
+  const [isClicked, setIsClicked] = useState<State>(initialState);
 
-  return <StateContext.Provider value={{ activeMenu, setActiveMenu }}>{children}</StateContext.Provider>;
+  const handleClick = (clicked: keyof State) => {
+    setIsClicked({ ...initialState, [clicked]: true });
+  };
+
+  return <StateContext.Provider value={{ activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick }}>{children}</StateContext.Provider>;
 };
 
 export const useStateContext = (): ContextType => {

@@ -9,7 +9,11 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import { Tooltip } from '@mui/material';
 import avatar from './../../../assets/avatar.png';
 
-import { Cart, Chat, Notifications, UserProfile } from '.';
+import Chat from './Chat';
+import UserProfile from './UserProfile';
+import Notifications from './Notifications';
+import Cart from './Cart';
+
 import { useStateContext } from '../../../contexts/ContextProvider';
 
 type NavButtonProps = {
@@ -30,7 +34,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }: NavButtonProps)
   </Tooltip>
 );
 const Navbar = () => {
-  const { activeMenu, setActiveMenu } = useStateContext();
+  const { activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick } = useStateContext();
 
   return (
     <div className="flex justify-between p-2 md:mx-6 relative">
@@ -55,6 +59,11 @@ const Navbar = () => {
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
           </div>
         </Tooltip>
+
+        {isClicked.cart && <Cart />}
+        {isClicked.chat && <Chat />}
+        {isClicked.notification && <Notifications />}
+        {isClicked.userProfile && <UserProfile />}
       </div>
     </div>
   );
