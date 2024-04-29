@@ -1,7 +1,7 @@
 import React from 'react';
 
 const General = () => {
-  return <div>General</div>;
+  return <div className="flex items-center justify-center text-3xl">General</div>;
 };
 
 export default General;

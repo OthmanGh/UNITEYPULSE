@@ -2,6 +2,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { SettingsIcon } from '../../constants/icons';
 import { Navbar, Sidebar } from '../../utils/index';
 import { useStateContext } from '../../contexts/ContextProvider';
+import { Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
   const { activeMenu } = useStateContext();
@@ -36,6 +37,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <Outlet />
     </div>
   );
 };
