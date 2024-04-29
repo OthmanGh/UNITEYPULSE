@@ -31,12 +31,17 @@ interface Props {
 export const ContextProvider: React.FC<Props> = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState<boolean>(true);
   const [isClicked, setIsClicked] = useState<State>(initialState);
+  const [screenSize, setScreenSize] = useState(undefined);
 
   const handleClick = (clicked: keyof State) => {
     setIsClicked({ ...initialState, [clicked]: true });
   };
 
-  return <StateContext.Provider value={{ activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick }}>{children}</StateContext.Provider>;
+  return (
+    <StateContext.Provider value={{ activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick, screenSize, setScreenSize }}>
+      {children}
+    </StateContext.Provider>
+  );
 };
 
 export const useStateContext = (): ContextType => {
