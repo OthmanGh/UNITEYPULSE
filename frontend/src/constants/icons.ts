@@ -16,4 +16,4 @@ export const RightArrow = HiOutlineArrowSmRight;
 export const ArrowScrollTop = FaArrowCircleUp;
 export const GoogleIcon = FcGoogle;
 export const BackArrow = IoReturnUpBack;
-export const settingsIcon = FiSettings;
+export const SettingsIcon = FiSettings;

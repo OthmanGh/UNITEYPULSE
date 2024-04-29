@@ -9,6 +9,7 @@ interface SelectProps {
   classParent?: string;
   classLabel?: string;
   classSelect?: string;
+  children?: string;
 }
 
 const Select: React.FC<SelectProps> = ({ label, name, register, error, classParent = '', classLabel = '', classSelect = '', children }) => {
