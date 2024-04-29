@@ -34,13 +34,11 @@ function App() {
           <Route path="employees" element={<Employees />} />
           <Route path="customers" element={<Customers />} />
 
-          {/* Apps */}
           <Route path="kanban" element={<Kanban />} />
           <Route path="editor" element={<Editor />} />
           <Route path="calendar" element={<Calender />} />
           <Route path="color-picker" element={<ColorPicker />} />
 
-          {/* Charts */}
           <Route path="line" element={<Line />} />
           <Route path="area" element={<Area />} />
           <Route path="bar" element={<Bar />} />

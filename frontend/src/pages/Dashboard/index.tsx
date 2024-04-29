@@ -1,9 +1,10 @@
 import Tooltip from '@mui/material/Tooltip';
 import { SettingsIcon } from '../../constants/icons';
 import { Navbar, Sidebar } from '../../utils/index';
+import { useStateContext } from '../../contexts/ContextProvider';
 
 const Dashboard = () => {
-  const activeMenu = true;
+  const { activeMenu } = useStateContext();
   return (
     <div>
       <div className="flex relative dark:bg-main-dark-bg">
