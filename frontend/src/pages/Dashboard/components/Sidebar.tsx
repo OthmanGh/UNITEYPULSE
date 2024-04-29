@@ -2,8 +2,8 @@ import { Link, NavLink } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
 import { CloseIcon } from '../../../constants/icons';
 import { links } from '../../../constants';
-import { Logo } from '../../../constants';
 import { useStateContext } from '../../../contexts/ContextProvider';
+import Logo from './../../../assets/Logo.png';
 
 const Sidebar = () => {
   const { activeMenu, setActiveMenu } = useStateContext();
@@ -24,7 +24,7 @@ const Sidebar = () => {
               }}
               className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-whtie text-slate-900"
             >
-              <img src={Logo.src} className="text-lg" alt="" />
+              <img src={Logo} className="w-[25%]" alt="" />
               <p className="text-lg">
                 <span>UNITY</span> <span className="text-secondary">PAULSE</span>
               </p>
@@ -32,7 +32,7 @@ const Sidebar = () => {
 
             <Tooltip title="Menu" placement="bottom">
               <button
-                className="button text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden"
+                className="button text-[3rem] rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden"
                 onClick={() => setActiveMenu((prev: boolean) => !prev)}
               >
                 <CloseIcon />
