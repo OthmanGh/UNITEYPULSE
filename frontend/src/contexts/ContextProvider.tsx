@@ -13,6 +13,8 @@ interface ContextType {
   isClicked: State;
   setIsClicked: Dispatch<SetStateAction<State>>;
   handleClick: (clicked: keyof State) => void;
+  screenSize: number | undefined;
+  setScreenSize: Dispatch<SetStateAction<number | undefined>>;
 }
 
 const StateContext = createContext<ContextType | undefined>(undefined);
@@ -31,7 +33,7 @@ interface Props {
 export const ContextProvider: React.FC<Props> = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState<boolean>(true);
   const [isClicked, setIsClicked] = useState<State>(initialState);
-  const [screenSize, setScreenSize] = useState(undefined);
+  const [screenSize, setScreenSize] = useState<number | undefined>(undefined);
 
   const handleClick = (clicked: keyof State) => {
     setIsClicked({ ...initialState, [clicked]: true });
