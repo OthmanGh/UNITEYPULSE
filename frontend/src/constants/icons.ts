@@ -7,6 +7,9 @@ import { FaArrowCircleUp } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { IoReturnUpBack } from 'react-icons/io5';
 import { FiSettings } from 'react-icons/fi';
+import { IoMdClose } from 'react-icons/io';
+import { MdOutlineCancel } from 'react-icons/md';
+import LogoImg from './../assets/Logo.png';
 
 export const Menu = CgMenuRight;
 export const Close = IoCloseSharp;
@@ -17,3 +20,5 @@ export const ArrowScrollTop = FaArrowCircleUp;
 export const GoogleIcon = FcGoogle;
 export const BackArrow = IoReturnUpBack;
 export const SettingsIcon = FiSettings;
+export const CloseIcon = IoMdClose;
+export const Logo = LogoImg;
