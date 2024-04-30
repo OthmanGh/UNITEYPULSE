@@ -7,10 +7,10 @@ import Logo from './../../../assets/Logo.png';
 
 const Sidebar = () => {
   const { activeMenu, setActiveMenu, screenSize } = useStateContext();
-  const activeLink = 'flex itemes-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2';
+  const activeLink = 'flex itemes-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white bg-secondary text-md m-2';
 
   const normalLink =
-    'flex itemes-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2';
+    'flex itemes-center justify-start gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2';
 
   const handleCloseSideBar = () => {
     if (activeMenu && screenSize && screenSize <= 900) {
@@ -47,11 +47,16 @@ const Sidebar = () => {
           <div className="mt-10">
             {links.map((item) => (
               <div key={item.title}>
-                <p className="text-gray-400 m-3 mt-4 uppercase">{item.title}</p>
+                <p className="text-gray-400 m-3 mt-4 uppercase flex items-center">{item.title}</p>
 
                 {item.links.map((link) => (
-                  <NavLink to={`/${link.name}`} key={link.name} onClick={handleCloseSideBar} className={({ isActive }) => (isActive ? activeLink : normalLink)}>
-                    {link.icon}
+                  <NavLink
+                    to={`/dashboard/${link.name}`}
+                    key={link.name}
+                    onClick={handleCloseSideBar}
+                    className={({ isActive }) => (isActive ? activeLink : normalLink)}
+                  >
+                    <div className="self-center">{link.icon}</div>
                     <span className="captitalize">{link.name}</span>
                   </NavLink>
                 ))}

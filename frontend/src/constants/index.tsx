@@ -118,17 +118,7 @@ export const getInTouch = {
   textT: 'Fill out the form below, and one of our team members will get back to you as soon as possible.',
 };
 
-type NavLink = {
-  name: string;
-  icon: ReactElement;
-};
-
-type LinkGroup = {
-  title: string;
-  links: NavLink[];
-};
-
-export const links: LinkGroup[] = [
+export const links = [
   {
     title: 'Dashboard',
     links: [

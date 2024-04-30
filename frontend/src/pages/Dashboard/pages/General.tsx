@@ -46,8 +46,8 @@ const General = () => {
       </div>
 
       <div className="flex gap-10 flex-wrap ">
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg m-6 p-4 rounded-2xl w-full">
-          <div className="flex justify-between items-center md:w-[780px] mx-auto">
+        <div className=" dark:text-gray-200 dark:bg-secondary-dark-bg m-6 p-4 rounded-2xl w-full bg-main-bg">
+          <div className="flex  justify-between items-center md:w-[780px] mx-auto">
             <p className="font-semibold text-xl">Revenue Updates</p>
             <div className="flex items-center gap-4">
               <p className="flex items-center gap-1 text-gray-600 hover:drop-shadow-xl">
