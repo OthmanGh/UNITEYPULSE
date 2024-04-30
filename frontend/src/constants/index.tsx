@@ -259,44 +259,37 @@ export const earningData = [
 
 export const SparklineAreaData = {
   labels: Array.from({ length: 5 }, () => '1'),
-
   datasets: [
     {
       label: 'expenses',
       data: [3000, 5000, 1000, 7000, 9000],
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      borderColor: '#40F8FF',
+      backgroundColor: '#40F8FF',
     },
-
     {
       label: 'revenue',
       data: [6000, 9000, 6000, 2000, 4000],
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 130, 0.6)',
+      borderColor: '#0C356A',
+      backgroundColor: '#0C356A',
     },
   ],
 };
 
-export const stackedChartData = [
-  [
-    { x: 'Jan', y: 111.1 },
-    { x: 'Feb', y: 127.3 },
-    { x: 'Mar', y: 143.4 },
-    { x: 'Apr', y: 159.9 },
-    { x: 'May', y: 159.9 },
-    { x: 'Jun', y: 159.9 },
-    { x: 'July', y: 159.9 },
+export const stackedChartData = {
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July'],
+  datasets: [
+    {
+      label: 'revenue',
+      data: [111.1, 127.3, 143.4, 159.9, 159.9, 159.9, 159.9],
+      backgroundColor: '#40F8FF',
+    },
+    {
+      label: 'expenses',
+      data: [111.1, 127.3, 143.4, 159.9, 159.9, 159.9, 159.9],
+      backgroundColor: '#0C356A',
+    },
   ],
-  [
-    { x: 'Jan', y: 111.1 },
-    { x: 'Feb', y: 127.3 },
-    { x: 'Mar', y: 143.4 },
-    { x: 'Apr', y: 159.9 },
-    { x: 'May', y: 159.9 },
-    { x: 'Jun', y: 159.9 },
-    { x: 'July', y: 159.9 },
-  ],
-];
+};
 
 export const ecomPieChartData = [
   { x: '2018', y: 18, text: '35%' },

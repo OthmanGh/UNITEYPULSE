@@ -1,10 +1,10 @@
 import { BsCurrencyDollar } from 'react-icons/bs';
 import { GoDotFill } from 'react-icons/go';
 import Button from '../components/Button';
-import { SparklineAreaData, earningData, ecomPieChartData } from '../../../constants';
+import { SparklineAreaData, earningData, ecomPieChartData, stackedChartData } from '../../../constants';
 import { useStateContext } from '../../../contexts/ContextProvider';
 import SparkLine from '../components/Charts/SparkLine';
-import Stacked from './Charts/Stacked';
+import Stacked from '../components/Charts/Stacked';
 
 const General = () => {
   return (
@@ -94,7 +94,9 @@ const General = () => {
               </div>
             </div>
 
-            <Stacked width="320px" height="360px" />
+            <div className="mt-10">
+              <Stacked width="320px" height="360px" data={stackedChartData} id="bar-stacked" />
+            </div>
           </div>
         </div>
       </div>
