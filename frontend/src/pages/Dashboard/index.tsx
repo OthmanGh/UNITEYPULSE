@@ -35,9 +35,10 @@ const Dashboard = () => {
           <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg w-full navbar">
             <Navbar />
           </div>
+
+          <Outlet />
         </div>
       </div>
-      <Outlet />
     </div>
   );
 };
