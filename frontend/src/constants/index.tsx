@@ -277,6 +277,27 @@ export const SparklineAreaData = {
   ],
 };
 
+export const stackedChartData = [
+  [
+    { x: 'Jan', y: 111.1 },
+    { x: 'Feb', y: 127.3 },
+    { x: 'Mar', y: 143.4 },
+    { x: 'Apr', y: 159.9 },
+    { x: 'May', y: 159.9 },
+    { x: 'Jun', y: 159.9 },
+    { x: 'July', y: 159.9 },
+  ],
+  [
+    { x: 'Jan', y: 111.1 },
+    { x: 'Feb', y: 127.3 },
+    { x: 'Mar', y: 143.4 },
+    { x: 'Apr', y: 159.9 },
+    { x: 'May', y: 159.9 },
+    { x: 'Jun', y: 159.9 },
+    { x: 'July', y: 159.9 },
+  ],
+];
+
 export const ecomPieChartData = [
   { x: '2018', y: 18, text: '35%' },
   { x: '2019', y: 18, text: '15%' },
