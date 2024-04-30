@@ -4,10 +4,8 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 type SparkLineProps = {
-  currentColor: string;
-  color: string;
+  colors: string[];
   id: string;
-  type: string;
   width: string;
   height: string;
   data: any;
@@ -25,8 +23,15 @@ const options = {
   },
 };
 
-const SparkLine = ({ currentColor, color, id, type, height, width, data }: SparkLineProps) => {
-  return <Line options={options} data={data} color={color}></Line>;
+const SparkLine = ({ colors, id, width, height, data }: SparkLineProps) => {
+  const lineOptions = {
+    ...options,
+    maintainAspectRatio: false,
+    height: height,
+    width: width,
+  };
+
+  return <Line options={lineOptions} id={id} data={data} />;
 };
 
 export default SparkLine;

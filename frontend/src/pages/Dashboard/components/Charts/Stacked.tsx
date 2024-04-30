@@ -1,7 +1,7 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 type StackedProps = {
@@ -15,7 +15,7 @@ const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'top' as const,
+      position: 'bottom' as const,
     },
     title: {
       display: false,
@@ -32,7 +32,14 @@ const options = {
 };
 
 const Stacked = ({ id, width, height, data }: StackedProps) => {
-  return <Bar id={id} width={width} height={height} data={data} />;
+  const chartOptions = {
+    ...options,
+    maintainAspectRatio: false,
+    width: width,
+    height: height,
+  };
+
+  return <Bar options={chartOptions} id={id} data={data} />;
 };
 
 export default Stacked;
