@@ -6,7 +6,7 @@ import { BsKanban, BsBarChart } from 'react-icons/bs';
 import { BiColorFill } from 'react-icons/bi';
 import { GiLouvrePyramid } from 'react-icons/gi';
 import { FiShoppingBag, FiEdit, FiPieChart } from 'react-icons/fi';
-import { Currency } from './icons'; // If you have a Currency icon in your './icons' file
+import { Currency } from './icons';
 
 export const navLinks = [
   {

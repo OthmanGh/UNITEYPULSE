@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import {
   Auth,
   Home,
@@ -9,7 +9,7 @@ import {
   Customers,
   Kanban,
   Editor,
-  Calender,
+  Calendar,
   ColorPicker,
   Line,
   Area,
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       { path: 'customers', element: <Customers /> },
       { path: 'kanban', element: <Kanban /> },
       { path: 'editor', element: <Editor /> },
-      { path: 'calendar', element: <Calender /> },
+      { path: 'calendar', element: <Calendar /> },
       { path: 'color-picker', element: <ColorPicker /> },
       { path: 'line', element: <Line /> },
       { path: 'area', element: <Area /> },

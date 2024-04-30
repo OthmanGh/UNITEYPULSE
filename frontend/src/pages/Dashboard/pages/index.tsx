@@ -8,7 +8,7 @@ import Pie from './Charts/Pie';
 import Pyramid from './Charts/Pyramid';
 import Stacked from './Charts/Stacked';
 
-import Calender from './Calender';
+import Calender from './Calendar';
 import ColorPicker from './ColorPicker';
 import Customers from './Customers';
 import Editor from './Editor';

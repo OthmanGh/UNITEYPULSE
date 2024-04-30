@@ -13,7 +13,7 @@ import Line from '../pages/Dashboard/pages/Charts/Line';
 import Pie from '../pages/Dashboard/pages/Charts/Pie';
 import Pyramid from '../pages/Dashboard/pages/Charts/Pyramid';
 import Stacked from '../pages/Dashboard/pages/Charts/Stacked';
-import Calender from '../pages/Dashboard/pages/Calender';
+import Calendar from '../pages/Dashboard/pages/Calendar';
 import ColorPicker from '../pages/Dashboard/pages/ColorPicker';
 import Customers from '../pages/Dashboard/pages/Customers';
 import Editor from '../pages/Dashboard/pages/Editor';
@@ -42,7 +42,7 @@ export {
   Pie,
   Pyramid,
   Stacked,
-  Calender,
+  Calendar,
   ColorPicker,
   Customers,
   Editor,
