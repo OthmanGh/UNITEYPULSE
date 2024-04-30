@@ -257,13 +257,25 @@ export const earningData = [
   },
 ];
 
-export const SparklineAreaData = [
-  { x: 1, yval: 2 },
-  { x: 2, yval: 6 },
-  { x: 3, yval: 8 },
-  { x: 4, yval: 5 },
-  { x: 5, yval: 10 },
-];
+export const SparklineAreaData = {
+  labels: Array.from({ length: 5 }, () => '1'),
+
+  datasets: [
+    {
+      label: 'expenses',
+      data: [3000, 5000, 1000, 7000, 9000],
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    },
+
+    {
+      label: 'revenue',
+      data: [6000, 9000, 6000, 2000, 4000],
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 130, 0.6)',
+    },
+  ],
+};
 
 export const ecomPieChartData = [
   { x: '2018', y: 18, text: '35%' },

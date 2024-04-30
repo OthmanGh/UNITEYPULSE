@@ -9,19 +9,6 @@ export default {
       'open-sans': ['Open Sans', 'sans-serif'],
     },
 
-    backgroundColor: {
-      'main-bg': '#FAFBFB',
-      'main-dark-bg': '#20232A',
-      'secondary-dark-bg': '#33373E',
-      'light-gray': '#F7F7F7',
-      'half-transparent': 'rgba(0, 0, 0, 0.5)',
-      'bg-white': '#fff',
-    },
-
-    borderColor: {
-      color: 'rgba(0, 0, 0, 0.1)',
-    },
-
     extend: {
       colors: {
         primary: '#3F72AF',
@@ -43,6 +30,12 @@ export default {
 
         gradientActiveDark: '#001731',
         gradientActiveBlue: '#1C4F8B',
+
+        'main-bg': '#FAFBFB',
+        'main-dark-bg': '#20232A',
+        'secondary-dark-bg': '#33373E',
+        'light-gray': '#F7F7F7',
+        'half-transparent': 'rgba(0, 0, 0, 0.5)',
       },
     },
 

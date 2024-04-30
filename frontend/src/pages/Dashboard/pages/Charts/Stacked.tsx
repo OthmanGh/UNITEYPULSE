@@ -1,6 +1,11 @@
 import React from 'react';
 
-const Stacked = () => {
+type StackedProps = {
+  width: string;
+  height: string;
+};
+
+const Stacked = ({ width, height }: StackedProps) => {
   return <div>Stacked</div>;
 };
 
