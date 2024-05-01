@@ -9,6 +9,7 @@ import { GiLouvrePyramid } from 'react-icons/gi';
 import { Currency } from '../utils/icons';
 import { MdOutlineSupervisorAccount } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
+import { SiExpensify } from 'react-icons/si';
 import { TiTick } from 'react-icons/ti';
 import { GrLocation } from 'react-icons/gr';
 
@@ -162,8 +163,8 @@ export const links = [
         icon: <FiEdit />,
       },
       {
-        name: 'color-picker',
-        icon: <BiColorFill />,
+        name: 'tracker',
+        icon: <SiExpensify />,
       },
     ],
   },

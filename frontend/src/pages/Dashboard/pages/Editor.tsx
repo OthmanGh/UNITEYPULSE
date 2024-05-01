@@ -3,7 +3,7 @@ import { Editor as Ed } from 'primereact/editor';
 import Header from '../components/Header';
 
 const Editor = () => {
-  const [text, setText] = useState('<h1>Welcome to the Editor</h1><p>This is a simple example of an editor component.</p>');
+  const [text, setText] = useState('<h1>Welcome to the Editor</h1>');
 
   return (
     <section className="md:m-10 mt-24 p-2 md:p-10 bg-white rounded-xl flex flex-col">

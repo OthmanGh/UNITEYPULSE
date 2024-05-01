@@ -14,14 +14,13 @@ import Pie from '../pages/Dashboard/pages/Charts/Pie';
 import Pyramid from '../pages/Dashboard/pages/Charts/Pyramid';
 import Stacked from '../pages/Dashboard/pages/Charts/Stacked';
 import Calendar from '../pages/Dashboard/pages/Calendar';
-import ColorPicker from '../pages/Dashboard/pages/ColorPicker';
 import Customers from '../pages/Dashboard/pages/Customers';
 import Editor from '../pages/Dashboard/pages/Editor';
 import Employees from '../pages/Dashboard/pages/Employees';
 import General from '../pages/Dashboard/pages/General';
 import Kanban from '../pages/Dashboard/pages/Kanban/Kanban';
 import Orders from '../pages/Dashboard/pages/Orders';
-
+import ExpenseTracker from '../pages/Dashboard/pages/ExpenseTracker/ExpenseTracker';
 import Navbar from '../pages/Dashboard/components/Navbar';
 import Footer from '../pages/Dashboard/components/Footer';
 
@@ -43,7 +42,7 @@ export {
   Pyramid,
   Stacked,
   Calendar,
-  ColorPicker,
+  ExpenseTracker,
   Customers,
   Editor,
   Employees,
