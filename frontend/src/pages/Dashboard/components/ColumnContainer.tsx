@@ -38,26 +38,15 @@ const ColumnContainer = (props: Props) => {
   };
 
   if (isDragging) {
-    return (
-      <div
-        ref={setNodeRef}
-        style={style}
-        className="bg-blue-500 w-[350px] h-[500px] max-h-[500px rounded-md flex flex-col opacity-40 border-blue-600 border-2"
-      ></div>
-    );
+    return <div ref={setNodeRef} style={style} className="bg-blue-500  opacity-40 border-blue-600 border-2"></div>;
   }
 
   return (
-    <div ref={setNodeRef} style={style} className="bg-blue-500 w-[350px] h-[500px] max-h-[500px rounded-md flex flex-col">
-      <div className="flex gap-2">
-        <div className="flex justify-center items-center bg-blue-800 px-2 py-1 text-sm rounded-full flex-1">0</div>
+    <div ref={setNodeRef} style={style} className="w-full bg-red-100 h-[400px]">
+      <div className="">
+        <p className="">0</p>
 
-        <div
-          {...attributes}
-          {...listeners}
-          onClick={() => setEditMode(true)}
-          className="bg-blue-300 text-md h-[60px] cursor-grab rounded-md p-3 font-bold border-blue-600 flex-2"
-        >
+        <div {...attributes} {...listeners} onClick={() => setEditMode(true)} className="">
           {editMode ? (
             <input
               value={column.title}
@@ -82,7 +71,7 @@ const ColumnContainer = (props: Props) => {
         </button>
       </div>
 
-      <div className="flex flex-grow flex-col gap-4 p-2  overflow-y-hidden overflow-x-auto">
+      <div className="">
         <SortableContext items={tasksIds}>
           {tasks.map((task) => (
             <TaskCard key={task.id} task={task} deleteTask={() => deleteTask(task.id)} updateTask={() => updateTask} />
@@ -92,7 +81,7 @@ const ColumnContainer = (props: Props) => {
 
       <div>
         <button
-          className="flex items-center gap-2 border-2 bg-black text-white w-full text-center justify-center py-2 cursor-pointer hover:bg-blue-900 transition-all duration-900"
+          className=""
           onClick={(e) => {
             e.stopPropagation();
             onNewTask(column.id);
