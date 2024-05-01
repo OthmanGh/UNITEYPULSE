@@ -1,5 +1,3 @@
-import React from 'react';
-
 type OverlayProps = {
   opacity?: number;
   z_index?: number;

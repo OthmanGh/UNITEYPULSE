@@ -1,16 +1,18 @@
-import React, { useMemo, useState } from 'react';
-import { AddIcon, TrashIcon } from '../../../../utils/icons';
+import { useMemo, useState } from 'react';
+import { AddIcon } from '../../../../utils/icons';
 import { Column, Task } from './types';
 import ColumnContainer from '../../components/ColumnContainer';
 import { Id } from 'react-beautiful-dnd';
-import { DndContext, DragEndEvent, DragOverlay, DragStartEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { createPortal } from 'react-dom';
+import TaskCard from '../../components/TaskCard';
 
 const Kanban = () => {
   const [columns, setColumns] = useState<Column[]>([]);
   const columnId = useMemo(() => columns.map((col) => col.id), [columns]);
   const [activeColumn, setActiveColumn] = useState<Column | null>(null);
+  const [activeTask, setActiveTask] = useState<Task | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
 
   const sensors = useSensors(
@@ -37,6 +39,9 @@ const Kanban = () => {
   const handleDeleteColumn = (id: Id) => {
     const filteredColumn = columns.filter((col) => col.id !== id);
     setColumns(filteredColumn);
+
+    const newTasks = tasks.filter((t) => t.columnId !== id);
+    setTasks(newTasks);
   };
 
   const handleUpdateColumn = (id: Id, title: string) => {
@@ -80,9 +85,56 @@ const Kanban = () => {
       setActiveColumn(event.active.data.current.column);
       return;
     }
+
+    if (event.active.data.current?.type === 'Task') {
+      setActiveTask(event.active.data.current.task);
+      return;
+    }
+  };
+
+  const handleDragOver = (event: DragOverEvent) => {
+    const { active, over } = event;
+
+    if (!over) return;
+
+    const activeId = active.id;
+    const overId = over.id;
+
+    if (activeId === overId) return;
+
+    const isActiveATask = active.data.current?.type === 'Task';
+    const isOverATask = over.data.current?.type === 'Task';
+
+    if (!isActiveATask) return;
+
+    if (isActiveATask && isOverATask) {
+      setTasks((tasks) => {
+        const activeIndex = tasks.findIndex((t) => t.id === activeId);
+        const overIndex = tasks.findIndex((t) => t.id === overId);
+
+        tasks[activeIndex].columnId = tasks[overIndex].columnId;
+
+        return arrayMove(tasks, activeIndex, overIndex);
+      });
+    }
+
+    const isOverAColumn = over.data.current?.type === 'Column';
+
+    if (isActiveATask && isOverAColumn) {
+      setTasks((tasks) => {
+        const activeIndex = tasks.findIndex((t) => t.id === activeId);
+
+        tasks[activeIndex].columnId = overId;
+
+        return arrayMove(tasks, activeIndex, activeIndex);
+      });
+    }
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
+    setActiveColumn(null);
+    setActiveTask(null);
+
     const { active, over } = event;
 
     if (!over) return;
@@ -103,7 +155,7 @@ const Kanban = () => {
 
   return (
     <section className="flex m-auto min-h-screen w-full items-center overflow-x-auto overflow-y-auto px-[40px]">
-      <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+      <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
         <div className="m-auto flex gap-4">
           <SortableContext items={columnId}>
             <div className="flex gap-4">
@@ -130,9 +182,9 @@ const Kanban = () => {
           </button>
         </div>
 
-        {activeColumn &&
-          createPortal(
-            <DragOverlay>
+        {createPortal(
+          <DragOverlay>
+            {activeColumn && (
               <ColumnContainer
                 column={activeColumn}
                 deleteColumn={handleDeleteColumn}
@@ -142,9 +194,12 @@ const Kanban = () => {
                 deleteTask={handleDeleteTask}
                 updateTask={handleUpdateTask}
               />
-            </DragOverlay>,
-            document.body
-          )}
+            )}
+
+            {activeTask && <TaskCard task={activeTask} deleteTask={() => handleDeleteTask} updateTask={() => handleUpdateTask} />}
+          </DragOverlay>,
+          document.body
+        )}
       </DndContext>
     </section>
   );

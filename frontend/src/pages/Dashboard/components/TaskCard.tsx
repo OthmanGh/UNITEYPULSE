@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TrashIcon } from '../../../utils/icons';
 import { Task, Id } from '../pages/Kanban/types';
 import Overlay from '../../../components/Overlay';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 type TaskCardProps = {
   task: Task;
@@ -14,10 +16,35 @@ const TaskCard = ({ task, deleteTask, updateTask }: TaskCardProps) => {
   const [editMode, setEditMode] = useState(false);
   const [newContent, setNewContent] = useState(task.content);
 
+  const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
+    id: task.id,
+    data: {
+      type: 'Task',
+      task,
+    },
+
+    disabled: editMode,
+  });
+
+  const style = {
+    transition,
+    transform: CSS.Transform.toString(transform),
+  };
+
   const toggleEditMode = () => {
     setEditMode((prev) => !prev);
     setMouseIsOver(false);
   };
+
+  if (isDragging) {
+    return (
+      <div
+        ref={setNodeRef}
+        style={style}
+        className="bg-blue-200 p-2.5 h-[100px] min-h-[100px] items-center flex text-left rounded-xl hover:ring-2 cursor-grab relative opacity-50 border-blue-400"
+      ></div>
+    );
+  }
 
   const handleEdit = () => {
     updateTask(task.id, newContent);
@@ -45,6 +72,10 @@ const TaskCard = ({ task, deleteTask, updateTask }: TaskCardProps) => {
 
   return (
     <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
       className="bg-blue-200 p-2.5 h-[100px] min-h-[100px] items-center flex text-left rounded-xl hover:ring-2 hover:ring-inset hover:ring-blue-900  cursor-grab relative"
       onMouseEnter={() => {
         setMouseIsOver(true);

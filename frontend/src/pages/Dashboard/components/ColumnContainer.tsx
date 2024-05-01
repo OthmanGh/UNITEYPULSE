@@ -1,9 +1,9 @@
 import { Id } from 'react-beautiful-dnd';
 import { AddIcon, TrashIcon } from '../../../utils/icons';
 import { Column, Task } from '../pages/Kanban/types';
-import { useSortable } from '@dnd-kit/sortable';
+import { SortableContext, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import TaskCard from './TaskCard';
 
 interface Props {
@@ -29,6 +29,8 @@ const ColumnContainer = (props: Props) => {
 
     disabled: editMode,
   });
+
+  const tasksIds = useMemo(() => tasks.map((task) => task.id), [tasks]);
 
   const style = {
     transition,
@@ -81,9 +83,11 @@ const ColumnContainer = (props: Props) => {
       </div>
 
       <div className="flex flex-grow flex-col gap-4 p-2  overflow-y-hidden overflow-x-auto">
-        {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} deleteTask={() => deleteTask(task.id)} updateTask={updateTask} />
-        ))}
+        <SortableContext items={tasksIds}>
+          {tasks.map((task) => (
+            <TaskCard key={task.id} task={task} deleteTask={() => deleteTask(task.id)} updateTask={() => updateTask} />
+          ))}
+        </SortableContext>
       </div>
 
       <div>
