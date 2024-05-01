@@ -58,6 +58,12 @@ const Kanban = () => {
     setTasks((prev) => [...prev, newTask]);
   };
 
+  const handleDeleteTask = (id: Id) => {
+    const newTasks = tasks.filter((task) => task.id !== id);
+
+    setTasks(newTasks);
+  };
+
   const handleDragStart = (event: DragStartEvent) => {
     if (event.active.data.current?.type === 'Column') {
       setActiveColumn(event.active.data.current.column);
@@ -98,6 +104,7 @@ const Kanban = () => {
                   updateColumn={handleUpdateColumn}
                   onNewTask={handleNewTask}
                   tasks={tasks.filter((task) => task.columnId === col.id)}
+                  deleteTask={handleDeleteTask}
                 />
               ))}
             </div>
@@ -120,6 +127,7 @@ const Kanban = () => {
                 updateColumn={handleUpdateColumn}
                 onNewTask={handleNewTask}
                 tasks={tasks.filter((task) => task.columnId === activeColumn.id)}
+                deleteTask={handleDeleteTask}
               />
             </DragOverlay>,
             document.body
