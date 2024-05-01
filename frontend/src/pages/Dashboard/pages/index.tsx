@@ -14,7 +14,7 @@ import Customers from './Customers';
 import Editor from './Editor';
 import Employees from './Employees';
 import General from './General';
-import Kanban from './Kanban';
+import Kanban from './Kanban/Kanban';
 import Orders from './Orders';
 
 export { Area, Bar, ColorMapping, Financial, Line, Pie, Pyramid, Stacked, Calender, ColorPicker, Customers, Editor, Employees, General, Kanban, Orders };

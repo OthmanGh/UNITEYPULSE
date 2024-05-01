@@ -19,7 +19,7 @@ import Customers from '../pages/Dashboard/pages/Customers';
 import Editor from '../pages/Dashboard/pages/Editor';
 import Employees from '../pages/Dashboard/pages/Employees';
 import General from '../pages/Dashboard/pages/General';
-import Kanban from '../pages/Dashboard/pages/Kanban';
+import Kanban from '../pages/Dashboard/pages/Kanban/Kanban';
 import Orders from '../pages/Dashboard/pages/Orders';
 
 import Navbar from '../pages/Dashboard/components/Navbar';

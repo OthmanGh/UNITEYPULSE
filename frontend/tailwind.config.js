@@ -18,6 +18,8 @@ export default {
         white: '#F9F7F7',
         skyBlue: '#A8D9F2',
         lightSkyBlue: '#CDEEFF',
+        darkbg: '#0d1117',
+        columnbg: '#161c22',
 
         gradientDarkBlue: '#112D4E',
         gradientNormalBlue: '#3F72AF',
