@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react';
-import { AddIcon } from '../../../../constants/icons';
-import { Column } from './types';
+import React, { useMemo, useState } from 'react';
+import { AddIcon, TrashIcon } from '../../../../utils/icons';
+import { Column, Task } from './types';
 import ColumnContainer from '../../components/ColumnContainer';
 import { Id } from 'react-beautiful-dnd';
 import { DndContext, DragEndEvent, DragOverlay, DragStartEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
@@ -9,8 +9,9 @@ import { createPortal } from 'react-dom';
 
 const Kanban = () => {
   const [columns, setColumns] = useState<Column[]>([]);
-  const columnsId = useMemo(() => columns.map((col) => col.id), [columns]);
+  const columnId = useMemo(() => columns.map((col) => col.id), [columns]);
   const [activeColumn, setActiveColumn] = useState<Column | null>(null);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -47,6 +48,16 @@ const Kanban = () => {
     setColumns(newColumns);
   };
 
+  const handleNewTask = (columnId: Id) => {
+    const newTask: Task = {
+      id: generateId(),
+      columnId,
+      content: `Task ${tasks.length + 1}`,
+    };
+
+    setTasks((prev) => [...prev, newTask]);
+  };
+
   const handleDragStart = (event: DragStartEvent) => {
     if (event.active.data.current?.type === 'Column') {
       setActiveColumn(event.active.data.current.column);
@@ -77,10 +88,17 @@ const Kanban = () => {
     <section className="flex m-auto min-h-screen w-full items-center overflow-x-auto overflow-y-auto px-[40px]">
       <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
         <div className="m-auto flex gap-4">
-          <SortableContext items={columnsId}>
+          <SortableContext items={columnId}>
             <div className="flex gap-4">
               {columns.map((col) => (
-                <ColumnContainer key={col.id} column={col} deleteColumn={handleDeleteColumn} updateColumn={handleUpdateColumn} />
+                <ColumnContainer
+                  key={col.id}
+                  column={col}
+                  deleteColumn={handleDeleteColumn}
+                  updateColumn={handleUpdateColumn}
+                  onNewTask={handleNewTask}
+                  tasks={tasks.filter((task) => task.columnId === col.id)}
+                />
               ))}
             </div>
           </SortableContext>
@@ -96,7 +114,13 @@ const Kanban = () => {
         {activeColumn &&
           createPortal(
             <DragOverlay>
-              <ColumnContainer column={activeColumn} deleteColumn={handleDeleteColumn} updateColumn={handleUpdateColumn} />
+              <ColumnContainer
+                column={activeColumn}
+                deleteColumn={handleDeleteColumn}
+                updateColumn={handleUpdateColumn}
+                onNewTask={handleNewTask}
+                tasks={tasks.filter((task) => task.columnId === activeColumn.id)}
+              />
             </DragOverlay>,
             document.body
           )}

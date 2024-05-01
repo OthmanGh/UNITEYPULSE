@@ -2,7 +2,7 @@ import { Link, Element } from 'react-scroll';
 import Features from './components/Features';
 import { Aboutus, Getintouch, Hero, Navbar } from './components/index';
 import styles from './home.module.css';
-import { ArrowScrollTop } from '../../constants/icons';
+import { ArrowScrollTop } from '../../utils/icons';
 
 function Home() {
   return (

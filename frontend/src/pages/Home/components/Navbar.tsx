@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './Navbar.module.css';
 import { navLinks } from '../../../constants';
-import { Close, Menu } from '../../../constants/icons';
+import { Close, Menu } from '../../../utils/icons';
 import shortStyles from '../../../components/index';
 import { Link } from 'react-scroll';
 import { motion } from 'framer-motion';

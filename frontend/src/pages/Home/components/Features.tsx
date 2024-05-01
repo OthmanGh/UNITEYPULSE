@@ -6,7 +6,7 @@ import Button from '../../../components/Button';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
-import { LeftArrow, RightArrow } from '../../../constants/icons';
+import { LeftArrow, RightArrow } from '../../../utils/icons';
 import { useNavigate } from 'react-router-dom';
 
 type CardProps = {

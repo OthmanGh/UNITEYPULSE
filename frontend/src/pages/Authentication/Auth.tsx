@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BackArrow, GoogleIcon } from '../../constants/icons';
+import { BackArrow, GoogleIcon } from '../../utils/icons';
 import InputField from './components/InputField';
 import { useState } from 'react';
 

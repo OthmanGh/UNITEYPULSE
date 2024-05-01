@@ -1,5 +1,5 @@
 import Tooltip from '@mui/material/Tooltip';
-import { SettingsIcon } from '../../constants/icons';
+import { SettingsIcon } from '../../utils/icons';
 import { Navbar, Sidebar } from '../../utils/index';
 import { useStateContext } from '../../contexts/ContextProvider';
 import { Outlet } from 'react-router-dom';

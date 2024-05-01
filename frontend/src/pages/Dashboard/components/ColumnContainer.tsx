@@ -1,18 +1,21 @@
 import { Id } from 'react-beautiful-dnd';
-import { TrashIcon } from '../../../constants/icons';
-import { Column } from '../pages/Kanban/types';
+import { AddIcon, TrashIcon } from '../../../utils/icons';
+import { Column, Task } from '../pages/Kanban/types';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { useState } from 'react';
+import TaskCard from './TaskCard';
 
 interface Props {
   column: Column;
   deleteColumn: (id: Id) => void;
   updateColumn: (id: Id, title: string) => void;
+  onNewTask: (columnId: Id) => void;
+  tasks: Task[];
 }
 
 const ColumnContainer = (props: Props) => {
-  const { column, deleteColumn, updateColumn } = props;
+  const { column, deleteColumn, updateColumn, onNewTask, tasks } = props;
   const [editMode, setEditMode] = useState(false);
 
   const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
@@ -43,13 +46,13 @@ const ColumnContainer = (props: Props) => {
   return (
     <div ref={setNodeRef} style={style} className="bg-blue-500 w-[350px] h-[500px] max-h-[500px rounded-md flex flex-col">
       <div className="flex gap-2">
-        <div className="flex justify-center items-center bg-blue-800 px-2 py-1 text-sm rounded-full">0</div>
+        <div className="flex justify-center items-center bg-blue-800 px-2 py-1 text-sm rounded-full flex-1">0</div>
 
         <div
           {...attributes}
           {...listeners}
           onClick={() => setEditMode(true)}
-          className="bg-blue-300 text-md h-[60px] cursor-grab rounded-md p-3 font-bold border-blue-600"
+          className="bg-blue-300 text-md h-[60px] cursor-grab rounded-md p-3 font-bold border-blue-600 flex-2"
         >
           {editMode ? (
             <input
@@ -70,14 +73,28 @@ const ColumnContainer = (props: Props) => {
           )}
         </div>
 
-        <button onClick={() => deleteColumn(column.id)}>
+        <button className="flex-1" onClick={() => deleteColumn(column.id)}>
           <TrashIcon />
         </button>
       </div>
 
-      <div className="flex flex-grow">Content</div>
+      <div className="flex flex-grow flex-col gap-4 p-2  overflow-y-hidden overflow-x-auto">
+        {tasks.map((task) => (
+          <TaskCard key={task.id} task={task} />
+        ))}
+      </div>
 
-      <div>Footer</div>
+      <div>
+        <button
+          className="flex items-center gap-2 border-2 bg-black text-white w-full text-center justify-center py-2 cursor-pointer hover:bg-blue-900 transition-all duration-900"
+          onClick={(e) => {
+            e.stopPropagation();
+            onNewTask(column.id);
+          }}
+        >
+          <AddIcon /> Add Task
+        </button>
+      </div>
     </div>
   );
 };

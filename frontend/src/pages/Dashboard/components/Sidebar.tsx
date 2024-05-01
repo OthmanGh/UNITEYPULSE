@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
-import { CloseIcon } from '../../../constants/icons';
+import { CloseIcon } from '../../../utils/icons';
 import { links } from '../../../constants';
 import { useStateContext } from '../../../contexts/ContextProvider';
 import Logo from './../../../assets/Logo.png';
