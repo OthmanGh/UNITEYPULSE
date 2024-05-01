@@ -3,13 +3,17 @@ import { TrashIcon } from '../../../constants/icons';
 import { Column } from '../pages/Kanban/types';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { useState } from 'react';
+
 interface Props {
   column: Column;
   deleteColumn: (id: Id) => void;
+  updateColumn: (id: Id, title: string) => void;
 }
 
 const ColumnContainer = (props: Props) => {
-  const { column, deleteColumn } = props;
+  const { column, deleteColumn, updateColumn } = props;
+  const [editMode, setEditMode] = useState(false);
 
   const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
     id: column.id,
@@ -17,6 +21,8 @@ const ColumnContainer = (props: Props) => {
       type: 'Column',
       column,
     },
+
+    disabled: editMode,
   });
 
   const style = {
@@ -39,8 +45,29 @@ const ColumnContainer = (props: Props) => {
       <div className="flex gap-2">
         <div className="flex justify-center items-center bg-blue-800 px-2 py-1 text-sm rounded-full">0</div>
 
-        <div {...attributes} {...listeners} className="bg-blue-300 text-md h-[60px] cursor-grab rounded-md p-3 font-bold border-blue-600">
-          {column.title}
+        <div
+          {...attributes}
+          {...listeners}
+          onClick={() => setEditMode(true)}
+          className="bg-blue-300 text-md h-[60px] cursor-grab rounded-md p-3 font-bold border-blue-600"
+        >
+          {editMode ? (
+            <input
+              value={column.title}
+              onChange={(e) => updateColumn(column.id, e.target.value)}
+              autoFocus
+              onBlur={() => {
+                setEditMode(false);
+              }}
+              onKeyDown={(e) => {
+                if (e.key !== 'Enter') return;
+                setEditMode(false);
+              }}
+              className="bg-white focus:border-blue-400 rounded outline-none px-2"
+            />
+          ) : (
+            column.title
+          )}
         </div>
 
         <button onClick={() => deleteColumn(column.id)}>

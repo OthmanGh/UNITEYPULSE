@@ -38,6 +38,15 @@ const Kanban = () => {
     setColumns(filteredColumn);
   };
 
+  const handleUpdateColumn = (id: Id, title: string) => {
+    const newColumns = columns.map((col) => {
+      if (col.id !== id) return col;
+      return { ...col, title };
+    });
+
+    setColumns(newColumns);
+  };
+
   const handleDragStart = (event: DragStartEvent) => {
     if (event.active.data.current?.type === 'Column') {
       setActiveColumn(event.active.data.current.column);
@@ -71,7 +80,7 @@ const Kanban = () => {
           <SortableContext items={columnsId}>
             <div className="flex gap-4">
               {columns.map((col) => (
-                <ColumnContainer key={col.id} column={col} deleteColumn={handleDeleteColumn} />
+                <ColumnContainer key={col.id} column={col} deleteColumn={handleDeleteColumn} updateColumn={handleUpdateColumn} />
               ))}
             </div>
           </SortableContext>
@@ -87,7 +96,7 @@ const Kanban = () => {
         {activeColumn &&
           createPortal(
             <DragOverlay>
-              <ColumnContainer column={activeColumn} deleteColumn={handleDeleteColumn} />
+              <ColumnContainer column={activeColumn} deleteColumn={handleDeleteColumn} updateColumn={handleUpdateColumn} />
             </DragOverlay>,
             document.body
           )}
