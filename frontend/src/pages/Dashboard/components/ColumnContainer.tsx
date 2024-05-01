@@ -42,11 +42,20 @@ const ColumnContainer = (props: Props) => {
   }
 
   return (
-    <div ref={setNodeRef} style={style} className="w-full bg-blue-50 h-[350px] ">
-      <div className="">
-        <p className="">0</p>
+    <div
+      ref={setNodeRef}
+      style={style}
+      className="w-full bg-blue-50 bg-opacity-60 shadow-xl rounded-md overflow-hidden h-[350px] flex flex-col justify-between"
+    >
+      <div className="flex justify-between items-center gap-4 w-full bg-secondary p-3 text-white">
+        <p className="text-blue-100 font-semibold">0</p>
 
-        <div {...attributes} {...listeners} onClick={() => setEditMode(true)} className="">
+        <div
+          {...attributes}
+          {...listeners}
+          onClick={() => setEditMode(true)}
+          className="font-bold capitalize cursor-pointer hover:text-blue-100 transition-all duration-500"
+        >
           {editMode ? (
             <input
               value={column.title}
@@ -59,14 +68,14 @@ const ColumnContainer = (props: Props) => {
                 if (e.key !== 'Enter') return;
                 setEditMode(false);
               }}
-              className="bg-white focus:border-blue-400 rounded outline-none px-2"
+              className="bg-blue-50 border-none outline-none text-secondary px-2 w-full rounded-sm"
             />
           ) : (
             column.title
           )}
         </div>
 
-        <button className="flex-1" onClick={() => deleteColumn(column.id)}>
+        <button className="text-red-50 opacity-50 hover:opacity-100 transition-all duration-500" onClick={() => deleteColumn(column.id)}>
           <TrashIcon />
         </button>
       </div>
