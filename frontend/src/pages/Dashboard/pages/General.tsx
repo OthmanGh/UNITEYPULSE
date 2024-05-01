@@ -1,8 +1,6 @@
-import { BsCurrencyDollar } from 'react-icons/bs';
 import { GoDotFill } from 'react-icons/go';
 import Button from '../components/Button';
 import { SparklineAreaData, earningData, ecomPieChartData, stackedChartData } from '../../../constants';
-import { useStateContext } from '../../../contexts/ContextProvider';
 import SparkLine from '../components/Charts/SparkLine';
 import Stacked from '../components/Charts/Stacked';
 

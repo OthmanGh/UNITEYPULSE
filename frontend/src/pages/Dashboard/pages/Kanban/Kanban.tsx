@@ -7,6 +7,7 @@ import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, P
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { createPortal } from 'react-dom';
 import TaskCard from '../../components/TaskCard';
+import Header from '../../components/Header';
 
 const Kanban = () => {
   const [columns, setColumns] = useState<Column[]>([]);
@@ -154,7 +155,8 @@ const Kanban = () => {
   };
 
   return (
-    <section className="flex m-auto min-h-screen w-full items-center overflow-x-auto overflow-y-auto px-[40px]">
+    <section className="md:m-10 mt-24 p-2 md:p-10 bg-white rounded-xl flex flex-col relative">
+      <Header category="apps" title="Kanban" />
       <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
         <div className="m-auto flex gap-4">
           <SortableContext items={columnId}>
@@ -174,10 +176,10 @@ const Kanban = () => {
             </div>
           </SortableContext>
           <button
-            className="h-[60px] w-[350px] min-w-[350px] bg-darkbg cursor-pointer rounded-lg border-columnbg p-4 ring-rose-500 hover:ring-2 text-white flex gap-2 items-center justify-center"
+            className="absolute top-14 flex items-center gap-2 bg-secondary text-white px-2 py-2 rounded-lg  hover:bg-white border-secondary border-2 hover:border-2 hover:text-secondary font-semibold transition-all duration-500 right-4"
             onClick={() => createNewColumn()}
           >
-            <AddIcon className="text-xl text-blue-400" />
+            <AddIcon className="text-xl" />
             Add Column
           </button>
         </div>
