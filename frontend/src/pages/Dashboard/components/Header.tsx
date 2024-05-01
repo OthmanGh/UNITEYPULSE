@@ -9,7 +9,7 @@ const Header = ({ title, category }: HeaderProps) => {
   return (
     <div className="mb-10">
       <p className="text-gray-400">{category}</p>
-      <p className="font-extrabold text-secondary">{title}</p>
+      <p className="font-extrabold text-secondary text-3xl mt-2">{title}</p>
     </div>
   );
 };
