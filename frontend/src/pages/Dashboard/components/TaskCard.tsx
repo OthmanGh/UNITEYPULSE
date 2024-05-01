@@ -1,14 +1,47 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { TrashIcon } from '../../../utils/icons';
 import { Task, Id } from '../pages/Kanban/types';
+import Overlay from '../../../components/Overlay';
 
 type TaskCardProps = {
   task: Task;
   deleteTask: (id: Id) => void;
+  updateTask: (id: Id, content: string) => void;
 };
 
-const TaskCard = ({ task, deleteTask }: TaskCardProps) => {
+const TaskCard = ({ task, deleteTask, updateTask }: TaskCardProps) => {
   const [mouseIsOver, setMouseIsOver] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [newContent, setNewContent] = useState(task.content);
+
+  const toggleEditMode = () => {
+    setEditMode((prev) => !prev);
+    setMouseIsOver(false);
+  };
+
+  const handleEdit = () => {
+    updateTask(task.id, newContent);
+    toggleEditMode();
+  };
+
+  if (editMode) {
+    return (
+      <>
+        <div className="fixed z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-md shadow-md">
+          <input type="text" value={newContent} onChange={(e) => setNewContent(e.target.value)} className="border rounded-md p-1 w-full" />
+          <div className="mt-4 flex justify-end">
+            <button className="bg-blue-500 text-white px-4 py-1 rounded-md mr-2" onClick={handleEdit}>
+              Save
+            </button>
+            <button className="bg-red-500 text-white px-4 py-1 rounded-md" onClick={toggleEditMode}>
+              Cancel
+            </button>
+          </div>
+        </div>
+        <Overlay />
+      </>
+    );
+  }
 
   return (
     <div
@@ -19,6 +52,7 @@ const TaskCard = ({ task, deleteTask }: TaskCardProps) => {
       onMouseLeave={() => {
         setMouseIsOver(false);
       }}
+      onClick={toggleEditMode}
     >
       {task.content}
 
