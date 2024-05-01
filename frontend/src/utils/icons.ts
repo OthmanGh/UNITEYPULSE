@@ -9,6 +9,8 @@ import { IoReturnUpBack } from 'react-icons/io5';
 import { FiSettings } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 import { IoMdAdd } from 'react-icons/io';
+import { MdAddBox } from 'react-icons/md';
+import { IoMdAddCircleOutline } from 'react-icons/io';
 
 import LogoImg from './../assets/Logo.png';
 import { FaRegTrashAlt } from 'react-icons/fa';
@@ -24,5 +26,5 @@ export const BackArrow = IoReturnUpBack;
 export const SettingsIcon = FiSettings;
 export const CloseIcon = IoMdClose;
 export const Logo = LogoImg;
-export const AddIcon = IoMdAdd;
+export const AddIcon = IoMdAddCircleOutline;
 export const TrashIcon = FaRegTrashAlt;

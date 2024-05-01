@@ -45,7 +45,7 @@ const ColumnContainer = (props: Props) => {
     <div
       ref={setNodeRef}
       style={style}
-      className="w-full bg-blue-50 bg-opacity-60 shadow-xl rounded-md overflow-hidden h-[350px] flex flex-col justify-between"
+      className="w-full bg-blue-50 bg-opacity-60 shadow-xl rounded-md overflow-hidden h-[400px] flex flex-col justify-between hover:drop-shadow-md transition-all duration-400"
     >
       <div className="flex justify-between items-center gap-4 w-full bg-secondary p-3 text-white">
         <p className="text-blue-100 font-semibold">0</p>
@@ -90,13 +90,13 @@ const ColumnContainer = (props: Props) => {
 
       <div>
         <button
-          className=""
+          className="flex items-center justify-center gap-2 mx-auto bg-secondary bg-opacity-50 text-gray-900 hover:bg-gray-600 hover:text-blue-100 transition-all duration-500 w-full p-2 font-semibold"
           onClick={(e) => {
             e.stopPropagation();
             onNewTask(column.id);
           }}
         >
-          <AddIcon /> Add Task
+          <AddIcon className="text-xl" /> Add Task
         </button>
       </div>
     </div>
