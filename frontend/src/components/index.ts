@@ -7,6 +7,7 @@ const styles = {
   linksFonts: 'xs:text-lg sm:text-xl md:text-2xl xl:text-3xl',
   pointer: 'cursor-pointer',
   titleMobile: 'text-md text-center pt-2 text-lg text-wrap',
+  dashboardSection: 'md:m-10 mt-24 p-4 md:p-10 bg-white rounded-xl flex flex-col relative',
 };
 
 export default styles;

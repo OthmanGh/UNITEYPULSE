@@ -42,7 +42,7 @@ const ColumnContainer = (props: Props) => {
   }
 
   return (
-    <div ref={setNodeRef} style={style} className="w-full bg-red-100 h-[400px]">
+    <div ref={setNodeRef} style={style} className="w-full bg-blue-50 h-[350px] ">
       <div className="">
         <p className="">0</p>
 

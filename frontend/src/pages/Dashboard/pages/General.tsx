@@ -3,10 +3,11 @@ import Button from '../components/Button';
 import { SparklineAreaData, earningData, ecomPieChartData, stackedChartData } from '../../../constants';
 import SparkLine from '../components/Charts/SparkLine';
 import Stacked from '../components/Charts/Stacked';
+import styles from '../../../components';
 
 const General = () => {
   return (
-    <div className="mt-5">
+    <section className={styles.dashboardSection}>
       <div className="flex flex-wrap lg:flex-nowrap justify-center">
         <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-earning-img bg-no-repeat bg-cover bg-center">
           <div className="flex justify-between items-center">
@@ -98,7 +99,7 @@ const General = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

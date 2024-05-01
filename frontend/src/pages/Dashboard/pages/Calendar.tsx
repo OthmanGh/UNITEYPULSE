@@ -3,10 +3,11 @@ import Fullcalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import styles from '../../../components';
 
 const Calendar = () => {
   return (
-    <section className="w-[80%] mx-auto mt-5">
+    <section className={styles.dashboardSection}>
       <Fullcalendar
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
         initialView={'dayGridMonth'}
