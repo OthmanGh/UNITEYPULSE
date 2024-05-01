@@ -9,7 +9,7 @@ const Dashboard = () => {
   return (
     <div>
       <div className="flex relative dark:bg-main-dark-bg">
-        <div className="fixed right-4 bottom-4">
+        <div className="fixed right-4 bottom-4  z-20">
           <Tooltip title="Settings" placement="top">
             <button
               className="cursor-pointer text-3xl p-3 hover:drop-shadow-xl text-white hover:bg-light-gray rounded-3xl"
