@@ -56,9 +56,11 @@ const Auth = () => {
           <form className="flex flex-col items-start justify-center gap-4 w-[90%] sm:w-2/3">
             <Header text="Create Account" />
 
-            <InputField name="name" id="name" placeholder="Othman..." labelText="Name" type="text" classes="w-full" />
+            <div className="flex w-full gap-2">
+              <InputField name="name" id="name" placeholder="Othman..." labelText="Name" type="text" classes="w-full" />
 
-            <InputField name="username" id="username" placeholder="Othman..." labelText="Username" type="text" classes="w-full" />
+              <InputField name="username" id="username" placeholder="Othman..." labelText="Username" type="text" classes="w-full" />
+            </div>
 
             <InputField name="email" id="email" placeholder="example@gmail.com" labelText="Email" type="email" classes="w-full" />
 
