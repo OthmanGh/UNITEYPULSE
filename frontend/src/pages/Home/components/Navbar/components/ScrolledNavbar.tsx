@@ -1,4 +1,3 @@
-import React from 'react';
 import LogoTitle from './LogoTitle';
 import NavLinkItem from './NavLinkItem';
 import shortStyles from '../../../../../components/index';

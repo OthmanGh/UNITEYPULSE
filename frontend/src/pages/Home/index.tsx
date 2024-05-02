@@ -1,5 +1,5 @@
 import { Link, Element } from 'react-scroll';
-import Features from './components/Features';
+import Features from './components/Features/Features';
 import { Aboutus, Getintouch, Hero, Navbar } from './components/index';
 import styles from './home.module.css';
 import { ArrowScrollTop } from '../../utils/icons';
@@ -11,7 +11,7 @@ function Home() {
         <Navbar />
       </header>
 
-      <main className="flex flex-col gap-40">
+      <main className="flex flex-col ">
         <Element name="hero">
           <Hero />
         </Element>
