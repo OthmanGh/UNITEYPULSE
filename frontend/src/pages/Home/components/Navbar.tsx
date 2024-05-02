@@ -26,7 +26,7 @@ const Navbar = () => {
     };
   }, []);
 
-  const NavLinkItem = ({ id, title }) => (
+  const NavLinkItem = ({ id, title }: { id: string; title: string }) => (
     <Link to={id} spy={true} smooth={true} duration={500} offset={-70}>
       <li className={`${shortStyles.pointer} hover:text-primary transition-all duration-500`}>{title}</li>
     </Link>
@@ -67,7 +67,7 @@ const Navbar = () => {
   );
 };
 
-const ScrolledNavbar = ({ handleToggle, toggle }) => (
+const ScrolledNavbar = ({ handleToggle, toggle }: { toggle: boolean; handleToggle: () => void }) => (
   <motion.nav
     initial={{ y: -100, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
@@ -106,13 +106,13 @@ const LogoTitle = () => (
   </p>
 );
 
-const NavLinkItem = ({ id, title }) => (
+const NavLinkItem = ({ id, title }: { id: string; title: string }) => (
   <Link to={id} spy={true} smooth={true} duration={500} offset={-70}>
     <li className={`${shortStyles.pointer} hover:text-primary transition-all duration-500`}>{title}</li>
   </Link>
 );
 
-const LoginBtn = ({ handleToggle }) => (
+const LoginBtn = ({ handleToggle }: { handleToggle: () => void }) => (
   <button
     className={`hidden sm:flex border-[1px] border-transparent px-4 py-2 rounded-xl hover:text-primary hover:border-primary hover:scale-90 transition-all duration-500
   sm:text-xl md:text-2xl
