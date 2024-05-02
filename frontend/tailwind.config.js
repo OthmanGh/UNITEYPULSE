@@ -6,7 +6,7 @@ export default {
   theme: {
     fontFamily: {
       poppins: ['Poppins', 'sans-serif'],
-      'open-sans': ['Open Sans', 'sans-serif'],
+      montserrat: ['Montserrat', 'sans-serif'],
     },
 
     extend: {

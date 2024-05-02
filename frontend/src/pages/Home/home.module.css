@@ -1,13 +1,1 @@
-.header {
-  background-color: red;
-}
 
-.header p {
-  color: green;
-  background-color: black;
-}
-
-.main {
-  background: linear-gradient(to bottom, #d9e9fc, #3f72af);
-  min-height: 100vh;
-}

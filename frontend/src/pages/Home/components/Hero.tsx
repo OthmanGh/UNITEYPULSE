@@ -12,7 +12,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className={`flex xs:w-full  sm:flex-row flex-col sm:py-16 sm:px-4 py-10 gap-10 sm:mx-auto md:gap-48 xl:gap-64 mx-auto md:w-[85%]`}>
+    <section id="home" className={`flex items-center justify-center gap-10 xs:w-full p-2 bg-dark h-[100vh]`}>
       <div className={`sm:text-start flex flex-col gap-6 text-center p-6 text-lg sm:justify-center sm:gap-20 sm:py-10`}>
         <h1
           className={`text-white font-semibold leading-8 sm:leading-10 text-lg ss:text-xl sm:text-2xl sm:max-w-[280px] md:text-3xl md:max-w-[350px] md:leading-10`}
