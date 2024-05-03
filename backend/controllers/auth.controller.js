@@ -61,3 +61,19 @@ export const login = async (req, res, next) => {
 export const logout = (req, res) => {
   console.log("logout");
 };
+
+export const forgotPassword = async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) {
+    return res.status(404).send({
+      status: "fail",
+      message: "User not found"
+    });
+  }
+
+  const resetToken = user.generatePasswordResetToken();
+
+  await user.save({ validateBeforeSave: false });
+};
+export const resetPassword = (req, res, next) => {};
