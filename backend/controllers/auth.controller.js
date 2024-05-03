@@ -11,6 +11,7 @@ export const signup = async (req, res, next) => {
   try {
     const newUser = await User.create({
       name: req.body.name,
+      username: req.body.username,
       email: req.body.email,
       password: req.body.password,
       passwordConfirm: req.body.passwordConfirm
@@ -35,27 +36,32 @@ export const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(200).send({
+    return res.status(400).send({
       status: "fail",
       message: "invalid credentials"
     });
   }
 
-  const user = await User.findOne({ email }).select("+password");
+  try {
+    const user = await User.findOne({ email }).select("+password");
 
-  if (!user || !(await user.correctPassword(password, user.password))) {
-    return res.status(200).send({
-      status: "fail",
-      message: "incorrect email or password"
+    if (!user || !(await user.correctPassword(password, user.password))) {
+      return res.status(401).json({
+        status: "fail",
+        message: "Incorrect email or password"
+      });
+    }
+
+    const token = signToken(user._id);
+
+    res.status(200).json({
+      status: "success",
+      token
     });
+  } catch (error) {
+    console.error("Error in login", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-
-  const token = signToken(user._id);
-
-  res.status(200).json({
-    status: "success",
-    token
-  });
 };
 
 export const logout = (req, res) => {
