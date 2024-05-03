@@ -43,14 +43,43 @@ const userSchema = new mongoose.Schema({
 
   profilePicture: {
     type: String,
-    default: ""
+    default: "annonymous.png"
   },
 
   role: {
     type: String,
-    enum: ["employee", "business owner", "project manager"],
-    default: "business owner"
+    enum: ["employee", "owner", "manager"],
+    default: "employee"
   },
+
+  department: {
+    type: String,
+    required: true
+  },
+
+  companyPolicies: [String],
+  goalsAndObjectives: [String],
+
+  projects: [
+    {
+      name: String,
+      department: String
+    }
+  ],
+
+  manager: {
+    name: String,
+    username: String,
+    email: String
+  },
+
+  feedback: [
+    {
+      type: String,
+      date: { type: Date, default: Date.now },
+      anonymous: { type: Boolean, default: true }
+    }
+  ],
 
   passwordResetToken: String,
   passwordResetExpires: Date
