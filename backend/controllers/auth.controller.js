@@ -1,11 +1,5 @@
 import User from "../models/user.model.js";
-import jwt from "jsonwebtoken";
-
-const signToken = id => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRESIN
-  });
-};
+import signToken from "../utils/signToken.js";
 
 export const signup = async (req, res, next) => {
   try {
