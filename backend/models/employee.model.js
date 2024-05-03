@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Event from "./event.model.js";
 
 const employeeSchema = new mongoose.Schema({
   user: {
@@ -44,7 +45,9 @@ const employeeSchema = new mongoose.Schema({
 
   department: {
     name: String
-  }
+  },
+
+  events: [Event.schema]
 });
 
 const Employee = mongoose.model("Employee", employeeSchema);
