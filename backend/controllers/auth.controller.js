@@ -64,10 +64,6 @@ export const login = async (req, res, next) => {
   }
 };
 
-export const logout = (req, res) => {
-  console.log("logout");
-};
-
 export const forgotPassword = async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
@@ -83,3 +79,7 @@ export const forgotPassword = async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 };
 export const resetPassword = (req, res, next) => {};
+
+export const logout = (req, res) => {
+  console.log("logout");
+};
