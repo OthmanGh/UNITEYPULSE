@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Event from "./event.model.js";
 import Task from "./task.model.js";
+import Expense from "./expense.js";
 
 const employeeSchema = new mongoose.Schema({
   user: {
@@ -56,7 +57,8 @@ const employeeSchema = new mongoose.Schema({
 
   events: [Event.schema],
   tasks: [Task.schema],
-  profits: [Profit.schema]
+  profits: [Profit.schema],
+  expenses: [Expense.schema]
 });
 
 const Employee = mongoose.model("Employee", employeeSchema);
