@@ -16,19 +16,23 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+
   description: {
     type: String,
     required: true
   },
+
   deadline: {
     type: Date,
     required: true
   },
+
   assignedTo: {
     name: String,
     username: String,
     email: String
   },
+
   status: {
     type: String,
     enum: ["Pending", "In Progress", "Completed"],

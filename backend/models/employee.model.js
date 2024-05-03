@@ -48,8 +48,15 @@ const employeeSchema = new mongoose.Schema({
     name: String
   },
 
+  role: {
+    type: String,
+    enum: ["owner", "manager", "employee"],
+    default: "employee"
+  },
+
   events: [Event.schema],
-  tasks: [Task.schema]
+  tasks: [Task.schema],
+  profits: [Profit.schema]
 });
 
 const Employee = mongoose.model("Employee", employeeSchema);
