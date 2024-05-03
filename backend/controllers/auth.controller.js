@@ -1,6 +1,12 @@
 import User from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
+const signToken = id => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRESIN
+  });
+};
+
 export const signup = async (req, res, next) => {
   try {
     const newUser = await User.create({
@@ -10,9 +16,7 @@ export const signup = async (req, res, next) => {
       passwordConfirm: req.body.passwordConfirm
     });
 
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRESIN
-    });
+    const token = signToken(newUser._id);
 
     res.status(201).json({
       status: "success",
@@ -27,8 +31,31 @@ export const signup = async (req, res, next) => {
   }
 };
 
-export const login = (req, res) => {
-  console.log("Login User");
+export const login = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(200).send({
+      status: "fail",
+      message: "invalid credentials"
+    });
+  }
+
+  const user = await User.findOne({ email }).select("+password");
+
+  if (!user || !(await user.correctPassword(password, user.password))) {
+    return res.status(200).send({
+      status: "fail",
+      message: "incorrect email or password"
+    });
+  }
+
+  const token = signToken(user._id);
+
+  res.status(200).json({
+    status: "success",
+    token
+  });
 };
 
 export const logout = (req, res) => {
