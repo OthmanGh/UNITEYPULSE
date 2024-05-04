@@ -7,7 +7,7 @@ const Chat = () => {
   return (
     <section className={`${styles.dashboardSection}`}>
       <Header category="App" title="Live Chatting" />
-      <div className="flex flex-col sm:flex-row w-full bg-dark p-6 rounded-md gap-2 h-[80vh]">
+      <div className="flex flex-col sm:flex-row w-full bg-dark p-6 rounded-lg gap-2 h-[80vh]">
         <SidebarChat />
         <MessageContainer />
       </div>

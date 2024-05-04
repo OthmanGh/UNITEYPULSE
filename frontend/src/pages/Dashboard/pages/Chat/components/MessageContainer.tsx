@@ -15,18 +15,17 @@ const NoChatSelectedComp = () => {
 };
 
 const MessageContainer = () => {
-  const NoChatSelected = true;
+  const NoChatSelected = false;
 
   return (
-    <div className="flex flex-col bg-blue-600 flex-1">
+    <div className={`flex flex-col ${NoChatSelected ? 'bg-secondary bg-opacity-20' : ''}  flex-1 rounded-md`}>
       {NoChatSelected ? (
         <NoChatSelectedComp />
       ) : (
         <>
-          <div className="bg-half-transparent px-4 py-2 mb-2">
-            <span className="label-text"> To:</span>
-            {''}
-            <span className="text-gray-900 font-bold">Ali</span>
+          <div className="flex items-center gap-2 bg-secondary bg-opacity-50 h-[48px] rounded-lg mb-4 hover:bg-opacity-100 transition-all p-4   duration-400">
+            <span className="label-text text-md"> To :</span>
+            <span className="text-gray-300 font-bold">Ali</span>
           </div>
           <Messages />
           <MessageInput />
