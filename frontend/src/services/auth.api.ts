@@ -16,13 +16,15 @@ const fetchAuthRes = async (data: any, path: string, method: RequestMethod) => {
     });
 
     if (!req.ok) {
-      throw new Error('Network Error');
+      const error = await req.json();
+      console.log('error:', error);
+      throw new Error(error || 'Request failed');
     }
 
-    const res = await req.json();
-    return res;
+    return await req.json();
   } catch (error) {
-    return error;
+    console.error('fetchAuthRes error:', error);
+    throw error;
   }
 };
 

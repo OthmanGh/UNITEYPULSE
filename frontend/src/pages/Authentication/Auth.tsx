@@ -6,27 +6,41 @@ import InputField from './components/InputField';
 import { useState } from 'react';
 import fetchAuthRes from '../../services/auth.api';
 import { RequestMethod } from '../../services/requestMethods';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-type FormData = {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+const schema = z.object({
+  name: z.string().min(2).max(50),
+  username: z
+    .string()
+    .min(5)
+    .max(20)
+    .regex(/^[a-zA-Z0-9_]+$/),
+  email: z.string().email(),
+  password: z.string().min(8),
+  confirmPassword: z.string(),
+});
+
+type FormData = z.infer<typeof schema>;
 
 const Auth = () => {
   const {
     register,
     handleSubmit,
     setError,
+    clearErrors,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>();
+    watch,
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
 
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const password = watch('password', '');
 
   const handleSwitch = () => {
     setIsLoggingIn((prev) => !prev);
+    clearErrors();
   };
 
   const onSubmit = async (data: FormData) => {
@@ -34,14 +48,17 @@ const Auth = () => {
       const path = isLoggingIn ? 'login' : 'signup';
       const post = RequestMethod.POST;
 
-      console.log(data);
-
       const res = await fetchAuthRes(data, path, post);
-      const result = await res.json();
-
-      console.log(result);
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error);
+      } else {
+        console.log(res);
+      }
     } catch (error) {
-      console.log(error);
+      setError('root', {
+        message: error.message,
+      });
     }
   };
 
@@ -93,14 +110,16 @@ const Auth = () => {
             <span className="mt-[-12px] ml-1 text-[12px] text-primary text-opacity-50 hover:text-opacity-100 font-semibold cursor-pointer transition-all duration-500">
               Forgot your password?
             </span>
+
+            <div className="flex flex-col gap-5 mt-10 w-[100%] mx-auto ">
+              <OrLine />
+              <GoogleBtn />
+            </div>
+
+            <SubmitBtn text="Login" onSubmit={handleSubmit(onSubmit)} isSubmitting={isSubmitting} />
+
+            {errors.root && <span className="text-red-500 mx-auto">{errors.root.message}</span>}
           </form>
-
-          <div className="flex flex-col gap-5 mt-10 w-[90%] sm:w-2/3">
-            <OrLine />
-            <GoogleBtn />
-          </div>
-
-          <SubmitBtn text="Login" onSubmit={handleSubmit(onSubmit)} isSubmitting={isSubmitting} />
         </div>
       ) : (
         <div className="h-full w-full flex flex-col items-center justify-center p-5 bg-dark text-gray-50">
@@ -158,7 +177,7 @@ const Auth = () => {
             />
 
             <InputField
-              name="confirm password"
+              name="confirmPassword"
               id="confirmPassword"
               placeholder="Pass1234.."
               labelText="Confirm Password"
@@ -168,6 +187,7 @@ const Auth = () => {
               required
               error={errors.confirmPassword}
             />
+            {password !== '' && password !== watch('confirmPassword') && <span className="text-red-500 text-sm mt-[-10px]">Passwords don't match</span>}
           </form>
 
           <div className="flex flex-col gap-5 mt-10 w-[90%] sm:w-2/3">
@@ -176,6 +196,8 @@ const Auth = () => {
           </div>
 
           <SubmitBtn text="Create Account" onSubmit={handleSubmit(onSubmit)} isSubmitting={isSubmitting} />
+
+          {errors.root && <span className="text-red-500 mt-4">{errors.root.message}</span>}
         </div>
       )}
 

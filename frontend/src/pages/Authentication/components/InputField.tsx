@@ -30,7 +30,7 @@ const InputField = ({ name, placeholder, type, labelText, id, classes, register,
           required: `${name} is required`,
         })}
       />
-      {error && <span className="text-red-500">{error?.message}</span>}
+      {error && <span className="text-red-500 text-sm">{error?.message}</span>}
     </fieldset>
   );
 };
