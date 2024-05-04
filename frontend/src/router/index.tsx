@@ -19,6 +19,7 @@ import {
   ColorMapping,
   Pyramid,
   Stacked,
+  Chat,
 } from '../utils';
 
 const router = createBrowserRouter([
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       { path: 'color-mapping', element: <ColorMapping /> },
       { path: 'pyramid', element: <Pyramid /> },
       { path: 'stacked', element: <Stacked /> },
+      { path: 'chat', element: <Chat /> },
     ],
   },
 ]);

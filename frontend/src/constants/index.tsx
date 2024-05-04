@@ -12,6 +12,7 @@ import { HiOutlineRefresh } from 'react-icons/hi';
 import { SiExpensify } from 'react-icons/si';
 import { TiTick } from 'react-icons/ti';
 import { GrLocation } from 'react-icons/gr';
+import { PiWechatLogoFill } from 'react-icons/pi';
 
 export const navLinks = [
   {
@@ -165,6 +166,11 @@ export const links = [
       {
         name: 'tracker',
         icon: <SiExpensify />,
+      },
+
+      {
+        name: 'Chat',
+        icon: <PiWechatLogoFill className="text-xl" />,
       },
     ],
   },
