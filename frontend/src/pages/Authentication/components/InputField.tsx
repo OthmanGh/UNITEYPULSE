@@ -1,3 +1,5 @@
+import React from 'react';
+
 type InputFieldProps = {
   name: string;
   placeholder: string;
@@ -10,7 +12,7 @@ type InputFieldProps = {
   error?: any;
 };
 
-const InputField = ({ name, placeholder, type, labelText, id, classes, register, required, error }: InputFieldProps) => {
+const InputField = ({ name, placeholder, type, labelText, id, classes, register, error }: InputFieldProps) => {
   return (
     <fieldset className="flex flex-col gap-1 w-full">
       <label htmlFor={id} className="font-semibold  text-gray-200">
@@ -24,9 +26,11 @@ const InputField = ({ name, placeholder, type, labelText, id, classes, register,
         className={`h-[50px] px-4 rounded-md  outline-none ${
           classes || ''
         } bg-half-transparent border-b-2 border-b-primary placeholder:text-gray-500 text-primary`}
-        {...register(name, { required })}
+        {...register(id, {
+          required: `${name} is required`,
+        })}
       />
-      {error && <span className="text-red-500">This field is required</span>}
+      {error && <span className="text-red-500">{error?.message}</span>}
     </fieldset>
   );
 };

@@ -2,7 +2,7 @@ import { RequestMethod } from './requestMethods';
 
 const API_BASE_URL = 'http://127.0.0.1:8000/api/auth';
 
-const auth = async (data: any, path: string, method: RequestMethod) => {
+const fetchAuthRes = async (data: any, path: string, method: RequestMethod) => {
   try {
     const url = `${API_BASE_URL}/${path}`;
     const httpMethod = method;
@@ -22,8 +22,8 @@ const auth = async (data: any, path: string, method: RequestMethod) => {
     const res = await req.json();
     return res;
   } catch (error) {
-    throw error;
+    return error;
   }
 };
 
-export default auth;
+export default fetchAuthRes;

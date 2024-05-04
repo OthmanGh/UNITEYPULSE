@@ -4,6 +4,8 @@ import Overlay from '../../components/Overlay';
 import { GoogleBtn, OrLine, SwitchBtn, Text, BackBtn, SubmitBtn, Header } from './components';
 import InputField from './components/InputField';
 import { useState } from 'react';
+import fetchAuthRes from '../../services/auth.api';
+import { RequestMethod } from '../../services/requestMethods';
 
 type FormData = {
   name: string;
@@ -17,7 +19,8 @@ const Auth = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    setError,
+    formState: { errors, isSubmitting },
   } = useForm<FormData>();
 
   const [isLoggingIn, setIsLoggingIn] = useState(false);
@@ -26,8 +29,20 @@ const Auth = () => {
     setIsLoggingIn((prev) => !prev);
   };
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: FormData) => {
+    try {
+      const path = isLoggingIn ? 'login' : 'signup';
+      const post = RequestMethod.POST;
+
+      console.log(data);
+
+      const res = await fetchAuthRes(data, path, post);
+      const result = await res.json();
+
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -85,7 +100,7 @@ const Auth = () => {
             <GoogleBtn />
           </div>
 
-          <SubmitBtn text="Login" onSubmit={handleSubmit(onSubmit)} />
+          <SubmitBtn text="Login" onSubmit={handleSubmit(onSubmit)} isSubmitting={isSubmitting} />
         </div>
       ) : (
         <div className="h-full w-full flex flex-col items-center justify-center p-5 bg-dark text-gray-50">
@@ -143,7 +158,7 @@ const Auth = () => {
             />
 
             <InputField
-              name="confirmPassword"
+              name="confirm password"
               id="confirmPassword"
               placeholder="Pass1234.."
               labelText="Confirm Password"
@@ -160,7 +175,7 @@ const Auth = () => {
             <GoogleBtn />
           </div>
 
-          <SubmitBtn text="Create Account" onSubmit={handleSubmit(onSubmit)} />
+          <SubmitBtn text="Create Account" onSubmit={handleSubmit(onSubmit)} isSubmitting={isSubmitting} />
         </div>
       )}
 
