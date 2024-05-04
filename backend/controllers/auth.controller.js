@@ -75,5 +75,6 @@ export const forgotPassword = async (req, res, next) => {
 export const resetPassword = (req, res, next) => {};
 
 export const logout = (req, res) => {
-  console.log("logout");
+  try {
+  } catch (error) {}
 };
