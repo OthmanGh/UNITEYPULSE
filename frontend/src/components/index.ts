@@ -6,7 +6,7 @@ const styles = {
   transition: 'transition-all duration-500',
   pointer: 'cursor-pointer',
   titleMobile: 'text-md text-center pt-2 text-lg text-wrap',
-  dashboardSection: 'md:m-10 mt-24 p-4 md:p-10 bg-white rounded-xl flex flex-col relative',
+  dashboardSection: 'md:m-5 mt-10 p-4 md:p-8 bg-white rounded-xl flex flex-col relative',
 };
 
 export default styles;

@@ -5,10 +5,9 @@ import MessageContainer from './components/MessageContainer';
 
 const Chat = () => {
   return (
-    <section className={styles.dashboardSection}>
+    <section className={`${styles.dashboardSection}`}>
       <Header category="App" title="Live Chatting" />
-
-      <div className="grid grid-1 sm:grid-cols-2 w-full">
+      <div className="flex flex-col sm:flex-row w-full bg-dark p-6 rounded-md gap-2 h-[80vh]">
         <SidebarChat />
         <MessageContainer />
       </div>
