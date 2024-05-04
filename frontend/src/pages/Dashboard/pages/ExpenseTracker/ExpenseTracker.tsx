@@ -6,12 +6,20 @@ import { tableExpenseData } from '../../../../constants';
 import { useState } from 'react';
 
 const ExpenseTracker = () => {
-  const [active, setActive] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleAddExpense = () => {
+    console.log('added');
+  };
+
   return (
     <section className={styles.dashboardSection}>
       <div className="flex flex-col  xs:flex-row items-center justify-between">
         <Header category="app" title="Expense Tracker" />
-        <button className="flex items-center gap-2 bg-secondary text-gray-100 p-3 rounded-md cursor-pointer hover:bg-dark transition-all duration-400">
+        <button
+          className="flex items-center gap-2 bg-secondary text-gray-100 p-3 rounded-md cursor-pointer hover:bg-dark transition-all duration-400"
+          onClick={() => setShowPopup(true)}
+        >
           <AddIcon className="text-xl" />
           Add Expense
         </button>
@@ -73,7 +81,57 @@ const ExpenseTracker = () => {
           </table>
         </div>
       </div>
+
+      {showPopup && <AddExpensePopup onAddExpense={handleAddExpense} setShowPopup={() => setShowPopup} />}
     </section>
+  );
+};
+
+const AddExpensePopup = ({ setShowPopup, onAddExpense }: { setShowPopup: () => void; onAddExpense: () => void }) => {
+  return (
+    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+      <div className="bg-white dark:bg-secondary-dark-bg p-6 rounded-lg w-96">
+        <h2 className="text-lg font-semibold mb-4">Add Expense</h2>
+        <form>
+          <div className="mb-4">
+            <label htmlFor="date" className="block text-sm  text-gray-700 dark:text-gray-200 font-semibold">
+              Date
+            </label>
+            <input type="text" id="date" name="date" className="mt-1 p-2 border rounded-md w-full bg-secondary text-white  focus:outline-none" />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="description" className="block text-sm  text-gray-700 dark:text-gray-200 font-semibold">
+              Description
+            </label>
+            <input type="text" id="description" name="description" className="mt-1 p-2 border rounded-md w-full bg-secondary text-white focus:outline-none" />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="category" className="block text-sm text-gray-700 dark:text-gray-200 font-semibold">
+              Category
+            </label>
+            <input type="text" id="category" name="category" className="mt-1 p-2 border rounded-md w-full bg-secondary text-white focus:outline-none" />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="amount" className="block text-sm  text-gray-700 dark:text-gray-200 font-semibold">
+              Amount
+            </label>
+            <input type="text" id="amount" name="amount" className="mt-1 p-2 border rounded-md w-full bg-secondary text-white focus:outline-none" />
+          </div>
+          <div className="flex justify-end">
+            <button type="button" className="bg-gray-700 text-white p-2 rounded-md mr-2 hover:bg-gray-600" onClick={() => setShowPopup(false)}>
+              Cancel
+            </button>
+            <button
+              type="submit"
+              onClick={onAddExpense}
+              className="bg-secondary text-white p-2 rounded-md hover:bg-secondary hover:bg-opacity-80 transition-all duration-400"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 
