@@ -58,5 +58,5 @@ export default {
       bg2: "url('https://images.unsplash.com/photo-1548092372-0d1bd40894a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjJ8fGRhdGF8ZW58MHx8MHx8fDA%3D')",
     },
   },
-  plugins: [],
+  plugins: [require('daisyui')],
 };
