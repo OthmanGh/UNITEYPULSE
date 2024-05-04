@@ -65,6 +65,15 @@ const Auth = () => {
             <InputField name="email" id="email" placeholder="example@gmail.com" labelText="Email" type="email" classes="w-full" />
 
             <InputField name="password" id="password" placeholder="Pass1234.." labelText="Password" type="password" classes="w-full flex-2" />
+
+            <InputField
+              name="confirmPassword"
+              id="confirmPassword"
+              placeholder="Pass1234.."
+              labelText="Confirm Password"
+              type="password"
+              classes="w-full flex-2"
+            />
           </form>
 
           <div className="flex flex-col gap-5 mt-10 w-[90%] sm:w-2/3">
