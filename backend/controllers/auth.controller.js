@@ -8,14 +8,14 @@ export const signup = async (req, res, next) => {
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
-      passwordConfirm: req.body.passwordConfirm
+      confirmPassword: req.body.confirmPassword
     });
 
     if (newUser) {
       generateTokenandSetCookie(newUser._id, res);
     }
 
-    res.status(201).json({
+    return res.status(201).json({
       status: "success",
       data: {
         user: newUser
@@ -23,7 +23,9 @@ export const signup = async (req, res, next) => {
     });
   } catch (error) {
     console.error("Error in signup", error.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    return res
+      .status(500)
+      .json({ status: "fail", error: "Internal Server Error" });
   }
 };
 

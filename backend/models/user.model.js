@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema(
       select: false
     },
 
-    passwordConfirm: {
+    confirmPassword: {
       type: String,
       required: [true, "Confirm password is required"],
       validate: {
@@ -92,7 +92,7 @@ userSchema.pre("save", async function(next) {
 
   this.password = await bcrypt.hash(this.password, 10);
 
-  this.passwordConfirm = undefined;
+  this.confirmPassword = undefined;
   next();
 });
 
