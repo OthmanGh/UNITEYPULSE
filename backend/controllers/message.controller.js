@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
 
@@ -35,4 +34,19 @@ export const sendMessage = async (req, res) => {
     console.log("Error in sendMessage controller: ", error.message);
     res.status(500).json({ error: "Internal server error" });
   }
+};
+
+export const getMessages = async (req, res) => {
+  try {
+    const chatId = req.params.id;
+    const senderId = req.user._id;
+
+    const converstion = await Conversation.findOne({
+      participants: { $all: [senderId, chatId] }
+    }).populate("messages");
+
+    if (!converstion) return res.status(200).json([]);
+
+    res.status(200).json(converstion.messages);
+  } catch {}
 };
