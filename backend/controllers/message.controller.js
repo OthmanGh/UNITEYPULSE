@@ -4,9 +4,9 @@ import Message from "../models/message.model.js";
 
 export const sendMessage = async (req, res) => {
   try {
-    const { message } = req.body;
-    const { id: receiverId } = req.params;
-    const senderId = new mongoose.Types.ObjectId(req.user._id);
+    const message = req.body.message;
+    const receiverId = req.params.id;
+    const senderId = req.user._id;
 
     let conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] }
