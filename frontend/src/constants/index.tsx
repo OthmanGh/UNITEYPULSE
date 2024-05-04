@@ -6,7 +6,7 @@ import { IoMdContacts } from 'react-icons/io';
 import { RiContactsLine, RiStockLine } from 'react-icons/ri';
 import { BiColorFill } from 'react-icons/bi';
 import { GiLouvrePyramid } from 'react-icons/gi';
-import { Currency } from '../utils/icons';
+import { Currency, MonthIcon, TodayIcon, WeekIcon } from '../utils/icons';
 import { MdOutlineSupervisorAccount } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { SiExpensify } from 'react-icons/si';
@@ -293,4 +293,54 @@ export const ecomPieChartData = [
   { x: '2019', y: 18, text: '15%' },
   { x: '2020', y: 18, text: '25%' },
   { x: '2021', y: 18, text: '25%' },
+];
+
+export const expenseHistory = [
+  {
+    time: 'Today',
+    Icon: <TodayIcon />,
+  },
+
+  {
+    time: 'Week',
+    Icon: <WeekIcon />,
+  },
+
+  {
+    time: 'Month',
+    Icon: <MonthIcon />,
+  },
+];
+
+export const tableExpenseData = [
+  {
+    date: '2024-05-01',
+    description: 'Shopping',
+    category: 'Expenses',
+    amount: '$50.00',
+  },
+  {
+    date: '2024-05-02',
+    description: 'Gasoline',
+    category: 'Expenses',
+    amount: '$40.00',
+  },
+  {
+    date: '2024-05-03',
+    description: 'Salary',
+    category: 'Earnings',
+    amount: '$1000.00',
+  },
+  {
+    date: '2024-05-04',
+    description: 'Restaurant',
+    category: 'Expenses',
+    amount: '$70.00',
+  },
+  {
+    date: '2024-05-05',
+    description: 'Utilities',
+    category: 'Expenses',
+    amount: '$120.00',
+  },
 ];
