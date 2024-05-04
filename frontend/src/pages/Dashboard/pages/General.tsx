@@ -22,7 +22,7 @@ const General = () => {
           </div>
         </div>
 
-        <div className="grid xs:grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="grid xs:grid-cols-2 gap-4 sm:grid-cols-4 mt-5">
           {earningData.map((item) => (
             <div className=" bg-gray-800 w-full dark:text-gray-200 dark:bg-secondary-dark-bg  p-4 pt-9 rounded-2xl text-center sm:text-start" key={item.title}>
               <button
@@ -44,16 +44,16 @@ const General = () => {
         </div>
       </div>
 
-      <div className="flex gap-10 flex-wrap ">
-        <div className=" dark:text-gray-200 dark:bg-secondary-dark-bg m-6 p-4 rounded-2xl w-full bg-main-bg">
+      <div className="flex gap-10 flex-wrap mt-5 ">
+        <div className=" dark:text-gray-200 dark:bg-secondary-dark-bg m-6 p-4 rounded-2xl w-full bg-gray-100">
           <div className="flex  justify-between items-center md:w-[780px] mx-auto">
             <p className="font-semibold text-sm xs:text-xl">Revenue Updates</p>
             <div className="flex items-center gap-4">
-              <p className="flex items-center gap-1 text-gray-600 hover:drop-shadow-xl">
+              <p className="flex items-center gap-1 text-red-400 hover:drop-shadow-xl">
                 <span>
                   <GoDotFill />
                 </span>
-                <span className="text-sm xs:text-xl">Expense</span>
+                <span className="text-sm xs:text-xl text-red-400">Expense</span>
               </p>
 
               <p className="flex items-center gap-2 text-green-400 hover:drop-shadow-xl">
@@ -65,11 +65,11 @@ const General = () => {
             </div>
           </div>
 
-          <div className="mt-5 flex  gap-10 flex-wrap justify-center">
+          <div className="mt-5 flex gap-10 flex-wrap justify-center ">
             <div className="border-r-1 border-color m-4 pr-10">
               <div>
                 <p>
-                  <span className="text-lg sm:text-3xl font-semibold">$33,593</span>
+                  <span className="text-lg sm:text-3xl font-semibold text-dark">$33,593</span>
                   <span className="p-0.5 sm:p-1.5 hover:drop-shadow-xl cursor-pointer rounded-full text-white bg-green-400 ml-3 text-xs">19%</span>
                 </p>
 
@@ -78,7 +78,7 @@ const General = () => {
 
               <div className="mt-8">
                 <p>
-                  <span className="text-lg sm:text-3xl font-semibold">$105,593</span>
+                  <span className="text-lg sm:text-3xl font-semibold text-dark">$105,593</span>
                 </p>
 
                 <p className="text-gray-500 mt-1">Expense</p>
