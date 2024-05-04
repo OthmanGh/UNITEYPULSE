@@ -1,17 +1,34 @@
 import { Link } from 'react-router-dom';
-import InputField from './components/InputField';
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import Overlay from '../../components/Overlay';
 import { GoogleBtn, OrLine, SwitchBtn, Text, BackBtn, SubmitBtn, Header } from './components';
+import InputField from './components/InputField';
+import { useState } from 'react';
+
+type FormData = {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
 const Auth = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const handleSwitch = () => {
     setIsLoggingIn((prev) => !prev);
   };
 
-  const handleSubmit = () => {};
+  const onSubmit = (data: FormData) => {
+    console.log(data);
+  };
 
   return (
     <section className="h-screen grid grid-cols-1 sm:grid-cols-2 items-center justify-center relative">
@@ -19,7 +36,6 @@ const Auth = () => {
         <div className="h-[40vh] sm:h-screen w-full bg-lightBlue flex flex-col items-center text-center justify-center gap-2 relative bg-bg2 bg-no-repeat bg-cover object-fit text-gray-300">
           <Text title="Welcome Back!" para="To stay connected with us, please login with your personal info" />
           <SwitchBtn text="Login" onClick={handleSwitch} />
-
           <Overlay />
         </div>
       ) : (
@@ -32,12 +48,32 @@ const Auth = () => {
 
       {isLoggingIn ? (
         <div className=" h-full w-full flex flex-col items-center justify-center p-5 bg-dark text-light-gray ">
-          <form className="flex flex-col items-start justify-center gap-4 w-[90%] sm:w-2/3">
+          <form className="flex flex-col items-start justify-center gap-4 w-[90%] sm:w-2/3" onSubmit={handleSubmit(onSubmit)}>
             <Header text="Login" />
 
-            <InputField name="email" id="email" placeholder="example@gmail.com" labelText="Email" type="email" classes="w-full" />
+            <InputField
+              name="email"
+              id="email"
+              placeholder="example@gmail.com"
+              labelText="Email"
+              type="email"
+              classes="w-full"
+              register={register}
+              required
+              error={errors.email}
+            />
 
-            <InputField name="password" id="password" placeholder="Pass1234.." labelText="Password" type="password" classes="w-full flex-2" />
+            <InputField
+              name="password"
+              id="password"
+              placeholder="Pass1234.."
+              labelText="Password"
+              type="password"
+              classes="w-full flex-2"
+              register={register}
+              required
+              error={errors.password}
+            />
 
             <span className="mt-[-12px] ml-1 text-[12px] text-primary text-opacity-50 hover:text-opacity-100 font-semibold cursor-pointer transition-all duration-500">
               Forgot your password?
@@ -49,22 +85,62 @@ const Auth = () => {
             <GoogleBtn />
           </div>
 
-          <SubmitBtn text="Login" onSubmit={handleSubmit} />
+          <SubmitBtn text="Login" onSubmit={handleSubmit(onSubmit)} />
         </div>
       ) : (
         <div className="h-full w-full flex flex-col items-center justify-center p-5 bg-dark text-gray-50">
-          <form className="flex flex-col items-start justify-center gap-4 w-[90%] sm:w-2/3">
+          <form className="flex flex-col items-start justify-center gap-4 w-[90%] sm:w-2/3" onSubmit={handleSubmit(onSubmit)}>
             <Header text="Create Account" />
 
             <div className="flex w-full gap-2">
-              <InputField name="name" id="name" placeholder="Othman..." labelText="Name" type="text" classes="w-full" />
+              <InputField
+                name="name"
+                id="name"
+                placeholder="Othman..."
+                labelText="Name"
+                type="text"
+                classes="w-full"
+                register={register}
+                required
+                error={errors.name}
+              />
 
-              <InputField name="username" id="username" placeholder="Othman..." labelText="Username" type="text" classes="w-full" />
+              <InputField
+                name="username"
+                id="username"
+                placeholder="Othman..."
+                labelText="Username"
+                type="text"
+                classes="w-full"
+                register={register}
+                required
+                error={errors.username}
+              />
             </div>
 
-            <InputField name="email" id="email" placeholder="example@gmail.com" labelText="Email" type="email" classes="w-full" />
+            <InputField
+              name="email"
+              id="email"
+              placeholder="example@gmail.com"
+              labelText="Email"
+              type="email"
+              classes="w-full"
+              register={register}
+              required
+              error={errors.email}
+            />
 
-            <InputField name="password" id="password" placeholder="Pass1234.." labelText="Password" type="password" classes="w-full flex-2" />
+            <InputField
+              name="password"
+              id="password"
+              placeholder="Pass1234.."
+              labelText="Password"
+              type="password"
+              classes="w-full flex-2"
+              register={register}
+              required
+              error={errors.password}
+            />
 
             <InputField
               name="confirmPassword"
@@ -73,6 +149,9 @@ const Auth = () => {
               labelText="Confirm Password"
               type="password"
               classes="w-full flex-2"
+              register={register}
+              required
+              error={errors.confirmPassword}
             />
           </form>
 
@@ -81,7 +160,7 @@ const Auth = () => {
             <GoogleBtn />
           </div>
 
-          <SubmitBtn text="Create Account" onSubmit={handleSubmit} />
+          <SubmitBtn text="Create Account" onSubmit={handleSubmit(onSubmit)} />
         </div>
       )}
 

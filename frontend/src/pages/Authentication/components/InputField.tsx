@@ -5,9 +5,12 @@ type InputFieldProps = {
   labelText: string;
   id: string;
   classes?: string;
+  register: any;
+  required?: boolean;
+  error?: any;
 };
 
-const InputField = ({ name, placeholder, type, labelText, id, classes }: InputFieldProps) => {
+const InputField = ({ name, placeholder, type, labelText, id, classes, register, required, error }: InputFieldProps) => {
   return (
     <fieldset className="flex flex-col gap-1 w-full">
       <label htmlFor={id} className="font-semibold  text-gray-200">
@@ -20,8 +23,10 @@ const InputField = ({ name, placeholder, type, labelText, id, classes }: InputFi
         placeholder={placeholder}
         className={`h-[50px] px-4 rounded-md  outline-none ${
           classes || ''
-        } bg-half-transparent border-b-2 border-b-primary placeholder:text-gray-500 text-primary `}
+        } bg-half-transparent border-b-2 border-b-primary placeholder:text-gray-500 text-primary`}
+        {...register(name, { required })}
       />
+      {error && <span className="text-red-500">This field is required</span>}
     </fieldset>
   );
 };
