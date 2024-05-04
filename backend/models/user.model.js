@@ -3,86 +3,89 @@ import validator from "validator";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, "Name is required"]
-  },
-
-  username: {
-    type: String,
-    required: true,
-    unique: true
-  },
-
-  email: {
-    type: String,
-    required: [true, "Email is required"],
-    unique: true,
-    lowercase: true,
-    validate: [validator.isEmail, "Provide a valid email"]
-  },
-
-  password: {
-    type: String,
-    required: [true, "Password is required"],
-    minlength: 8,
-    select: false
-  },
-
-  passwordConfirm: {
-    type: String,
-    required: [true, "Confirm password is required"],
-    validate: {
-      validator: function(el) {
-        return el === this.password;
-      },
-      message: "Passwords must match"
-    }
-  },
-
-  profilePicture: {
-    type: String,
-    default: "annonymous.png"
-  },
-
-  role: {
-    type: String,
-    enum: ["employee", "owner", "manager"],
-    default: "employee"
-  },
-
-  department: {
-    type: String
-  },
-
-  companyPolicies: [String],
-  goalsAndObjectives: [String],
-
-  projects: [
-    {
-      name: String,
-      department: String
-    }
-  ],
-
-  manager: {
-    name: String,
-    username: String,
-    email: String
-  },
-
-  feedback: [
-    {
+const userSchema = new mongoose.Schema(
+  {
+    name: {
       type: String,
-      date: { type: Date, default: Date.now },
-      anonymous: { type: Boolean, default: true }
-    }
-  ],
+      required: [true, "Name is required"]
+    },
 
-  passwordResetToken: String,
-  passwordResetExpires: Date
-});
+    username: {
+      type: String,
+      required: true,
+      unique: true
+    },
+
+    email: {
+      type: String,
+      required: [true, "Email is required"],
+      unique: true,
+      lowercase: true,
+      validate: [validator.isEmail, "Provide a valid email"]
+    },
+
+    password: {
+      type: String,
+      required: [true, "Password is required"],
+      minlength: 8,
+      select: false
+    },
+
+    passwordConfirm: {
+      type: String,
+      required: [true, "Confirm password is required"],
+      validate: {
+        validator: function(el) {
+          return el === this.password;
+        },
+        message: "Passwords must match"
+      }
+    },
+
+    profilePicture: {
+      type: String,
+      default: "annonymous.png"
+    },
+
+    role: {
+      type: String,
+      enum: ["employee", "owner", "manager"],
+      default: "employee"
+    },
+
+    department: {
+      type: String
+    },
+
+    companyPolicies: [String],
+    goalsAndObjectives: [String],
+
+    projects: [
+      {
+        name: String,
+        department: String
+      }
+    ],
+
+    manager: {
+      name: String,
+      username: String,
+      email: String
+    },
+
+    feedback: [
+      {
+        type: String,
+        date: { type: Date, default: Date.now },
+        anonymous: { type: Boolean, default: true }
+      }
+    ],
+
+    passwordResetToken: String,
+    passwordResetExpires: Date
+  },
+  { timestamps: true }
+);
 
 userSchema.pre("save", async function(next) {
   if (!this.isModified("password")) return next();
