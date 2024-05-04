@@ -1,5 +1,5 @@
 import User from "../models/user.model.js";
-import signToken from "../utils/signToken.js";
+import generateTokenandSetCookie from "../utils/generateTokenandSetCookie.js";
 
 export const signup = async (req, res, next) => {
   try {
@@ -11,11 +11,12 @@ export const signup = async (req, res, next) => {
       passwordConfirm: req.body.passwordConfirm
     });
 
-    const token = signToken(newUser._id);
+    if (newUser) {
+      generateTokenandSetCookie(newUser._id, res);
+    }
 
     res.status(201).json({
       status: "success",
-      token,
       data: {
         user: newUser
       }
@@ -27,7 +28,10 @@ export const signup = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password } = {
+    email: req.body.email,
+    password: req.body.password
+  };
 
   if (!email || !password) {
     return res.status(400).send({
@@ -46,11 +50,17 @@ export const login = async (req, res, next) => {
       });
     }
 
-    const token = signToken(user._id);
+    generateTokenandSetCookie(user._id, res);
 
     res.status(200).json({
       status: "success",
-      token
+
+      data: {
+        _id: user._id,
+        name: user.name,
+        profilePicture: user.profilePicture,
+        username: user.username
+      }
     });
   } catch (error) {
     console.error("Error in login", error.message);
