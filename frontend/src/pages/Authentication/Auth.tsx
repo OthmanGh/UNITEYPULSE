@@ -13,7 +13,7 @@ const schema = z.object({
   name: z.string().min(2).max(50),
   username: z
     .string()
-    .min(5)
+    .min(3)
     .max(20)
     .regex(/^[a-zA-Z0-9_]+$/),
   email: z.string().email(),
@@ -51,13 +51,13 @@ const Auth = () => {
       const res = await fetchAuthRes(data, path, post);
       if (!res.ok) {
         const error = await res.json();
-        throw new Error(error);
+        throw new Error(error.message);
       } else {
-        console.log(res);
+        // Add action for successful response if needed
       }
     } catch (error) {
       setError('root', {
-        message: error.message,
+        message: error.message || 'Server Error',
       });
     }
   };
@@ -111,14 +111,14 @@ const Auth = () => {
               Forgot your password?
             </span>
 
-            <div className="flex flex-col gap-5 mt-10 w-[100%] mx-auto ">
+            <div className="flex flex-col gap-5 mt-10 w-[90%] sm:w-2/3">
               <OrLine />
               <GoogleBtn />
             </div>
 
-            <SubmitBtn text="Login" onSubmit={handleSubmit(onSubmit)} isSubmitting={isSubmitting} />
+            <SubmitBtn text="Login" isSubmitting={isSubmitting} onSubmit={handleSubmit(onSubmit)} />
 
-            {errors.root && <span className="text-red-500 mx-auto">{errors.root.message}</span>}
+            {errors.root && <span className="text-red-500">{errors.root.message}</span>}
           </form>
         </div>
       ) : (
@@ -187,7 +187,8 @@ const Auth = () => {
               required
               error={errors.confirmPassword}
             />
-            {password !== '' && password !== watch('confirmPassword') && <span className="text-red-500 text-sm mt-[-10px]">Passwords don't match</span>}
+            {!isLoggingIn && errors.confirmPassword && <span className="text-red-500">{errors.confirmPassword.message}</span>}
+            {password !== '' && password !== watch('confirmPassword') && <span className="text-red-500">Passwords don't match</span>}
           </form>
 
           <div className="flex flex-col gap-5 mt-10 w-[90%] sm:w-2/3">
@@ -195,9 +196,9 @@ const Auth = () => {
             <GoogleBtn />
           </div>
 
-          <SubmitBtn text="Create Account" onSubmit={handleSubmit(onSubmit)} isSubmitting={isSubmitting} />
+          <SubmitBtn text="Create Account" isSubmitting={isSubmitting} onSubmit={handleSubmit(onSubmit)} />
 
-          {errors.root && <span className="text-red-500 mt-4">{errors.root.message}</span>}
+          {errors.root && <span className="text-red-500">{errors.root.message}</span>}
         </div>
       )}
 

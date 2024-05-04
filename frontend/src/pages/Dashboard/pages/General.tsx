@@ -8,8 +8,8 @@ import styles from '../../../components';
 const General = () => {
   return (
     <section className={styles.dashboardSection}>
-      <div className="flex flex-wrap lg:flex-nowrap justify-center">
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-earning-img bg-no-repeat bg-cover bg-center">
+      <div className="grid gap-4 px-4 mt-10 sm:mt-4">
+        <div className="rounded-xl p-10 text-dark  dark:text-gray-200 dark:bg-secondary-dark-bg   bg-earning-img bg-no-repeat bg-cover">
           <div className="flex justify-between items-center">
             <div>
               <p className="font-bold text-black-400">Earnings</p>
@@ -22,9 +22,9 @@ const General = () => {
           </div>
         </div>
 
-        <div className="flex m-3 flex-wrap justify-center gap-10 items-center">
+        <div className="grid xs:grid-cols-2 gap-4 sm:grid-cols-4">
           {earningData.map((item) => (
-            <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg md:w-52 p-4 pt-9 rounded-2xl" key={item.title}>
+            <div className=" bg-gray-800 w-full dark:text-gray-200 dark:bg-secondary-dark-bg  p-4 pt-9 rounded-2xl text-center sm:text-start" key={item.title}>
               <button
                 type="button"
                 style={{ color: item.iconColor, backgroundColor: item.iconBg }}
