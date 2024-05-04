@@ -82,9 +82,15 @@ export const forgotPassword = async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 };
+
 export const resetPassword = (req, res, next) => {};
 
-export const logout = (req, res) => {
+export const logout = async (req, res) => {
   try {
-  } catch (error) {}
+    res.cookie("jwt", "", { maxAge: 0 });
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    console.error("Error in logout:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
