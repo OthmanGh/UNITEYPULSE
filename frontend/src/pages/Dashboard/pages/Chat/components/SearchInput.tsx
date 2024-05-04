@@ -6,10 +6,10 @@ const SearchInput = () => {
       <input
         type="text"
         placeholder="Search"
-        className="input input-bordered rounded-ml bg-secondary bg-opacity-50 placeholder:text-gray-300 text-white w-[100%] focus:bg-secondary"
+        className="input input-bordered rounded-ml bg-secondary bg-opacity-50 placeholder:text-gray-300 text-white w-[100%] focus:bg-secondary border-none outline-none"
       />
 
-      <button type="submit" className="btn btn-rectangle bg-secondary bg-opacity-55 border-none text-white text-lg hover:bg-secondary h-[40px]">
+      <button type="submit" className="btn btn-rectangle bg-secondary bg-opacity-55 border-none text-gray-300 text-lg hover:bg-secondary h-[40px]">
         <IoSearchSharp />
       </button>
     </form>
