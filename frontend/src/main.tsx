@@ -5,7 +5,6 @@ import './index.css';
 import '@fontsource/poppins';
 import '@fontsource/open-sans';
 import { ContextProvider } from './contexts/ContextProvider.tsx';
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ContextProvider>

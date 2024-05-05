@@ -1,53 +1,25 @@
 import { useForm } from 'react-hook-form';
 import { GoogleBtn, OrLine, SubmitBtn, Header } from './';
 import InputField from './InputField';
-import { RequestMethod } from '../../../services/requestMethods';
-import { z } from 'zod';
+import useLogin from '../../../hooks/useLogin';
+import { LoginSchema } from '../../../utils/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate } from 'react-router-dom';
-
-const API_BASE_URL = `http://127.0.0.1:8000/api/auth`;
-
-const LoginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-});
 
 const Login = () => {
-  const navigator = useNavigate();
+  const { loading, error, login } = useLogin();
 
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(LoginSchema) });
 
   const onSubmit = async (data) => {
-    try {
-      const url = `${API_BASE_URL}/login`;
-      const req = await fetch(url, {
-        method: RequestMethod.post,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      const res = await req.json();
-      if (res.status === 'success') {
-        navigator('/dashboard');
-      } else {
-        throw new Error(res.message);
-      }
-    } catch (error) {
-      setError('root', {
-        message: error.message,
-      });
-    }
+    await login(data);
   };
 
   return (
-    <div className=" h-full w-full flex flex-col items-center justify-center p-5 bg-dark text-light-gray z-10">
+    <div className=" h-full w-full flex flex-col items-center justify-center p-5 bg-auth text-light-gray z-10">
       <form className="flex flex-col items-start justify-center gap-4 w-[90%] sm:w-2/3" onSubmit={handleSubmit(onSubmit)}>
         <Header text="Login" />
 
@@ -84,9 +56,9 @@ const Login = () => {
           <GoogleBtn />
         </div>
 
-        <SubmitBtn text="Login" isSubmitting={isSubmitting} onSubmit={handleSubmit(onSubmit)} />
+        <SubmitBtn text="Login" isSubmitting={isSubmitting || loading} onSubmit={handleSubmit(onSubmit)} />
 
-        {errors.root && <span className="text-red-500 text-sm mx-auto">{errors.root.message}</span>}
+        {error && <span className="text-red-500 text-sm mx-auto">{error.message}</span>}
       </form>
     </div>
   );

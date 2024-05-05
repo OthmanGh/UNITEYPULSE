@@ -1,63 +1,28 @@
 import { GoogleBtn, OrLine, SubmitBtn, Header } from './';
 import InputField from './../components/InputField';
-import { RequestMethod } from '../../../services/requestMethods';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-
-const API_BASE_URL = `http://127.0.0.1:8000/api/auth`;
-
-const SignupSchema = z.object({
-  name: z.string().min(2).max(50),
-  username: z
-    .string()
-    .min(5)
-    .max(20)
-    .regex(/^[a-zA-Z0-9_]+$/),
-  email: z.string().email(),
-  password: z.string().min(8),
-  confirmPassword: z.string(),
-});
+import useSignup from '../../../hooks/useSignup';
+import { SignupSchema } from '../../../utils/validation';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const Signup = () => {
-  const navigator = useNavigate();
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors, isSubmitting },
     watch,
   } = useForm({ resolver: zodResolver(SignupSchema) });
 
+  const { loading, error, signup } = useSignup();
+
   const password = watch('password', '');
 
   const onSubmit = async (data) => {
-    try {
-      const url = `${API_BASE_URL}/signup`;
-      const req = await fetch(url, {
-        method: RequestMethod.post,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const res = await req.json();
-      if (res.status === 'success') {
-        navigator('/dashboard');
-      } else {
-        throw new Error(res.error);
-      }
-    } catch (error) {
-      setError('root', {
-        message: error.message,
-      });
-    }
+    await signup(data);
   };
 
   return (
-    <div className="h-full w-full flex flex-col items-center justify-center p-5 bg-dark text-gray-50 z-10">
+    <div className="h-full w-full flex flex-col items-center justify-center p-5 bg-auth text-gray-50 z-10">
       <form className="flex flex-col items-start justify-center gap-4 w-[90%] sm:w-2/3" onSubmit={handleSubmit(onSubmit)}>
         <Header text="Create Account" />
 
@@ -131,9 +96,9 @@ const Signup = () => {
         <GoogleBtn />
       </div>
 
-      <SubmitBtn text="Create Account" isSubmitting={isSubmitting} onSubmit={handleSubmit(onSubmit)} />
+      <SubmitBtn text="Create Account" isSubmitting={isSubmitting || loading} onSubmit={handleSubmit(onSubmit)} />
 
-      {errors.root && <span className="text-red-500 text-sm mt-2">{errors.root.message}</span>}
+      {error && <span className="text-red-500 text-sm mt-2">{error.message}</span>}
     </div>
   );
 };

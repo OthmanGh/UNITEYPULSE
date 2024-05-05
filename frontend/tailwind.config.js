@@ -15,6 +15,7 @@ export default {
         primary: '#64CCC5',
         dark: '#042d3e',
         light: '#A6F6F1',
+        auth: '#041d29',
 
         secondaryHover: '#0f5369',
         'main-bg': '#FAFBFB',
