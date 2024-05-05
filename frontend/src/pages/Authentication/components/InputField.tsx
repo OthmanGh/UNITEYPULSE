@@ -1,5 +1,3 @@
-import React from 'react';
-
 type InputFieldProps = {
   name: string;
   placeholder: string;
@@ -30,7 +28,7 @@ const InputField = ({ name, placeholder, type, labelText, id, classes, register,
           required: `${name} is required`,
         })}
       />
-      {error && <span className="text-red-500 text-sm">{error?.message}</span>}
+      {error && <span className="text-red-500 text-sm w-full">{error?.message}</span>}
     </fieldset>
   );
 };
