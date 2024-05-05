@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RequestMethod } from '../services/requestMethods';
 import { AUTH_API_BASE_URL } from '../utils';
+import { useAuthContext } from '../contexts/AuthContext';
 
 interface SignupData {
   name: string;
@@ -25,6 +26,7 @@ const useSignup = () => {
   const navigator = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<SignupError | null>(null);
+  const { setAuthUser } = useAuthContext();
 
   const signup = async (data: SignupData) => {
     setLoading(true);
@@ -43,7 +45,8 @@ const useSignup = () => {
       const res: SignupResponse = await req.json();
 
       if (res.status === 'success') {
-        localStorage.setItem('userInfo', JSON.stringify(res.data));
+        localStorage.setItem('authUser', JSON.stringify(res.data));
+        setAuthUser(res.data);
         navigator('/dashboard');
       } else {
         throw new Error(res.error);

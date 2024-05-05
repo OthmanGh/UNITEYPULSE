@@ -21,6 +21,7 @@ import {
   Stacked,
   Chat,
 } from '../utils';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
@@ -28,7 +29,11 @@ const router = createBrowserRouter([
 
   {
     path: '/dashboard',
-    element: <Dashboard />,
+    element: (
+      <ProtectedRoute>
+        <Dashboard />,
+      </ProtectedRoute>
+    ),
     children: [
       { path: 'general', element: <General /> },
       { path: 'orders', element: <Orders /> },
