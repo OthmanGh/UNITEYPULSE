@@ -4,13 +4,12 @@ import { AddIcon, AmountIcon, CategoryIcon, DateIcon, DescriptionIcon } from '..
 import { expenseHistory } from '../../../../constants';
 import { tableExpenseData } from '../../../../constants';
 import { useState } from 'react';
+import AddExpensePopup from './components/AddExpensePopup';
 
 const ExpenseTracker = () => {
   const [showPopup, setShowPopup] = useState(false);
 
-  const handleAddExpense = () => {
-    console.log('added');
-  };
+  const handleAddExpense = () => {};
 
   return (
     <section className={styles.dashboardSection}>
@@ -35,9 +34,9 @@ const ExpenseTracker = () => {
           ))}
         </div>
 
-        <div className="overflow-x-auto mt-5 ">
-          <table className="min-w-full divide-y divide-gray-200 text-sm">
-            <thead className="bg-gray-50 dark:bg-gray-800">
+        <div className="overflow-x-auto mt-5 h-[50vh]">
+          <table className="min-w-full divide-y divide-gray-200 text-sm ">
+            <thead className="bg-gray-100 dark:bg-gray-800">
               <tr>
                 <th scope="col" className="px-6 py-3 text-left text-gray-800 uppercase tracking-wider">
                   <div className="flex items-center gap-2">
@@ -68,9 +67,9 @@ const ExpenseTracker = () => {
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200 dark:bg-secondary-dark-bg dark:text-gray-200">
+            <tbody className=" divide-y divide-gray-200 dark:bg-secondary-dark-bg dark:text-gray-200 bg-white">
               {tableExpenseData.map((item, index) => (
-                <tr key={index}>
+                <tr key={index} className="hover:bg-secondary hover:text-white transition-all duration-400 cursor-pointer">
                   <td className="px-6 py-4 whitespace-nowrap">{item.date}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{item.description}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{item.category}</td>
@@ -82,56 +81,8 @@ const ExpenseTracker = () => {
         </div>
       </div>
 
-      {showPopup && <AddExpensePopup onAddExpense={handleAddExpense} setShowPopup={() => setShowPopup} />}
+      {showPopup && <AddExpensePopup onAddExpense={handleAddExpense} onShowPopup={setShowPopup} />}
     </section>
-  );
-};
-
-const AddExpensePopup = ({ setShowPopup, onAddExpense }: { setShowPopup: () => void; onAddExpense: () => void }) => {
-  return (
-    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white dark:bg-secondary-dark-bg p-6 rounded-lg w-96">
-        <h2 className="text-lg font-semibold mb-4">Add Expense</h2>
-        <form>
-          <div className="mb-4">
-            <label htmlFor="date" className="block text-sm  text-gray-700 dark:text-gray-200 font-semibold">
-              Date
-            </label>
-            <input type="text" id="date" name="date" className="mt-1 p-2 border rounded-md w-full bg-secondary text-white  focus:outline-none" />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="description" className="block text-sm  text-gray-700 dark:text-gray-200 font-semibold">
-              Description
-            </label>
-            <input type="text" id="description" name="description" className="mt-1 p-2 border rounded-md w-full bg-secondary text-white focus:outline-none" />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="category" className="block text-sm text-gray-700 dark:text-gray-200 font-semibold">
-              Category
-            </label>
-            <input type="text" id="category" name="category" className="mt-1 p-2 border rounded-md w-full bg-secondary text-white focus:outline-none" />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="amount" className="block text-sm  text-gray-700 dark:text-gray-200 font-semibold">
-              Amount
-            </label>
-            <input type="text" id="amount" name="amount" className="mt-1 p-2 border rounded-md w-full bg-secondary text-white focus:outline-none" />
-          </div>
-          <div className="flex justify-end">
-            <button type="button" className="bg-gray-700 text-white p-2 rounded-md mr-2 hover:bg-gray-600" onClick={() => setShowPopup(false)}>
-              Cancel
-            </button>
-            <button
-              type="submit"
-              onClick={onAddExpense}
-              className="bg-secondary text-white p-2 rounded-md hover:bg-secondary hover:bg-opacity-80 transition-all duration-400"
-            >
-              Add
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
   );
 };
 

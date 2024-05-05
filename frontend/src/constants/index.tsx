@@ -343,4 +343,116 @@ export const tableExpenseData = [
     category: 'Expenses',
     amount: '$120.00',
   },
+
+  {
+    date: '2024-05-01',
+    description: 'Shopping',
+    category: 'Expenses',
+    amount: '$50.00',
+  },
+  {
+    date: '2024-05-02',
+    description: 'Gasoline',
+    category: 'Expenses',
+    amount: '$40.00',
+  },
+  {
+    date: '2024-05-03',
+    description: 'Salary',
+    category: 'Earnings',
+    amount: '$1000.00',
+  },
+  {
+    date: '2024-05-04',
+    description: 'Restaurant',
+    category: 'Expenses',
+    amount: '$70.00',
+  },
+  {
+    date: '2024-05-05',
+    description: 'Utilities',
+    category: 'Expenses',
+    amount: '$120.00',
+  },
+
+  {
+    date: '2024-05-01',
+    description: 'Shopping',
+    category: 'Expenses',
+    amount: '$50.00',
+  },
+  {
+    date: '2024-05-02',
+    description: 'Gasoline',
+    category: 'Expenses',
+    amount: '$40.00',
+  },
+  {
+    date: '2024-05-03',
+    description: 'Salary',
+    category: 'Earnings',
+    amount: '$1000.00',
+  },
+  {
+    date: '2024-05-04',
+    description: 'Restaurant',
+    category: 'Expenses',
+    amount: '$70.00',
+  },
+  {
+    date: '2024-05-05',
+    description: 'Utilities',
+    category: 'Expenses',
+    amount: '$120.00',
+  },
+
+  {
+    date: '2024-05-03',
+    description: 'Salary',
+    category: 'Earnings',
+    amount: '$1000.00',
+  },
+  {
+    date: '2024-05-04',
+    description: 'Restaurant',
+    category: 'Expenses',
+    amount: '$70.00',
+  },
+  {
+    date: '2024-05-05',
+    description: 'Utilities',
+    category: 'Expenses',
+    amount: '$120.00',
+  },
+
+  {
+    date: '2024-05-01',
+    description: 'Shopping',
+    category: 'Expenses',
+    amount: '$50.00',
+  },
+  {
+    date: '2024-05-02',
+    description: 'Gasoline',
+    category: 'Expenses',
+    amount: '$40.00',
+  },
+  {
+    date: '2024-05-03',
+    description: 'Salary',
+    category: 'Earnings',
+    amount: '$1000.00',
+  },
+  {
+    date: '2024-05-04',
+    description: 'Restaurant',
+    category: 'Expenses',
+    amount: '$70.00',
+  },
+  {
+    date: '2024-05-05',
+    description: 'Utilities',
+    category: 'Expenses',
+    amount: '$120.00',
+  },
 ];
