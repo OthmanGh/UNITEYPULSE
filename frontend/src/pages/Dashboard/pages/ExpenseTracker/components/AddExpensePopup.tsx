@@ -36,7 +36,7 @@ const AddExpensePopup = ({ onShowPopup, onAddExpense }: { onShowPopup: () => voi
           <div className="flex justify-end">
             <button
               type="button"
-              className="bg-gray-300 text-gray-500 p-2 rounded-md mr-2 hover:bg-gray-200 transition-all duration-400"
+              className="bg-gray-300 text-gray-500 p-2 rounded-md mr-2 hover:bg-gray-200 transition-all duration-400 w-[80px]"
               onClick={() => onShowPopup(false)}
             >
               Cancel
@@ -44,7 +44,7 @@ const AddExpensePopup = ({ onShowPopup, onAddExpense }: { onShowPopup: () => voi
             <button
               type="submit"
               onClick={onAddExpense}
-              className="bg-secondary text-white p-2 rounded-md hover:bg-secondary hover:bg-opacity-80 transition-all duration-400"
+              className="bg-secondary text-white p-2 rounded-md hover:bg-secondary hover:bg-opacity-80 transition-all duration-400 w-[80px]"
             >
               Add
             </button>
