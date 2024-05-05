@@ -2,6 +2,7 @@ import User from "../models/user.model.js";
 import generateTokenandSetCookie from "../utils/generateTokenandSetCookie.js";
 
 export const signup = async (req, res, next) => {
+  console.log(req.body);
   try {
     const newUser = await User.create({
       name: req.body.name,
@@ -11,9 +12,14 @@ export const signup = async (req, res, next) => {
       confirmPassword: req.body.confirmPassword
     });
 
-    if (newUser) {
-      generateTokenandSetCookie(newUser._id, res);
+    if (!newUser) {
+      return res.status(500).json({
+        status: "fail",
+        error: "User creation failed"
+      });
     }
+
+    generateTokenandSetCookie(newUser._id, res);
 
     return res.status(201).json({
       status: "success",
@@ -23,6 +29,12 @@ export const signup = async (req, res, next) => {
     });
   } catch (error) {
     console.error("Error in signup", error.message);
+    if (error.code === 11000) {
+      return res.status(400).json({
+        status: "fail",
+        error: "Email or username already exists"
+      });
+    }
     return res
       .status(500)
       .json({ status: "fail", error: "Internal Server Error" });
@@ -30,19 +42,19 @@ export const signup = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-  const { email, password } = {
-    email: req.body.email,
-    password: req.body.password
-  };
-
-  if (!email || !password) {
-    return res.status(400).send({
-      status: "fail",
-      message: "invalid credentials"
-    });
-  }
-
   try {
+    const { email, password } = {
+      email: req.body.email,
+      password: req.body.password
+    };
+
+    if (!email || !password) {
+      return res.status(400).send({
+        status: "fail",
+        message: "invalid credentials"
+      });
+    }
+
     const user = await User.findOne({ email }).select("+password");
 
     if (!user || !(await user.correctPassword(password, user.password))) {
@@ -56,7 +68,6 @@ export const login = async (req, res, next) => {
 
     res.status(200).json({
       status: "success",
-
       data: {
         _id: user._id,
         name: user.name,
