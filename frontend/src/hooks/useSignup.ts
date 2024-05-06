@@ -47,6 +47,7 @@ const useSignup = () => {
 
       if (res.status === 'success') {
         localStorage.setItem('authUser', JSON.stringify(res.data));
+        setAuthUser(res);
         navigator('/dashboard');
       } else {
         throw new Error(res.error);

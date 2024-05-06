@@ -15,6 +15,7 @@ import Notifications from './Notifications';
 import Cart from './Cart';
 
 import { useStateContext } from '../../../contexts/ContextProvider';
+import { useAuthContext } from '../../../contexts/AuthContext';
 
 type NavButtonProps = {
   title: string;
@@ -34,6 +35,9 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }: NavButtonProps)
 );
 const Navbar = () => {
   const { activeMenu, setActiveMenu, isClicked, setIsClicked, screenSize, setScreenSize, handleClick } = useStateContext();
+  const { authUser } = useAuthContext();
+
+  console.log(authUser);
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -70,7 +74,7 @@ const Navbar = () => {
 
             <p>
               <span className="text-gray-400 text-14">Hi,</span> {''}
-              <span className="text-gray-400 font-bold ml-1 text-14">Othman</span>
+              <span className="text-gray-400 font-bold ml-1 text-14">{authUser.name}</span>
             </p>
 
             <MdKeyboardArrowDown className="text-gray-400 text-14" />

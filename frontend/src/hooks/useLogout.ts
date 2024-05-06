@@ -4,7 +4,7 @@ import { useAuthContext } from '../contexts/AuthContext';
 
 const useLogout = () => {
   const [loading, setLoading] = useState(false);
-  const { setAuthUser } = useAuthContext;
+  const { setAuthUser } = useAuthContext();
 
   const logout = async () => {
     setLoading(true);
