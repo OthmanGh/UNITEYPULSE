@@ -33,7 +33,7 @@ const ScrolledNavbar = ({ handleToggle, toggle }: { toggle: boolean; handleToggl
       <ul className={`${toggle ? 'flex' : 'hidden'} absolute inset-0 flex flex-col top-[70px] z-10`}>
         {navLinks.map((item) => (
           <Link key={item.id} to={item.section} spy={true} smooth={true} duration={500} offset={-70}>
-            <li className="bg-dark bg-opacity-90 text-center border-b-2 p-4 text-primary border-b-primary hover:scale-110 transition-all duration-400 text-md font-montserrat">
+            <li className="bg-extraDark bg-opacity-95 text-center border-b-2 p-4 text-primary border-b-primary hover:scale-110 transition-all duration-500 text-md font-montserrat">
               {item.title}
             </li>
           </Link>
