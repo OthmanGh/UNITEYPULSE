@@ -17,6 +17,7 @@ const Features = () => {
     slidesToScroll: 1,
     nextArrow: <CustomNextArrow />,
     prevArrow: <CustomPrevArrow />,
+    dots: true,
     responsive: [
       {
         breakpoint: 1200,
@@ -41,9 +42,9 @@ const Features = () => {
   };
 
   return (
-    <section className="bg-gray-100 h-[100vh] py-20">
-      <h2 className="text-center text-3xl font-extrabold text-half-transparent mb-10">{features.title}</h2>
-      <Slider {...settings} className="mx-auto max-w-screen-xl p-4">
+    <section className="bg-gray-200 h-[100vh] py-20">
+      <h2 className="text-center text-md xs:text-xl  sm:text-3xl font-extrabold text-gray-800 mb-10">{features.title}</h2>
+      <Slider {...settings} className="flex items-center justify-center h-[50vh] mx-20">
         {featuresCard.map((card, index) => (
           <Card key={index} {...card} />
         ))}
@@ -66,24 +67,28 @@ const Card = ({ title, text, Icon, buttonText }: CardProps) => {
     navigator('/auth');
   };
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md font-poppins max-w-[400px] mx-auto">
-      <Icon className="w-12 h-12 text-primary mx-auto mb-4" />
-      <h3 className="text-lg font-semibold text-gray-800 mb-2 text-center">{title}</h3>
-      <p className="text-gray-600 text-center mb-4 text-[16px]">{text}</p>
-      <Button onClick={handleSubmit} classes="bg-primary text-white mx-auto block px-2 py-3 rounded-sm" text={buttonText} />
+    <div className="bg-extraDark  mx-auto gap-4 rounded-xl py-6 flex flex-col justify-between  transition-all duration-500">
+      <Icon className="h-[20px] w-[20px] sm:h-10 sm:w-10  mx-auto text-gray-100" />
+      <h3 className=" text-md sm:text-lg font-semibold text-gray-200 mb-2 text-center ">{title}</h3>
+      <p className="hidden xs:block text-center text-gray-300 w-[80%] mx-auto leading-6 text-sm">{text}</p>
+      <Button
+        onClick={handleSubmit}
+        classes="text-dark text-primary border-primary border-[2px] text-sm hover:primary-light mx-auto px-3 font-semibold py-2 rounded-md hover:bg-primary hover:text-dark transition-all duration-500 mt-6"
+        text="Start now"
+      />
     </div>
   );
 };
 
 const CustomNextArrow = (props: any) => (
-  <div onClick={props.onClick} className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer bg-dark rounded-full p-[4px]">
-    <RightArrow className="w-6 h-6 text-primary z-10" />
+  <div onClick={props.onClick} className="absolute right-[-40px] bg-dark rounded-full p-[2px] cursor-pointer">
+    <RightArrow className="w-6 h-6 text-gray-200  z-10" />
   </div>
 );
 
 const CustomPrevArrow = (props: any) => (
-  <div onClick={props.onClick} className="absolute left-4 top-1/2 transform -translate-y-1/2 cursor-pointer bg-dark rounded-full p-[4px]">
-    <LeftArrow className="w-6 h-6 text-primary z-10" />
+  <div onClick={props.onClick} className=" absolute left-[-40px] bg-dark rounded-full p-[2px] cursor-pointer">
+    <LeftArrow className="w-6 h-6 text-gray-200 z-10 cursor-auto" />
   </div>
 );
 

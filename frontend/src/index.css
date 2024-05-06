@@ -86,6 +86,10 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+.slick-slide > div {
+  margin: 0 10px;
+}
+
 /* 
 Media Queries BreakPoints : 
   - 320px — 480px: Mobile devices
