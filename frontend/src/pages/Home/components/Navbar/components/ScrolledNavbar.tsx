@@ -6,15 +6,16 @@ import LoginBtn from './LoginBtn';
 import { Link } from 'react-router-dom';
 import { Close, Menu } from '../../../../../utils/icons';
 import { motion } from 'framer-motion';
+import companyLogo from '../../../../../assets/logo_1.png';
 
 const ScrolledNavbar = ({ handleToggle, toggle }: { toggle: boolean; handleToggle: () => void }) => (
   <motion.nav
     initial={{ y: -100, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
     transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-    className={`w-full px-6 ${shortStyles.flexBetween} bg-dark fixed top-0 left-0 right-0  text-white z-30 gap-8 md:gap-12 h-[70px] border-b-primary border-b-[2px]`}
+    className={`w-full px-6 ${shortStyles.flexBetween} bg-extraDark fixed top-0 left-0 right-0  text-white z-30 gap-8 md:gap-12 h-[70px] border-b-primary border-b-[2px]`}
   >
-    <LogoTitle />
+    <img src={companyLogo} className="w-[80px] h-[80px]" alt="compoany Logo" />
 
     <ul className="hidden sm:flex gap-8 md:gap-12 text-sm sm:text-[14px] md:text-[16px] ">
       {navLinks.map((nav) => (

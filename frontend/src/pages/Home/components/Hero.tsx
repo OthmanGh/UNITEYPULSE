@@ -26,7 +26,7 @@ const Hero = () => {
         <Button
           onClick={handleSubmit}
           classes={`text-lg text-primary-light font-semibold border-[2px]
-          rounded-lg border-primary-light px-14 py-4 hover:text-primary hover:border-primary ${shortStyles.transition}`}
+          rounded-lg border-primary-light text-lg px-4 py-2  xs:px-6 xs:py-3 sm:px-14 sm:py-4 hover:text-primary hover:border-primary ${shortStyles.transition}`}
           text="Explore"
         />
       </div>
