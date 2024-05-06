@@ -14,7 +14,8 @@ export default {
         secondary: '#176B87',
         primary: '#64CCC5',
         dark: '#042d3e',
-        light: '#A6F6F1',
+        extraDark: '#041d29',
+        'primary-light': '#A6F6F1',
         auth: '#041d29',
 
         secondaryHover: '#0f5369',

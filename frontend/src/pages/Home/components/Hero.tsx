@@ -1,6 +1,8 @@
 import shortStyles from '../../../components/index';
 import Button from '../../../components/Button';
 import { useNavigate } from 'react-router-dom';
+import Video from './../../../assets/video.mp4';
+import LogoTitle from './Navbar/components/LogoTitle';
 
 const Hero = () => {
   const navigator = useNavigate();
@@ -10,22 +12,24 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="flex items-center justify-center gap-10 flex-col xs:w-full pt-10 bg-dark h-[100vh] relative">
-      <div className="h-5/6 flex flex-col gap-4 text-center">
-        <p className={`text-white`}>
-          Unlock Your Business Potential with <span className="text-primary">UNITY PULSE</span>
-        </p>
-        <img
-          className="sm:rounded-xl"
-          src="https://images.unsplash.com/photo-1634176866089-b633f4aec882?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZWFydGh8ZW58MHx8MHx8fDA%3D"
-          alt="earth"
+    <section
+      id="home"
+      className="relative flex items-center justify-center gap-10 flex-col xs:w-full pt-10 bg-extraDark bg-opacity-70 h-[100vh] overflow-hidden"
+    >
+      <video autoPlay loop muted playsInline className="absolute top-0 left-0 min-w-full min-h-full object-cover z-[-1]">
+        <source src={Video} type="video/mp4" />
+      </video>
+
+      <div className="h-5/6 flex flex-col items-center justify-center  text-center relative z-10 mt-[-15vh] gap-10">
+        <LogoTitle />
+
+        <Button
+          onClick={handleSubmit}
+          classes={`text-lg text-primary-light font-semibold border-[2px]
+          rounded-lg border-primary-light px-14 py-4 hover:text-primary hover:border-primary ${shortStyles.transition}`}
+          text="Explore"
         />
       </div>
-      <Button
-        onClick={handleSubmit}
-        classes={`bg-primary w-[150px] mx-auto py-2  rounded-lg text-white text-semibold hover:bg-secondary ${shortStyles.transition} sm:mx-0 sm:w-[200px] sm:py-4 sm:font-bold`}
-        text="Get Started"
-      />
     </section>
   );
 };

@@ -6,5 +6,5 @@ import eslint from 'vite-plugin-eslint';
 export default defineConfig({
   plugins: [react(), eslint()],
 
-  assetsInclude: ['**/*.glb'],
+  assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg', '**/*.ico', '**/*.webp', '**/*.mp4', '**/*.webm', '**/*.mkv'],
 });
