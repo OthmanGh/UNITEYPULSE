@@ -8,7 +8,7 @@ const Aboutus = () => {
       <div className=" h-full text-center text-white flex flex-col justify-center items-center max-w-[80%] m-auto">
         <h2 className="text-center text-gray-200 text-lg mb-10 xs:text-xl sm:text-2xl md:text-3xl font-bold z-20">{aboutusText.title}</h2>
 
-        <p className="text-gray-100  z-10">{aboutusText.text}</p>
+        <p className="text-gray-100 z-10">{aboutusText.text}</p>
       </div>
       <Overlay />
     </section>
