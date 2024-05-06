@@ -43,7 +43,7 @@ const Features = () => {
 
   return (
     <section className="bg-gray-200 h-[100vh] py-20">
-      <h2 className="text-center text-md xs:text-xl  sm:text-3xl font-extrabold text-gray-800 mb-10">{features.title}</h2>
+      <h2 className="text-center text-md xs:text-xl  sm:text-3xl font-extrabold text-gray-700 mb-10">{features.title}</h2>
       <Slider {...settings} className="flex items-center justify-center h-[50vh] mx-20">
         {featuresCard.map((card, index) => (
           <Card key={index} {...card} />
@@ -73,7 +73,7 @@ const Card = ({ title, text, Icon, buttonText }: CardProps) => {
       <p className="hidden xs:block text-center text-gray-300 w-[80%] mx-auto leading-6 text-sm">{text}</p>
       <Button
         onClick={handleSubmit}
-        classes="text-dark text-primary border-primary border-[2px] text-sm hover:primary-light mx-auto px-3 font-semibold py-2 rounded-md hover:bg-primary hover:text-dark transition-all duration-500 mt-6"
+        classes="text-dark text-primary border-primary border-[2px] text-[14px] hover:primary-light mx-auto px-4 font-semibold py-3 rounded-md hover:bg-primary hover:text-dark transition-all duration-500 mt-6 mb-2"
         text="Start now"
       />
     </div>

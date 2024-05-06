@@ -58,6 +58,9 @@ export default {
       bg1: "url('https://images.unsplash.com/photo-1562575214-da9fcf59b907?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEzfHx8ZW58MHx8fHx8')",
 
       bg2: "url('https://images.unsplash.com/photo-1548092372-0d1bd40894a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjJ8fGRhdGF8ZW58MHx8MHx8fDA%3D')",
+
+      about:
+        "url('https://images.unsplash.com/photo-1669951584304-8da02ea5a54f?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
     },
   },
   plugins: [require('daisyui')],
