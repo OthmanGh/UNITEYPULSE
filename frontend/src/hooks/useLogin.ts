@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RequestMethod } from '../services/requestMethods';
 import { AUTH_API_BASE_URL } from '../utils';
+import { useAuthContext } from '../contexts/AuthContext';
 
 interface LoginData {
   email: string;
@@ -22,6 +23,7 @@ const useLogin = () => {
   const navigator = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<LoginError | null>(null);
+  const { setAuthUser } = useAuthContext();
 
   const login = async (data: LoginData) => {
     setLoading(true);
@@ -38,9 +40,11 @@ const useLogin = () => {
       });
 
       const res: LoginResponse = await req.json();
+      console.log(res);
 
       if (res.status === 'success') {
-        localStorage.setItem('userInfo', JSON.stringify(res.data));
+        localStorage.setItem('authUser', JSON.stringify(res.data));
+        setAuthUser(res.data);
 
         navigator('/dashboard');
       } else {
