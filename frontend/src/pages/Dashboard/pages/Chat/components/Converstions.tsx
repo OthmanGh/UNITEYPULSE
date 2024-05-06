@@ -1,30 +1,23 @@
+import { useConversation } from '../../../../../contexts/ConversationContext';
+import useGetConversations from '../../../../../hooks/useGetConversations';
 import Conversation from './Conversation';
 
-const Converstions = () => {
+const Conversations = () => {
+  const { loading, conversations } = useGetConversations();
+
+  console.log('Conversations', conversations);
+
   return (
-    <div className="py-2 flex flex-col gap-2 bg-dark overflow-auto">
-      <Conversation />
-      <Conversation />
-      <Conversation />
-      <Conversation />
-      <Conversation />
-      <Conversation />
-
-      <Conversation />
-      <Conversation />
-      <Conversation />
-      <Conversation />
-      <Conversation />
-      <Conversation />
-
-      <Conversation />
-      <Conversation />
-      <Conversation />
-      <Conversation />
-      <Conversation />
-      <Conversation />
+    <div className="py-2 flex flex-col gap-2 bg-dark overflow-auto relative">
+      {loading ? (
+        <span className="loading loading-spinner mx-auto"></span>
+      ) : conversations ? (
+        conversations.map((conversation, idx) => <Conversation key={conversation.id} conversation={conversation} lastIdx={idx} />)
+      ) : (
+        <p className="absolute z-20 inset-0 text-black text-xl">No Current Users</p>
+      )}
     </div>
   );
 };
 
-export default Converstions;
+export default Conversations;

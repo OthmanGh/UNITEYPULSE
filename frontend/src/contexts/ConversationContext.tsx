@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 
-const ConversationContext = createContext(null);
+const ConversationContext = createContext({});
 
 export const useConversation = () => useContext(ConversationContext);
 

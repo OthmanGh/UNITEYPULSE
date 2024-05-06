@@ -1,6 +1,8 @@
 import Messages from './Messages';
 import MessageInput from './MessageInput';
 import { TiMessages } from 'react-icons/ti';
+import { useConversation } from '../../../../../contexts/ConversationContext';
+import { useEffect } from 'react';
 
 const NoChatSelectedComp = () => {
   return (
@@ -15,17 +17,23 @@ const NoChatSelectedComp = () => {
 };
 
 const MessageContainer = () => {
+  const { selectedConversation, setSelectedConversation } = useConversation;
+
   const NoChatSelected = false;
+
+  // useEffect(() => {
+  //   return () => setSelectedConversation(null);
+  // }, [selectedConversation]);
 
   return (
     <div className={`flex flex-col ${NoChatSelected ? 'bg-secondary bg-opacity-20' : ''}  flex-1 rounded-md`}>
-      {NoChatSelected ? (
+      {selectedConversation ? (
         <NoChatSelectedComp />
       ) : (
         <>
           <div className="flex items-center gap-2 bg-secondary bg-opacity-50 h-[48px] rounded-lg mb-4 hover:bg-opacity-100 transition-all p-4   duration-400">
             <span className="label-text text-md"> To :</span>
-            <span className="text-gray-300 font-bold">Ali</span>
+            <span className="text-gray-300 font-bold">{selectedConversation?.name}</span>
           </div>
           <Messages />
           <MessageInput />
