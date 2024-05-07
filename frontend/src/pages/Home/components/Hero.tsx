@@ -1,7 +1,7 @@
 import shortStyles from '../../../components/index';
 import Button from '../../../components/Button';
 import { useNavigate } from 'react-router-dom';
-import Video from './../../../assets/video.mp4';
+import Video from '../../../assets/video.mp4';
 import LogoTitle from './Navbar/components/LogoTitle';
 
 const Hero = () => {

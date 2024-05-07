@@ -1,5 +1,4 @@
 import Tooltip from '@mui/material/Tooltip';
-import { SettingsIcon } from '../../utils/icons';
 import { Navbar, Sidebar } from '../../utils/index';
 import { useStateContext } from '../../contexts/ContextProvider';
 import { Outlet } from 'react-router-dom';
@@ -9,11 +8,11 @@ const Dashboard = () => {
   const { activeMenu } = useStateContext();
   return (
     <div>
-      <div className="flex relative dark:bg-main-dark-bg ">
+      <div className="flex relative dark:bg-main-dark-bg">
         <div className="fixed right-4 bottom-4  z-20">
           <Tooltip title="Logout" placement="top">
             <button
-              className="cursor-pointer text-3xl p-3 hover:drop-shadow-xl text-white  hover:bg-transparent hover:text-secondary rounded-full bg-secondary font-bold border-2 border-secondary transition-all duration-500"
+              className="cursor-pointer text-2xl p-3 hover:drop-shadow-xl text-white  hover:bg-transparent hover:text-secondary rounded-full bg-secondary font-bold border-2 border-secondary transition-all duration-500"
               type="button"
               // style={{ background: 'blue' }}
             >
@@ -33,7 +32,7 @@ const Dashboard = () => {
         )}
 
         <div className={`dark:bg-main-bg bg-main-bg min-h-screen w-full ${activeMenu ? 'md:ml-72' : 'flex-2'} `}>
-          <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg w-full navbar">
+          <div>
             <Navbar />
           </div>
 
