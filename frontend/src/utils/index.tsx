@@ -25,6 +25,7 @@ import Orders from '../pages/Dashboard/pages/Orders';
 import ExpenseTracker from '../pages/Dashboard/pages/ExpenseTracker/ExpenseTracker';
 import Navbar from '../pages/Dashboard/components/Navbar';
 import Footer from '../pages/Dashboard/components/Footer';
+import Manage from '../pages/Dashboard/pages/Manage';
 
 import Theme from '../pages/Dashboard/components/Theme';
 
@@ -54,6 +55,7 @@ export {
   Greet,
   Navbar,
   Footer,
+  Manage,
   Sidebar,
   Theme,
   Chat,

@@ -83,8 +83,6 @@ const Navbar = () => {
           </div>
         </Tooltip>
 
-        {isClicked.cart && <Cart />}
-        {isClicked.chat && <Chat />}
         {isClicked.notification && <Notifications />}
         {isClicked.userProfile && <UserProfile />}
       </div>

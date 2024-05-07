@@ -13,6 +13,8 @@ import { SiExpensify } from 'react-icons/si';
 import { TiTick } from 'react-icons/ti';
 import { GrLocation } from 'react-icons/gr';
 import { PiWechatLogoFill } from 'react-icons/pi';
+import { FcInvite } from 'react-icons/fc';
+import { SiGoogletagmanager } from 'react-icons/si';
 
 export const navLinks = [
   {
@@ -135,8 +137,8 @@ export const links = [
     title: 'Pages',
     links: [
       {
-        name: 'orders',
-        icon: <AiOutlineShoppingCart />,
+        name: 'manage',
+        icon: <SiGoogletagmanager />,
       },
       {
         name: 'employees',
