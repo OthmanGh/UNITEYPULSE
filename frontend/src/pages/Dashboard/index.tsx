@@ -3,20 +3,21 @@ import { SettingsIcon } from '../../utils/icons';
 import { Navbar, Sidebar } from '../../utils/index';
 import { useStateContext } from '../../contexts/ContextProvider';
 import { Outlet } from 'react-router-dom';
+import LogoutBtn from '../../components/LogoutBtn';
 
 const Dashboard = () => {
   const { activeMenu } = useStateContext();
   return (
     <div>
-      <div className="flex relative dark:bg-main-dark-bg">
+      <div className="flex relative dark:bg-main-dark-bg ">
         <div className="fixed right-4 bottom-4  z-20">
-          <Tooltip title="Settings" placement="top">
+          <Tooltip title="Logout" placement="top">
             <button
-              className="cursor-pointer text-3xl p-3 hover:drop-shadow-xl text-white hover:bg-light-gray rounded-3xl"
+              className="cursor-pointer text-3xl p-3 hover:drop-shadow-xl text-white  hover:bg-transparent hover:text-secondary rounded-full bg-secondary font-bold border-2 border-secondary transition-all duration-500"
               type="button"
-              style={{ background: 'blue' }}
+              // style={{ background: 'blue' }}
             >
-              <SettingsIcon />
+              <LogoutBtn />
             </button>
           </Tooltip>
         </div>

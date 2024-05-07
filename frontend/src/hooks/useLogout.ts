@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { RequestMethod } from '../services/requestMethods';
 import { useAuthContext } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const useLogout = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
+  const navigator = useNavigate();
 
   const logout = async () => {
     setLoading(true);
@@ -13,7 +15,7 @@ const useLogout = () => {
       const res = await fetch('http://127.0.0.1:8000/api/auth/logout', {
         method: RequestMethod.post,
         headers: {
-          'Content-Type:': 'application/json',
+          'Content-Type': 'application/json',
         },
       });
 
@@ -22,6 +24,7 @@ const useLogout = () => {
         throw new Error(data.error);
       }
 
+      navigator('/');
       localStorage.removeItem('authUser');
       setAuthUser(null);
     } catch (error) {

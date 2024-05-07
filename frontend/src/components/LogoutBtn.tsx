@@ -1,11 +1,14 @@
-import React from 'react';
-import { BiLogOut } from 'react-icons/bi';
+import { CiLogout } from 'react-icons/ci';
 import useLogout from '../hooks/useLogout';
 
 const LogoutBtn = () => {
-  const { loading, logout } = useLogout();
+  const { logout } = useLogout();
 
-  return <div className="mt-auto">{loading ? <BiLogOut onClick={logout} /> : <span className="loading loading-spinner"></span>}</div>;
+  return (
+    <div className="mt-auto">
+      <CiLogout onClick={logout} />
+    </div>
+  );
 };
 
 export default LogoutBtn;
