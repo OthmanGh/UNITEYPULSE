@@ -3,7 +3,7 @@ import { Tooltip } from '@mui/material';
 import { CloseIcon } from '../../../utils/icons';
 import { links } from '../../../constants';
 import { useStateContext } from '../../../contexts/ContextProvider';
-import Logo from './../../../assets/Logo.png';
+import Logo from './../../../assets/logo_2.png';
 
 const Sidebar = () => {
   const { activeMenu, setActiveMenu, screenSize } = useStateContext();

@@ -3,6 +3,7 @@ import Auth from '../pages/Authentication/Auth';
 import Input from '../components/Input';
 import Dashboard from '../pages/Dashboard';
 import Chat from '../pages/Dashboard/pages/Chat/Chat';
+import Greet from '../pages/Dashboard/components/Greet';
 
 import Area from '../pages/Dashboard/pages/Charts/Area';
 import Bar from '../pages/Dashboard/pages/Charts/Bar';
@@ -50,6 +51,7 @@ export {
   General,
   Kanban,
   Orders,
+  Greet,
   Navbar,
   Footer,
   Sidebar,

@@ -20,6 +20,7 @@ import {
   Pyramid,
   Stacked,
   Chat,
+  Greet,
 } from '../utils';
 import ProtectedRoute from '../components/ProtectedRoute';
 
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
+      { path: '', element: <Greet /> },
       { path: 'general', element: <General /> },
       { path: 'orders', element: <Orders /> },
       { path: 'employees', element: <Employees /> },

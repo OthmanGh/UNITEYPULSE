@@ -69,7 +69,6 @@ ul {
 
 body {
   scroll-behavior: smooth;
-  background-color: white;
 }
 
 ::-webkit-scrollbar {

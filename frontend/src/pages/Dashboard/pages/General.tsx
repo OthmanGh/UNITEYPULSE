@@ -1,5 +1,4 @@
 import { GoDotFill } from 'react-icons/go';
-import Button from '../components/Button';
 import { SparklineAreaData, earningData, ecomPieChartData, stackedChartData } from '../../../constants';
 import SparkLine from '../components/Charts/SparkLine';
 import Stacked from '../components/Charts/Stacked';
