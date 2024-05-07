@@ -1,6 +1,5 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { getInTouch } from '../../../constants';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import Select from '../../../components/Select';
@@ -23,16 +22,12 @@ const Getintouch: React.FC = () => {
   };
 
   return (
-    <section className={`min-h-[100vh]`}>
-      <h2 className="text-center text-white text-lg mb-10 xs:text-xl sm:text-2xl md:text-3xl font-bold z-20">{getInTouch.title}</h2>
-      <div className="text-center text-lg">
-        <p className="text-black ">{getInTouch.textQ}</p>
-        <p className="text-lightBlue  font-semibold mt-2">{getInTouch.textT}</p>
-      </div>
+    <section className="min-h-[100vh] p-10 bg-gray-200">
+      <h2 className="text-center text-md xs:text-xl  sm:text-3xl font-extrabold text-gray-700 mb-10">Get in Touch</h2>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-2 gap-10 max-w-[800px] mx-auto mt-20 bg-secondary shadow-2xl p-40 rounded-3xl text-white justify-center items-center"
+        className="grid  gap-10 max-w-[800px] mx-auto mt-20 bg-dark shadow-2xl p-40 rounded-3xl text-white justify-between items-center "
       >
         <Input
           label="Full Name"
@@ -73,6 +68,8 @@ const Getintouch: React.FC = () => {
           <option value="Internet Search">Internet Search</option>
           <option value="Other">Other</option>
         </Select>
+
+        <textarea className="w-full" rows={4} placeholder="Message...."></textarea>
 
         <Button text="Submit" classes="bg-primary h-[45px] hover:cursor-pointer hover:bg-red-400 self-center mt-8 rounded" onClick={handleSubmit(onSubmit)} />
       </form>

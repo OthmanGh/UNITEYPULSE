@@ -3,6 +3,7 @@ import Features from './components/Features/Features';
 import { Aboutus, Getintouch, Hero, Navbar } from './components/index';
 import styles from './home.module.css';
 import { ArrowScrollTop } from '../../utils/icons';
+import ContactForm from './components/Getintouch';
 
 function Home() {
   return (
@@ -22,7 +23,7 @@ function Home() {
           <Aboutus />
         </Element>
         <Element name="getintouch">
-          <Getintouch />
+          <ContactForm />
         </Element>
       </main>
 

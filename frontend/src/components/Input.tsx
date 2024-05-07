@@ -16,7 +16,6 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({ label, type, nameInput, register, error, classParent = '', classLabel = '', classInput = '', placeholder = '' }) => {
   return (
     <div className={classParent}>
-      <label className={classLabel}>{label}</label>
       <input type={type} name={nameInput} {...register(nameInput)} className={classInput} placeholder={placeholder} />
       {error && <p className="text-red-500">{error.message}</p>}
     </div>

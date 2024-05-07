@@ -2,7 +2,7 @@ import React from 'react';
 import { FieldError, UseFormRegister } from 'react-hook-form';
 
 interface SelectProps {
-  label: string;
+  label?: string;
   name: string;
   register: UseFormRegister<any>;
   error?: FieldError;
@@ -12,10 +12,9 @@ interface SelectProps {
   children?: string;
 }
 
-const Select: React.FC<SelectProps> = ({ label, name, register, error, classParent = '', classLabel = '', classSelect = '', children }) => {
+const Select: React.FC<SelectProps> = ({ name, register, error, classParent = '', classLabel = '', classSelect = '', children }) => {
   return (
     <div className={classParent}>
-      <label className={classLabel}>{label}</label>
       <select name={name} {...register(name)} className={classSelect}>
         {children}
       </select>
