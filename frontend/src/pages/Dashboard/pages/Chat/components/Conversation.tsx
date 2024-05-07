@@ -1,8 +1,12 @@
 import { Avatar } from '@mui/material';
 import { useConversation } from '../../../../../contexts/ConversationContext';
+import { useSocketContext } from '../../../../../contexts/SocketContext';
 
 const Conversation = ({ conversation, lastIdx }) => {
   const { selectedConversation, setSelectedConversation } = useConversation();
+
+  const { onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(conversation._id);
 
   const isSelected = selectedConversation?._id === conversations._id;
 
@@ -11,7 +15,7 @@ const Conversation = ({ conversation, lastIdx }) => {
       className={`flex flex-row gap-2 items-center hover:bg-secondary rounded p-2 py-1 cursor-pointer ${isSelected ? 'bg-sky-500' : ''} `}
       onClick={() => setSelectedConversation(conversation)}
     >
-      <div className="avatar ">
+      <div className={`avatar ${isOnline ? 'online' : ''}`}>
         <div className="w-12 rounded-full">
           <Avatar alt="Remy Sharp" src={conversation.profilePic} className="" />
         </div>

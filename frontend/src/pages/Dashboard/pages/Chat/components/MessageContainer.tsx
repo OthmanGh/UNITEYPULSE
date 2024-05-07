@@ -3,12 +3,14 @@ import MessageInput from './MessageInput';
 import { TiMessages } from 'react-icons/ti';
 import { useConversation } from '../../../../../contexts/ConversationContext';
 import { useEffect } from 'react';
+import { useAuthContext } from '../../../../../contexts/AuthContext';
 
 const NoChatSelectedComp = () => {
+  const { authUser } = useAuthContext();
   return (
     <div className="flex items-center justify-center w-full h-full">
       <div className="px-4 text-center sm:text-lg md:text-xl text-gray-200 font-semibold flex flex-col items-center gap-2">
-        <p>Welcome 👋 Othman Ghandour ❄</p>
+        <p>Welcome 👋 {authUser.name} ❄</p>
         <p>Select a chat to start messaging</p>
         <TiMessages className="text-3xl md:text-6xl text-center" />
       </div>
@@ -21,9 +23,9 @@ const MessageContainer = () => {
 
   const NoChatSelected = false;
 
-  // useEffect(() => {
-  //   return () => setSelectedConversation(null);
-  // }, [selectedConversation]);
+  useEffect(() => {
+    return () => setSelectedConversation(null);
+  }, [selectedConversation]);
 
   return (
     <div className={`flex flex-col ${NoChatSelected ? 'bg-secondary bg-opacity-20' : ''}  flex-1 rounded-md`}>
