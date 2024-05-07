@@ -13,7 +13,7 @@ const useGetMessages = () => {
 
         const res = await fetch(url);
 
-        const data = await res.jons();
+        const data = await res.json();
 
         if (data.error) throw new Error(data.error);
         setMessages(data);
