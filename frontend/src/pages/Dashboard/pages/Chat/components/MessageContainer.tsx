@@ -1,8 +1,8 @@
 import Messages from './Messages';
 import MessageInput from './MessageInput';
 import { TiMessages } from 'react-icons/ti';
-import { useConversation } from '../../../../../contexts/ConversationContext';
 import { useEffect } from 'react';
+import useConversation from '../../../../../store/useConversations';
 import { useAuthContext } from '../../../../../contexts/AuthContext';
 
 const NoChatSelectedComp = () => {
@@ -21,15 +21,17 @@ const NoChatSelectedComp = () => {
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
 
+  console.log(selectedConversation);
+
   const NoChatSelected = false;
 
-  // useEffect(() => {
-  //   return () => setSelectedConversation(null);
-  // }, [selectedConversation]);
+  useEffect(() => {
+    return () => setSelectedConversation(null);
+  }, [setSelectedConversation]);
 
   return (
     <div className={`flex flex-col ${NoChatSelected ? 'bg-secondary bg-opacity-20' : ''}  flex-1 rounded-md`}>
-      {selectedConversation ? (
+      {!selectedConversation ? (
         <NoChatSelectedComp />
       ) : (
         <>
