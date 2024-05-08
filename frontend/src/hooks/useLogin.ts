@@ -46,7 +46,7 @@ const useLogin = () => {
         localStorage.setItem('authUser', JSON.stringify(res.data));
 
         setAuthUser(res);
-        navigator('/dashboard');
+        navigator('/infos');
       } else {
         throw new Error(res.error);
       }

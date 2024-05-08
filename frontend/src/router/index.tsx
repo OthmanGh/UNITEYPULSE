@@ -20,6 +20,7 @@ import {
   Pyramid,
   Stacked,
   Chat,
+  Infos,
   Greet,
 } from '../utils';
 import ProtectedRoute from '../components/ProtectedRoute';
@@ -27,6 +28,11 @@ import ProtectedRoute from '../components/ProtectedRoute';
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
   { path: '/auth', element: <Auth /> },
+
+  {
+    path: '/infos',
+    element: <Infos />,
+  },
 
   {
     path: '/dashboard',

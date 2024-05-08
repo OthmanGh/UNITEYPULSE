@@ -28,6 +28,7 @@ import Footer from '../pages/Dashboard/components/Footer';
 import Manage from '../pages/Dashboard/pages/Manage';
 
 import Theme from '../pages/Dashboard/components/Theme';
+import Infos from '../pages/Infos/Infos';
 
 import Sidebar from '../pages/Dashboard/components/Sidebar';
 
@@ -52,6 +53,7 @@ export {
   General,
   Kanban,
   Orders,
+  Infos,
   Greet,
   Navbar,
   Footer,
