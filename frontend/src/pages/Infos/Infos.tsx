@@ -28,21 +28,29 @@ const Infos = () => {
 
         <Input name="budget" placeholder="Budget" type="number" register={register} error={errors.budget} />
 
-        <select
-          className="bg-transparent border-b-[1px] px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400 h-[50px]  bg-red-500 w-[80%]"
-          name="currency"
-        >
-          <option value="">Currency</option>
-          <option value="USD">USD - Dollar</option>
-          <option value="EUR">EUR - Euro</option>
-          <option value="GBP">GBP - Pound</option>
-        </select>
-        {errors.currency && <span className="text-red-500">Currency is required</span>}
+        <fieldset className="relative">
+          <select
+            className="bg-transparent border-b-[1px] px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400 h-[50px]  bg-red-500 w-[80%] relative"
+            {...register('currency', {
+              required: 'Selecting currency is required',
+            })}
+          >
+            <option value="">Currency</option>
+            <option value="USD">USD - Dollar</option>
+            <option value="EUR">EUR - Euro</option>
+            <option value="GBP">GBP - Pound</option>
+          </select>
+          {errors.currency && <span className="text-red-500 text-sm absolute top-14 left-0 w-full">{errors.currency.message}</span>}
+        </fieldset>
 
         <Input name="products" placeholder="Products" type="number" register={register} error={errors.products} />
+
         <Input name="sales" placeholder="Sales" type="number" register={register} error={errors.sales} />
+
         <Input name="customers" placeholder="Customers" type="number" register={register} error={errors.customers} />
+
         <Input name="refunds" placeholder="Refunds" type="number" register={register} error={errors.refunds} />
+
         <Input name="taxId" placeholder="Tax ID" type="text" register={register} error={errors.taxId} />
 
         <button type="submit" disabled={isSubmitting} className="bg-secondary w-[80%] text-white rounded-md hover:bg-dark transition-all duration-500 h-[50px]">
