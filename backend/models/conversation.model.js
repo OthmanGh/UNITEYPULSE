@@ -8,7 +8,6 @@ const conversationSchema = new mongoose.Schema(
         ref: "User"
       }
     ],
-
     messages: [
       {
         type: mongoose.Schema.Types.ObjectId,
