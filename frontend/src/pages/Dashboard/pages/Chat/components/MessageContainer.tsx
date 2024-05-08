@@ -19,13 +19,13 @@ const NoChatSelectedComp = () => {
 };
 
 const MessageContainer = () => {
-  const { selectedConversation, setSelectedConversation } = useConversation;
+  const { selectedConversation, setSelectedConversation } = useConversation();
 
   const NoChatSelected = false;
 
-  useEffect(() => {
-    return () => setSelectedConversation(null);
-  }, [selectedConversation]);
+  // useEffect(() => {
+  //   return () => setSelectedConversation(null);
+  // }, [selectedConversation]);
 
   return (
     <div className={`flex flex-col ${NoChatSelected ? 'bg-secondary bg-opacity-20' : ''}  flex-1 rounded-md`}>
