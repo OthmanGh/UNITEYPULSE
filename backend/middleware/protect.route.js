@@ -3,7 +3,16 @@ import User from "../models/user.model.js";
 
 const protectRoute = async (req, res, next) => {
   try {
-    const token = req.cookies.jwt;
+    let token;
+
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith("Bearer")
+    ) {
+      token = req.headers.authorization.split(" ")[1];
+    } else if (req.cookies.jwt) {
+      token = req.cookies.jwt;
+    }
 
     if (!token) {
       return res
@@ -18,8 +27,6 @@ const protectRoute = async (req, res, next) => {
     }
 
     const user = await User.findById(decoded.id).select("-password");
-
-    console.log(user);
 
     if (!user) {
       return res.status(404).json({ error: "User not found" });

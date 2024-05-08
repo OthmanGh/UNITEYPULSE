@@ -61,13 +61,6 @@ const userSchema = new mongoose.Schema(
     companyPolicies: [String],
     goalsAndObjectives: [String],
 
-    projects: [
-      {
-        name: String,
-        department: String
-      }
-    ],
-
     manager: {
       name: String,
       username: String,
@@ -81,11 +74,6 @@ const userSchema = new mongoose.Schema(
         anonymous: { type: Boolean, default: true }
       }
     ],
-
-    company: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Company"
-    },
 
     passwordResetToken: String,
     passwordResetExpires: Date

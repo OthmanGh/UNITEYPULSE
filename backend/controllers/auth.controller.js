@@ -1,5 +1,11 @@
+import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
-import generateTokenandSetCookie from "../utils/generateTokenandSetCookie.js";
+
+const generateToken = id => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRESIN
+  });
+};
 
 export const signup = async (req, res, next) => {
   console.log(req.body);
@@ -19,12 +25,13 @@ export const signup = async (req, res, next) => {
       });
     }
 
-    generateTokenandSetCookie(newUser._id, res);
+    const token = generateToken(newUser._id);
 
     return res.status(201).json({
       status: "success",
       data: {
-        user: newUser
+        user: newUser,
+        token: token
       }
     });
   } catch (error) {
@@ -43,15 +50,12 @@ export const signup = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
   try {
-    const { email, password } = {
-      email: req.body.email,
-      password: req.body.password
-    };
+    const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).send({
+      return res.status(400).json({
         status: "fail",
-        message: "invalid credentials"
+        message: "Invalid credentials"
       });
     }
 
@@ -64,7 +68,7 @@ export const login = async (req, res, next) => {
       });
     }
 
-    generateTokenandSetCookie(user._id, res);
+    const token = generateToken(user._id);
 
     res.status(200).json({
       status: "success",
@@ -72,7 +76,8 @@ export const login = async (req, res, next) => {
         _id: user._id,
         name: user.name,
         profilePicture: user.profilePicture,
-        username: user.username
+        username: user.username,
+        token: token
       }
     });
   } catch (error) {
@@ -81,23 +86,13 @@ export const login = async (req, res, next) => {
   }
 };
 
-export const logout = async (req, res) => {
-  try {
-    res.cookie("jwt", "", { maxAge: 0 });
-    res.status(200).json({ message: "Logged out successfully" });
-  } catch (error) {
-    console.error("Error in logout:", error.message);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
-
 export const forgotPassword = async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    return res.status(404).send({
+    return res.status(404).json({
       status: "fail",
-      message: "User not found 23543"
+      message: "User not found"
     });
   }
 
