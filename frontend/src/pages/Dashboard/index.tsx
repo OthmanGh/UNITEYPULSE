@@ -6,6 +6,7 @@ import LogoutBtn from '../../components/LogoutBtn';
 
 const Dashboard = () => {
   const { activeMenu } = useStateContext();
+
   return (
     <div>
       <div className="flex relative dark:bg-main-dark-bg bg-white">

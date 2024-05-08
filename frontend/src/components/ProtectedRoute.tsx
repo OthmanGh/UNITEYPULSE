@@ -6,6 +6,7 @@ type ProtectedRouteProps = PropsWithChildren;
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { authUser } = useAuthContext();
+  console.log(authUser);
   const navigator = useNavigate();
 
   useEffect(() => {

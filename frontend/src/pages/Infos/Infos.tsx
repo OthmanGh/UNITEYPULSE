@@ -1,16 +1,46 @@
 import { useForm } from 'react-hook-form';
 import Header from '../Dashboard/components/Header';
 import Input from './components/Input';
+import { RequestMethod } from '../../services/requestMethods';
+import { useNavigate } from 'react-router-dom';
 
 const Infos = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const navigator = useNavigate();
+
+  const onSubmit = async (data) => {
+    try {
+      const url = 'http://127.0.0.1:8000/api/company';
+
+      const req = await fetch(url, {
+        method: RequestMethod.post,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const res = await req.json();
+
+      console.log(res);
+
+      if (res.status === 'success') {
+        navigator('/dashboard');
+      } else {
+        throw new Error(res.error);
+      }
+    } catch (error) {
+      setError('form', {
+        type: 'manual',
+        message: error.message,
+      });
+    }
   };
 
   return (
@@ -52,6 +82,8 @@ const Infos = () => {
         <Input name="refunds" placeholder="Refunds" type="number" register={register} error={errors.refunds} />
 
         <Input name="taxId" placeholder="Tax ID" type="text" register={register} error={errors.taxId} />
+
+        {errors.form && <span className="text-red-500 text-sm absolute top-14 left-0 w-full">{errors.form.message}</span>}
 
         <button type="submit" disabled={isSubmitting} className="bg-secondary w-[80%] text-white rounded-md hover:bg-dark transition-all duration-500 h-[50px]">
           {isSubmitting ? 'Loading....' : 'Submit'}

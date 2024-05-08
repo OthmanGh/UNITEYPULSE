@@ -44,9 +44,9 @@ const useLogin = () => {
 
       if (res.status === 'success') {
         localStorage.setItem('authUser', JSON.stringify(res.data));
-
         setAuthUser(res);
-        navigator('/infos');
+
+        navigator('/dashboard');
       } else {
         throw new Error(res.error);
       }
