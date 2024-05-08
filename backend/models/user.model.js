@@ -1,8 +1,8 @@
+// user.model.js
 import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
-import Company from "./company.model.js";
 
 const userSchema = new mongoose.Schema(
   {
@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       enum: ["employee", "owner", "manager"],
-      default: "employee"
+      default: "owner"
     },
 
     department: {
@@ -83,10 +83,8 @@ const userSchema = new mongoose.Schema(
     ],
 
     company: {
-      type: Company.schema,
-      required: function() {
-        return this.role === "owner";
-      }
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company"
     },
 
     passwordResetToken: String,

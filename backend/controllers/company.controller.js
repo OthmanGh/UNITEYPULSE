@@ -1,3 +1,4 @@
+// company.controller.js
 import Company from "../models/company.model.js";
 
 export const createCompany = async (req, res) => {
@@ -29,6 +30,8 @@ export const createCompany = async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
+    const userData = req.user;
+
     const company = new Company({
       name,
       address,
@@ -39,7 +42,8 @@ export const createCompany = async (req, res) => {
       sales,
       products,
       customers,
-      refunds
+      refunds,
+      owner: userData._id
     });
 
     const newCompany = await company.save();
