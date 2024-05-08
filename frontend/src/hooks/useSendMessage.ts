@@ -1,13 +1,21 @@
 import { useState } from 'react';
-import { useConversation } from '../contexts/ConversationContext';
 import { RequestMethod } from '../services/requestMethods';
+import useConversation from '../store/useConversations';
 
 const useSendMessage = () => {
   const [loading, setLoading] = useState(false);
   const { messages, setMessages, selectedConversation } = useConversation();
+  const token = JSON.parse(localStorage.getItem('authUser'))?.token;
 
   const sendMessage = async (message) => {
-    const url = `http://127.0.0.1:8000/api/messages/send/${selectedConversation?._id}`;
+    if (!selectedConversation) {
+      console.log('No conversation selected');
+      return;
+    }
+
+    console.log(selectedConversation);
+
+    const url = `http://127.0.0.1:8000/api/messages/send/${selectedConversation._id}`;
 
     setLoading(true);
     try {
@@ -15,8 +23,8 @@ const useSendMessage = () => {
         method: RequestMethod.post,
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
-
         body: JSON.stringify({ message }),
       });
 

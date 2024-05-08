@@ -22,6 +22,8 @@ const MessageInput = () => {
           type="text"
           className="border block w-full  border-none outline-none bg-secondary bg-opacity-50 text-white h-[48px] focus:bg-opacity-100 transition-all px-4 duration-400 rounded-lg placeholder:text-[16px] text-[16px]"
           placeholder="Sent a message "
+          onChange={(e) => setMessage(e.target.value)}
+          value={message}
         />
         <button type="submit" className="absolute inset-y-0 end-0 flex items-center pe-4 text-lg">
           {loading ? <div className="loading loading-spinner"></div> : <BsSend className="hover:text-gray-300" />}
