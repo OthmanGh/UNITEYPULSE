@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
+import Company from "./company.model";
 
 const userSchema = new mongoose.Schema(
   {
@@ -80,6 +81,13 @@ const userSchema = new mongoose.Schema(
         anonymous: { type: Boolean, default: true }
       }
     ],
+
+    company: {
+      type: Company.schema,
+      required: function() {
+        return this.role === "owner";
+      }
+    },
 
     passwordResetToken: String,
     passwordResetExpires: Date
