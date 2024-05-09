@@ -1,4 +1,3 @@
-// customer.model.js
 import mongoose from "mongoose";
 
 const customerSchema = new mongoose.Schema(
@@ -15,7 +14,7 @@ const customerSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ["Pending", "In Progress", "Completed"],
+      enum: ["Pending", "Active", "Cancel", "Completed"],
       default: "Pending"
     },
 
