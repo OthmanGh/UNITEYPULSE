@@ -35,7 +35,7 @@ const ExpenseTracker = () => {
         </div>
 
         <div className="overflow-x-auto mt-5 h-[50vh]">
-          <table className="min-w-full divide-y divide-gray-200 text-sm ">
+          <table className="min-w-full divide-y divide-gray-200 text-sm">
             <thead className="bg-gray-100 dark:bg-gray-800">
               <tr>
                 <th scope="col" className="px-6 py-3 text-left text-gray-800 uppercase tracking-wider">
