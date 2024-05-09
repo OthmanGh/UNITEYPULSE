@@ -1,56 +1,54 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Header from '../components/Header';
 import MUIDataTable from 'mui-datatables';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styles from '../../../components';
+import useGetEmployees from '../../../hooks/useGetEmployees';
 
 const Employees = () => {
-  const [employees, setEmployees] = useState([]);
+  const { employees, loading } = useGetEmployees();
+
+  console.log(employees);
 
   const columns = [
     {
       name: 'id',
       label: 'S.No',
     },
-
     {
-      name: 'image',
+      name: 'profilePicture',
       label: 'Profile',
       options: {
-        customBodyRender: (value) => <img src={value} alt="pic" className="w-12 rounded-full p-3 bg-slate-300" />,
+        customBodyRender: (value) => <img src={employees?.profile?.pic} alt="pic" className="w-12 rounded-full p-3 bg-slate-300" />,
       },
       filter: false,
     },
-
     {
       name: 'name',
       label: 'Name',
     },
     {
-      name: 'age',
-      label: 'Age',
+      name: 'destination',
+      label: 'Destination',
     },
-
     {
-      name: 'gender',
-      label: 'Gender',
+      name: 'country',
+      label: 'Country',
+    },
+    {
+      name: 'hireDate',
+      label: 'Hire Date',
       options: {
-        customBodyRender: (value) => (
-          <p className={`capitalize px-3 py-1 inline-block rounded-full ${value === 'male' ? 'bg-blue-500' : 'bg-pink-500'}`}>{value}</p>
-        ),
+        customBodyRender: (value) => new Date(value).toLocaleDateString(),
       },
     },
-
     {
-      name: 'domain',
-      label: 'Domain',
-      options: {
-        customBodyRender: (value) => (
-          <a href={'https://' + value} className="bg-rose-600 px-3 rounded-m">
-            Open
-          </a>
-        ),
-      },
+      name: 'reportsTo',
+      label: 'Reports To',
+    },
+    {
+      name: 'employeeId',
+      label: 'Employee ID',
     },
   ];
 
@@ -62,20 +60,6 @@ const Employees = () => {
     responsive: 'standard',
     separator: true,
   };
-
-  useEffect(() => {
-    fetch('https://dummyjson.com/users')
-      .then((res) => res.json())
-      .then((data) => {
-        let local = data?.users?.map((user, index) => ({
-          id: index + 1,
-          name: user?.firstName + ' ' + user?.lastName,
-          age: user?.age,
-          gender: user?.gender,
-        }));
-        setEmployees(local);
-      });
-  }, []);
 
   const getMuiTheme = () => {
     return createTheme({
@@ -108,7 +92,7 @@ const Employees = () => {
         MUIDataTable: {
           root: {
             '& .MuiTableBody-root .MuiTableRow-root:not(:last-child)': {
-              borderBottom: '1px solid white', // Change rows separator color to white
+              borderBottom: '1px solid white',
             },
           },
         },
