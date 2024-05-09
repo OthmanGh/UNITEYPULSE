@@ -19,13 +19,16 @@ const Employees = () => {
       name: 'profilePicture',
       label: 'Profile',
       options: {
-        customBodyRender: (value) => <img src={employees?.profile?.pic} alt="pic" className="w-12 rounded-full p-3 bg-slate-300" />,
+        customBodyRender: (value, tableMeta, updateValue) => <img src={value} alt="pic" className="w-12 rounded-full p-3 bg-slate-300" />,
       },
       filter: false,
     },
     {
       name: 'name',
       label: 'Name',
+      options: {
+        customBodyRender: (value) => value,
+      },
     },
     {
       name: 'destination',
@@ -66,6 +69,7 @@ const Employees = () => {
       typography: {
         fontFamily: 'Poppins',
       },
+
       palette: {
         background: {
           paper: 'text-secondary',
@@ -76,6 +80,7 @@ const Employees = () => {
         },
         mode: 'dark',
       },
+
       components: {
         MuiTableCell: {
           styleOverrides: {
@@ -100,13 +105,19 @@ const Employees = () => {
     });
   };
 
+  const data = employees.map((employee, index) => ({
+    ...employee,
+    id: index + 1,
+    profilePicture: <img src={employee.profile.pic} alt="pic" className="w-12 rounded-full p-3 bg-slate-300" />,
+  }));
+
   return (
     <section className={styles.dashboardSection}>
       <Header category="app" title="Employees" />
       <div className="max-w-full overflow-x-auto dark:bg-white bg-dark rounded-md h-[100vh]">
         <div className="max-w-4xl rounded-lg p-4 bg-text-secondary">
           <ThemeProvider theme={getMuiTheme()}>
-            <MUIDataTable title={'Employees List'} data={employees} columns={columns} options={options} />
+            <MUIDataTable title={'Employees List'} data={data} columns={columns} options={options} />
           </ThemeProvider>
         </div>
       </div>

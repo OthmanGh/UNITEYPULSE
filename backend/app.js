@@ -19,6 +19,7 @@ app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/employees", employeeRoutes);
 app.use("/api/customers", customerRoutes);
+
 // app.use("/api/company", companyRoutes);
 
 export default app;
