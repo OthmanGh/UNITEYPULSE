@@ -1,67 +1,51 @@
 import mongoose from "mongoose";
-import Event from "./event.model.js";
-import Task from "./task.model.js";
-import Expense from "./expense.js";
-import Meeting from "./meeting.model.js";
 
-const employeeSchema = new mongoose.Schema({
-  user: {
-    name: String,
-    username: String,
-    email: String,
-    profilePicture: {
+const employeeSchema = new mongoose.Schema(
+  {
+    profile: {
+      name: {
+        type: String,
+        required: [true, "Name is required"]
+      },
+      pic: {
+        type: String,
+        default: "annonymous.png"
+      }
+    },
+
+    destination: {
+      type: String
+    },
+
+    country: {
+      type: String
+    },
+
+    hireDate: {
+      type: Date,
+      default: Date.now
+    },
+
+    reportsTo: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Employee"
+    },
+
+    employeeId: {
       type: String,
-      default: "anonymous.png"
+      required: [true, "Employee ID is required"],
+      unique: true
+    },
+
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
     }
   },
 
-  designation: {
-    type: String,
-    required: true
-  },
-
-  country: {
-    type: String,
-    required: true
-  },
-
-  hireDate: {
-    type: Date,
-    required: true
-  },
-
-  reportsTo: {
-    name: String,
-    username: String,
-    email: String
-  },
-
-  salary: {
-    type: Number,
-    required: true
-  },
-
-  performance: {
-    type: String,
-    enum: ["Excellent", "Good", "Average", "Poor"]
-  },
-
-  department: {
-    name: String
-  },
-
-  role: {
-    type: String,
-    enum: ["owner", "manager", "employee"],
-    default: "employee"
-  },
-
-  events: [Event.schema],
-  tasks: [Task.schema],
-  profits: [Profit.schema],
-  expenses: [Expense.schema],
-  meetings: [Meeting.schema]
-});
+  { timestamps: true }
+);
 
 const Employee = mongoose.model("Employee", employeeSchema);
+
 export default Employee;
