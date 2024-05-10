@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 type Step = {
   description: string;
@@ -70,7 +70,7 @@ const Stepper = ({ steps, currentStep }: StepperProps) => {
         >
           {step.completed ? <span className="text-white font-bold text-xl">&#10003;</span> : <span>{index + 1}</span>}
         </div>
-        <div className={`absolute top-0 text-center mt-16 w-32 text-xs font-medium uppercase ${step.highlighted ? 'text-gray-900' : 'text-gray-400'}`}>
+        <div className={`absolute top-0 text-center mt-16 w-32 text-xs font-semibold uppercase ${step.highlighted ? 'text-white' : 'text-gray-400'}`}>
           {step.description}
         </div>
       </div>

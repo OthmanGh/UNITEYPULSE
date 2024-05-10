@@ -4,8 +4,8 @@ type InputProps = {
   name: string;
   placeholder: string;
   type: string;
-  register: any;
-  error?: any;
+  // register: any;
+  // error?: any;
 };
 
 const Input = ({ placeholder, name, type, register, error }: InputProps) => {
@@ -29,9 +29,9 @@ const Input = ({ placeholder, name, type, register, error }: InputProps) => {
         name={name}
         type={type}
         value={value}
-        {...register(name, {
-          required: `${placeholder} is required`,
-        })}
+        // {...register(name, {
+        //   required: `${placeholder} is required`,
+        // })}
         onChange={handleChange}
       />
 

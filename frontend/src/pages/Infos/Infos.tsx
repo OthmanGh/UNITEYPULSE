@@ -5,6 +5,8 @@ import CompanyInfos from './components/steps/CompanyInfos';
 import Stats from './components/steps/Stats';
 import Final from './components/steps/Final';
 import { StepperContext } from '../../contexts/StepperContext';
+import Header from '../Dashboard/components/Header';
+import styles from '../../components';
 
 const Infos = () => {
   const steps = ['Company Information', 'Statistics', 'Complete'];
@@ -34,27 +36,29 @@ const Infos = () => {
   };
 
   return (
-    <div className="md:w-1/2 mx-auto shadow-xl rounded-2xl pb-2 bg-white h-screen">
-      <div className="container horizontal mt-5">
-        <Stepper steps={steps} currentStep={currentStep} />
+    <section className={`${styles.dashboardSection} rounded-none`}>
+      <Header category="Infos" title="Fill Necessary Information" />
+      <div className="w-[80%] mx-auto shadow-xl rounded-2xl pb-2 bg-dark">
+        <div className="  horizontal mt-5 mx-auto p-10">
+          <Stepper steps={steps} currentStep={currentStep} />
 
-        <div className="my-10 p-10">
-          <StepperContext.Provider
-            value={{
-              userData,
-              setUserData,
-              finalData,
-              setFinalData,
-            }}
-          >
-            {displayStep(currentStep)}
-          </StepperContext.Provider>
+          <div className="my-10 p-10">
+            <StepperContext.Provider
+              value={{
+                userData,
+                setUserData,
+                finalData,
+                setFinalData,
+              }}
+            >
+              {displayStep(currentStep)}
+            </StepperContext.Provider>
+          </div>
         </div>
-      </div>
 
-      <div>{displayStep(currentStep)}</div>
-      <StepperControl handleClick={handleClick} currentStep={currentStep} steps={steps} />
-    </div>
+        <StepperControl handleClick={handleClick} currentStep={currentStep} steps={steps} />
+      </div>
+    </section>
   );
 };
 
