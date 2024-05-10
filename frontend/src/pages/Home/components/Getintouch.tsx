@@ -75,7 +75,7 @@ const Getintouch: React.FC = () => {
 
         <Button
           text="Submit"
-          classes="bg-primary h-[45px] hover:cursor-pointer hover:bg-secondary hover:text-white transition-all duration-500 self-center mt-8 rounded"
+          classes="bg-transparent text-primary-light border-[2px] border-primary-light h-[45px] hover:cursor-pointer hover:bg-primary hover:border-primary hover:text-dark transition-all duration-500 self-center mt-8 rounded font-semibold"
           type="submit"
         />
       </form>
