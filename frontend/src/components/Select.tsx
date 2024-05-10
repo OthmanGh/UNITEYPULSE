@@ -15,7 +15,7 @@ interface SelectProps {
 const Select: React.FC<SelectProps> = ({ name, register, error, classParent = '', classLabel = '', classSelect = '', children }) => {
   return (
     <div className={classParent}>
-      <select name={name} {...register(name)} className={classSelect}>
+      <select name={name} {...register(name)} className={`${classSelect} placeholder:text-gray-300 outline-none`}>
         {children}
       </select>
       {error && <p className="text-red-500">{error.message}</p>}

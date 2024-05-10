@@ -11,13 +11,31 @@ interface InputProps {
   classLabel?: string;
   classInput?: string;
   placeholder?: string;
+  required?: boolean;
 }
 
-const Input: React.FC<InputProps> = ({ label, type, nameInput, register, error, classParent = '', classLabel = '', classInput = '', placeholder = '' }) => {
+const Input: React.FC<InputProps> = ({
+  label,
+  type,
+  nameInput,
+  register,
+  error,
+  classParent = '',
+  classLabel = '',
+  classInput = '',
+  placeholder = '',
+  required = false,
+}) => {
   return (
     <div className={classParent}>
-      <input type={type} name={nameInput} {...register(nameInput)} className={classInput} placeholder={placeholder} />
-      {error && <p className="text-red-500">{error.message}</p>}
+      <input
+        type={type}
+        name={nameInput}
+        {...register(nameInput, { required: required ? `${label} field is required` : false })}
+        className={classInput}
+        placeholder={placeholder}
+      />
+      {error && <p className="text-red-500 text-sm mt-2">{error.message}</p>}
     </div>
   );
 };

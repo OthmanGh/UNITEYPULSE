@@ -38,7 +38,7 @@ const Infos = () => {
   return (
     <section className={`${styles.dashboardSection} rounded-none`}>
       <Header category="Infos" title="Fill Necessary Information" />
-      <div className="w-[80%] mx-auto shadow-xl rounded-2xl pb-2 bg-dark">
+      <div className="mx-auto shadow-xl rounded-2xl pb-2 bg-dark">
         <div className="  horizontal mt-5 mx-auto p-10">
           <Stepper steps={steps} currentStep={currentStep} />
 

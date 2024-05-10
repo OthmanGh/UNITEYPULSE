@@ -2,12 +2,12 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
-import Select from '../../../components/Select';
 
 interface FormData {
   fullName: string;
   email: string;
   referralSource: string;
+  message: string;
 }
 
 const Getintouch: React.FC = () => {
@@ -22,12 +22,12 @@ const Getintouch: React.FC = () => {
   };
 
   return (
-    <section className="min-h-[100vh] p-10 bg-gray-200">
+    <section className="min-h-[100vh] p-10 bg-gray-200 shadow-2xl ">
       <h2 className="text-center text-md xs:text-xl  sm:text-3xl font-extrabold text-gray-700 mb-10">Get in Touch</h2>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="grid  gap-10 max-w-[800px] mx-auto mt-20 bg-dark shadow-2xl p-40 rounded-3xl text-white justify-between items-center "
+        className="grid gap-10 max-w-[600px] p-10 rounded-xl mx-auto mt-15 bg-dark shadow-2xl text-white sm:hover:scale-105 transition-all duration-500"
       >
         <Input
           label="Full Name"
@@ -38,7 +38,8 @@ const Getintouch: React.FC = () => {
           error={errors.fullName}
           classParent=""
           classLabel="mb-2"
-          classInput="w-full px-4 py-2 rounded-lg h-[45px]"
+          classInput="w-full px-4 py-2 rounded-md h-[45px] text-dark outline-none"
+          required
         />
 
         <Input
@@ -50,28 +51,33 @@ const Getintouch: React.FC = () => {
           error={errors.email}
           classParent=""
           classLabel="mb-2"
-          classInput="w-full px-4 py-2 rounded-lg h-[45px]"
+          classInput="w-full px-4 py-2 rounded-md h-[45px] outline-none text-dark"
+          required
         />
 
-        <Select
-          label="Where did you hear from us?"
-          name="referralSource"
-          register={register}
-          error={errors.referralSource}
-          classParent="w-full"
-          classLabel="mb-2"
-          classSelect="w-full px-4 py-2 rounded-lg h-[45px] bg-gray-100"
+        <select
+          {...register('referralSource', { required: 'Please select an option' })}
+          className="w-full px-4 py-2 rounded-md h-[45px] bg-gray-100 placeholder:text-gray-300 text-dark outline-none"
         >
           <option value="">Select an option</option>
           <option value="Social Media">Social Media</option>
           <option value="Friend">Friend</option>
           <option value="Internet Search">Internet Search</option>
-          <option value="Other">Other</option>
-        </Select>
+        </select>
 
-        <textarea className="w-full" rows={4} placeholder="Message...."></textarea>
+        <textarea
+          {...register('message', { required: 'Please enter a message' })}
+          className="w-full rounded-md p-2 outline-none text-dark"
+          rows={4}
+          placeholder="Message...."
+        ></textarea>
+        {errors.message && <span className="text-red-500 text-sm mt-[-30px]">{errors.message.message}</span>}
 
-        <Button text="Submit" classes="bg-primary h-[45px] hover:cursor-pointer hover:bg-red-400 self-center mt-8 rounded" onClick={handleSubmit(onSubmit)} />
+        <Button
+          text="Submit"
+          classes="bg-primary h-[45px] hover:cursor-pointer hover:bg-secondary hover:text-white transition-all duration-500 self-center mt-8 rounded"
+          type="submit"
+        />
       </form>
     </section>
   );
