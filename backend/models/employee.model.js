@@ -7,9 +7,11 @@ const employeeSchema = new mongoose.Schema(
         type: String,
         required: [true, "Name is required"]
       },
-      pic: {
+
+      picture: {
         type: String,
-        default: "annonymous.png"
+        default:
+          "https://static.vecteezy.com/system/resources/previews/005/266/979/original/avatar-profile-pink-neon-icon-brick-wall-background-colour-neon-icon-vector.jpg"
       }
     },
 
