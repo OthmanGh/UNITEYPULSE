@@ -1,13 +1,13 @@
 import { Link, Element } from 'react-scroll';
 import Features from './components/Features/Features';
-import { Aboutus, Getintouch, Hero, Navbar } from './components/index';
-import styles from './home.module.css';
+import { Aboutus, Hero, Navbar } from './components/index';
 import { ArrowScrollTop } from '../../utils/icons';
 import ContactForm from './components/Getintouch';
+import Footer from './components/Footer';
 
 function Home() {
   return (
-    <div className={styles.main}>
+    <div>
       <header>
         <Navbar />
       </header>
@@ -24,6 +24,9 @@ function Home() {
         </Element>
         <Element name="getintouch">
           <ContactForm />
+        </Element>
+        <Element name="footer">
+          <Footer />
         </Element>
       </main>
 
