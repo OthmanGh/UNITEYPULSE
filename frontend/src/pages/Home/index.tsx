@@ -32,8 +32,8 @@ function Home() {
 
       <div className="fixed bottom-4 right-4 z-10">
         <Link activeClass="active" to="hero" spy={true} smooth={true} offset={-70} duration={500}>
-          <button className="rounde-lg font-bold text-3xl">
-            <ArrowScrollTop className="text-secondary bg-white rounded-3xl p-0.5" />
+          <button className="rounde-lg font-bold text-2xl sm:text-4xl">
+            <ArrowScrollTop className="border-none text-dark hover:text-primary transition-all duration-500 rounded-full" />
           </button>
         </Link>
       </div>
