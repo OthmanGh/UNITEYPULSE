@@ -28,18 +28,8 @@ export const navLinks = [
   },
 
   {
-    id: 'howItWorks',
-    title: 'How it Works',
-  },
-
-  {
     id: 'aboutus',
     title: 'AboutUs',
-  },
-
-  {
-    id: 'pricing',
-    title: 'Pricing',
   },
 
   {

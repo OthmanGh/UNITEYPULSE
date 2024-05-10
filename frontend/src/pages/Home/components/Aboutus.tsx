@@ -6,7 +6,7 @@ import Video from '../../../assets/about_video.mp4';
 
 const Aboutus = () => {
   return (
-    <section className={`${styles.aboutus__section} h-[70vh] mb-1000px relative`}>
+    <section id="aboutus" className={`${styles.aboutus__section} h-[70vh] mb-1000px relative`}>
       <video autoPlay loop muted playsInline className="absolute top-0 left-0 min-w-full h-[70vh] object-cover">
         <source src={Video} type="video/mp4" />
       </video>

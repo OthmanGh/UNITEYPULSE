@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { navLinks } from '../../../../constants';
 import { Close, Menu } from '../../../../utils/icons';
 import shortStyles from '../../../../components/index';
-import { Link } from 'react-scroll';
 import LoginBtn from './components/LoginBtn';
-import NavLinkItem from './components/NavLinkItem';
 import ScrolledNavbar from './components/ScrolledNavbar';
 import companyLogo from '../../../../assets/logo_1.png';
+import NavLinkItem from './components/NavLinkItem';
+import { Link as ScrollLink } from 'react-scroll';
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -35,7 +35,7 @@ const Navbar = () => {
         <img src={companyLogo} alt="company logo" className="w-[80px] h-[80px]" />
         <ul className={`hidden sm:flex gap-8 md:gap-12 text-sm sm:text-[14px] md:text-[16px] `}>
           {navLinks.map((nav) => (
-            <NavLinkItem key={nav.id} {...nav} />
+            <NavLinkItem key={nav.id} id={nav.id} title={nav.title} />
           ))}
         </ul>
 
@@ -48,11 +48,14 @@ const Navbar = () => {
 
           <ul className={`${toggle ? 'flex' : 'hidden'} absolute inset-0 flex flex-col top-20 z-10  font-montserrat`}>
             {navLinks.map((item) => (
-              <Link key={item.id} to={item.section} spy={true} smooth={true} duration={500} offset={-70}>
-                <li className="flex items-center justify-center bg-extraDark p-4 cursor-pointer transition-all duration-500 text-primary text-opacity-60 hover:text-opacity-100 hover:scale-110 hover:border-none border-primary border-b-[1px] text-[1rem]">
+              <li
+                key={item.id}
+                className="flex items-center justify-center bg-extraDark p-4 cursor-pointer transition-all duration-500 text-primary text-opacity-60 hover:text-opacity-100 hover:scale-110 hover:border-none border-primary border-b-[1px] text-[1rem]"
+              >
+                <ScrollLink to={item.id} spy={true} smooth={true} duration={500}>
                   {item.title}
-                </li>
-              </Link>
+                </ScrollLink>
+              </li>
             ))}
           </ul>
         </div>

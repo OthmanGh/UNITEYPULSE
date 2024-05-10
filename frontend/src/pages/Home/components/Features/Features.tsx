@@ -67,7 +67,7 @@ const Card = ({ title, text, Icon, buttonText }: CardProps) => {
     navigator('/auth');
   };
   return (
-    <div className="bg-extraDark  mx-auto gap-4 rounded-xl py-6 flex flex-col justify-between  transition-all duration-500">
+    <div id="features" className="bg-extraDark  mx-auto gap-4 rounded-xl py-6 flex flex-col justify-between  transition-all duration-500">
       <Icon className="h-[20px] w-[20px] sm:h-10 sm:w-10  mx-auto text-gray-100" />
       <h3 className=" text-md sm:text-lg font-semibold text-gray-200 mb-2 text-center ">{title}</h3>
       <p className="hidden xs:block text-center text-gray-300 w-[80%] mx-auto leading-6 text-sm">{text}</p>

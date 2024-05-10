@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 import shortStyles from '../../../../../components/index';
 
 const NavLinkItem = ({ id, title }: { id: string; title: string }) => (
-  <Link to={id} spy={true} smooth={true} duration={500} offset={-70}>
+  <ScrollLink to={id} spy={true} smooth={true} duration={500}>
     <li className={`${shortStyles.pointer} hover:text-primary transition-all duration-500`}>{title}</li>
-  </Link>
+  </ScrollLink>
 );
 
 export default NavLinkItem;

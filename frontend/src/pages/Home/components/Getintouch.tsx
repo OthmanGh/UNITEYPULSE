@@ -22,7 +22,7 @@ const Getintouch: React.FC = () => {
   };
 
   return (
-    <section className="min-h-[100vh] p-12 bg-gray-200 shadow-2xl">
+    <section id="getintouch" className="min-h-[100vh] p-12 bg-gray-200 shadow-2xl">
       <h2 className="text-center text-md xs:text-xl  sm:text-3xl font-extrabold text-gray-700 mb-10">Get in Touch</h2>
 
       <form
