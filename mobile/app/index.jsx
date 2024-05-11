@@ -13,7 +13,7 @@ export default function App() {
         <View className="w-full justify-center items-center min-h-[100vh] px-4">
           <Image source={logo} className="w-full h-[150px]" resizeMode="contain" />
 
-          <Image source={onBoardingImage} className="w-full h-[250px] rounded-2xl" resizeMode="contain" />
+          <Image source={onBoardingImage} className="w-full h-[200px] rounded-2xl" />
 
           <View className="relative mt-5">
             <Text className="text-2xl text-white p-2 font-bold text-center inline-block">
