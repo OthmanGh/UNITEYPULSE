@@ -9,6 +9,7 @@ module.exports = {
         secondary: '#176B87',
         dark: '#042d3e',
         extraDark: '#041d29',
+        'half-transparent': 'rgba(0, 0, 0, 0.5)',
 
         black: {
           DEFAULT: '#000',
