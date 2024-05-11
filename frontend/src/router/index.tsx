@@ -16,6 +16,7 @@ import {
   Pie,
   Financial,
   ColorMapping,
+  Informations,
   Manage,
   Pyramid,
   Stacked,
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
 
   {
     path: '/infos',
-    element: <Infos />,
+    element: <Informations />,
   },
 
   {

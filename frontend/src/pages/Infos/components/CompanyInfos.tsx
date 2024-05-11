@@ -1,5 +1,4 @@
-import { register } from 'react-scroll/modules/mixins/scroller';
-import Input from '../Input';
+import Input from './Input';
 
 const CompanyInfos = () => {
   return (

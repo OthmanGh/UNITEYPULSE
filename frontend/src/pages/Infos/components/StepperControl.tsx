@@ -1,5 +1,3 @@
-import React from 'react';
-
 type StepperControlProps = {
   handleClick: (direction: string) => void;
   steps: string[];
