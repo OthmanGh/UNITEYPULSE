@@ -15,6 +15,14 @@ const EditProfile = () => {
 
   const renderInner = () => {};
 
+  const renderHeader = () => {
+    <View style={styles.header}>
+      <View style={styles.panelHeader}>
+        <View style={styles.panelHandle}></View>
+      </View>
+    </View>;
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ margin: 30, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -126,5 +134,29 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 8,
     color: '#CDCDE0',
+  },
+
+  header: {
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#333333',
+    shadowOffset: { width: -1, height: -3 },
+    shadowRadius: 2,
+    shadowOpacity: 0.4,
+    // elevation: 5,
+    paddingTop: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+
+  panelHeader: {
+    alignItems: 'center',
+  },
+
+  panelHandle: {
+    width: 40,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#00000040',
+    marginBottom: 10,
   },
 });
