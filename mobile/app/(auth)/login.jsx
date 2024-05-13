@@ -12,8 +12,8 @@ const Login = () => {
   const navigation = useNavigation();
 
   const [form, setForm] = useState({
-    email: '',
-    password: '',
+    email: 'othman@gmail.com', // Default email value
+    password: 'Othman123456', // Default password value
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);

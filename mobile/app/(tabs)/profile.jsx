@@ -52,7 +52,7 @@ const Profile = ({ navigation }) => {
             </View>
 
             <View>
-              <TouchableOpacity onPress={() => router.push('/editProfile')}>
+              <TouchableOpacity onPress={() => {}}>
                 <Icon name="account-edit" size={30} color="white" />
               </TouchableOpacity>
             </View>
