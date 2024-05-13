@@ -13,15 +13,15 @@ const EditProfile = () => {
   bs = React.createRef();
   fall = new Animated.Value(1);
 
-  const renderInner = () => {};
+  const renderInner = () => <Text>Hello</Text>;
 
-  const renderHeader = () => {
+  const renderHeader = () => (
     <View style={styles.header}>
       <View style={styles.panelHeader}>
-        <View style={styles.panelHandle}></View>
+        <View style={styles.panelHandle} />
       </View>
-    </View>;
-  };
+    </View>
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -37,7 +37,7 @@ const EditProfile = () => {
         />
 
         <View style={{ alignItems: 'center' }}>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={() => this.bs.current.snapTo(0)}>
             <View style={{ height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
               <ImageBackground
                 source={{
@@ -136,6 +136,17 @@ const styles = StyleSheet.create({
     color: '#CDCDE0',
   },
 
+  panel: {
+    padding: 20,
+    backgroundColor: '#FFFFFF',
+    paddingTop: 20,
+    // borderTopLeftRadius: 20,
+    // borderTopRightRadius: 20,
+    // shadowColor: '#000000',
+    // shadowOffset: {width: 0, height: 0},
+    // shadowRadius: 5,
+    // shadowOpacity: 0.4,
+  },
   header: {
     backgroundColor: '#FFFFFF',
     shadowColor: '#333333',
