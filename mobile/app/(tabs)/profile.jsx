@@ -1,17 +1,26 @@
 import { View, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { logo } from '../../constants/images';
-import { Avatar, Caption, Title, Text } from 'react-native-paper';
+import { Avatar, Caption, Title, Text, TouchableRipple } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Profile = () => {
+  const [selectedItem, setSelectedItem] = useState('');
+
+  const handlePress = (itemName) => {
+    setSelectedItem(itemName);
+    setTimeout(() => {
+      setSelectedItem('');
+    }, 150);
+  };
+
   return (
     <SafeAreaView>
-      <ScrollView className="bg-extraDark">
+      <ScrollView className="bg-extraDark  min-h-full">
         <View>
           <View style={styles.userInfoSection}>
-            <View style={{ flexDirection: 'row', marginTop: 15 }}>
+            <View style={{ flexDirection: 'row', marginTop: 15, padding: 10 }}>
               <Avatar.Image
                 source={{
                   uri: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzZ8fGZhY2V8ZW58MHx8MHx8fDA%3D',
@@ -67,6 +76,88 @@ const Profile = () => {
             <Caption className="text-gray-100">Performance</Caption>
           </View>
         </View>
+
+        <View>
+          <TouchableRipple onPress={() => handlePress('Favorites')}>
+            <View style={[styles.menuItem, selectedItem === 'Favorites' && styles.selectedMenuItem]}>
+              <Icon name="heart" color="lightgray" size={25} />
+              <Text
+                style={[
+                  styles.menuItemText,
+                  {
+                    color: 'lightgray',
+                  },
+                ]}
+              >
+                Your Favorites
+              </Text>
+            </View>
+          </TouchableRipple>
+
+          <TouchableRipple onPress={() => handlePress('Payment')}>
+            <View style={[styles.menuItem, selectedItem === 'Payment' && styles.selectedMenuItem]}>
+              <Icon name="credit-card" color="lightgray" size={25} />
+              <Text
+                style={[
+                  styles.menuItemText,
+                  {
+                    color: 'lightgray',
+                  },
+                ]}
+              >
+                Payment
+              </Text>
+            </View>
+          </TouchableRipple>
+
+          <TouchableRipple onPress={() => handlePress('Share')}>
+            <View style={[styles.menuItem, selectedItem === 'Share' && styles.selectedMenuItem]}>
+              <Icon name="share-outline" color="lightgray" size={25} />
+              <Text
+                style={[
+                  styles.menuItemText,
+                  {
+                    color: 'lightgray',
+                  },
+                ]}
+              >
+                Share
+              </Text>
+            </View>
+          </TouchableRipple>
+
+          <TouchableRipple onPress={() => handlePress('Support')}>
+            <View style={[styles.menuItem, selectedItem === 'Support' && styles.selectedMenuItem]}>
+              <Icon name="account-check-outline" color="lightgray" size={25} />
+              <Text
+                style={[
+                  styles.menuItemText,
+                  {
+                    color: 'lightgray',
+                  },
+                ]}
+              >
+                Support
+              </Text>
+            </View>
+          </TouchableRipple>
+
+          <TouchableRipple onPress={() => handlePress('Settings')}>
+            <View style={[styles.menuItem, selectedItem === 'Settings' && styles.selectedMenuItem]}>
+              <Icon name="account-settings" color="lightgray" size={25} />
+              <Text
+                style={[
+                  styles.menuItemText,
+                  {
+                    color: 'lightgray',
+                  },
+                ]}
+              >
+                Settings
+              </Text>
+            </View>
+          </TouchableRipple>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -119,7 +210,8 @@ const styles = StyleSheet.create({
   },
 
   menuWrapper: {
-    marginTop: 10,
+    marginTop: 20,
+    backgroundColor: 'red',
   },
 
   menuItem: {
@@ -128,112 +220,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
 
-  menuItmeText: {
+  menuItemText: {
     color: '#777777',
     marginLeft: 20,
     fontWeight: '600',
     fontSize: 16,
     lineHeight: 26,
   },
-});
 
-{
-  /* <View style={styles.container}>
-          <View style={styles.profileHeader}>
-            <Image style={styles.profileImg} source={{ uri: 'https://via.placeholder.com/150' }} />
-          </View>
-          <View style={styles.profileInfo}>
-            <Text style={styles.heading}>Personal Information</Text>
-            <Text>
-              <Text style={styles.bold}>Name:</Text> John Doe
-            </Text>
-            <Text>
-              <Text style={styles.bold}>Employee ID:</Text> EMP12345
-            </Text>
-            <Text>
-              <Text style={styles.bold}>Department:</Text> Marketing
-            </Text>
-            <Text>
-              <Text style={styles.bold}>Job Title:</Text> Marketing Specialist
-            </Text>
-            <Text>
-              <Text style={styles.bold}>Email:</Text> john.doe@example.com
-            </Text>
-            <Text>
-              <Text style={styles.bold}>Phone Number:</Text> +123-456-7890
-            </Text>
-          </View>
-          <View style={styles.profileInfo}>
-            <Text style={styles.heading}>Company Information</Text>
-            <Text>
-              <Text style={styles.bold}>Company Name:</Text> UNITEY PULSE
-            </Text>
-            <Text>
-              <Text style={styles.bold}>Office Location:</Text> New York, NY
-            </Text>
-            <Text>
-              <Text style={styles.bold}>Office Address:</Text> 123 Main Street, Suite 101
-            </Text>
-          </View>
-          <View style={styles.profileInfo}>
-            <Text style={styles.heading}>Job Details</Text>
-            <Text>
-              <Text style={styles.bold}>Employment Status:</Text> Full-time
-            </Text>
-            <Text>
-              <Text style={styles.bold}>Date of Joining:</Text> January 1, 2020
-            </Text>
-            <Text>
-              <Text style={styles.bold}>Supervisor:</Text> Jane Smith (Marketing Manager)
-            </Text>
-          </View>
-          <View style={styles.profileInfo}>
-            <Text style={styles.heading}>Leave Management</Text>
-            <Text>
-              <Text style={styles.bold}>Annual Leave Balance:</Text> 10 days
-            </Text>
-            <Text>
-              <Text style={styles.bold}>Sick Leave Balance:</Text> 5 days
-            </Text>
-            <Text>
-              <Text style={styles.bold}>Total Leave Balance:</Text> 15 days
-            </Text>
-          </View>
-          <View style={styles.profileInfo}>
-            <Text style={styles.heading}>Flexible Work Arrangements</Text>
-            <Text>
-              <Text style={styles.bold}>Current Work Arrangement:</Text> Office-based
-            </Text>
-            <Text>
-              <Text style={styles.bold}>Request Flexible Work Arrangement:</Text>
-            </Text>
-            <Text>
-              <Text style={styles.checkboxLabel}>Remote Work</Text>
-              <Text style={styles.checkbox}>✔</Text>
-            </Text>
-            <Text>
-              <Text style={styles.checkboxLabel}>Flexible Hours</Text>
-              <Text style={styles.checkbox}>✔</Text>
-            </Text>
-            <Text>
-              <Text style={styles.checkboxLabel}>Job Sharing</Text>
-              <Text style={styles.checkbox}>✖</Text>
-            </Text>
-          </View>
-          <View style={styles.profileInfo}>
-            <Text style={styles.heading}>Emergency Contact</Text>
-            <Text>
-              <Text style={styles.bold}>Name:</Text> Jane Doe
-            </Text>
-            <Text>
-              <Text style={styles.bold}>Relationship:</Text> Spouse
-            </Text>
-            <Text>
-              <Text style={styles.bold}>Phone Number:</Text> +123-456-7890
-            </Text>
-          </View>
-          <TouchableOpacity style={styles.editProfileBtn}>
-            <Text style={styles.editProfileText}>Edit Profile</Text>
-          </TouchableOpacity>
-        </View> */
-}
+  selectedMenuItem: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+});
