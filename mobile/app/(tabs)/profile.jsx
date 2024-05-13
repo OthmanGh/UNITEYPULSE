@@ -4,8 +4,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { logo } from '../../constants/images';
 import { Avatar, Caption, Title, Text, TouchableRipple } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { router } from 'expo-router';
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   const [selectedItem, setSelectedItem] = useState('');
 
   const handlePress = (itemName) => {
@@ -19,7 +20,19 @@ const Profile = () => {
     <SafeAreaView>
       <ScrollView className="bg-extraDark  min-h-full">
         <View>
-          <View style={styles.userInfoSection}>
+          <View
+            style={
+              ([styles.userInfoSection],
+              {
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexDirection: 'row',
+                width: '90%',
+                marginBottom: 20,
+              })
+            }
+          >
             <View style={{ flexDirection: 'row', marginTop: 15, padding: 10 }}>
               <Avatar.Image
                 source={{
@@ -36,6 +49,12 @@ const Profile = () => {
                   @othman_id
                 </Caption>
               </View>
+            </View>
+
+            <View>
+              <TouchableOpacity onPress={() => router.push('/editProfile')}>
+                <Icon name="account-edit" size={30} color="white" />
+              </TouchableOpacity>
             </View>
           </View>
 

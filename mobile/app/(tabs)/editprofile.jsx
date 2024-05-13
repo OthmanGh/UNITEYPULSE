@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 
-const editprofile = () => {
+const editProfile = () => {
   return (
     <View>
-      <Text>editprofile</Text>
+      <Text>editProfile</Text>
     </View>
   );
 };
 
-export default editprofile;
+export default editProfile;
