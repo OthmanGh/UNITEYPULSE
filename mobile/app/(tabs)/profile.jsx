@@ -2,13 +2,14 @@ import { View, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-nat
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { logo } from '../../constants/images';
-import { Avatar, Caption, Title } from 'react-native-paper';
+import { Avatar, Caption, Title, Text } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Profile = () => {
   return (
     <SafeAreaView>
-      <ScrollView contentContainerStyle={{ height: '100%' }}>
-        <View style={styles.container}>
+      <ScrollView className="bg-extraDark">
+        <View>
           <View style={styles.userInfoSection}>
             <View style={{ flexDirection: 'row', marginTop: 15 }}>
               <Avatar.Image
@@ -19,10 +20,51 @@ const Profile = () => {
               />
 
               <View style={{ marginLeft: 20 }}>
-                <Title style={([styles.title], { marginTop: 10, marginBottom: 5 })}>Othman Ghandour</Title>
-                <Caption style={styles.caption}>@othman_id</Caption>
+                <Title style={([styles.title], { marginTop: 10, marginBottom: 5 })} className="text-primary-light">
+                  Othman Ghandour
+                </Title>
+                <Caption style={styles.caption} className="text-primary-light">
+                  @othman_id
+                </Caption>
               </View>
             </View>
+          </View>
+
+          <View style={styles.userInfoSection}>
+            <View style={styles.row}>
+              <Icon name="map-marker-radius" size={20} color="white" />
+              <Text className="text-gray-50 ml-4">Lebanon, Beirut</Text>
+            </View>
+
+            <View style={styles.row}>
+              <Icon name="phone" size={20} color="white" />
+              <Text className="text-gray-50 ml-4">+90 552 650 20 61</Text>
+            </View>
+
+            <View style={styles.row}>
+              <Icon name="email" size={20} color="white" />
+              <Text className="text-gray-50 ml-6">othman@gmail.com</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.infoBoxWrapper}>
+          <View
+            style={[
+              styles.infoBox,
+              {
+                borderRightColor: 'lightgray',
+                borderRightWidth: 1,
+              },
+            ]}
+          >
+            <Title className="text-primary">7800$</Title>
+            <Caption className="text-gray-100">Salary</Caption>
+          </View>
+
+          <View style={styles.infoBox}>
+            <Title className="text-primary">A</Title>
+            <Caption className="text-gray-100">Performance</Caption>
           </View>
         </View>
       </ScrollView>
@@ -40,6 +82,9 @@ const styles = StyleSheet.create({
   userInfoSection: {
     paddingHorizontal: 30,
     marginBottom: 25,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 8,
   },
 
   title: {
