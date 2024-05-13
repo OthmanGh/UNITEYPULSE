@@ -6,6 +6,7 @@ import FormField from '../../components/FormField';
 import CustomButton from '../../components/CustomButton';
 import { API_BASE_URI } from '../../constants/data';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../Context/AuthContext';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -16,6 +17,8 @@ const Login = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { login } = useAuth();
 
   const submit = async () => {
     setIsSubmitting(true);
@@ -38,6 +41,7 @@ const Login = () => {
       console.log(data);
 
       if (data.status === 'success') {
+        login(data.data); // Set user data with data.data
         navigation.navigate('(tabs)', { screen: 'home' });
       } else {
         Alert.alert('Login Failed', data.message);

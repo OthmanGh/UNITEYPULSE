@@ -5,31 +5,34 @@ import { StatusBar } from 'expo-status-bar';
 import { Redirect, router } from 'expo-router';
 import { logo, onBoardingImage } from '../constants/images';
 import CustomButton from '../components/CustomButton';
+import { AuthProvider } from '../Context/AuthContext';
 
 export default function App() {
   return (
-    <SafeAreaView className="bg-extraDark h-full">
-      <ScrollView contentContainerStyle={{ height: '100%' }}>
-        <View className="w-full justify-center items-center min-h-[100vh] px-4">
-          <Image source={logo} className="w-full h-[150px]" resizeMode="contain" />
+    <AuthProvider>
+      <SafeAreaView className="bg-extraDark h-full">
+        <ScrollView contentContainerStyle={{ height: '100%' }}>
+          <View className="w-full justify-center items-center min-h-[100vh] px-4">
+            <Image source={logo} className="w-full h-[150px]" resizeMode="contain" />
 
-          <Image source={onBoardingImage} className="w-full h-[200px] rounded-2xl" />
+            <Image source={onBoardingImage} className="w-full h-[200px] rounded-2xl" />
 
-          <View className="relative mt-5">
-            <Text className="text-2xl text-white p-2 font-bold text-center inline-block">
-              Discover Endless Possibilities with <Text className=" text-primary mx-auto inline-block">Unity Paulse</Text>
+            <View className="relative mt-5">
+              <Text className="text-2xl text-white p-2 font-bold text-center inline-block">
+                Discover Endless Possibilities with <Text className=" text-primary mx-auto inline-block">Unity Paulse</Text>
+              </Text>
+            </View>
+
+            <Text className="text-[12px]  font-pregular text-gray-100 mt-7 text-center">
+              Where creativity meets innovations: embark on a journey of limitless exploration with UnityPaulse
             </Text>
+
+            <CustomButton title="Continue with Email" handlePress={() => router.push('/login')} containerStyles="w-full mt-7" />
           </View>
+        </ScrollView>
 
-          <Text className="text-[12px]  font-pregular text-gray-100 mt-7 text-center">
-            Where creativity meets innovations: embark on a journey of limitless exploration with UnityPaulse
-          </Text>
-
-          <CustomButton title="Continue with Email" handlePress={() => router.push('/login')} containerStyles="w-full mt-7" />
-        </View>
-      </ScrollView>
-
-      <StatusBar backgroundColor="#042d3e" style="light" />
-    </SafeAreaView>
+        <StatusBar backgroundColor="#042d3e" style="light" />
+      </SafeAreaView>
+    </AuthProvider>
   );
 }

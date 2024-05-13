@@ -1,15 +1,18 @@
 import React from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { AuthProvider } from '../../Context/AuthContext';
 
 const AuthLayout = () => {
   return (
     <>
-      <Stack>
-        <Stack.Screen name="login" options={{ headerShown: false }} />
-      </Stack>
+      <AuthProvider>
+        <Stack>
+          <Stack.Screen name="login" options={{ headerShown: false }} />
+        </Stack>
 
-      <StatusBar backgroundColor="#042d3e" style="light" />
+        <StatusBar backgroundColor="#042d3e" style="light" />
+      </AuthProvider>
     </>
   );
 };
