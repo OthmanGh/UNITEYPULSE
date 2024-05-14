@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-// import CustomButton from '../../../components/CustomButton';
+// import CustomButton from '../../components/CustomButton';
 // import BottomSheet from 'reanimated-bottom-sheet';
 // import Animated from 'react-native-reanimated';
 
@@ -84,7 +84,7 @@ const EditProfile = () => {
           <TextInput placeholder="City" placeholderTextColor="#9999" style={styles.textInput} autoCorrect={false} />
         </View>
 
-        {/* <CustomButton title="Submit" handlePress={() => {}} containerStyles="w-full mt-10 h-0 p-0" /> */}
+        <CustomButton title="Submit" handlePress={() => {}} containerStyles="w-full mt-10 h-0 p-0" />
       </View>
     </SafeAreaView>
   );
