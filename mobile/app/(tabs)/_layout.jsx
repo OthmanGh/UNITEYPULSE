@@ -52,9 +52,9 @@ const TabsLayout = () => {
           />
 
           <Tabs.Screen
-            name="messages"
+            name="Chats"
             options={{
-              title: 'Messages',
+              title: 'chats',
               headerShown: false,
               tabBarIcon: ({ color, focused }) => (
                 <View className="items-center justify-center gap-[2px]">

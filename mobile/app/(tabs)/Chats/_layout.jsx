@@ -5,22 +5,13 @@ import { useEffect } from 'react';
 
 SplashScreen.preventAutoHideAsync();
 
-const profileLayout = () => {
+const chatLayout = () => {
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen
-        name="editprofile"
-        options={{
-          headerShown: true,
-          headerStyle: {
-            backgroundColor: '#042d3e',
-          },
-          headerTintColor: 'white',
-        }}
-      />
+      <Stack.Screen name="chat" options={{ headerShown: false }} />
     </Stack>
   );
 };
 
-export default profileLayout;
+export default chatLayout;
