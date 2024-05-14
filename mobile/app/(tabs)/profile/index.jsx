@@ -1,7 +1,7 @@
 import { View, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { logo } from '../../constants/images';
+import { logo } from '../../../constants/images';
 import { Avatar, Caption, Title, Text, TouchableRipple } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { router } from 'expo-router';
@@ -52,7 +52,7 @@ const Profile = ({ navigation }) => {
             </View>
 
             <View>
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity onPress={() => router.push('/profile/editprofile')}>
                 <Icon name="account-edit" size={30} color="white" />
               </TouchableOpacity>
             </View>

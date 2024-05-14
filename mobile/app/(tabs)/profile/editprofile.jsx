@@ -5,39 +5,18 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import CustomButton from '../../components/CustomButton';
-import BottomSheet from 'reanimated-bottom-sheet';
-import Animated from 'react-native-reanimated';
+// import CustomButton from '../../../components/CustomButton';
+// import BottomSheet from 'reanimated-bottom-sheet';
+// import Animated from 'react-native-reanimated';
 
 const EditProfile = () => {
-  bs = React.createRef();
-  fall = new Animated.Value(1);
-
-  const renderInner = () => <Text>Hello</Text>;
-
-  const renderHeader = () => (
-    <View style={styles.header}>
-      <View style={styles.panelHeader}>
-        <View style={styles.panelHandle} />
-      </View>
-    </View>
-  );
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ margin: 30, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-        <BottomSheet
-          ref={this.bs}
-          snapPoints={[330, 0]}
-          initialSnap={1}
-          callbackNode={this.fall}
-          enabledGestureInteraction={true}
-          renderContent={this.renderInner}
-          renderHeader={this.renderHeader}
-        />
+        {/* <BottomSheet snapPoints={[330, 0]} initialSnap={1} enabledGestureInteraction={true} /> */}
 
         <View style={{ alignItems: 'center' }}>
-          <TouchableOpacity onPress={() => this.bs.current.snapTo(0)}>
+          <TouchableOpacity>
             <View style={{ height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
               <ImageBackground
                 source={{
@@ -105,7 +84,7 @@ const EditProfile = () => {
           <TextInput placeholder="City" placeholderTextColor="#9999" style={styles.textInput} autoCorrect={false} />
         </View>
 
-        <CustomButton title="Submit" handlePress={() => {}} containerStyles="w-full mt-10 h-0 p-0" />
+        {/* <CustomButton title="Submit" handlePress={() => {}} containerStyles="w-full mt-10 h-0 p-0" /> */}
       </View>
     </SafeAreaView>
   );
@@ -169,5 +148,31 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#00000040',
     marginBottom: 10,
+  },
+
+  panelTitle: {
+    fontSize: 27,
+    height: 35,
+  },
+
+  panelSubtitle: {
+    fontSize: 14,
+    color: 'gray',
+    height: 30,
+    marginBottom: 10,
+  },
+
+  panelButton: {
+    padding: 13,
+    borderRadius: 10,
+    backgroundColor: '#FF6347',
+    alignItems: 'center',
+    marginVertical: 7,
+  },
+
+  panelButtonTitle: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });

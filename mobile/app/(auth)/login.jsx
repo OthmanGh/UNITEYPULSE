@@ -42,6 +42,7 @@ const Login = () => {
 
       if (data.status === 'success') {
         login(data.data); // Set user data with data.data
+        console.log(data);
         navigation.navigate('(tabs)', { screen: 'home' });
       } else {
         Alert.alert('Login Failed', data.message);
