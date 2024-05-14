@@ -11,6 +11,7 @@ import { AUTH_API_BASE_URL } from '../../../utils';
 import { CodeResponse, GoogleLogin, TokenResponse, useGoogleLogin } from '@react-oauth/google';
 import { date } from 'zod';
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../../contexts/AuthContext';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -24,6 +25,8 @@ const Signup = () => {
   const { loading, error, signup } = useSignup();
 
   const password = watch('password', '');
+
+  const { setAuthUser } = useAuthContext;
 
   const onSubmit = async (data) => {
     await signup(data);
@@ -62,14 +65,13 @@ const Signup = () => {
         email: profile.email,
         name: profile.name,
         profilePicture: profile.picture,
-        username: `Date.now()_${profile.name}`,
+        username: `${Date.now()}_${profile.name}`,
         role: 'owner',
       });
 
-      console.log(repsonse);
+      localStorage.setItem('authUser', JSON.stringify({ status: 'success', ...profile }));
 
-      localStorage.setItem('token', repsonse.data.token);
-
+      // setAuthUser(profile);
       navigate('/dashboard');
     };
 

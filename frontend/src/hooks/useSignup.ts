@@ -43,7 +43,7 @@ const useSignup = () => {
       });
 
       const res: SignupResponse = await req.json();
-      setAuthUser(res);
+      // setAuthUser(res);
 
       if (res.status === 'success') {
         localStorage.setItem('authUser', JSON.stringify(res.data));
