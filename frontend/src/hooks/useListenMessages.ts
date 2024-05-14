@@ -9,6 +9,10 @@ const useListenMessages = () => {
   const { messages, setMessages } = useConversation();
 
   useEffect(() => {
+    socket.on('connect', () => {
+      console.log('Connected to the server');
+    });
+
     socket?.on('newMessage', (newMessage) => {
       newMessage.shake = true;
 

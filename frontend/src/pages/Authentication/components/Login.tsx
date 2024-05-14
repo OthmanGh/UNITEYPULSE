@@ -18,6 +18,8 @@ const Login = () => {
     await login(data);
   };
 
+  const handleGoogleAuthSubmit = () => {};
+
   return (
     <div className=" h-full w-full flex flex-col items-center justify-center p-5 bg-auth text-light-gray z-10">
       <form className="flex flex-col items-start justify-center gap-4 w-[90%] sm:w-2/3" onSubmit={handleSubmit(onSubmit)}>
@@ -53,7 +55,7 @@ const Login = () => {
 
         <div className="flex flex-col gap-4 mt-10 w-[100%]">
           <OrLine />
-          <GoogleBtn />
+          <GoogleBtn isLogin={true} onSubmit={handleGoogleAuthSubmit} />
         </div>
 
         <SubmitBtn text="Login" isSubmitting={isSubmitting || loading} onSubmit={handleSubmit(onSubmit)} />
