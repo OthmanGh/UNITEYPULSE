@@ -10,13 +10,24 @@ const generateToken = id => {
 export const signup = async (req, res, next) => {
   console.log(req.body);
   try {
-    const newUser = await User.create({
-      name: req.body.name,
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      confirmPassword: req.body.confirmPassword
-    });
+    let newUser;
+
+    if (req.body.password) {
+      newUser = await User.create({
+        name: req.body.name,
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        confirmPassword: req.body.confirmPassword
+      });
+    } else {
+      newUser = await User.create({
+        name: req.body.name,
+        username: req.body.username,
+        email: req.body.email,
+        profilePicture: req.body.profilePicture
+      });
+    }
 
     if (!newUser) {
       return res.status(500).json({

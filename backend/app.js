@@ -1,4 +1,4 @@
-import e from "express";
+import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
 import messageRoutes from "./routes/message.routes.js";
@@ -10,12 +10,9 @@ import http from "http";
 import { Server } from "socket.io";
 import connect from "./config/db.js";
 
-// import companyRoutes from "./routes/company.routes.js";
+const app = express();
 
-const app = e();
-// const server = http.createServer(app);
-
-app.use(e.json());
+app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
@@ -27,26 +24,13 @@ app.use("/api/customers", customerRoutes);
 
 // app.use("/api/company", companyRoutes);
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8000;
 
-app.on("error", e => {
-  if (e.code === "EADDRINUSE") {
-    console.error("Address already in use, retrying in a few seconds...");
-    setTimeout(() => {
-      app.listen(PORT);
-    }, 1000);
-  }
-});
-
-const server = app.listen(PORT, err => {
-  if (err) throw new Error(err);
-  console.log(`Server is runing on port ${PORT}`);
-  connect();
-});
+const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["*"],
+    origin: ["http://localhost:5173"],
     methods: ["GET", "POST", "PATCH", "DELETE"]
   }
 });
@@ -57,13 +41,14 @@ export const getReceiverSocketId = receiverId => {
   return userSocketMap[receiverId];
 };
 
+// const userSocketMap = [{user, socketId}];
+
 io.on("connection", socket => {
   console.log("a user connected", socket.id);
 
   const userId = socket.handshake.query.userId;
-  console.log(userId);
 
-  if (userId != "undefined") userSocketMap[userId] = socket.id;
+  if (userId !== "undefined") userSocketMap[userId] = socket.id;
 
   io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
@@ -72,4 +57,10 @@ io.on("connection", socket => {
     delete userSocketMap[userId];
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
+});
+
+server.listen(PORT, err => {
+  if (err) throw new Error(err);
+  console.log(`Server is running on port ${PORT}`);
+  connect();
 });
