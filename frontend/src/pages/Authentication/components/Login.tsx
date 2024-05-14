@@ -18,7 +18,9 @@ const Login = () => {
     await login(data);
   };
 
-  const handleGoogleAuthSubmit = () => {};
+  const handleGoogleAuthSubmit = (authState) => {
+    console.log(authState);
+  };
 
   return (
     <div className=" h-full w-full flex flex-col items-center justify-center p-5 bg-auth text-light-gray z-10">
@@ -55,7 +57,7 @@ const Login = () => {
 
         <div className="flex flex-col gap-4 mt-10 w-[100%]">
           <OrLine />
-          <GoogleBtn isLogin={true} onSubmit={handleGoogleAuthSubmit} />
+          <GoogleBtn isLogin={true} onSubmit={() => handleGoogleAuthSubmit('login')} />
         </div>
 
         <SubmitBtn text="Login" isSubmitting={isSubmitting || loading} onSubmit={handleSubmit(onSubmit)} />
