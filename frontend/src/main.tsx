@@ -7,15 +7,19 @@ import '@fontsource/open-sans';
 import { ContextProvider } from './contexts/ContextProvider.tsx';
 import { AuthContextProvider } from './contexts/AuthContext.tsx';
 import { SocketContextProvider } from './contexts/SocketContext.tsx';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <SocketContextProvider>
-        <ContextProvider>
-          <App />
-        </ContextProvider>
-      </SocketContextProvider>
-    </AuthContextProvider>
+    <GoogleOAuthProvider clientId="1089419800008-tonr18jq1vahjf74ikge8ub7imen0c1i.apps.googleusercontent.com">
+      <AuthContextProvider>
+        <SocketContextProvider>
+          <ContextProvider>
+            <App />
+          </ContextProvider>
+        </SocketContextProvider>
+      </AuthContextProvider>
+    </GoogleOAuthProvider>
+    ;
   </React.StrictMode>
 );

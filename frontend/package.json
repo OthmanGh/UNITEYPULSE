@@ -27,6 +27,7 @@
     "@mui/icons-material": "^5.15.17",
     "@mui/material": "^5.15.17",
     "@mui/x-date-pickers": "^7.3.2",
+    "@react-oauth/google": "^0.12.1",
     "@react-spring/three": "^9.7.3",
     "@react-three/drei": "^9.105.6",
     "@react-three/fiber": "^8.16.3",

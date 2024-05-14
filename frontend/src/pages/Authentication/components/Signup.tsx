@@ -4,8 +4,16 @@ import { useForm } from 'react-hook-form';
 import useSignup from '../../../hooks/useSignup';
 import { SignupSchema } from '../../../utils/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { AUTH_API_BASE_URL } from '../../../utils';
+
+import { CodeResponse, GoogleLogin, TokenResponse, useGoogleLogin } from '@react-oauth/google';
+import { date } from 'zod';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -21,9 +29,54 @@ const Signup = () => {
     await signup(data);
   };
 
-  const handleGoogleAuthSubmit = (authState) => {
-    console.log(authState);
-  };
+  const [profile, setProfile] = useState<any>();
+  const [user, setUser] = useState<Omit<TokenResponse, 'error' | 'error_description' | 'error_uri'>>();
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse as any),
+    onError: (error) => console.log('Login Failed:', error),
+  });
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+          headers: {
+            Authorization: `Bearer ${user.access_token}`,
+            Accept: 'application/json',
+          },
+        })
+        .then((res) => {
+          setProfile(res.data);
+          console.log(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user]);
+
+  console.log(profile);
+
+  useEffect(() => {
+    const login = async () => {
+      const repsonse = await axios.post(`${AUTH_API_BASE_URL}/signup`, {
+        email: profile.email,
+        name: profile.name,
+        profilePicture: profile.picture,
+        username: `Date.now()_${profile.name}`,
+        role: 'owner',
+      });
+
+      console.log(repsonse);
+
+      localStorage.setItem('token', repsonse.data.token);
+
+      navigate('/dashboard');
+    };
+
+    if (profile) {
+      login();
+    }
+  }, [profile]);
 
   return (
     <div className="h-full w-full flex flex-col items-center justify-center p-5 bg-auth text-gray-50 z-10">
@@ -97,7 +150,7 @@ const Signup = () => {
 
       <div className="flex flex-col gap-5 mt-10 w-[90%] sm:w-2/3">
         <OrLine />
-        <GoogleBtn onSubmit={() => handleGoogleAuthSubmit('signup')} isLogin={false} />
+        <GoogleBtn onSubmit={() => login()} isLogin={false} />
       </div>
 
       <SubmitBtn text="Create Account" isSubmitting={isSubmitting || loading} onSubmit={handleSubmit(onSubmit)} />
