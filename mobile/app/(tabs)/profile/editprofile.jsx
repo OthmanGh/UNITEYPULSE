@@ -84,7 +84,7 @@ const EditProfile = () => {
           <TextInput placeholder="City" placeholderTextColor="#9999" style={styles.textInput} autoCorrect={false} />
         </View>
 
-        <CustomButton title="Submit" handlePress={() => {}} containerStyles="w-full mt-10 h-0 p-0" />
+        {/* <CustomButton title="Submit" handlePress={() => {}} containerStyles="w-full mt-10 h-0 p-0" /> */}
       </View>
     </SafeAreaView>
   );
