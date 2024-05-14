@@ -14,7 +14,7 @@ const Auth = () => {
 
   return (
     <section className="h-screen grid grid-cols-1 sm:grid-cols-2 items-center justify-center relative">
-      {isLoggingIn ? (
+      {!isLoggingIn ? (
         <div className="h-[40vh] sm:h-screen w-full bg-lightBlue flex flex-col items-center text-center justify-center gap-2 relative bg-bg2 bg-no-repeat bg-cover object-fit text-gray-300">
           <Text title="Welcome Back!" para="To stay connected with us, please login with your personal info" />
           <SwitchBtn text="Login" onClick={handleSwitch} />
