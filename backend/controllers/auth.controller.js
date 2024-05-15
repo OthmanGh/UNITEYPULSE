@@ -63,34 +63,57 @@ export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    if (!email || !password) {
-      return res.status(400).json({
-        status: "fail",
-        message: "Invalid credentials"
+    if (email && !password) {
+      const user = await User.findOne({ email });
+
+      if (!user)
+        return res.status(401).json({
+          status: "fail",
+          message: "User doesn't exist - Sign up"
+        });
+
+      const token = generateToken(user._id);
+
+      res.status(200).json({
+        status: "success",
+        data: {
+          _id: user._id,
+          name: user.name,
+          profilePicture: user.profilePicture,
+          username: user.username,
+          token: token
+        }
       });
-    }
-
-    const user = await User.findOne({ email }).select("+password");
-
-    if (!user || !(await user.correctPassword(password, user.password))) {
-      return res.status(401).json({
-        status: "fail",
-        message: "Incorrect email or password"
-      });
-    }
-
-    const token = generateToken(user._id);
-
-    res.status(200).json({
-      status: "success",
-      data: {
-        _id: user._id,
-        name: user.name,
-        profilePicture: user.profilePicture,
-        username: user.username,
-        token: token
+    } else {
+      if (!email || !password) {
+        return res.status(400).json({
+          status: "fail",
+          message: "Invalid credentials"
+        });
       }
-    });
+
+      const user = await User.findOne({ email }).select("+password");
+
+      if (!user || !(await user.correctPassword(password, user.password))) {
+        return res.status(401).json({
+          status: "fail",
+          message: "Incorrect email or password"
+        });
+      }
+
+      const token = generateToken(user._id);
+
+      res.status(200).json({
+        status: "success",
+        data: {
+          _id: user._id,
+          name: user.name,
+          profilePicture: user.profilePicture,
+          username: user.username,
+          token: token
+        }
+      });
+    }
   } catch (error) {
     console.error("Error in login", error.message);
     res.status(500).json({ error: "Internal Server Error" });
