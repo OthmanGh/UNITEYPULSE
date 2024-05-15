@@ -7,10 +7,12 @@ import ScrolledNavbar from './components/ScrolledNavbar';
 import companyLogo from '../../../../assets/logo_1.png';
 import NavLinkItem from './components/NavLinkItem';
 import { Link as ScrollLink } from 'react-scroll';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigator = useNavigate();
 
   const handleToggle = () => {
     setToggle((prev) => !prev);
@@ -39,7 +41,7 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <LoginBtn handleToggle={handleToggle} />
+        <LoginBtn onClick={() => navigator('/auth')} />
 
         <div className="sm:hidden flex flex-1 justify-end items-center text-2xl">
           <button onClick={handleToggle} className="hover:text-primary transition-all duration-500 ">

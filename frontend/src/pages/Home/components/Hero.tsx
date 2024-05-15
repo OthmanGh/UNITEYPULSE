@@ -3,7 +3,6 @@ import Button from '../../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import Video from './../../../assets/video.mp4';
 import LogoTitle from './Navbar/components/LogoTitle';
-import Overlay from '../../../components/Overlay';
 
 const Hero = () => {
   const navigator = useNavigate();
