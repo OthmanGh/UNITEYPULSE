@@ -22,9 +22,7 @@ const Dashboard = () => {
             </button>
           </Tooltip> */}
 
-          <Tooltip title="need help?" placement="top">
-            <ChatBot />
-          </Tooltip>
+          <ChatBot />
         </div>
 
         {activeMenu ? (

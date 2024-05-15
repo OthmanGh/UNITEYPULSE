@@ -1,45 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import { IoSendSharp } from 'react-icons/io5';
 import { Tooltip } from '@mui/material';
 import { useAuthContext } from '../../../contexts/AuthContext';
+import { FaQuestion } from 'react-icons/fa';
 import BotIcon from '../../../assets/aiBot.png';
-import { TbMessageChatbot } from 'react-icons/tb';
 
 const ChatBot = () => {
   const { authUser } = useAuthContext();
 
+  const [showChatbot, setShowChatbot] = useState(false);
+
   return (
-    <section className="rounded-xl overflow-hidden w-full shadow-md hover:scale-105 transition-all duration-500">
-      {/*'top'*/}
-      <div className="flex items-center justify-between text-white font-semibold bg-dark p-4 w-72 h-12">
-        <p>Hi Othman</p>
-        <p>
-          <Tooltip title="close" placement="top">
-            <RiArrowDownSLine className="text-2xl cursor-pointer" />
-          </Tooltip>
-        </p>
-      </div>
+    <div>
+      {showChatbot ? (
+        <section className="rounded-xl overflow-hidden w-full shadow-md hover:scale-105 transition-all duration-500">
+          {/*'top'*/}
+          <div className="flex items-center justify-between text-white font-semibold bg-dark p-4 w-72 h-12">
+            <p>Hi {authUser?.name.split(' ')[0]} 😁</p>
 
-      {/*'Chats'*/}
-      <div className="h-[350px] overflow-scroll flex flex-col-reverse gap-4 bg-slate-100 px-2">
-        <UserMessage />
-        <BotMessages />
-      </div>
+            <RiArrowDownSLine className="text-2xl cursor-pointer hover:text-primary transition-all duration-500" />
+          </div>
 
-      {/*'send'*/}
-      <div className="flex items-center bg-slate-300 p-4 h-12 ">
-        <input className="w-full bg-transparent placeholder:text-slate-600 outline-none text-slate-700" placeholder="Type here to Chat" />
+          {/*'Chats'*/}
+          <div className="h-[350px] overflow-scroll flex flex-col-reverse gap-4 bg-slate-100 px-2">
+            <UserMessage />
+            <BotMessages />
+          </div>
 
-        <button type="submit">
-          <IoSendSharp className="text-slate-600 text-xl hover:text-slate-700" />
-        </button>
-      </div>
-    </section>
+          {/*'send'*/}
+          <div className="flex items-center bg-slate-300 p-4 h-12 ">
+            <input className="w-full bg-transparent placeholder:text-slate-600 outline-none text-slate-700" placeholder="Type here to Chat" />
+
+            <button type="submit">
+              <IoSendSharp className="text-slate-600 text-xl hover:text-slate-700" />
+            </button>
+          </div>
+        </section>
+      ) : (
+        <SwitchBtn />
+      )}
+    </div>
   );
 };
 
 export default ChatBot;
+
+const SwitchBtn = () => {
+  return (
+    <Tooltip title="help?" placement="top">
+      <button className="bg-dark p-4 rounded-full shadow-2xl hover:bg-transparent hover:border-dark border-2 hover:text-dark border-dark transition-all duration-500 text-white">
+        <FaQuestion className="text-3xl" />
+      </button>
+    </Tooltip>
+  );
+};
 
 const UserMessage = () => {
   return (
