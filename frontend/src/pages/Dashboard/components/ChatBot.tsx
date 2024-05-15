@@ -11,6 +11,8 @@ const ChatBot = () => {
 
   const [showChatbot, setShowChatbot] = useState(false);
 
+  const botGreet = "Hello! I'm your friendly chatbot. How can I assist you today?";
+
   //http://127.0.0.1:8000/api/chatbot
 
   //   {

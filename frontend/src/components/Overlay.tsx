@@ -4,7 +4,7 @@ type OverlayProps = {
 };
 
 const Overlay = ({ opacity, z_index }: OverlayProps) => {
-  return <div className={`absolute inset-0 bg-black bg-opacity-65 ${z_index}`}></div>;
+  return <div className={`absolute inset-0 bg-dark bg-opacity-${opacity} ${z_index}`}></div>;
 };
 
 export default Overlay;

@@ -16,7 +16,6 @@ const Aboutus = () => {
 
         <p className="text-gray-100 z-10">{aboutusText.text}</p>
       </div>
-      <Overlay />
     </section>
   );
 };

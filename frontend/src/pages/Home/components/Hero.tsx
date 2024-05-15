@@ -3,6 +3,7 @@ import Button from '../../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import Video from './../../../assets/video.mp4';
 import LogoTitle from './Navbar/components/LogoTitle';
+import Overlay from '../../../components/Overlay';
 
 const Hero = () => {
   const navigator = useNavigate();
@@ -16,7 +17,7 @@ const Hero = () => {
       id="home"
       className="relative flex items-center justify-center gap-10 flex-col xs:w-full pt-10 bg-extraDark bg-opacity-70 h-[100vh] overflow-hidden"
     >
-      <video autoPlay loop muted playsInline className="absolute top-0 left-0 min-w-full min-h-full object-cover z-[-1]">
+      <video autoPlay loop muted playsInline className="absolute top-0 left-0 min-w-full min-h-full object-cover z-1">
         <source src={Video} type="video/mp4" />
       </video>
 

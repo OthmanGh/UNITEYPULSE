@@ -4,6 +4,7 @@ import { Aboutus, Hero, Navbar } from './components/index';
 import { ArrowScrollTop } from '../../utils/icons';
 import ContactForm from './components/Getintouch';
 import Footer from './components/Footer';
+import Overlay from '../../components/Overlay';
 
 function Home() {
   return (
@@ -13,14 +14,16 @@ function Home() {
       </header>
 
       <main className="flex flex-col ">
-        <Element name="hero">
+        <Element name="hero relative">
           <Hero />
+          <Overlay opacity={20} z_index={2} />
         </Element>
         <Element name="features">
           <Features />
         </Element>
-        <Element name="aboutus">
+        <Element name="aboutus relative">
           <Aboutus />
+          <Overlay opacity={50} z_index={2} />
         </Element>
         <Element name="getintouch">
           <ContactForm />
