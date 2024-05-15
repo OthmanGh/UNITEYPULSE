@@ -1,15 +1,19 @@
 import { Avatar } from '@mui/material';
-import { useSocketContext } from '../../../../../contexts/SocketContext';
 import useConversation from '../../../../../store/useConversations';
+import { useSocketContext } from '../../../../../contexts/SocketContext';
 
 const Conversation = ({ conversation, lastIdx }) => {
   const { selectedConversation, setSelectedConversation } = useConversation();
 
-  const isSelected = selectedConversation?._id === conversation._id;
+  const isSelected = selectedConversation?._id == conversation._id;
 
   const { onlineUsers } = useSocketContext();
 
+  console.log(onlineUsers, conversation._id);
+
   const isOnline = onlineUsers.includes(conversation._id);
+
+  console.log(isOnline);
 
   return (
     <div
@@ -24,7 +28,7 @@ const Conversation = ({ conversation, lastIdx }) => {
 
       <div className="flex flex-col flex-1">
         <div className="flex gap-3 justify-between">
-          <p className="font-bold text-gray-200">{conversation.username}</p>
+          <p className="font-bold text-gray-200">{conversation.name}</p>
         </div>
       </div>
 

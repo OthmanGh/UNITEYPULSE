@@ -64,3 +64,5 @@ export {
 };
 
 export const AUTH_API_BASE_URL = 'http://192.168.2.213:8000/api/auth';
+
+export const API_BASE_URI = 'http://192.168.2.213:8000';

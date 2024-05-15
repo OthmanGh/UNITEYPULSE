@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { API_BASE_URI } from '../utils';
 
 const useGetCustomers = () => {
   const [loading, setLoading] = useState(false);
@@ -9,7 +10,7 @@ const useGetCustomers = () => {
     const getCustomers = async () => {
       setLoading(true);
       try {
-        const url = 'http://127.0.0.1:8000/api/customers';
+        const url = `${API_BASE_URI}/customers`;
 
         const res = await fetch(url, {
           headers: {

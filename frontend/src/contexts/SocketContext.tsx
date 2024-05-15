@@ -1,32 +1,35 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { io } from 'socket.io-client';
+import { API_BASE_URI } from '../utils';
 import { useAuthContext } from './AuthContext';
-import io from 'socket.io-client';
 
-const SocketContext = createContext<any>(null);
+const SocketContext = createContext();
 
 export const useSocketContext = () => {
   return useContext(SocketContext);
 };
 
-export const SocketContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [socket, setSocket] = useState<any>(null);
-  const [onlineUsers, setOnlineUsers] = useState<any[]>([]);
+export const SocketContextProvider = ({ children }) => {
   const { authUser } = useAuthContext();
+  const [socket, setSocket] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
   useEffect(() => {
     if (authUser) {
-      const socket = io('http://127.0.0.1:8000', {
+      const newSocket = io('http://127.0.0.1:8000', {
         query: {
           userId: authUser._id,
         },
       });
-      setSocket(socket);
+      setSocket(newSocket);
 
-      socket.on('getOnlineUsers', (users) => {
+      newSocket.on('getOnlineUsers', (users) => {
         setOnlineUsers(users);
       });
 
-      return () => socket.close();
+      return () => {
+        newSocket.close();
+      };
     } else {
       if (socket) {
         socket.close();
