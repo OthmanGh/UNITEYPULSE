@@ -3,6 +3,7 @@ import { Navbar, Sidebar } from '../../utils/index';
 import { useStateContext } from '../../contexts/ContextProvider';
 import { Outlet } from 'react-router-dom';
 import LogoutBtn from '../../components/LogoutBtn';
+import ChatBot from './components/ChatBot';
 
 const Dashboard = () => {
   const { activeMenu } = useStateContext();
@@ -11,7 +12,7 @@ const Dashboard = () => {
     <div>
       <div className="flex relative dark:bg-main-dark-bg bg-white">
         <div className="fixed right-4 bottom-4 z-20">
-          <Tooltip title="Logout" placement="top">
+          {/* <Tooltip title="Logout" placement="top">
             <button
               className="cursor-pointer text-2xl p-3 hover:drop-shadow-xl text-white  hover:bg-transparent hover:text-secondary rounded-full bg-secondary font-bold border-2 border-secondary transition-all duration-500"
               type="button"
@@ -19,6 +20,10 @@ const Dashboard = () => {
             >
               <LogoutBtn />
             </button>
+          </Tooltip> */}
+
+          <Tooltip title="need help?" placement="top">
+            <ChatBot />
           </Tooltip>
         </div>
 
