@@ -51,13 +51,10 @@ const Signup = () => {
         })
         .then((res) => {
           setProfile(res.data);
-          console.log(res.data);
         })
         .catch((err) => console.log(err));
     }
   }, [user]);
-
-  console.log(profile);
 
   useEffect(() => {
     const login = async () => {
@@ -71,7 +68,6 @@ const Signup = () => {
 
       localStorage.setItem('authUser', JSON.stringify({ status: 'success', ...profile }));
 
-      // setAuthUser(profile);
       navigate('/dashboard');
     };
 

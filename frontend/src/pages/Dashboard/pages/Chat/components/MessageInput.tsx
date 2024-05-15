@@ -8,9 +8,7 @@ const MessageInput = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!message) return;
-
     await sendMessage(message);
     setMessage('');
   };
@@ -20,17 +18,16 @@ const MessageInput = () => {
       <div className="w-full relative">
         <input
           type="text"
-          className="border block w-full  border-none outline-none bg-secondary bg-opacity-50 text-white h-[48px] focus:bg-opacity-100 transition-all px-4 duration-400 rounded-lg placeholder:text-[16px] text-[16px]"
-          placeholder="Sent a message "
-          onChange={(e) => setMessage(e.target.value)}
+          className="border text-sm rounded-lg block w-full p-2.5  bg-gray-700 border-gray-600 text-white"
+          placeholder="Send a message"
           value={message}
+          onChange={(e) => setMessage(e.target.value)}
         />
-        <button type="submit" className="absolute inset-y-0 end-0 flex items-center pe-4 text-lg">
-          {loading ? <div className="loading loading-spinner"></div> : <BsSend className="hover:text-gray-300" />}
+        <button type="submit" className="absolute inset-y-0 end-0 flex items-center pe-3">
+          {loading ? <div className="loading loading-spinner"></div> : <BsSend />}
         </button>
       </div>
     </form>
   );
 };
-
 export default MessageInput;

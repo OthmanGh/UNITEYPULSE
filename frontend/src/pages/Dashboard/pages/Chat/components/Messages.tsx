@@ -6,7 +6,6 @@ import useListenMessages from '../../../../../hooks/useListenMessages';
 
 const Messages = () => {
   const { messages, loading } = useGetMessages();
-
   useListenMessages();
   const lastMessageRef = useRef();
 
@@ -31,5 +30,4 @@ const Messages = () => {
     </div>
   );
 };
-
 export default Messages;
