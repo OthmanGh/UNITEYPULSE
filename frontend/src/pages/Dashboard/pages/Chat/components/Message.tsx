@@ -10,6 +10,9 @@ const Message = ({ message }) => {
 
   const chatClassName = currentUserMessages ? 'chat-end' : 'chat-start';
 
+  console.log(authUser);
+  console.log(selectedConversation);
+
   const profilePic = currentUserMessages ? authUser.profilePicture : selectedConversation?.profilePicture;
 
   const formatedTime = convertTime(message.createdAt);

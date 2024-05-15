@@ -26,7 +26,7 @@ const Signup = () => {
 
   const password = watch('password', '');
 
-  const { setAuthUser } = useAuthContext;
+  const { setAuthUser } = useAuthContext();
 
   const onSubmit = async (data) => {
     await signup(data);
@@ -69,10 +69,9 @@ const Signup = () => {
         role: 'owner',
       });
 
-      localStorage.setItem('authUser', JSON.stringify({ status: 'success', ...profile }));
-
-      // setAuthUser(profile);
+      setAuthUser(profile);
       navigate('/dashboard');
+      localStorage.setItem('authUser', JSON.stringify({ status: 'success', ...profile }));
     };
 
     if (profile) {
