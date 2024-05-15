@@ -3,6 +3,8 @@ import { RiArrowDownSLine } from 'react-icons/ri';
 import { IoSendSharp } from 'react-icons/io5';
 import { Tooltip } from '@mui/material';
 import { useAuthContext } from '../../../contexts/AuthContext';
+import BotIcon from '../../../assets/aiBot.png';
+import { TbMessageChatbot } from 'react-icons/tb';
 
 const ChatBot = () => {
   const { authUser } = useAuthContext();
@@ -20,23 +22,9 @@ const ChatBot = () => {
       </div>
 
       {/*'Chats'*/}
-      <div
-        className="h-[350px] bg-slate-100 p-4 flex items-start flex-col justify-end gap-4 overflow-y-scroll max-h-[400px] overscroll-behavior: auto;
-"
-      >
+      <div className="h-[350px] overflow-scroll flex flex-col-reverse gap-4 bg-slate-100 px-2">
         <UserMessage />
-        <UserMessage />
-        <UserMessage />
-        <UserMessage />
-        <UserMessage />
-        <UserMessage />
-        <UserMessage />
-        <UserMessage />
-        <UserMessage />
-        <UserMessage />
-        <UserMessage />
-        <UserMessage />
-        <UserMessage />
+        <BotMessages />
       </div>
 
       {/*'send'*/}
@@ -51,24 +39,37 @@ const ChatBot = () => {
   );
 };
 
+export default ChatBot;
+
 const UserMessage = () => {
   return (
-    <div className="flex items-center gap-2 chat-start">
-      <div className="avatar">
-        <div className="w-8 rounded-full">
-          <img
-            src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D"
-            alt=""
-            className="chat-image"
-          />
+    <div className="chat chat-start">
+      <div className="chat-image avatar">
+        <div className="w-10 rounded-full">
+          <img alt="Tailwind CSS chat bubble component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
         </div>
       </div>
 
-      <p className="chat-bubble px-2 text-white pb-2 text-[12px] self-center h-10">Hey there</p>
+      <div className="chat-bubble text-sm self-center pt-3 px-2">
+        <p className=" w-[180px] text-gray-200 font-normal leading-5">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel corporis voluptas ab inventore, earum modi deleniti saepe voluptate aperiam alias.
+        </p>
+      </div>
     </div>
   );
 };
 
-export default ChatBot;
-
-const BotMessages = () => {};
+const BotMessages = () => {
+  return (
+    <div className="chat chat-end">
+      <div className="chat-image avatar">
+        <div className="w-10 rounded-full">
+          <img alt="Tailwind CSS chat bubble component" src={BotIcon} />
+        </div>
+      </div>
+      <div className="chat-bubble chat-bubble-accent text-sm pt-3">
+        <p className="w-[180px] font-semibold text-zinc-900">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, omnis!</p>
+      </div>
+    </div>
+  );
+};

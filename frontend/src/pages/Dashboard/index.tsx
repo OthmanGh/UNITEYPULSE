@@ -11,7 +11,7 @@ const Dashboard = () => {
   return (
     <div>
       <div className="flex relative dark:bg-main-dark-bg bg-white">
-        <div className="fixed right-6 bottom-6 z-20">
+        <div className="fixed right-8 bottom-6 z-20">
           {/* <Tooltip title="Logout" placement="top">
             <button
               className="cursor-pointer text-2xl p-3 hover:drop-shadow-xl text-white  hover:bg-transparent hover:text-secondary rounded-full bg-secondary font-bold border-2 border-secondary transition-all duration-500"
