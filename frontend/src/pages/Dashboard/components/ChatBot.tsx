@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import { IoSendSharp } from 'react-icons/io5';
 import { Tooltip } from '@mui/material';
@@ -10,6 +10,15 @@ const ChatBot = () => {
   const { authUser } = useAuthContext();
 
   const [showChatbot, setShowChatbot] = useState(false);
+
+  //http://127.0.0.1:8000/api/chatbot
+
+  //   {
+  //     "userId" : "6644995af7d78bd56c843590",
+  //     "message" : "What is the capital of lebanon?"
+  // }
+
+  useEffect(() => {}, []);
 
   return (
     <div>
@@ -70,7 +79,7 @@ const SwitchBtn = ({ onSwitch }: SwitchBtnProps) => {
 
 const UserMessage = () => {
   return (
-    <div className="chat chat-start">
+    <div className="chat chat-start flex">
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
           <img alt="Tailwind CSS chat bubble component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
@@ -82,13 +91,15 @@ const UserMessage = () => {
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel corporis voluptas ab inventore, earum modi deleniti saepe voluptate aperiam alias.
         </p>
       </div>
+
+      {/* <span class="loading self-center pt-3 text-dark px-2 loading-dots loading-md"></span> */}
     </div>
   );
 };
 
 const BotMessages = () => {
   return (
-    <div className="chat chat-end">
+    <div className="chat chat-end flex-reverse">
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
           <img alt="Tailwind CSS chat bubble component" src={BotIcon} />
@@ -97,6 +108,8 @@ const BotMessages = () => {
       <div className="chat-bubble chat-bubble-accent text-sm pt-3">
         <p className="w-[180px] font-semibold text-zinc-900">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, omnis!</p>
       </div>
+
+      {/* <span class="loading self-center pt-3 text-dark px-2 loading-dots loading-md"></span> */}
     </div>
   );
 };
