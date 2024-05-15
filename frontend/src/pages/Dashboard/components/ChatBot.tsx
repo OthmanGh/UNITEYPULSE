@@ -19,7 +19,9 @@ const ChatBot = () => {
           <div className="flex items-center justify-between text-white font-semibold bg-dark p-4 w-72 h-12">
             <p>Hi {authUser?.name.split(' ')[0]} 😁</p>
 
-            <RiArrowDownSLine className="text-2xl cursor-pointer hover:text-primary transition-all duration-500" />
+            <Tooltip title="Close" placement="bottom">
+              <RiArrowDownSLine className="text-2xl cursor-pointer hover:text-primary transition-all duration-500" onClick={() => setShowChatbot(false)} />
+            </Tooltip>
           </div>
 
           {/*'Chats'*/}
@@ -38,7 +40,7 @@ const ChatBot = () => {
           </div>
         </section>
       ) : (
-        <SwitchBtn />
+        <SwitchBtn onSwitch={setShowChatbot} />
       )}
     </div>
   );
@@ -46,13 +48,23 @@ const ChatBot = () => {
 
 export default ChatBot;
 
-const SwitchBtn = () => {
+type SwitchBtnProps = {
+  onSwitch: () => void;
+};
+
+const SwitchBtn = ({ onSwitch }: SwitchBtnProps) => {
   return (
-    <Tooltip title="help?" placement="top">
-      <button className="bg-dark p-4 rounded-full shadow-2xl hover:bg-transparent hover:border-dark border-2 hover:text-dark border-dark transition-all duration-500 text-white">
-        <FaQuestion className="text-3xl" />
-      </button>
-    </Tooltip>
+    <div className="hover:scale-105 transition-all duration-500">
+      <Tooltip title="help?" placement="top">
+        <button
+          className="bg-dark p-4 rounded-full shadow-2xl hover:bg-transparent hover:border-dark border-2 hover:text-dark border-dark transition-all duration-500 text-white"
+          type="button"
+          onClick={onSwitch}
+        >
+          <FaQuestion className="text-3xl" />
+        </button>
+      </Tooltip>
+    </div>
   );
 };
 
