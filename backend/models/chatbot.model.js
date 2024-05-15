@@ -21,6 +21,6 @@ const chatBotMessagesSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const ChatBot = mongoose.model("ChatBotMessage", chatBotMessagesSchema);
+const ChatBotMessage = mongoose.model("ChatBotMessage", chatBotMessagesSchema);
 
-export default ChatBot;
+export default ChatBotMessage;
