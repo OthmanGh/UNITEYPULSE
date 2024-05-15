@@ -1,8 +1,8 @@
-import OpenAIChatbot from "../openai/ai.model";
+import OpenAIChatbot from "../openai/ai.model.js";
 
 const chatbot = new OpenAIChatbot(process.env.OPENAI_KEY);
 
-exports.sendMessage = async (req, res) => {
+export const sendMessage = async (req, res) => {
   const { userId, message } = req.body;
 
   try {

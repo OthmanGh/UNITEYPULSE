@@ -19,7 +19,7 @@ app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/employees", employeeRoutes);
 app.use("/api/customers", customerRoutes);
-app.use("/chatbot", chatbotRoutes);
+app.use("/api/chatbot", chatbotRoutes);
 
 const PORT = process.env.PORT || 8000;
 server.listen(PORT, err => {

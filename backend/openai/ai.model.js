@@ -1,9 +1,11 @@
 import OpenAI from "openai";
-import ChatBotMessage from "../models/ChatBotMessage";
+import ChatBotMessage from "../models/chatbot.model.js";
 
 class OpenAIChatbot {
   constructor(apiKey) {
-    this.OpenAI = new OpenAI.api(apiKey);
+    this.OpenAI = new OpenAI({
+      apiKey: apiKey
+    });
   }
 
   async sendMessage(userId, message) {
