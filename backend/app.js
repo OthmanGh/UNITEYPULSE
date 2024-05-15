@@ -6,8 +6,8 @@ import userRoutes from "./routes/user.routes.js";
 import employeeRoutes from "./routes/employee.routes.js";
 import customerRoutes from "./routes/customer.routes.js";
 import connect from "./config/db.js";
-import chatRoute from "./routes/chat.routes.js";
-
+import chatRoutes from "./routes/chat.routes.js";
+import messageRoutes from "./routes/message.routes.js";
 const app = express();
 
 app.use(express.json());
@@ -19,7 +19,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/employees", employeeRoutes);
 app.use("/api/customers", customerRoutes);
-app.use("/api/chat", chatRoute);
+app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoutes);
 
 const PORT = process.env.PORT || 8000;
 
