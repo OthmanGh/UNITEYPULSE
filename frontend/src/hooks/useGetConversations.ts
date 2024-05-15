@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { API_BASE_URL } from '../utils';
 
 const useGetConversations = () => {
   const [loading, setLoading] = useState(false);
@@ -16,7 +15,7 @@ const useGetConversations = () => {
       setLoading(true);
 
       try {
-        const res = await fetch(`${API_BASE_URL}/api/users`, {
+        const res = await fetch('http://127.0.0.1:8000/api/users', {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
