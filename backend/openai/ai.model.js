@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import ChatBotMessage from "../models/chatbot.model";
+import ChatBotMessage from "../models/ChatBotMessage";
 
 class OpenAIChatbot {
   constructor(apiKey) {
@@ -29,7 +29,7 @@ class OpenAIChatbot {
       await ChatBotMessage.create({
         userId,
         message: response.data.choices[0].message.content,
-        role: "chatbot"
+        role: "assistant"
       });
 
       return response.data.choices[0].message.content;

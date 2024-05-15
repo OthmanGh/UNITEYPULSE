@@ -4,14 +4,12 @@ const chatBotMessagesSchema = new mongoose.Schema(
   {
     userId: {
       type: String,
-      require: true
+      required: true
     },
-
     message: {
       type: String,
-      require: true
+      required: true
     },
-
     role: {
       type: String,
       enum: ["user", "assistant"],
