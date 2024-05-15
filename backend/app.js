@@ -8,6 +8,7 @@ import employeeRoutes from "./routes/employee.routes.js";
 import customerRoutes from "./routes/customer.routes.js";
 import { app, server } from "./socket/socket.js";
 import connect from "./config/db.js";
+import chatbotRoutes from "./routes/chatbot.routes.js";
 
 app.use(express.json());
 app.use(cookieParser());
@@ -18,6 +19,7 @@ app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/employees", employeeRoutes);
 app.use("/api/customers", customerRoutes);
+app.use("/chatbot", chatbotRoutes);
 
 const PORT = process.env.PORT || 8000;
 server.listen(PORT, err => {
