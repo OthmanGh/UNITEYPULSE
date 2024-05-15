@@ -11,7 +11,7 @@ const Conversations = () => {
       ) : conversations && conversations.length > 0 ? (
         conversations.map((conversation, idx) => <Conversation key={conversation._id} conversation={conversation} lastIdx={idx} />)
       ) : (
-        <p className="absolute z-20 inset-0 text-black text-xl">No Current Users</p>
+        <p className="inset-0 text-white top-10 text-xl">No Current Users 😐</p>
       )}
     </div>
   );
