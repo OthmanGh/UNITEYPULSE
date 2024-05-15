@@ -23,6 +23,8 @@ console.log(process.env.PORT);
 
 const PORT = process.env.PORT || 8000;
 
+console.log(process.env.MONGODB_URI);
+
 server.listen(PORT, err => {
   if (err) throw new Error(err);
   console.log(`Server is runing on port ${PORT}`);
