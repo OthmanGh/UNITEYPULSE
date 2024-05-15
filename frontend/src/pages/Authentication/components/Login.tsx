@@ -4,8 +4,13 @@ import InputField from './InputField';
 import useLogin from '../../../hooks/useLogin';
 import { LoginSchema } from '../../../utils/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useGoogleLogin } from '@react-oauth/google';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
+  const navigate = useNavigate();
   const { loading, error, login } = useLogin();
 
   const {
@@ -18,9 +23,30 @@ const Login = () => {
     await login(data);
   };
 
-  const handleGoogleAuthSubmit = (authState) => {
-    console.log(authState);
+  const handleGoogleAuthSubmit = async (response) => {
+    try {
+      const userInfoResponse = await axios.get('https://www.googleapis.com/oauth2/v1/userinfo', {
+        headers: {
+          Authorization: `Bearer ${response.access_token}`,
+        },
+      });
+
+      const googleData = {
+        email: userInfoResponse.data.email,
+        googleId: userInfoResponse.data.id,
+      };
+
+      await login(googleData);
+      navigate('/dashboard');
+    } catch (error) {
+      console.log('Error occurred while logging in with Google:', error);
+    }
   };
+
+  const loginWithGoogle = useGoogleLogin({
+    onSuccess: handleGoogleAuthSubmit,
+    onError: (error) => console.log('Google Login Failed:', error),
+  });
 
   return (
     <div className=" h-full w-full flex flex-col items-center justify-center p-5 bg-auth text-light-gray z-10">
@@ -57,7 +83,7 @@ const Login = () => {
 
         <div className="flex flex-col gap-4 mt-10 w-[100%]">
           <OrLine />
-          <GoogleBtn isLogin={true} onSubmit={() => handleGoogleAuthSubmit('login')} />
+          <GoogleBtn isLogin={true} onSubmit={() => loginWithGoogle()} />
         </div>
 
         <SubmitBtn text="Login" isSubmitting={isSubmitting || loading} onSubmit={handleSubmit(onSubmit)} />
