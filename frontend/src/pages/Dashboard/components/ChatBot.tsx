@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import { IoSendSharp } from 'react-icons/io5';
 import { Tooltip } from '@mui/material';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { FaQuestion } from 'react-icons/fa';
 import BotIcon from '../../../assets/aiBot.png';
-
-// http://127.0.0.1:8000/api/chatbot
-
-// {
-//   "userId": "6644995af7d78bd56c843590",
-//   "message": "What is the capital of lebanon?"
-// }
+import { RequestMethod } from '../../../services/requestMethods';
 
 const ChatBot = () => {
   const { authUser } = useAuthContext();
@@ -27,6 +21,14 @@ const ChatBot = () => {
   const token = JSON.parse(localStorage.getItem('authUser')).token;
   const userId = JSON.parse(localStorage.getItem('authUser'))._id;
 
+  const chatContainerRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  };
+
   const sendMessage = async () => {
     if (!inputMessage.trim()) return;
 
@@ -35,7 +37,7 @@ const ChatBot = () => {
 
     try {
       const response = await fetch('http://127.0.0.1:8000/api/chatbot', {
-        method: 'POST',
+        method: RequestMethod.post,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -59,6 +61,10 @@ const ChatBot = () => {
     }
   };
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   return (
     <div>
       {showChatbot ? (
@@ -73,14 +79,17 @@ const ChatBot = () => {
           </div>
 
           {/*'Chats'*/}
-          <div className="h-[350px] overflow-scroll flex flex-col-reverse gap-4 bg-slate-100 px-2">
-            {messages.map((msg, index) => {
-              if (msg.sender === 'user') {
-                return <UserMessage key={index} message={msg.message} />;
-              } else {
-                return <BotMessages key={index} message={msg.message} />;
-              }
-            })}
+          <div className="h-[350px] overflow-scroll flex flex-col-reverse gap-4 bg-slate-100 px-2" ref={chatContainerRef}>
+            {messages
+              .slice(0)
+              .reverse()
+              .map((msg, index) => {
+                if (msg.sender === 'user') {
+                  return <UserMessage key={index} message={msg.message} />;
+                } else {
+                  return <BotMessages key={index} message={msg.message} />;
+                }
+              })}
           </div>
 
           {/*'send'*/}
