@@ -16,14 +16,14 @@ function Home() {
       <main className="flex flex-col ">
         <Element name="hero relative">
           <Hero />
-          <Overlay opacity={20} z_index={2} />
+          <Overlay opacity={50} z_index={2} bgColor="bg-dark" />
         </Element>
         <Element name="features">
           <Features />
         </Element>
         <Element name="aboutus relative">
           <Aboutus />
-          <Overlay opacity={50} z_index={2} />
+          <Overlay opacity={20} z_index={2} bgColor="bg-dark" />
         </Element>
         <Element name="getintouch">
           <ContactForm />

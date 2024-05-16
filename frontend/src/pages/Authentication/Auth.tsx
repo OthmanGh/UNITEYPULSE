@@ -31,7 +31,7 @@ const Auth = () => {
       <Link to="/" className="z-10">
         <BackBtn />
       </Link>
-      <Overlay />
+      <Overlay opacity={70} bgColor="bg-black" />
     </section>
   );
 };
