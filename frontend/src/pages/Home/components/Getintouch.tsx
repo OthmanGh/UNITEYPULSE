@@ -2,6 +2,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
+import emailjs from '@emailjs/browser';
+import toast, { Toaster } from 'react-hot-toast';
+
+const notify = () => toast('Email sent successfully.');
 
 interface FormData {
   fullName: string;
@@ -14,11 +18,29 @@ const Getintouch: React.FC = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {
     console.log(data);
+
+    const serviceId = 'service_sgglm4x';
+    const templateId = 'template_bmrw1sh';
+    const publicKey = '4omKBXDrSDIIQEWN7';
+
+    const templateParams = {
+      from_name: data.email,
+      from_email: data.email,
+      to_name: 'Unity Paulse',
+      message: data.message,
+    };
+
+    emailjs.send(serviceId, templateId, templateParams, publicKey).then((res) => {
+      console.log('Email sent successfully');
+      reset();
+      toast.success('Email sent successfully.');
+    });
   };
 
   return (
@@ -86,6 +108,7 @@ const Getintouch: React.FC = () => {
           classes="hover:bg-transparent hover:text-primary border-[2px] border-primary h-[45px] hover:cursor-pointer bg-primary text-dark transition-all duration-500 self-center mt-8 rounded font-semibold "
           onClick={handleSubmit(onSubmit)}
         />
+        <Toaster />
       </form>
     </section>
   );
