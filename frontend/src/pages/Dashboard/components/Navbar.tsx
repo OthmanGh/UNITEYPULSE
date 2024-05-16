@@ -67,7 +67,7 @@ const Navbar = () => {
 
         <Tooltip title="Profile" placement="bottom">
           <div className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg" onClick={() => handleClick('userProfile')}>
-            <img src={authUser?.picture} className="rounded-full w-8 h-8" alt="avatar" />
+            <img src={authUser?.profilePicture} className="rounded-full w-8 h-8" alt="avatar" />
 
             <p>
               <span className="text-gray-600 text-14">Hi,</span> {''}

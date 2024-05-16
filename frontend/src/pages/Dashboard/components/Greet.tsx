@@ -2,6 +2,7 @@ import { useAuthContext } from '../../../contexts/AuthContext';
 
 const Greet = () => {
   const { authUser } = useAuthContext();
+  console.log(authUser);
 
   console.log(authUser);
   return (
