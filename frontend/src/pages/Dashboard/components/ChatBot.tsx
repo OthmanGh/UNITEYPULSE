@@ -6,8 +6,10 @@ import { FaQuestion } from 'react-icons/fa';
 import BotIcon from '../../../assets/aiBot.png';
 import { RequestMethod } from '../../../services/requestMethods';
 import notificationSound from '../../../assets/notification.mp3';
+import { useNavigate } from 'react-router-dom';
 
 const ChatBot = () => {
+  const navigator = useNavigate();
   const [showChatbot, setShowChatbot] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
   const [messages, setMessages] = useState([
@@ -18,10 +20,16 @@ const ChatBot = () => {
   ]);
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(null);
 
-  const authUser = JSON.parse(localStorage.getItem('authUser'));
+  const authUser = JSON.parse(localStorage.getItem('authUser')) ?? undefined;
 
-  const token = authUser.token;
-  const userId = authUser._id;
+  useEffect(() => {
+    if (!authUser) {
+      navigator('/auth');
+    }
+  }, [authUser, navigator]);
+
+  const token = authUser?.token;
+  const userId = authUser?._id;
 
   const scrollToBottom = () => {
     const chatContainer = document.getElementById('chatContainer');
@@ -77,7 +85,7 @@ const ChatBot = () => {
 
   return (
     <div>
-      {showChatbot ? (
+      {authUser && showChatbot ? (
         <section className="rounded-xl overflow-hidden w-full shadow-md hover:scale-105 transition-all duration-500">
           {/*'top'*/}
           <div className="flex items-center justify-between text-white font-semibold bg-dark p-4 w-72 h-12">

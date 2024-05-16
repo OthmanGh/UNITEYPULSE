@@ -49,7 +49,7 @@ const Getintouch: React.FC = () => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="grid gap-10 max-w-[600px] p-10 rounded-xl mx-auto mt-15 bg-dark shadow-2xl text-white sm:hover:scale-105 transition-all duration-500"
+        className="grid gap-10 max-w-[600px] p-10 rounded-xl mx-auto mt-15 bg-extraDark shadow-2xl text-white sm:hover:scale-105 transition-all duration-500"
       >
         <Input
           label="Full Name"

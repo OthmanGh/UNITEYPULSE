@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { API_BASE_URI } from '../utils';
 
 const useGetConversations = () => {
   const [loading, setLoading] = useState(false);

@@ -1,10 +1,9 @@
 import { useAuthContext } from '../../../../../contexts/AuthContext';
 import { useConversation } from '../../../../../contexts/ConversationContext';
 import { convertTime } from '../../../../../utils/convertTime';
-import notification from '../../../../../assets/notification.mp3';
 
 const Message = ({ message }) => {
-  const authUser = JSON.parse(localStorage.getItem('authUser'));
+  const { authUser } = useAuthContext();
 
   const { selectedConversation } = useConversation();
 
@@ -12,10 +11,11 @@ const Message = ({ message }) => {
 
   const chatClassName = currentUserMessages ? 'chat-end' : 'chat-start';
 
-  console.log(authUser);
-  console.log(selectedConversation);
-
-  const profilePic = currentUserMessages ? authUser.profilePicture : selectedConversation?.profilePic;
+  const profilePic = currentUserMessages
+    ? authUser.profilePicture
+    : selectedConversation?.profilePic
+    ? selectedConversation?.profilePicture
+    : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9XYwkxuAsCVT8G1Ql3EMddIFV0nhvukM9Tg&s';
 
   console.log(profilePic);
 
@@ -29,7 +29,7 @@ const Message = ({ message }) => {
     <div className={`chat ${chatClassName}`}>
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
-          <img src={selectedConversation?.profilePicture} alt="chat" />
+          <img src={profilePic} alt="chat" />
         </div>
       </div>
 
