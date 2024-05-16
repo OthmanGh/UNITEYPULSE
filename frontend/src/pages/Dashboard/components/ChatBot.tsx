@@ -6,25 +6,58 @@ import { useAuthContext } from '../../../contexts/AuthContext';
 import { FaQuestion } from 'react-icons/fa';
 import BotIcon from '../../../assets/aiBot.png';
 
-//http://127.0.0.1:8000/api/chatbot
+// http://127.0.0.1:8000/api/chatbot
 
-//   {
-//     "userId" : "6644995af7d78bd56c843590",
-//     "message" : "What is the capital of lebanon?"
+// {
+//   "userId": "6644995af7d78bd56c843590",
+//   "message": "What is the capital of lebanon?"
 // }
 
 const ChatBot = () => {
   const { authUser } = useAuthContext();
   const [showChatbot, setShowChatbot] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
-  const [messages, setMessages] = useState([]);
-
-  const botGreet = "Hello! I'm your friendly chatbot. How can I assist you today?";
+  const [messages, setMessages] = useState([
+    {
+      message: "Hello! I'm your friendly chatbot. How can I assist you today?",
+      sender: 'bot',
+    },
+  ]);
 
   const token = JSON.parse(localStorage.getItem('authUser')).token;
   const userId = JSON.parse(localStorage.getItem('authUser'))._id;
 
-  useEffect(() => {}, []);
+  const sendMessage = async () => {
+    if (!inputMessage.trim()) return;
+
+    setMessages((prevMessages) => [...prevMessages, { message: inputMessage, sender: 'user' }]);
+    setInputMessage('');
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/chatbot', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          userId,
+          message: inputMessage,
+        }),
+      });
+      const data = await response.json();
+
+      setMessages((prevMessages) => [...prevMessages, { message: data.message, sender: 'bot' }]);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
+  };
 
   return (
     <div>
@@ -41,21 +74,32 @@ const ChatBot = () => {
 
           {/*'Chats'*/}
           <div className="h-[350px] overflow-scroll flex flex-col-reverse gap-4 bg-slate-100 px-2">
-            <UserMessage />
-            <BotMessages />
+            {messages.map((msg, index) => {
+              if (msg.sender === 'user') {
+                return <UserMessage key={index} message={msg.message} />;
+              } else {
+                return <BotMessages key={index} message={msg.message} />;
+              }
+            })}
           </div>
 
           {/*'send'*/}
-          <div className="flex items-center bg-slate-300 p-4 h-12 ">
-            <input className="w-full bg-transparent placeholder:text-slate-600 outline-none text-slate-700" placeholder="Type here to Chat" />
+          <div className="flex items-center bg-slate-300 p-4 h-12">
+            <input
+              className="w-full bg-transparent placeholder:text-slate-600 outline-none text-slate-700"
+              placeholder="Type here to Chat"
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+              onKeyPress={handleKeyPress}
+            />
 
-            <button type="submit">
+            <button type="submit" onClick={sendMessage}>
               <IoSendSharp className="text-slate-600 text-xl hover:text-slate-700" />
             </button>
           </div>
         </section>
       ) : (
-        <SwitchBtn onSwitch={setShowChatbot} />
+        <SwitchBtn onSwitch={() => setShowChatbot(true)} />
       )}
     </div>
   );
@@ -83,39 +127,33 @@ const SwitchBtn = ({ onSwitch }: SwitchBtnProps) => {
   );
 };
 
-const UserMessage = () => {
+const UserMessage = ({ message }: { message: string }) => {
   return (
     <div className="chat chat-start flex">
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
-          <img alt="Tailwind CSS chat bubble component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+          <img alt="User Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
         </div>
       </div>
 
       <div className="chat-bubble text-sm self-center pt-3 px-2">
-        <p className=" w-[180px] text-gray-200 font-normal leading-5">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel corporis voluptas ab inventore, earum modi deleniti saepe voluptate aperiam alias.
-        </p>
+        <p className="w-[180px] text-gray-200 font-normal leading-5">{message}</p>
       </div>
-
-      {/* <span class="loading self-center pt-3 text-dark px-2 loading-dots loading-md"></span> */}
     </div>
   );
 };
 
-const BotMessages = () => {
+const BotMessages = ({ message }: { message: string }) => {
   return (
     <div className="chat chat-end flex-reverse">
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
-          <img alt="Tailwind CSS chat bubble component" src={BotIcon} />
+          <img alt="Bot Avatar" src={BotIcon} />
         </div>
       </div>
       <div className="chat-bubble chat-bubble-accent text-sm pt-3">
-        <p className="w-[180px] font-semibold text-zinc-900">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, omnis!</p>
+        <p className="w-[180px] font-semibold text-zinc-900">{message}</p>
       </div>
-
-      {/* <span class="loading self-center pt-3 text-dark px-2 loading-dots loading-md"></span> */}
     </div>
   );
 };
