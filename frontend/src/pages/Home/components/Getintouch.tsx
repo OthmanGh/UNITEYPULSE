@@ -71,12 +71,12 @@ const Getintouch: React.FC = () => {
           rows={4}
           placeholder="Message...."
         ></textarea>
-        {errors.message && <span className="text-red-500 text-sm mt-[-30px]">{errors.message.message}</span>}
+        {errors.message && <span className="text-primary-light text-sm mt-[-30px]">{errors.message.message}</span>}
 
         <Button
           text="Submit"
-          classes="bg-transparent text-primary-light border-[2px] border-primary-light h-[45px] hover:cursor-pointer hover:bg-primary hover:border-primary hover:text-dark transition-all duration-500 self-center mt-8 rounded font-semibold"
-          type="submit"
+          classes="hover:bg-transparent hover:text-primary border-[2px] border-primary h-[45px] hover:cursor-pointer bg-primary text-dark transition-all duration-500 self-center mt-8 rounded font-semibold "
+          onClick={handleSubmit(onSubmit)}
         />
       </form>
     </section>

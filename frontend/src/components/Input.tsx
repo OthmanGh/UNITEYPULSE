@@ -35,7 +35,7 @@ const Input: React.FC<InputProps> = ({
         className={classInput}
         placeholder={placeholder}
       />
-      {error && <p className="text-red-500 text-sm mt-2">{error.message}</p>}
+      {error && <p className="text-primary-light text-sm mt-[7px] ml-[2px]">{error.message}</p>}
     </div>
   );
 };
