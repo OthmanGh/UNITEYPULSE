@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import { IoSendSharp } from 'react-icons/io5';
 import { Tooltip } from '@mui/material';
@@ -6,6 +6,7 @@ import { useAuthContext } from '../../../contexts/AuthContext';
 import { FaQuestion } from 'react-icons/fa';
 import BotIcon from '../../../assets/aiBot.png';
 import { RequestMethod } from '../../../services/requestMethods';
+import notificationSound from '../../../assets/notification.mp3';
 
 const ChatBot = () => {
   const { authUser } = useAuthContext();
@@ -22,12 +23,16 @@ const ChatBot = () => {
   const token = JSON.parse(localStorage.getItem('authUser')).token;
   const userId = JSON.parse(localStorage.getItem('authUser'))._id;
 
-  const chatContainerRef = useRef(null);
-
   const scrollToBottom = () => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    const chatContainer = document.getElementById('chatContainer');
+    if (chatContainer) {
+      chatContainer.scrollTop = chatContainer.scrollHeight;
     }
+  };
+
+  const playNotificationSound = () => {
+    const audio = new Audio(notificationSound);
+    audio.play();
   };
 
   const sendMessage = async () => {
@@ -52,6 +57,7 @@ const ChatBot = () => {
       const data = await response.json();
 
       setMessages((prevMessages) => [...prevMessages, { message: data.message, sender: 'bot' }]);
+      playNotificationSound();
     } catch (error) {
       console.error('Error:', error);
     } finally {
@@ -83,7 +89,7 @@ const ChatBot = () => {
           </div>
 
           {/*'Chats'*/}
-          <div className="h-[350px] overflow-scroll flex flex-col-reverse gap-4 bg-slate-100 px-2" ref={chatContainerRef}>
+          <div id="chatContainer" className="h-[350px] overflow-scroll flex flex-col-reverse gap-4 bg-slate-100 px-2">
             {messages
               .slice(0)
               .reverse()
