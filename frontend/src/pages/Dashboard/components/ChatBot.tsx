@@ -17,6 +17,7 @@ const ChatBot = () => {
       sender: 'bot',
     },
   ]);
+  const [loadingMessageIndex, setLoadingMessageIndex] = useState(null);
 
   const token = JSON.parse(localStorage.getItem('authUser')).token;
   const userId = JSON.parse(localStorage.getItem('authUser'))._id;
@@ -34,6 +35,7 @@ const ChatBot = () => {
 
     setMessages((prevMessages) => [...prevMessages, { message: inputMessage, sender: 'user' }]);
     setInputMessage('');
+    setLoadingMessageIndex(messages.length);
 
     try {
       const response = await fetch('http://127.0.0.1:8000/api/chatbot', {
@@ -52,6 +54,8 @@ const ChatBot = () => {
       setMessages((prevMessages) => [...prevMessages, { message: data.message, sender: 'bot' }]);
     } catch (error) {
       console.error('Error:', error);
+    } finally {
+      setLoadingMessageIndex(null);
     }
   };
 
@@ -85,9 +89,9 @@ const ChatBot = () => {
               .reverse()
               .map((msg, index) => {
                 if (msg.sender === 'user') {
-                  return <UserMessage key={index} message={msg.message} />;
+                  return <UserMessage key={index} message={msg.message} isLoading={false} />;
                 } else {
-                  return <BotMessages key={index} message={msg.message} />;
+                  return <BotMessages key={index} message={msg.message} isLoading={loadingMessageIndex === index} />;
                 }
               })}
           </div>
@@ -152,7 +156,7 @@ const UserMessage = ({ message }: { message: string }) => {
   );
 };
 
-const BotMessages = ({ message }: { message: string }) => {
+const BotMessages = ({ message, isLoading }: { message: string; isLoading: boolean }) => {
   return (
     <div className="chat chat-end flex-reverse">
       <div className="chat-image avatar">
@@ -160,9 +164,14 @@ const BotMessages = ({ message }: { message: string }) => {
           <img alt="Bot Avatar" src={BotIcon} />
         </div>
       </div>
-      <div className="chat-bubble chat-bubble-accent text-sm pt-3">
-        <p className="w-[180px] font-semibold text-zinc-900">{message}</p>
-      </div>
+
+      {isLoading ? (
+        <span class="loading self-center pt-3 text-dark px-2 loading-dots loading-md"></span>
+      ) : (
+        <div className="chat-bubble chat-bubble-accent text-sm pt-3">
+          <p className="w-[180px] font-semibold text-zinc-900">{message}</p>
+        </div>
+      )}
     </div>
   );
 };
