@@ -1,6 +1,8 @@
 import { useAuthContext } from '../../../../../contexts/AuthContext';
 import { useConversation } from '../../../../../contexts/ConversationContext';
 import { convertTime } from '../../../../../utils/convertTime';
+import notification from '../../../../../assets/notification.mp3';
+
 const Message = ({ message }) => {
   const authUser = JSON.parse(localStorage.getItem('authUser'));
 
@@ -31,7 +33,7 @@ const Message = ({ message }) => {
         </div>
       </div>
 
-      <div className={`chat-bubble text-white ${shakeClass}  ${bgColor} pb-2`}>{message.message}</div>
+      <div className={`chat-bubble text-white ${shakeClass} ${bgColor} pb-2`}>{message.message}</div>
       <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">{formatedTime}</div>
     </div>
   );
