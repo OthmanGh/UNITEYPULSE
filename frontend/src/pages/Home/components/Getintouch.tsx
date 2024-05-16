@@ -73,7 +73,7 @@ const Getintouch: React.FC = () => {
           error={errors.email}
           classParent=""
           classLabel="mb-2"
-          classInput="w-full px-4 py-2 rounded-md h-[45px] outline-none bg-half-transparent text-primary"
+          classInput="w-full px-4 py-2 rounded-md h-[45px] outline-none bg-half-transparent  text-primary"
           required
         />
 
