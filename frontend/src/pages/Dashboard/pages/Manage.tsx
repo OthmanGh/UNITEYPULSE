@@ -14,102 +14,6 @@ interface CompanyInfo {
   businessAddress: string;
 }
 
-interface EmployeeInfo {
-  fullName: string;
-  email: string;
-  role: string;
-  department: string;
-  startDate: string;
-  employeeId: string;
-  manager: string;
-  password: string;
-}
-
-type EmployeePopupProps = {
-  employeeInfo: EmployeeInfo;
-  handleEmployeeChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleEmployeeSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-};
-
-const EmployeePopup = ({ employeeInfo, handleEmployeeChange, handleEmployeeSubmit }: EmployeePopupProps) => {
-  return (
-    <div className="bg-white p-8 rounded-lg ">
-      <h2 className="text-lg font-semibold mb-4">Add Employee</h2>
-      <form className="grid xs:grid-cols-2 sm:grid-cols-3 gap-10" onSubmit={handleEmployeeSubmit}>
-        <input
-          className="bg-transparent border-b-2 px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400 w-full mb-4"
-          placeholder="Full Name"
-          name="fullName"
-          value={employeeInfo.fullName}
-          onChange={handleEmployeeChange}
-          required
-        />
-        <input
-          className="bg-transparent border-b-2 px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400 w-full mb-4"
-          placeholder="Email Address"
-          type="email"
-          name="email"
-          value={employeeInfo.email}
-          onChange={handleEmployeeChange}
-          required
-        />
-        <input
-          className="bg-transparent border-b-2 px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400 w-full mb-4"
-          placeholder="Role/Position"
-          name="role"
-          value={employeeInfo.role}
-          onChange={handleEmployeeChange}
-          required
-        />
-        <input
-          className="bg-transparent border-b-2 px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400 w-full mb-4"
-          placeholder="Department"
-          name="department"
-          value={employeeInfo.department}
-          onChange={handleEmployeeChange}
-        />
-        <input
-          className="bg-transparent border-b-2 px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400 w-full mb-4"
-          placeholder="Start Date"
-          type="date"
-          name="startDate"
-          value={employeeInfo.startDate}
-          onChange={handleEmployeeChange}
-          required
-        />
-        <input
-          className="bg-transparent border-b-2 px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400 w-full mb-4"
-          placeholder="Employee ID"
-          name="employeeId"
-          value={employeeInfo.employeeId}
-          onChange={handleEmployeeChange}
-        />
-        <input
-          className="bg-transparent border-b-2 px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400 w-full mb-4"
-          placeholder="Manager"
-          name="manager"
-          value={employeeInfo.manager}
-          onChange={handleEmployeeChange}
-        />
-        <input
-          className="bg-transparent border-b-2 px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400 w-full mb-4"
-          placeholder="Password"
-          type="password"
-          name="password"
-          value={employeeInfo.password}
-          onChange={handleEmployeeChange}
-          required
-        />
-        <div className="flex justify-end">
-          <button type="submit" className="bg-secondary text-gray-100 p-3 rounded-md cursor-pointer hover:bg-dark transition-all duration-400 text-md">
-            Invite Employee
-          </button>
-        </div>
-      </form>
-    </div>
-  );
-};
-
 const Manage: React.FC = () => {
   const [companyInfo, setCompanyInfo] = useState<CompanyInfo>({
     companyName: '',
@@ -120,18 +24,8 @@ const Manage: React.FC = () => {
     businessAddress: '',
   });
 
-  const [employeeInfo, setEmployeeInfo] = useState<EmployeeInfo>({
-    fullName: '',
-    email: '',
-    role: '',
-    department: '',
-    startDate: '',
-    employeeId: '',
-    manager: '',
-    password: '',
-  });
-
-  const [showPopup, setShowPopup] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
+  const [email, setEmail] = useState('');
 
   const handleCompanyChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -139,29 +33,6 @@ const Manage: React.FC = () => {
       ...prevInfo,
       [name]: value,
     }));
-  };
-
-  const handleEmployeeChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setEmployeeInfo((prevInfo) => ({
-      ...prevInfo,
-      [name]: value,
-    }));
-  };
-
-  const handleEmployeeSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(employeeInfo);
-    setEmployeeInfo({
-      fullName: '',
-      email: '',
-      role: '',
-      department: '',
-      startDate: '',
-      employeeId: '',
-      manager: '',
-      password: '',
-    });
   };
 
   const handleCompanySubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -176,15 +47,18 @@ const Manage: React.FC = () => {
       businessAddress: '',
     });
   };
+
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const handleInvitationSubmission = (e) => {
+  const handleInvitationSubmission = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const emailInput = e.target.elements.email;
-    if (emailPattern.test(emailInput.value)) {
-      console.log('Email is valid:', emailInput.value);
+
+    if (emailPattern.test(email)) {
+      console.log('Email is valid:', email);
+      setEmail('');
+      setShowPopup(false);
     } else {
-      console.log('Invalid email:', emailInput.value);
+      console.log('Invalid email:', email);
     }
   };
 
@@ -267,7 +141,7 @@ const Manage: React.FC = () => {
 
         <div className="bg-slate-100 px-4 py-10 rounded-lg h-[50vh] flex flex-col items-center mt-4 gap-10">
           <CycleIcon className="text-5xl text-dark" />
-          <p className="text-lg text-slate-600">Send an invaitation by email</p>
+          <p className="text-lg text-slate-600">Send an invitation by email</p>
           <button
             className="flex text-md items-center gap-2 bg-secondary text-gray-100 p-3 rounded-md cursor-pointer hover:bg-dark transition-all duration-400"
             onClick={() => {
@@ -279,16 +153,29 @@ const Manage: React.FC = () => {
         </div>
       </div>
 
-      <EmployeePopup employeeInfo={employeeInfo} handleEmployeeChange={handleEmployeeChange} handleEmployeeSubmit={handleEmployeeSubmit} />
-
-      {showPopup && <SendInvitationPopup onSubmit={handleInvitationSubmission} setShowPopup={setShowPopup} />}
+      {showPopup && <SendInvitationPopup onSubmit={handleInvitationSubmission} setShowPopup={setShowPopup} setEmail={setEmail} />}
     </section>
   );
 };
 
 export default Manage;
 
-const SendInvitationPopup = ({ setShowPopup }: { setShowPopup: () => void }) => {
+type SendInvitationPopupProps = {
+  setShowPopup: () => void;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const SendInvitationPopup: React.FC<SendInvitationPopupProps> = ({ setShowPopup, onSubmit, setEmail }) => {
+  const handleInvitationSubmission = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmit(e);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60">
       <div className="bg-white p-8 shadow-md rounded-md">
@@ -301,9 +188,13 @@ const SendInvitationPopup = ({ setShowPopup }: { setShowPopup: () => void }) => 
             />
           </Tooltip>
         </div>
-        <form>
-          <input type="email" placeholder="Email" className=" px-4 py-2 rounded-md w-full bg-slate-200 outline-none text-slate-800" />
-
+        <form onSubmit={handleInvitationSubmission}>
+          <input
+            type="email"
+            placeholder="Email"
+            className="px-4 py-2 rounded-md w-full bg-slate-200 outline-none text-slate-800"
+            onChange={handleEmailChange}
+          />
           <button type="submit" className="bg-secondary hover:bg-dark transition-all duration-500 text-white px-4 py-2 rounded-md mt-4 block w-full">
             Send Invitation
           </button>
