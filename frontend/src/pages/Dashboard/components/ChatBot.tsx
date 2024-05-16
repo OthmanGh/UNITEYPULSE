@@ -6,19 +6,23 @@ import { useAuthContext } from '../../../contexts/AuthContext';
 import { FaQuestion } from 'react-icons/fa';
 import BotIcon from '../../../assets/aiBot.png';
 
+//http://127.0.0.1:8000/api/chatbot
+
+//   {
+//     "userId" : "6644995af7d78bd56c843590",
+//     "message" : "What is the capital of lebanon?"
+// }
+
 const ChatBot = () => {
   const { authUser } = useAuthContext();
-
   const [showChatbot, setShowChatbot] = useState(false);
+  const [inputMessage, setInputMessage] = useState('');
+  const [messages, setMessages] = useState([]);
 
   const botGreet = "Hello! I'm your friendly chatbot. How can I assist you today?";
 
-  //http://127.0.0.1:8000/api/chatbot
-
-  //   {
-  //     "userId" : "6644995af7d78bd56c843590",
-  //     "message" : "What is the capital of lebanon?"
-  // }
+  const token = JSON.parse(localStorage.getItem('authUser')).token;
+  const userId = JSON.parse(localStorage.getItem('authUser'))._id;
 
   useEffect(() => {}, []);
 
@@ -28,7 +32,7 @@ const ChatBot = () => {
         <section className="rounded-xl overflow-hidden w-full shadow-md hover:scale-105 transition-all duration-500">
           {/*'top'*/}
           <div className="flex items-center justify-between text-white font-semibold bg-dark p-4 w-72 h-12">
-            <p>Hi {authUser?.name.split(' ')[0]} 😁</p>
+            <p>Hi {authUser?.name?.split(' ')[0]} 😁</p>
 
             <Tooltip title="Close" placement="bottom">
               <RiArrowDownSLine className="text-2xl cursor-pointer hover:text-primary transition-all duration-500" onClick={() => setShowChatbot(false)} />
