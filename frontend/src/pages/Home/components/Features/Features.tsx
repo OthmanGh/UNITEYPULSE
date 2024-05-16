@@ -73,7 +73,7 @@ const Card = ({ title, text, Icon, buttonText }: CardProps) => {
       <p className="hidden xs:block text-center text-gray-300 w-[80%] mx-auto leading-6 text-sm">{text}</p>
       <Button
         onClick={handleSubmit}
-        classes="text-dark text-primary border-primary border-[2px] text-[14px] hover:primary-light mx-auto px-4 font-semibold py-3 rounded-md hover:bg-primary hover:text-dark transition-all duration-500 mt-6 mb-2"
+        classes="text-dark hover:text-primary hover:bg-transparent border-primary border-[2px] text-[14px] hover:primary-light mx-auto px-4 font-semibold py-3 rounded-md hover:bg-primary hover:text-dark transition-all duration-500 mt-6 mb-2 bg-primary"
         text="Start now"
       />
     </div>
@@ -81,14 +81,20 @@ const Card = ({ title, text, Icon, buttonText }: CardProps) => {
 };
 
 const CustomNextArrow = (props: any) => (
-  <div onClick={props.onClick} className="absolute right-[-40px] bg-dark rounded-full p-[2px] cursor-pointer">
-    <RightArrow className="w-6 h-6 text-gray-200  z-10" />
+  <div
+    onClick={props.onClick}
+    className="absolute right-[-40px] bg-dark hover:bg-primary text-gray-200 transition-all duration-500 hover:text-dark rounded-full p-[2px] cursor-pointer"
+  >
+    <RightArrow className="w-6 h-6  z-10" />
   </div>
 );
 
 const CustomPrevArrow = (props: any) => (
-  <div onClick={props.onClick} className=" absolute left-[-40px] bg-dark rounded-full p-[2px] cursor-pointer">
-    <LeftArrow className="w-6 h-6 text-gray-200 z-10 cursor-auto" />
+  <div
+    onClick={props.onClick}
+    className=" absolute left-[-40px] bg-dark rounded-full p-[2px] cursor-pointer hover:bg-primary text-gray-200  transition-all duration-500 hover:text-dark"
+  >
+    <LeftArrow className="w-6 h-6 z-10" />
   </div>
 );
 
