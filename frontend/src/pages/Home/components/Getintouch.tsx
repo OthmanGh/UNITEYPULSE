@@ -38,7 +38,7 @@ const Getintouch: React.FC = () => {
           error={errors.fullName}
           classParent=""
           classLabel="mb-2"
-          classInput="w-full px-4 py-2 rounded-md h-[45px] text-dark outline-none"
+          classInput="w-full px-4 py-2 rounded-md h-[45px] text-dark outline-none bg-half-transparent text-primary"
           required
         />
 
@@ -51,23 +51,31 @@ const Getintouch: React.FC = () => {
           error={errors.email}
           classParent=""
           classLabel="mb-2"
-          classInput="w-full px-4 py-2 rounded-md h-[45px] outline-none text-dark"
+          classInput="w-full px-4 py-2 rounded-md h-[45px] outline-none bg-half-transparent text-primary"
           required
         />
 
         <select
           {...register('referralSource', { required: 'Please select an option' })}
-          className="w-full px-4 py-2 rounded-md h-[45px] bg-gray-100 placeholder:text-gray-300 text-dark outline-none"
+          className="w-full px-4 py-2 rounded-md h-[45px] bg-gray-100 placeholder:text-gray-300  outline-none bg-half-transparent text-primary"
         >
-          <option value="">Select an option</option>
-          <option value="Social Media">Social Media</option>
-          <option value="Friend">Friend</option>
-          <option value="Internet Search">Internet Search</option>
+          <option className="bg-white text-black" value="">
+            Select an option
+          </option>
+          <option className="bg-white text-black" value="Social Media">
+            Social Media
+          </option>
+          <option className="bg-white text-black" value="Friend">
+            Friend
+          </option>
+          <option className="bg-white text-black" value="Internet Search">
+            Internet Search
+          </option>
         </select>
 
         <textarea
           {...register('message', { required: 'Please enter a message' })}
-          className="w-full rounded-md p-2 outline-none text-dark"
+          className="w-full rounded-md p-2 outline-none bg-half-transparent text-primary"
           rows={4}
           placeholder="Message...."
         ></textarea>
