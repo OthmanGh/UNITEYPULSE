@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import { IoSendSharp } from 'react-icons/io5';
 import { Tooltip } from '@mui/material';
-import { useAuthContext } from '../../../contexts/AuthContext';
 import { FaQuestion } from 'react-icons/fa';
 import BotIcon from '../../../assets/aiBot.png';
 import { RequestMethod } from '../../../services/requestMethods';
 import notificationSound from '../../../assets/notification.mp3';
 
 const ChatBot = () => {
-  const { authUser } = useAuthContext();
   const [showChatbot, setShowChatbot] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
   const [messages, setMessages] = useState([
@@ -20,8 +18,10 @@ const ChatBot = () => {
   ]);
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(null);
 
-  const token = JSON.parse(localStorage.getItem('authUser')).token;
-  const userId = JSON.parse(localStorage.getItem('authUser'))._id;
+  const authUser = JSON.parse(localStorage.getItem('authUser'));
+
+  const token = authUser.token;
+  const userId = authUser._id;
 
   const scrollToBottom = () => {
     const chatContainer = document.getElementById('chatContainer');
@@ -95,7 +95,7 @@ const ChatBot = () => {
               .reverse()
               .map((msg, index) => {
                 if (msg.sender === 'user') {
-                  return <UserMessage key={index} message={msg.message} isLoading={false} />;
+                  return <UserMessage key={index} message={msg.message} isLoading={false} user={authUser} />;
                 } else {
                   return <BotMessages key={index} message={msg.message} isLoading={loadingMessageIndex === index} />;
                 }
@@ -146,12 +146,12 @@ const SwitchBtn = ({ onSwitch }: SwitchBtnProps) => {
   );
 };
 
-const UserMessage = ({ message }: { message: string }) => {
+const UserMessage = ({ message, user }: { message: string; user: any }) => {
   return (
     <div className="chat chat-start flex">
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
-          <img alt="User Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+          <img alt="User Avatar" src={user.profilePicture} />
         </div>
       </div>
 
