@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styles from '../../../components';
 import Header from '../components/Header';
 import { GiCycle as CycleIcon } from 'react-icons/gi';
+import { CloseIcon } from '../../../utils/icons';
+import { Tooltip } from '@mui/material';
 
 interface CompanyInfo {
   companyName: string;
@@ -129,6 +131,8 @@ const Manage: React.FC = () => {
     password: '',
   });
 
+  const [showPopup, setShowPopup] = useState(true);
+
   const handleCompanyChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setCompanyInfo((prevInfo) => ({
@@ -171,6 +175,17 @@ const Manage: React.FC = () => {
       currency: '',
       businessAddress: '',
     });
+  };
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const handleInvitationSubmission = (e) => {
+    e.preventDefault();
+    const emailInput = e.target.elements.email;
+    if (emailPattern.test(emailInput.value)) {
+      console.log('Email is valid:', emailInput.value);
+    } else {
+      console.log('Invalid email:', emailInput.value);
+    }
   };
 
   return (
@@ -252,16 +267,48 @@ const Manage: React.FC = () => {
 
         <div className="bg-slate-100 px-4 py-10 rounded-lg h-[50vh] flex flex-col items-center mt-4 gap-10">
           <CycleIcon className="text-5xl text-dark" />
-          <p className="text-lg text-slate-600">You've not added any employee yet</p>
-          <button className="flex text-md items-center gap-2 bg-secondary text-gray-100 p-3 rounded-md cursor-pointer hover:bg-dark transition-all duration-400">
+          <p className="text-lg text-slate-600">Send an invaitation by email</p>
+          <button
+            className="flex text-md items-center gap-2 bg-secondary text-gray-100 p-3 rounded-md cursor-pointer hover:bg-dark transition-all duration-400"
+            onClick={() => {
+              setShowPopup(true);
+            }}
+          >
             Add Employee
           </button>
         </div>
       </div>
 
       <EmployeePopup employeeInfo={employeeInfo} handleEmployeeChange={handleEmployeeChange} handleEmployeeSubmit={handleEmployeeSubmit} />
+
+      {showPopup && <SendInvitationPopup onSubmit={handleInvitationSubmission} setShowPopup={setShowPopup} />}
     </section>
   );
 };
 
 export default Manage;
+
+const SendInvitationPopup = ({ setShowPopup }: { setShowPopup: () => void }) => {
+  return (
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60">
+      <div className="bg-white p-8 shadow-md rounded-md">
+        <div className="flex items-center justify-between mb-6 text-slate-600 relative">
+          <h2 className="text-2xl font-semibold">Invite by Email</h2>
+          <Tooltip title="close" placement="top">
+            <CloseIcon
+              className="text-xl transition-all duration-500 hover:text-slate-800 self-center cursor-pointer absolute top-[-13px] right-[-18px] "
+              onClick={() => setShowPopup(false)}
+            />
+          </Tooltip>
+        </div>
+        <form>
+          <input type="email" placeholder="Email" className=" px-4 py-2 rounded-md w-full bg-slate-200 outline-none text-slate-800" />
+
+          <button type="submit" className="bg-secondary hover:bg-dark transition-all duration-500 text-white px-4 py-2 rounded-md mt-4 block w-full">
+            Send Invitation
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
