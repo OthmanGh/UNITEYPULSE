@@ -4,6 +4,7 @@ import { CloseIcon } from '../../../utils/icons';
 import { links } from '../../../constants';
 import { useStateContext } from '../../../contexts/ContextProvider';
 import Logo from './../../../assets/logo_2.png';
+import LogoutBtn from '../../../components/LogoutBtn';
 
 const Sidebar = () => {
   const { activeMenu, setActiveMenu, screenSize } = useStateContext();
@@ -19,7 +20,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10">
+    <div className="ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 relative">
       {activeMenu && (
         <>
           <div className="flex justify-between items-center">
@@ -63,6 +64,12 @@ const Sidebar = () => {
               </div>
             ))}
           </div>
+
+          <Tooltip title="Logout" placement="top">
+            <button className="absolute right-10 mb-5 cursor-pointer text-3xl  text-extraDark font-bold transition-all duration-500 " type="button">
+              <LogoutBtn />
+            </button>
+          </Tooltip>
         </>
       )}
     </div>
