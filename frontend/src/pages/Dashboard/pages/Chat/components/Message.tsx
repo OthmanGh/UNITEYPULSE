@@ -2,7 +2,7 @@ import { useAuthContext } from '../../../../../contexts/AuthContext';
 import { useConversation } from '../../../../../contexts/ConversationContext';
 import { convertTime } from '../../../../../utils/convertTime';
 const Message = ({ message }) => {
-  const { authUser } = useAuthContext();
+  const authUser = JSON.parse(localStorage.getItem('authUser'));
 
   const { selectedConversation } = useConversation();
 
@@ -13,7 +13,9 @@ const Message = ({ message }) => {
   console.log(authUser);
   console.log(selectedConversation);
 
-  const profilePic = currentUserMessages ? authUser.profilePicture : selectedConversation?.profilePicture;
+  const profilePic = currentUserMessages ? authUser.profilePicture : selectedConversation?.profilePic;
+
+  console.log(profilePic);
 
   const formatedTime = convertTime(message.createdAt);
 
@@ -25,7 +27,7 @@ const Message = ({ message }) => {
     <div className={`chat ${chatClassName}`}>
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
-          <img src={profilePic} alt="chat" />
+          <img src={selectedConversation?.profilePicture} alt="chat" />
         </div>
       </div>
 

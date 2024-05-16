@@ -6,6 +6,7 @@ const Conversation = ({ conversation, lastIdx }) => {
   const { selectedConversation, setSelectedConversation } = useConversation();
 
   const isSelected = selectedConversation?._id == conversation._id;
+  console.log(isSelected);
 
   const { onlineUsers } = useSocketContext();
 
