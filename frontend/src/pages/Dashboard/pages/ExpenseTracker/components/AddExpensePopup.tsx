@@ -1,52 +1,66 @@
-const AddExpensePopup = ({ onShowPopup, onAddExpense }: { onShowPopup: () => void; onAddExpense: () => void }) => {
+import React, { useState } from 'react';
+
+interface AddExpensePopupProps {
+  onAddExpense: (newExpense: { date: string; description: string; category: string; amount: string }) => void;
+  onClose: () => void;
+}
+
+const AddExpensePopup: React.FC<AddExpensePopupProps> = ({ onAddExpense, onClose }) => {
+  const [date, setDate] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [amount, setAmount] = useState('');
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const newExpense = {
+      date,
+      description,
+      category,
+      amount,
+    };
+    onAddExpense(newExpense);
+  };
+
   return (
-    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white dark:bg-secondary-dark-bg p-6 rounded-lg w-96">
-        <h2 className="text-lg font-semibold mb-4">Add Expense</h2>
-        <form>
-          <div className="mb-4">
-            <label htmlFor="date" className="block text-sm  text-gray-700 dark:text-gray-200 font-semibold">
-              Date
-            </label>
-            <input type="text" id="date" name="date" className="mt-1 p-2 border rounded-md w-full bg-gray-200 text-secondary  focus:outline-none" />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="description" className="block text-sm  text-gray-700 dark:text-gray-200 font-semibold">
-              Description
-            </label>
-            <input
-              type="text"
-              id="description"
-              name="description"
-              className="mt-1 p-2 border rounded-md w-full bg-gray-200 text-secondary focus:outline-none"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="category" className="block text-sm text-gray-700 dark:text-gray-200 font-semibold">
-              Category
-            </label>
-            <input type="text" id="category" name="category" className="mt-1 p-2 border rounded-md w-full bg-gray-200 text-secondary focus:outline-none" />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="amount" className="block text-sm  text-gray-700 dark:text-gray-200 font-semibold">
-              Amount
-            </label>
-            <input type="text" id="amount" name="amount" className="mt-1 p-2 border rounded-md w-full bg-gray-200 text-secondary focus:outline-none" />
-          </div>
-          <div className="flex justify-end">
-            <button
-              type="button"
-              className="bg-gray-300 text-gray-500 p-2 rounded-md mr-2 hover:bg-gray-200 transition-all duration-400 w-[80px]"
-              onClick={() => onShowPopup(false)}
-            >
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60 z-10">
+      <div className="bg-white p-8 rounded-lg relative">
+        <h2 className="text-2xl font-bold mb-4">Add Expense</h2>
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
+          <InputField type="date" placeholder="Enter date" name="date" value={date} onChange={(e) => setDate(e.target.value)} label="Date" id="date" />
+          <InputField
+            type="text"
+            placeholder="Enter description"
+            name="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            label="Description"
+            id="description"
+          />
+          <InputField
+            type="text"
+            placeholder="Enter category"
+            name="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            label="Category"
+            id="category"
+          />
+          <InputField
+            type="number"
+            placeholder="Enter amount"
+            name="amount"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            label="Amount"
+            id="amount"
+          />
+          <div className="flex justify-end gap-2">
+            <button type="button" onClick={onClose} className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 transition-all duration-500">
               Cancel
             </button>
-            <button
-              type="submit"
-              onClick={onAddExpense}
-              className="bg-secondary text-white p-2 rounded-md hover:bg-secondary hover:bg-opacity-80 transition-all duration-400 w-[80px]"
-            >
-              Add
+            <button type="submit" className="bg-secondary text-white px-4 py-2 rounded hover:bg-dark transition-all duration-500 ">
+              Add Expense
             </button>
           </div>
         </form>
@@ -54,4 +68,35 @@ const AddExpensePopup = ({ onShowPopup, onAddExpense }: { onShowPopup: () => voi
     </div>
   );
 };
+
 export default AddExpensePopup;
+
+interface InputFieldProps {
+  type: string;
+  placeholder: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  label: string;
+  id: string;
+  disabled?: boolean;
+}
+
+const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value, onChange, label, id, disabled = false }) => {
+  return (
+    <label className="flex flex-col">
+      <span className="text-slate-600 mb-[1px]">{label}</span>
+      <input
+        type={type}
+        placeholder={placeholder}
+        name={name}
+        value={value}
+        onChange={onChange}
+        id={id}
+        className={`p-3 rounded-md bg-slate-200  outline-none w-[500px]  text-dark `}
+        disabled={disabled}
+        required
+      />
+    </label>
+  );
+};
