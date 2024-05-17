@@ -3,9 +3,12 @@ import useGetCustomers from '../../../hooks/useGetCustomers';
 import Header from '../components/Header';
 import { MdOutlineDeleteSweep as DeleteIcon } from 'react-icons/md';
 import { BiSolidEditAlt as EditIcon } from 'react-icons/bi';
+import { AddIcon } from '../../../utils/icons';
+import { CloseIcon } from '../../../utils/icons';
 
 const Customers = () => {
   const { customers, loading } = useGetCustomers();
+  const [showPopup, setShowPopup] = useState('false');
 
   const data = ['customerId', 'name', 'projectName', 'location', 'budget', 'status', 'week'];
 
@@ -44,7 +47,16 @@ const Customers = () => {
 
   return (
     <section className="py-8 px-4">
-      <Header category="pages" title="Customers" />
+      <div className="flex flex-col  xs:flex-row items-center justify-between">
+        <Header category="app" title="Expense Tracker" />
+        <button
+          className="flex items-center gap-2 bg-secondary text-gray-100 p-3 rounded-md cursor-pointer hover:bg-dark transition-all duration-400"
+          onClick={() => setShowPopup(true)}
+        >
+          <AddIcon className="text-xl" />
+          Add Customer
+        </button>
+      </div>
 
       <div className="overflow-x-auto">
         <table className="w-full table-auto border-collapse border border-gray-300 text-center">
@@ -63,23 +75,56 @@ const Customers = () => {
           <tbody>{filteredCustomers}</tbody>
         </table>
       </div>
+
+      {showPopup && <AddCustomerPopup setShowPopup={setShowPopup} />}
     </section>
   );
 };
 
 export default Customers;
 
-// {
-//   "_id": "663c5f34040161bc23f92422",
-//   "name": "Customer 1",
-//   "projectName": "Project 1",
-//   "status": "Pending",
-//   "weeks": 10,
-//   "budget": 50000,
-//   "location": "City 1",
-//   "customerId": "CUST001", *
-//   "owner": "663b67f60b989a6091509d30",
-//   "createdAt": "2024-05-09T05:29:24.987Z",
-//   "updatedAt": "2024-05-09T05:29:24.987Z",
-//   "__v": 0 1
-// },
+const AddCustomerPopup = ({ setShowPopup }) => {
+  return (
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60">
+      <div className="bg-white p-8 rounded-lg relative">
+        <h2 className="text-2xl font-bold mb-4">Fill Customer Infos</h2>
+        <button className="absolute top-6 right-6 text-xl text-secondary hover:text-dark transition-all duration-500" onClick={() => setShowPopup(false)}>
+          <CloseIcon className="" />
+        </button>
+
+        <form className="grid grid-cols-1 items-center justify-center  xs:gap-4 xs:grid-cols-2 sm:grid-cols-3">
+          <InputField type="text" placeholder="Customer Name" />
+          <InputField type="text" placeholder="Customer ID" />
+          <InputField type="text" placeholder="Project Name" />
+
+          <select className="bg-slate-100 rounded-md px-4 py-4 h-15 text-secondary outline-none">
+            <option value="pending">Pending</option>
+            <option value="active">Active</option>
+            <option value="cancel">Cancel</option>
+            <option value="completed">Completed</option>
+          </select>
+
+          <InputField type="number" placeholder="Weeks" />
+          <InputField type="number" placeholder="Budget" />
+          <InputField type="text" placeholder="Location" />
+
+          <button
+            type="submit"
+            className="bg-secondary rounded-md px-4 py-4 h-15 text-slate-100 outline-none font-bold cursor-pointer hover:bg-dark transition-all duration-500"
+          >
+            Add Customer
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+type InputFieldProps = {
+  type: string;
+  placeholder: string;
+};
+
+const InputField = ({ type, placeholder }: InputFieldProps) => {
+  return <input type={type} placeholder={placeholder} className="bg-slate-100 rounded-md px-4 py-4 h-15 text-secondary outline-none" />;
+};
