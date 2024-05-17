@@ -1,216 +1,286 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
-import MUIDataTable from 'mui-datatables';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { MdOutlineDeleteSweep as DeleteIcon } from 'react-icons/md';
+import { BiSolidEditAlt as EditIcon } from 'react-icons/bi';
+import { AddIcon, CloseIcon } from '../../../utils/icons';
 import useGetEmployees from '../../../hooks/useGetEmployees';
 import useCreateEmployee from '../../../hooks/useCreateEmployees';
 import useUpdateEmployee from '../../../hooks/useUpdateEmployee';
 import useDeleteEmployee from '../../../hooks/useDeleteEmployee';
-import styles from '../../../components';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 
-const Employees = () => {
-  const { employees, loading: employeesLoading } = useGetEmployees();
-  const { createEmployee, loading: createEmployeeLoading, error: createEmployeeError } = useCreateEmployee();
-  const { deleteEmployee, loading: deleteEmployeeLoading, error: deleteEmployeeError } = useDeleteEmployee();
-  const { updateEmployee, loading: updateEmployeeLoading, error: updateEmployeeError } = useUpdateEmployee();
+interface EmployeeData {
+  employeeId: string;
+  name: string;
+  destination: string;
+  country: string;
+  hireDate: string;
+  profilePicture: string;
+}
 
-  const [employeeData, setEmployeeData] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ employeeId: '', name: '', destination: '', country: '', hireDate: '', profilePicture: '' });
-  const [isEdit, setIsEdit] = useState(false);
+const data: string[] = ['employeeId', 'name', 'destination', 'country', 'hireDate', 'profilePicture'];
+
+const Employees: React.FC = () => {
+  const { employees: initialEmployees, loading } = useGetEmployees();
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const { createEmployee, loading: createLoading, error: createError } = useCreateEmployee();
+  const [employees, setEmployees] = useState<EmployeeData[]>(initialEmployees);
+  const { deleteEmployee } = useDeleteEmployee();
+  const { updateEmployee } = useUpdateEmployee();
+  const [employeeData, setEmployeeData] = useState<EmployeeData>({
+    employeeId: '',
+    name: '',
+    destination: '',
+    country: '',
+    hireDate: '',
+    profilePicture: '',
+  });
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [editingEmployeeId, setEditingEmployeeId] = useState<string | null>(null);
 
   useEffect(() => {
-    setEmployeeData(employees);
-  }, [employees]);
+    if (!loading) {
+      setEmployees(initialEmployees);
+    }
+  }, [initialEmployees, loading]);
 
-  const handleOpen = () => {
-    setForm({ employeeId: '', name: '', destination: '', country: '', hireDate: '', profilePicture: '' });
-    setIsEdit(false);
-    setOpen(true);
+  const handleDelete = async (employeeId: string) => {
+    try {
+      await deleteEmployee(employeeId);
+      setEmployees((prevEmployees) => prevEmployees.filter((employee) => employee.employeeId !== employeeId));
+    } catch (error) {
+      console.error('Failed to delete employee', error);
+    }
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleEditOpen = (employee) => {
-    setForm(employee);
-    setIsEdit(true);
-    setOpen(true);
-  };
-
-  const handleChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setForm((prevForm) => ({ ...prevForm, [name]: value }));
+    setEmployeeData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = async () => {
-    if (isEdit) {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (isEditing && editingEmployeeId) {
       try {
-        await updateEmployee(form.employeeId, form);
-        setEmployeeData((prevData) => prevData.map((emp) => (emp.employeeId === form.employeeId ? form : emp)));
-        setOpen(false);
+        await updateEmployee(editingEmployeeId, employeeData);
+        setEmployees((prevEmployees) =>
+          prevEmployees.map((employee) => (employee.employeeId === editingEmployeeId ? { ...employeeData, employeeId: editingEmployeeId } : employee))
+        );
       } catch (error) {
-        console.error('Error updating employee:', error.message);
+        console.error('Failed to update employee', error);
       }
     } else {
       try {
-        const newEmployee = await createEmployee(form);
-        setEmployeeData((prevData) => [...prevData, { ...newEmployee }]);
-        setOpen(false);
+        const newEmployee = await createEmployee(employeeData);
+        setEmployees((prevEmployees) => [...prevEmployees, newEmployee]);
       } catch (error) {
-        console.error('Error creating employee:', error.message);
+        console.error('Failed to create employee', error);
       }
     }
-  };
 
-  const handleDelete = async (employeeId) => {
-    try {
-      await deleteEmployee(employeeId);
-      setEmployeeData((prevData) => prevData.filter((emp) => emp.employeeId !== employeeId));
-    } catch (error) {
-      console.error('Error deleting employee:', error.message);
-    }
-  };
-
-  const columns = [
-    { name: 'employeeId', label: 'Employee ID' },
-    {
-      name: 'profilePicture',
-      label: 'Profile',
-      options: { customBodyRender: (value) => <img src={value} alt="pic" className="w-12 rounded-full" /> },
-      filter: false,
-    },
-    { name: 'name', label: 'Name' },
-    { name: 'destination', label: 'Destination' },
-    { name: 'country', label: 'Country' },
-    {
-      name: 'hireDate',
-      label: 'Hire Date',
-      options: { customBodyRender: (value) => new Date(value).toLocaleDateString() },
-    },
-    {
-      name: 'actions',
-      label: 'Actions',
-      options: {
-        customBodyRender: (value, tableMeta) => (
-          <div className="flex justify-center space-x-2">
-            <Button onClick={() => handleEditOpen(employeeData[tableMeta.rowIndex])} variant="contained" color="secondary">
-              Edit
-            </Button>
-            <Button onClick={() => handleDelete(employeeData[tableMeta.rowIndex].employeeId)} variant="contained" color="error">
-              Delete
-            </Button>
-          </div>
-        ),
-        filter: false,
-        sort: false,
-      },
-    },
-  ];
-
-  const options = {
-    selectableRows: 'none',
-    elevation: 0,
-    rowsPerPage: 5,
-    rowsPerPageOptions: [5, 10, 20, 30],
-    responsive: 'standard',
-    tableBodyMaxHeight: 'calc(100vh - 320px)',
-    textLabels: {
-      body: {
-        noMatch: employeesLoading ? 'Loading...' : 'No records found',
-      },
-    },
-  };
-
-  const getMuiTheme = () =>
-    createTheme({
-      typography: { fontFamily: 'Poppins' },
-      palette: {
-        background: { paper: '#0f4659', default: '#1a1c20' },
-        text: { primary: '#F7F7F7' },
-        mode: 'dark',
-      },
-      components: {
-        MuiTableCell: {
-          styleOverrides: {
-            head: { textAlign: 'center' },
-            body: { color: '#e2e8f0', textAlign: 'center' },
-          },
-        },
-
-        MuiTableHead: {
-          styleOverrides: {
-            root: {
-              backgroundColor: '#1a1c20',
-            },
-          },
-        },
-
-        MuiButton: {
-          styleOverrides: {
-            root: {
-              color: '#fff',
-              '&:hover': {
-                backgroundColor: '#333',
-              },
-            },
-          },
-        },
-
-        MuiTableBody: {
-          styleOverrides: {
-            root: {
-              '& .MuiTableRow-root:not(:last-child)': {
-                borderBottom: '2px solid #ffffff',
-              },
-            },
-          },
-        },
-      },
+    setEmployeeData({
+      employeeId: '',
+      name: '',
+      destination: '',
+      country: '',
+      hireDate: '',
+      profilePicture: '',
     });
+    setShowPopup(false);
+    setIsEditing(false);
+    setEditingEmployeeId(null);
+  };
 
-  const data = employeeData.map((employee, index) => ({
-    ...employee,
-    profilePicture: <img src={employee?.profile?.picture} alt="pic" className="w-12 rounded-full p-3 bg-slate-300" />,
-    hireDate: new Date(employee?.hireDate).toLocaleDateString(),
-  }));
+  const handleEdit = (employee: EmployeeData) => {
+    setEmployeeData(employee);
+    setIsEditing(true);
+    setEditingEmployeeId(employee.employeeId);
+    setShowPopup(true);
+  };
+
+  const filteredEmployees = employees.map((employee, index) => {
+    const filteredData: any = {};
+    for (const key of data) {
+      if (employee.hasOwnProperty(key)) {
+        filteredData[key] = employee[key];
+      }
+    }
+
+    return (
+      <tr
+        key={index}
+        className={`${index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-100'} hover:bg-secondary hover:bg-opacity-20 transition-all duration-500 text-dark`}
+      >
+        <td className="px-4 text-[15px] py-2">{filteredData.employeeId}</td>
+        <td className="px-4 text-[15px] py-2">{filteredData.name}</td>
+        <td className="px-4 text-[15px] py-2">{filteredData.destination}</td>
+        <td className="px-4 text-[15px] py-2">{filteredData.country}</td>
+        <td className="px-4 text-[15px] py-2">{new Date(filteredData.hireDate).toLocaleDateString()}</td>
+        <td className="px-4 text-[15px] py-2">
+          <img src={filteredData.profilePicture} alt="pic" className="w-12 rounded-full" />
+        </td>
+        <td className="px-4 text-[15px] py-2">
+          <button className="py-2 px-4" onClick={() => handleEdit(employee)}>
+            <EditIcon className="text-dark text-2xl hover:text-blue-500 transition-all duration-500" />
+          </button>
+        </td>
+        <td className="px-4 py-2">
+          <button className="text-dark hover:text-red-500 transition-all duration-500 py-2 px-4 rounded" onClick={() => handleDelete(filteredData.employeeId)}>
+            <DeleteIcon className="text-2xl" />
+          </button>
+        </td>
+      </tr>
+    );
+  });
 
   return (
-    <section className={styles.dashboardSection}>
-      <Header category="app" title="Employees" />
-      <div className="max-w-full overflow-x-auto rounded-md bg-slate-100 p-4">
-        <div className="mb-4 flex justify-end">
-          <Button variant="contained" color="primary" onClick={handleOpen}>
-            Add Employee
-          </Button>
-        </div>
-
-        <ThemeProvider theme={getMuiTheme()}>
-          <MUIDataTable title={'Employees List'} data={data} columns={columns} options={options} />
-        </ThemeProvider>
+    <section className="py-8 px-4">
+      <div className="flex flex-col xs:flex-row items-center justify-between">
+        <Header category="app" title="Employees" />
+        <button
+          className="flex items-center gap-2 bg-secondary text-gray-100 p-3 rounded-md cursor-pointer hover:bg-dark transition-all duration-400"
+          onClick={() => setShowPopup(true)}
+        >
+          <AddIcon className="text-xl" />
+          Add Employee
+        </button>
       </div>
 
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{isEdit ? 'Edit Employee' : 'Add Employee'}</DialogTitle>
+      <div className="overflow-x-auto">
+        <table className="w-full table-auto border-collapse border border-gray-300 text-center">
+          <thead>
+            <tr className="text-center bg-secondary">
+              <th className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">Employee ID</th>
+              <th className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">Name</th>
+              <th className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">Destination</th>
+              <th className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">Country</th>
+              <th className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">Hire Date</th>
+              <th className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">Profile Picture</th>
+              <th className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">Edit</th>
+              <th className="text-gray-50 capitalize border-r-2 px-4 py-2">Delete</th>
+            </tr>
+          </thead>
+          <tbody>{filteredEmployees}</tbody>
+        </table>
+      </div>
 
-        <DialogContent>
-          <TextField margin="dense" name="name" label="Name" value={form.name} onChange={handleChange} fullWidth />
-          <TextField margin="dense" name="destination" label="Destination" value={form.destination} onChange={handleChange} fullWidth />
-          <TextField margin="dense" name="country" label="Country" value={form.country} onChange={handleChange} fullWidth />
-          <TextField margin="dense" name="hireDate" label="Hire Date" value={form.hireDate} onChange={handleChange} fullWidth />
-          <TextField margin="dense" name="profilePicture" label="Profile Picture URL" value={form.profilePicture} onChange={handleChange} fullWidth />
-        </DialogContent>
-
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>{isEdit ? 'Update' : 'Add'}</Button>
-        </DialogActions>
-      </Dialog>
+      {showPopup && (
+        <AddEmployeePopup
+          setShowPopup={setShowPopup}
+          setEmployeeData={setEmployeeData}
+          handleSubmit={handleSubmit}
+          handleInputChange={handleInputChange}
+          employeeData={employeeData}
+          isEditing={isEditing}
+        />
+      )}
     </section>
   );
 };
 
 export default Employees;
+
+interface AddEmployeePopupProps {
+  setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  setEmployeeData: React.Dispatch<React.SetStateAction<EmployeeData>>;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  employeeData: EmployeeData;
+  isEditing: boolean;
+}
+
+const AddEmployeePopup: React.FC<AddEmployeePopupProps> = ({ setShowPopup, setEmployeeData, handleSubmit, handleInputChange, employeeData, isEditing }) => {
+  return (
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60">
+      <div className="bg-white p-8 rounded-lg relative">
+        <h2 className="text-2xl font-bold mb-4">{isEditing ? 'Edit Employee' : 'Add Employee'}</h2>
+        <button className="absolute top-6 right-6 text-xl text-secondary hover:text-dark transition-all duration-500" onClick={() => setShowPopup(false)}>
+          <CloseIcon />
+        </button>
+        <form className="grid grid-cols-1 items-center justify-center xs:grid-cols-2 gap-10 sm:grid-cols-3" onSubmit={handleSubmit}>
+          <div className="flex flex-col">
+            <label
+              htmlFor="employeeId"
+              className="mb-1 font
+-medium"
+            >
+              Employee ID
+            </label>
+            <input
+              type="text"
+              id="employeeId"
+              name="employeeId"
+              value={employeeData.employeeId}
+              onChange={handleInputChange}
+              className="border p-2 rounded"
+              required
+              disabled={isEditing} // Disable ID field when editing
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="name" className="mb-1 font-medium">
+              Name
+            </label>
+            <input type="text" id="name" name="name" value={employeeData.name} onChange={handleInputChange} className="border p-2 rounded" required />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="destination" className="mb-1 font-medium">
+              Destination
+            </label>
+            <input
+              type="text"
+              id="destination"
+              name="destination"
+              value={employeeData.destination}
+              onChange={handleInputChange}
+              className="border p-2 rounded"
+              required
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="country" className="mb-1 font-medium">
+              Country
+            </label>
+            <input type="text" id="country" name="country" value={employeeData.country} onChange={handleInputChange} className="border p-2 rounded" required />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="hireDate" className="mb-1 font-medium">
+              Hire Date
+            </label>
+            <input
+              type="date"
+              id="hireDate"
+              name="hireDate"
+              value={employeeData.hireDate}
+              onChange={handleInputChange}
+              className="border p-2 rounded"
+              required
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="profilePicture" className="mb-1 font-medium">
+              Profile Picture URL
+            </label>
+            <input
+              type="text"
+              id="profilePicture"
+              name="profilePicture"
+              value={employeeData.profilePicture}
+              onChange={handleInputChange}
+              className="border p-2 rounded"
+            />
+          </div>
+          <button
+            type="submit"
+            className="xs:col-span-2 sm:col-span-3 bg-secondary text-gray-100 py-2 px-4 rounded mt-4 hover:bg-dark transition-all duration-400"
+          >
+            {isEditing ? 'Update Employee' : 'Add Employee'}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};

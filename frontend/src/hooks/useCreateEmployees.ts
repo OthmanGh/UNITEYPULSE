@@ -18,6 +18,7 @@ const useCreateEmployee = () => {
         },
         body: JSON.stringify(employeeData),
       });
+
       const data = await res.json();
 
       if (data.status === 'success') {
