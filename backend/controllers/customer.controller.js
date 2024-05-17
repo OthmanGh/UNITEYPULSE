@@ -69,9 +69,8 @@ export const updateCustomer = async (req, res) => {
 
   try {
     const customer = await Customer.findOneAndUpdate(
-      { _id: id, owner: ownerId },
-      req.body,
-      { new: true }
+      { customerId: id, owner: ownerId },
+      req.body
     );
     if (!customer) {
       return res.status(404).json({
