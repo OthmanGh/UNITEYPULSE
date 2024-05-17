@@ -66,90 +66,62 @@ const Manage: React.FC = () => {
     <section className={`${styles.dashboardSection}`}>
       <div className="flex flex-col  xs:flex-row items-center justify-between">
         <Header category="pages" title="Manage" />
-        <button
-          className="flex items-center mb-2 gap-2 bg-secondary text-gray-100 p-3 rounded-md cursor-pointer hover:bg-dark transition-all duration-400 text-md"
-          onClick={handleCompanySubmit}
-        >
-          Submit Changes
-        </button>
       </div>
 
-      <form className="grid xs:grid-cols-2 sm:grid-cols-3 gap-10" onSubmit={handleCompanySubmit}>
-        <input
-          className="bg-transparent border-b-2 px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400  w-[80%]"
-          placeholder="Company Name"
-          name="companyName"
-          value={companyInfo.companyName}
-          onChange={handleCompanyChange}
-          required
-        />
-
-        <input
-          className="bg-transparent border-b-2 px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400  w-[80%]"
-          placeholder="Total Incomes"
-          type="number"
-          name="totalIncomes"
-          value={companyInfo.totalIncomes}
-          onChange={handleCompanyChange}
-          required
-        />
-
-        <input
-          className="bg-transparent border-b-2 px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400  w-[80%]"
-          placeholder="Total Expenses"
-          type="number"
-          name="totalExpenses"
-          value={companyInfo.totalExpenses}
-          onChange={handleCompanyChange}
-          required
-        />
-
-        <input
-          className="bg-transparent border-b-2 px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400  w-[80%]"
-          placeholder="Tax ID"
-          name="taxId"
-          value={companyInfo.taxId}
-          onChange={handleCompanyChange}
-          required
-        />
-
-        <select
-          className="bg-transparent border-b-2 px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400  w-[80%]"
-          name="currency"
-          value={companyInfo.currency}
-          onChange={handleCompanyChange}
-          required
-        >
-          <option value="">Currency</option>
-          <option value="USD">USD - Dollar</option>
-          <option value="EUR">EUR - Euro</option>
-          <option value="GBP">GBP - Pound</option>
-        </select>
-
-        <input
-          className="bg-transparent border-b-2 px-1 py-3 border-b-secondary text-center outline-none text-secondary placeholder:text-gray-400  w-[80%]"
-          placeholder="Business Address"
-          name="businessAddress"
-          value={companyInfo.businessAddress}
-          onChange={handleCompanyChange}
-          required
-        />
-      </form>
-
       <div>
-        <h2 className="text-secondary font-semibold text-2xl mt-10">Access:</h2>
+        <h2 className="text-secondary font-bold text-2xl ">Company Policies:</h2>
 
-        <div className="bg-slate-100 px-4 py-10 rounded-lg h-[50vh] flex flex-col items-center mt-4 gap-10">
-          <CycleIcon className="text-5xl text-dark" />
-          <p className="text-lg text-slate-600">Send an invitation by email</p>
-          <button
-            className="flex text-md items-center gap-2 bg-secondary text-gray-100 p-3 rounded-md cursor-pointer hover:bg-dark transition-all duration-400"
-            onClick={() => {
-              setShowPopup(true);
-            }}
-          >
-            Add Employee
-          </button>
+        <div className="grid grid-cols-1 items-center justify-center xs:grid-cols-2 gap-4 sm:grid-cols-3 p-4">
+          <Policies
+            title="1. Equal Employment Opportunity Policy:"
+            text=" We embrace diversity and provide equal opportunities for all employees, prohibiting discrimination based on race, gender, religion, age, or disability."
+          />
+
+          <Policies
+            title="2. Code of Conduct:"
+            text="Employees must maintain honesty, respect, and professionalism in all interactions, avoiding conflicts of interest and unethical behavior.
+
+            "
+          />
+
+          <Policies
+            title="3. Workplace Harassment:"
+            text="Harassment of any kind is unacceptable. Employees are encouraged to report any incidents promptly for appropriate action."
+          />
+
+          <Policies
+            title="4. Data Privacy and Security:"
+            text="We prioritize the protection of customer and company data, ensuring compliance with all relevant privacy laws and regulations."
+          />
+
+          <Policies
+            title="5. Performance Evaluation:"
+            text="Annual evaluations provide opportunities for goal-setting, feedback, and professional development discussions."
+          />
+
+          <Policies
+            title="6. Communication:"
+            text="Clear and respectful communication is essential for effective collaboration. Our platform facilitates seamless communication across teams"
+          />
+        </div>
+      </div>
+
+      <div className="mt-4">
+        <h2 className="text-secondary font-bold text-2xl">Access:</h2>
+
+        <div className="p-4">
+          <div className="bg-slate-100 px-4 py-10 rounded-lg h-[50vh] flex flex-col items-center mt-4 gap-10">
+            <CycleIcon className="text-5xl text-dark" />
+            <p className="text-lg text-slate-600">Send an invitation by email</p>
+            <button
+              className="flex text-md items-center gap-2 bg-secondary text-gray-100 p-3 rounded-md cursor-pointer hover:bg-dark transition-all duration-400"
+              onClick={() => {
+                setShowPopup(true);
+              }}
+            >
+              Add Employee
+            </button>
+          </div>
         </div>
       </div>
 
@@ -161,7 +133,7 @@ const Manage: React.FC = () => {
 export default Manage;
 
 type SendInvitationPopupProps = {
-  setShowPopup: () => void;
+  setShowPopup: (show: boolean) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -201,5 +173,16 @@ const SendInvitationPopup: React.FC<SendInvitationPopupProps> = ({ setShowPopup,
         </form>
       </div>
     </div>
+  );
+};
+
+const Policies = ({ text, title }: { text: string; title: string }) => {
+  return (
+    <Tooltip title="click to edit" placement="top">
+      <div className="bg-dark px-4 py-6 rounded-lg text-sm w-full h-[180px] hover:scale-105 transition-all duration-500 hover:bg-secondary  hover:text-gray-200 overflow-y-scroll">
+        <h3 className="text-[15px] text-white mb-3">{title}</h3>
+        <p className="leading-6">{text}</p>
+      </div>
+    </Tooltip>
   );
 };
