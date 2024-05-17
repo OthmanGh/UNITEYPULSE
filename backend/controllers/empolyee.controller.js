@@ -64,6 +64,7 @@ export const updateEmployee = async (req, res) => {
       new: true,
       runValidators: true
     });
+
     if (!employee) {
       res.status(404).json({
         status: "fail",
@@ -83,8 +84,15 @@ export const updateEmployee = async (req, res) => {
 };
 
 export const deleteEmployee = async (req, res) => {
+  const { id } = req.params;
+
   try {
-    const employee = await Employee.findByIdAndDelete(req.params.id);
+    const employee = await Employee.findOneAndDelete({
+      employeeId: id
+    });
+
+    console.log(employee);
+
     if (!employee) {
       res.status(404).json({
         status: "fail",
