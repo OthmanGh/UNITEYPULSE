@@ -37,6 +37,23 @@ const Calendar = () => {
     fetchEvents();
   }, []);
 
+  const deleteEvent = async (eventId) => {
+    try {
+      const token = JSON.parse(localStorage.getItem('authUser')).token;
+
+      await axios.delete(`http://127.0.0.1:8000/api/events/${eventId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setEvents(events.filter((event) => event.id !== eventId));
+    } catch (error) {
+      console.error('Error deleting event:', error);
+    }
+  };
+
   return (
     <section className={styles.dashboardSection}>
       <FullCalendar
@@ -55,6 +72,7 @@ const Calendar = () => {
         dayMaxEvents={true}
         eventClick={(eventInfo) => {
           if (window.confirm(`Are you sure you want to remove the event '${eventInfo.event.title}'?`)) {
+            deleteEvent(eventInfo.event.id);
           }
         }}
         select={(selectionInfo) => {
