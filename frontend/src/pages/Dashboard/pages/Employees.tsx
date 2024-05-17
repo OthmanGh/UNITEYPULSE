@@ -113,7 +113,7 @@ const Employees: React.FC = () => {
     return (
       <tr
         key={index}
-        className={`${index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-100'} hover:bg-secondary hover:bg-opacity-20 transition-all duration-500 text-dark`}
+        className={`${index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-100'} hover:bg-secondary hover:bg-opacity-20  transition-all duration-500 text-dark w-full`}
       >
         <td className="px-4 text-[15px] py-2">{filteredData.employeeId}</td>
         <td className="px-4 text-[15px] py-2">{filteredData.name}</td>
@@ -121,7 +121,7 @@ const Employees: React.FC = () => {
         <td className="px-4 text-[15px] py-2">{filteredData.country}</td>
         <td className="px-4 text-[15px] py-2">{new Date(filteredData.hireDate).toLocaleDateString()}</td>
         <td className="px-4 text-[15px] py-2">
-          <img src={filteredData.profilePicture} alt="pic" className="w-12 rounded-full" />
+          <img src={filteredData.profilePicture} alt="pic" className="w-12 rounded-full mx-auto" />
         </td>
         <td className="px-4 text-[15px] py-2">
           <button className="py-2 px-4" onClick={() => handleEdit(employee)}>
@@ -185,11 +185,18 @@ const Employees: React.FC = () => {
 export default Employees;
 
 interface AddEmployeePopupProps {
-  setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
-  setEmployeeData: React.Dispatch<React.SetStateAction<EmployeeData>>;
+  setShowPopup: (show: boolean) => void;
+  setEmployeeData: (data: any) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
-  employeeData: EmployeeData;
+  employeeData: {
+    employeeId: string;
+    name: string;
+    destination: string;
+    country: string;
+    hireDate: string;
+    profilePicture: string;
+  };
   isEditing: boolean;
 }
 
@@ -202,78 +209,30 @@ const AddEmployeePopup: React.FC<AddEmployeePopupProps> = ({ setShowPopup, setEm
           <CloseIcon />
         </button>
         <form className="grid grid-cols-1 items-center justify-center xs:grid-cols-2 gap-10 sm:grid-cols-3" onSubmit={handleSubmit}>
-          <div className="flex flex-col">
-            <label
-              htmlFor="employeeId"
-              className="mb-1 font
--medium"
-            >
-              Employee ID
-            </label>
-            <input
-              type="text"
-              id="employeeId"
-              name="employeeId"
-              value={employeeData.employeeId}
-              onChange={handleInputChange}
-              className="border p-2 rounded"
-              required
-              disabled={isEditing} // Disable ID field when editing
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="name" className="mb-1 font-medium">
-              Name
-            </label>
-            <input type="text" id="name" name="name" value={employeeData.name} onChange={handleInputChange} className="border p-2 rounded" required />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="destination" className="mb-1 font-medium">
-              Destination
-            </label>
-            <input
-              type="text"
-              id="destination"
-              name="destination"
-              value={employeeData.destination}
-              onChange={handleInputChange}
-              className="border p-2 rounded"
-              required
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="country" className="mb-1 font-medium">
-              Country
-            </label>
-            <input type="text" id="country" name="country" value={employeeData.country} onChange={handleInputChange} className="border p-2 rounded" required />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="hireDate" className="mb-1 font-medium">
-              Hire Date
-            </label>
-            <input
-              type="date"
-              id="hireDate"
-              name="hireDate"
-              value={employeeData.hireDate}
-              onChange={handleInputChange}
-              className="border p-2 rounded"
-              required
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="profilePicture" className="mb-1 font-medium">
-              Profile Picture URL
-            </label>
-            <input
-              type="text"
-              id="profilePicture"
-              name="profilePicture"
-              value={employeeData.profilePicture}
-              onChange={handleInputChange}
-              className="border p-2 rounded"
-            />
-          </div>
+          <InputField
+            type="text"
+            id="employeeId"
+            name="employeeId"
+            label="Employee ID"
+            value={employeeData.employeeId}
+            onChange={handleInputChange}
+            disabled={isEditing}
+          />
+          <InputField type="text" id="name" name="name" label="Name" value={employeeData.name} onChange={handleInputChange} />
+          <InputField type="text" id="destination" name="destination" label="Destination" value={employeeData.destination} onChange={handleInputChange} />
+          <InputField type="text" id="country" name="country" label="Country" value={employeeData.country} onChange={handleInputChange} />
+
+          {!isEditing && <InputField type="date" id="hireDate" name="hireDate" label="Hire Date" value={employeeData.hireDate} onChange={handleInputChange} />}
+
+          <InputField
+            type="text"
+            id="profilePicture"
+            name="profilePicture"
+            label="Profile Picture URL"
+            value={employeeData.profilePicture}
+            onChange={handleInputChange}
+          />
+
           <button
             type="submit"
             className="xs:col-span-2 sm:col-span-3 bg-secondary text-gray-100 py-2 px-4 rounded mt-4 hover:bg-dark transition-all duration-400"
@@ -283,5 +242,36 @@ const AddEmployeePopup: React.FC<AddEmployeePopupProps> = ({ setShowPopup, setEm
         </form>
       </div>
     </div>
+  );
+};
+
+interface InputFieldProps {
+  type: string;
+  placeholder?: string;
+  name: string;
+  label: string;
+  id: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  disabled?: boolean;
+  style?: string;
+}
+
+const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value, onChange, label, id, style, disabled = false }) => {
+  return (
+    <fieldset className="flex flex-col justify-center items-start">
+      <label htmlFor={id} className="mb-2 text-[15px] text-slate-500">
+        {label}
+      </label>
+      <input
+        type={type}
+        placeholder={placeholder}
+        name={name}
+        value={value}
+        onChange={onChange}
+        className={`rounded-md px-4 py-4 h-15 text-secondary outline-none ${disabled ? 'bg-gray-500 text-slate-800 cursor-not-allowed' : 'bg-slate-100'}`}
+        disabled={disabled}
+      />
+    </fieldset>
   );
 };
