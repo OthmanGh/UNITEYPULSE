@@ -105,6 +105,7 @@ const Employees = () => {
         text: { primary: '#F7F7F7' },
         mode: 'dark',
       },
+
       components: {
         MuiTableCell: {
           styleOverrides: {
@@ -112,6 +113,7 @@ const Employees = () => {
             body: { color: '#e2e8f0', textAlign: 'center' },
           },
         },
+
         MUIDataTable: {
           root: {
             '& .MuiTableBody-root .MuiTableRow-root:not(:last-child)': { borderBottom: '1px solid white' },
