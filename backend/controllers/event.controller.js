@@ -18,3 +18,22 @@ export const getAllEvents = async (req, res) => {
     });
   }
 };
+
+export const createEvent = async (req, res) => {
+  try {
+    const user = req.user;
+
+    console.log("User information:", user);
+
+    const newEvent = await Event.create(req.body);
+    res.status(201).json({
+      status: "success",
+      data: newEvent
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "error",
+      message: err.message
+    });
+  }
+};
