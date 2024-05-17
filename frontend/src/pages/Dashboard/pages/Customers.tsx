@@ -6,14 +6,33 @@ import { BiSolidEditAlt as EditIcon } from 'react-icons/bi';
 import { AddIcon } from '../../../utils/icons';
 import { CloseIcon } from '../../../utils/icons';
 
-const Customers = () => {
-  const { customers, loading } = useGetCustomers();
-  const [showPopup, setShowPopup] = useState('false');
+interface CustomerData {
+  name: string;
+  customerId: string;
+  projectName: string;
+  status: string;
+  weeks: number;
+  budget: number;
+  location: string;
+}
 
-  const data = ['customerId', 'name', 'projectName', 'location', 'budget', 'status', 'week'];
+const data: string[] = ['customerId', 'name', 'projectName', 'location', 'budget', 'status', 'week'];
+
+const Customers: React.FC = () => {
+  const { customers, loading } = useGetCustomers();
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [customerData, setCustomerData] = useState<CustomerData>({
+    name: '',
+    customerId: '',
+    projectName: '',
+    status: 'pending',
+    weeks: 0,
+    budget: 0,
+    location: '',
+  });
 
   const filteredCustomers = customers.map((customer, index) => {
-    const filteredData = {};
+    const filteredData: any = {};
     for (const key of data) {
       if (customer.hasOwnProperty(key)) {
         filteredData[key] = customer[key];
@@ -44,6 +63,29 @@ const Customers = () => {
       </tr>
     );
   });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setCustomerData((prevData) => ({
+      ...prevData,
+      [name]: name === 'weeks' || name === 'budget' ? parseFloat(value) : value,
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(customerData);
+    setShowPopup(false);
+    setCustomerData({
+      name: '',
+      customerId: '',
+      projectName: '',
+      status: 'pending',
+      weeks: 0,
+      budget: 0,
+      location: '',
+    });
+  };
 
   return (
     <section className="py-8 px-4">
@@ -76,43 +118,118 @@ const Customers = () => {
         </table>
       </div>
 
-      {showPopup && <AddCustomerPopup setShowPopup={setShowPopup} />}
+      {showPopup && (
+        <AddCustomerPopup
+          setShowPopup={setShowPopup}
+          setCustomerData={setCustomerData}
+          handleSubmit={handleSubmit}
+          handleInputChange={handleInputChange}
+          customerData={customerData}
+        />
+      )}
     </section>
   );
 };
 
 export default Customers;
 
-const AddCustomerPopup = ({ setShowPopup }) => {
+interface AddCustomerPopupProps {
+  setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  setCustomerData: React.Dispatch<React.SetStateAction<CustomerData>>;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  customerData: CustomerData;
+}
+
+const AddCustomerPopup: React.FC<AddCustomerPopupProps> = ({ setShowPopup, setCustomerData, handleSubmit, handleInputChange, customerData }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60">
       <div className="bg-white p-8 rounded-lg relative">
         <h2 className="text-2xl font-bold mb-4">Fill Customer Infos</h2>
         <button className="absolute top-6 right-6 text-xl text-secondary hover:text-dark transition-all duration-500" onClick={() => setShowPopup(false)}>
-          <CloseIcon className="" />
+          <CloseIcon />
         </button>
 
-        <form className="grid grid-cols-1 items-center justify-center  xs:gap-4 xs:grid-cols-2 sm:grid-cols-3">
-          <InputField type="text" placeholder="Customer Name" />
-          <InputField type="text" placeholder="Customer ID" />
-          <InputField type="text" placeholder="Project Name" />
+        <form className="grid  grid-cols-1 items-center justify-center   xs:grid-cols-2 gap-10 sm:grid-cols-3" onSubmit={handleSubmit}>
+          <InputField
+            type="text"
+            placeholder="Customer Name"
+            name="name"
+            value={customerData.name}
+            onChange={handleInputChange}
+            label="Customer Name"
+            id="customerName"
+          />
+          <InputField
+            type="text"
+            placeholder="Customer ID"
+            name="customerId"
+            value={customerData.customerId}
+            onChange={handleInputChange}
+            label="Customer ID"
+            id="customerId"
+          />
+          <InputField
+            type="text"
+            placeholder="Project Name"
+            name="projectName"
+            value={customerData.projectName}
+            onChange={handleInputChange}
+            label="Project Name"
+            id="projectName"
+          />
 
-          <select className="bg-slate-100 rounded-md px-4 py-4 h-15 text-secondary outline-none">
-            <option value="pending">Pending</option>
-            <option value="active">Active</option>
-            <option value="cancel">Cancel</option>
-            <option value="completed">Completed</option>
-          </select>
+          <fieldset className="flex flex-col justify-center items-start">
+            <label htmlFor="status" className="mb-2 text-[15px] text-slate-500">
+              Select Status
+            </label>
+            <select
+              className="bg-slate-100 rounded-md px-4 py-4 h-15 text-secondary outline-none w-full"
+              name="status"
+              value={customerData.status}
+              onChange={handleInputChange}
+              id="status"
+            >
+              <option value="pending">Pending</option>
+              <option value="active">Active</option>
+              <option value="cancel">Cancel</option>
+              <option value="completed">Completed</option>
+            </select>
+          </fieldset>
 
-          <InputField type="number" placeholder="Weeks" />
-          <InputField type="number" placeholder="Budget" />
-          <InputField type="text" placeholder="Location" />
+          <InputField
+            type="number"
+            placeholder="Weeks"
+            name="weeks"
+            value={customerData.weeks.toString()}
+            onChange={handleInputChange}
+            label="Weeks"
+            id="weeks"
+          />
+          <InputField
+            type="number"
+            placeholder="Budget"
+            name="budget"
+            value={customerData.budget.toString()}
+            onChange={handleInputChange}
+            label="Budget"
+            id="budget"
+          />
+          <InputField
+            type="text"
+            placeholder="Location"
+            name="location"
+            value={customerData.location}
+            onChange={handleInputChange}
+            label="Location"
+            id="location"
+          />
 
           <button
             type="submit"
-            className="bg-secondary rounded-md px-4 py-4 h-15 text-slate-100 outline-none font-bold cursor-pointer hover:bg-dark transition-all duration-500"
+            className="bg-secondary rounded-md px-4 py-4 h-15 text-slate-100 outline-none font-bold cursor-pointer hover:bg-dark transition-all duration-500 w-full mt-[30px]"
           >
-            Add Customer
+            Submit
           </button>
         </form>
       </div>
@@ -120,11 +237,30 @@ const AddCustomerPopup = ({ setShowPopup }) => {
   );
 };
 
-type InputFieldProps = {
+interface InputFieldProps {
   type: string;
   placeholder: string;
-};
+  name: string;
+  label: string;
+  id: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+}
 
-const InputField = ({ type, placeholder }: InputFieldProps) => {
-  return <input type={type} placeholder={placeholder} className="bg-slate-100 rounded-md px-4 py-4 h-15 text-secondary outline-none" />;
+const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value, onChange, label, id }) => {
+  return (
+    <fieldset className="flex flex-col justify-center items-start">
+      <label htmlFor="" className="mb-2 text-[15px] text-slate-500">
+        {label}
+      </label>
+      <input
+        type={type}
+        placeholder={placeholder}
+        name={name}
+        value={value}
+        onChange={onChange}
+        className="bg-slate-100 rounded-md px-4 py-4 h-15 text-secondary outline-none"
+      />
+    </fieldset>
+  );
 };
