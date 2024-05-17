@@ -34,6 +34,7 @@ const Employees: React.FC = () => {
     hireDate: '',
     profilePicture: '',
   });
+
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editingEmployeeId, setEditingEmployeeId] = useState<string | null>(null);
 
