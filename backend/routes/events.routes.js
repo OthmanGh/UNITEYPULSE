@@ -1,0 +1,18 @@
+import express from "express";
+import {
+  getAllEvents,
+  createEvent,
+  updateEvent,
+  deleteEvent
+} from "../controllers/eventController";
+
+import protectRoute from "../middleware/protect.route.js";
+
+const router = express.Router();
+
+router.get("/", protectRoute, getAllEvents);
+router.post("/", protectRoute, createEvent);
+router.put("/:id", protectRoute, updateEvent);
+router.delete("/:id", protectRoute, deleteEvent);
+
+export default router;
