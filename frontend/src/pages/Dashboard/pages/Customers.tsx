@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useGetCustomers from '../../../hooks/useGetCustomers';
 import Header from '../components/Header';
 import { MdOutlineDeleteSweep as DeleteIcon } from 'react-icons/md';
 import { BiSolidEditAlt as EditIcon } from 'react-icons/bi';
 import { AddIcon } from '../../../utils/icons';
 import { CloseIcon } from '../../../utils/icons';
+import useCreateCustomer from '../../../hooks/useCreateCustomer';
 
 interface CustomerData {
   name: string;
@@ -19,17 +20,25 @@ interface CustomerData {
 const data: string[] = ['customerId', 'name', 'projectName', 'location', 'budget', 'status', 'week'];
 
 const Customers: React.FC = () => {
-  const { customers, loading } = useGetCustomers();
+  const { customers: initialCustomers, loading } = useGetCustomers();
   const [showPopup, setShowPopup] = useState<boolean>(false);
+  const { createCustomer, loading: createLoading, error: createError } = useCreateCustomer();
+  const [customers, setCustomers] = useState<CustomerData[]>(initialCustomers);
   const [customerData, setCustomerData] = useState<CustomerData>({
     name: '',
     customerId: '',
     projectName: '',
-    status: 'pending',
+    status: 'Pending',
     weeks: 0,
     budget: 0,
     location: '',
   });
+
+  useEffect(() => {
+    if (!loading) {
+      setCustomers(initialCustomers);
+    }
+  }, [initialCustomers, loading]);
 
   const filteredCustomers = customers.map((customer, index) => {
     const filteredData: any = {};
@@ -72,19 +81,26 @@ const Customers: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(customerData);
-    setShowPopup(false);
-    setCustomerData({
-      name: '',
-      customerId: '',
-      projectName: '',
-      status: 'pending',
-      weeks: 0,
-      budget: 0,
-      location: '',
-    });
+
+    try {
+      const newCustomer = await createCustomer(customerData);
+      setCustomers((prevCustomers) => [...prevCustomers, newCustomer]);
+      setCustomerData({
+        name: '',
+        customerId: '',
+        projectName: '',
+        status: 'Pending',
+        weeks: 0,
+        budget: 0,
+        location: '',
+      });
+
+      setShowPopup(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -190,10 +206,10 @@ const AddCustomerPopup: React.FC<AddCustomerPopupProps> = ({ setShowPopup, setCu
               onChange={handleInputChange}
               id="status"
             >
-              <option value="pending">Pending</option>
-              <option value="active">Active</option>
-              <option value="cancel">Cancel</option>
-              <option value="completed">Completed</option>
+              <option value="Pending">Pending</option>
+              <option value="Active">Active</option>
+              <option value="Cancel">Cancel</option>
+              <option value="Completed">Completed</option>
             </select>
           </fieldset>
 
