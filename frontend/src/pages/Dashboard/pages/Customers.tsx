@@ -3,10 +3,10 @@ import useGetCustomers from '../../../hooks/useGetCustomers';
 import Header from '../components/Header';
 import { MdOutlineDeleteSweep as DeleteIcon } from 'react-icons/md';
 import { BiSolidEditAlt as EditIcon } from 'react-icons/bi';
-import { AddIcon } from '../../../utils/icons';
-import { CloseIcon } from '../../../utils/icons';
+import { AddIcon, CloseIcon } from '../../../utils/icons';
 import useCreateCustomer from '../../../hooks/useCreateCustomer';
 import useDeleteCustomer from '../../../hooks/useDeleteCustomers';
+import useUpdateCustomer from '../../../hooks/useUpdateCustomer'; // Assume you have this hook
 
 interface CustomerData {
   name: string;
@@ -26,6 +26,7 @@ const Customers: React.FC = () => {
   const { createCustomer, loading: createLoading, error: createError } = useCreateCustomer();
   const [customers, setCustomers] = useState<CustomerData[]>(initialCustomers);
   const { deleteCustomer } = useDeleteCustomer();
+  const { updateCustomer } = useUpdateCustomer(); // Assume you have this hook
   const [customerData, setCustomerData] = useState<CustomerData>({
     name: '',
     customerId: '',
@@ -35,12 +36,73 @@ const Customers: React.FC = () => {
     budget: 0,
     location: '',
   });
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [editingCustomerId, setEditingCustomerId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!loading) {
       setCustomers(initialCustomers);
     }
   }, [initialCustomers, loading]);
+
+  const handleDelete = async (customerId: string) => {
+    try {
+      await deleteCustomer(customerId);
+      setCustomers((prevCustomers) => prevCustomers.filter((customer) => customer.customerId !== customerId));
+    } catch (error) {
+      console.error('Failed to delete customer', error);
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setCustomerData((prevData) => ({
+      ...prevData,
+      [name]: name === 'weeks' || name === 'budget' ? parseFloat(value) : value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (isEditing && editingCustomerId) {
+      try {
+        await updateCustomer(editingCustomerId, customerData);
+        setCustomers((prevCustomers) =>
+          prevCustomers.map((customer) => (customer.customerId === editingCustomerId ? { ...customerData, customerId: editingCustomerId } : customer))
+        );
+      } catch (error) {
+        console.error('Failed to update customer', error);
+      }
+    } else {
+      try {
+        const newCustomer = await createCustomer(customerData);
+        setCustomers((prevCustomers) => [...prevCustomers, newCustomer]);
+      } catch (error) {
+        console.error('Failed to create customer', error);
+      }
+    }
+
+    setCustomerData({
+      name: '',
+      customerId: '',
+      projectName: '',
+      status: 'Pending',
+      weeks: 0,
+      budget: 0,
+      location: '',
+    });
+    setShowPopup(false);
+    setIsEditing(false);
+    setEditingCustomerId(null);
+  };
+
+  const handleEdit = (customer: CustomerData) => {
+    setCustomerData(customer);
+    setIsEditing(true);
+    setEditingCustomerId(customer.customerId);
+    setShowPopup(true);
+  };
 
   const filteredCustomers = customers.map((customer, index) => {
     const filteredData: any = {};
@@ -62,7 +124,7 @@ const Customers: React.FC = () => {
         <td className="px-4 text-[15px] py-2">${filteredData.budget.toLocaleString()}</td>
         <td className="px-4 text-[15px] py-2">{filteredData.location}</td>
         <td className="px-4 text-[15px] py-2">
-          <button className="py-2 px-4 ">
+          <button className="py-2 px-4 " onClick={() => handleEdit(customer)}>
             <EditIcon className=" text-dark text-2xl hover:text-blue-500 trasition-all duration-500" />
           </button>
         </td>
@@ -74,43 +136,6 @@ const Customers: React.FC = () => {
       </tr>
     );
   });
-
-  const handleDelete = async (customerId: string) => {
-    try {
-      await deleteCustomer(customerId);
-      setCustomers((prevCustomers) => prevCustomers.filter((customer) => customer.customerId !== customerId));
-    } catch (error) {}
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setCustomerData((prevData) => ({
-      ...prevData,
-      [name]: name === 'weeks' || name === 'budget' ? parseFloat(value) : value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      const newCustomer = await createCustomer(customerData);
-      setCustomers((prevCustomers) => [...prevCustomers, newCustomer]);
-      setCustomerData({
-        name: '',
-        customerId: '',
-        projectName: '',
-        status: 'Pending',
-        weeks: 0,
-        budget: 0,
-        location: '',
-      });
-
-      setShowPopup(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <section className="py-8 px-4">
@@ -150,6 +175,7 @@ const Customers: React.FC = () => {
           handleSubmit={handleSubmit}
           handleInputChange={handleInputChange}
           customerData={customerData}
+          isEditing={isEditing}
         />
       )}
     </section>
@@ -164,13 +190,14 @@ interface AddCustomerPopupProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   customerData: CustomerData;
+  isEditing: boolean;
 }
 
-const AddCustomerPopup: React.FC<AddCustomerPopupProps> = ({ setShowPopup, setCustomerData, handleSubmit, handleInputChange, customerData }) => {
+const AddCustomerPopup: React.FC<AddCustomerPopupProps> = ({ setShowPopup, setCustomerData, handleSubmit, handleInputChange, customerData, isEditing }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60">
       <div className="bg-white p-8 rounded-lg relative">
-        <h2 className="text-2xl font-bold mb-4">Fill Customer Infos</h2>
+        <h2 className="text-2xl font-bold mb-4">{isEditing ? 'Edit Customer' : 'Fill Customer Infos'}</h2>
         <button className="absolute top-6 right-6 text-xl text-secondary hover:text-dark transition-all duration-500" onClick={() => setShowPopup(false)}>
           <CloseIcon />
         </button>
@@ -193,6 +220,7 @@ const AddCustomerPopup: React.FC<AddCustomerPopupProps> = ({ setShowPopup, setCu
             onChange={handleInputChange}
             label="Customer ID"
             id="customerId"
+            disabled={isEditing}
           />
           <InputField
             type="text"
@@ -270,9 +298,10 @@ interface InputFieldProps {
   id: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  disabled?: boolean;
 }
 
-const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value, onChange, label, id }) => {
+const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value, onChange, label, id, disabled = false }) => {
   return (
     <fieldset className="flex flex-col justify-center items-start">
       <label htmlFor="" className="mb-2 text-[15px] text-slate-500">
@@ -285,6 +314,7 @@ const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value,
         value={value}
         onChange={onChange}
         className="bg-slate-100 rounded-md px-4 py-4 h-15 text-secondary outline-none"
+        disabled={disabled}
       />
     </fieldset>
   );
