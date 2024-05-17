@@ -5,7 +5,8 @@ const useDeleteEmployee = () => {
   const [error, setError] = useState(null);
   const token = JSON.parse(localStorage.getItem('authUser')).token;
 
-  const deleteEmployee = async (employeeId) => {
+  const deleteEmployee = async (employeeId: string) => {
+    console.log(employeeId);
     setLoading(true);
     setError(null);
     try {
