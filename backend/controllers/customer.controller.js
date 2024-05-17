@@ -93,12 +93,14 @@ export const updateCustomer = async (req, res) => {
 export const deleteCustomer = async (req, res) => {
   const { id } = req.params;
   const ownerId = req.user._id;
+  console.log(id);
 
   try {
     const customer = await Customer.findOneAndDelete({
-      _id: id,
+      customerId: id,
       owner: ownerId
     });
+
     if (!customer) {
       return res.status(404).json({
         status: "fail",
