@@ -21,7 +21,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/employees", employeeRoutes);
 app.use("/api/customers", customerRoutes);
 app.use("/api/chatbot", chatbotRoutes);
-app.use("/events", eventRoutes);
+app.use("/api/events", eventRoutes);
 
 const PORT = process.env.PORT || 8000;
 server.listen(PORT, err => {
