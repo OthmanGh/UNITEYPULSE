@@ -64,3 +64,29 @@ export const updateEvent = async (req, res) => {
     });
   }
 };
+
+export const deleteEvent = async (req, res) => {
+  try {
+    const user = req.user;
+
+    console.log("User information:", user);
+
+    const deletedEvent = await Event.findByIdAndDelete(req.params.id);
+    if (!deletedEvent) {
+      return res.status(404).json({
+        status: "error",
+        message: "Event not found"
+      });
+    }
+
+    res.status(204).json({
+      status: "success",
+      data: null
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "error",
+      message: err.message
+    });
+  }
+};
