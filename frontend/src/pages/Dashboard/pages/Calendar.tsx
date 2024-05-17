@@ -115,7 +115,7 @@ const Calendar: React.FC = () => {
   return (
     <section className={styles.dashboardSection}>
       <FullCalendar
-        plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+        plugins={[dayGridPlugin, timeGridPlugin]}
         initialView={'dayGridMonth'}
         headerToolbar={{
           start: 'prev,today,next',
@@ -124,7 +124,7 @@ const Calendar: React.FC = () => {
         }}
         height="85vh"
         events={events}
-        editable={true}
+        editable={false}
         selectable={true}
         selectMirror={true}
         dayMaxEvents={true}
