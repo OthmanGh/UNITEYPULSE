@@ -59,27 +59,31 @@ export const getEmployeeById = async (req, res) => {
 };
 
 export const updateEmployee = async (req, res) => {
+  const { id } = req.params;
+  const ownerId = req.user._id;
+
   try {
-    const employee = await Employee.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
+    const employee = await Employee.findOneAndUpdate(
+      { employeeId: id, owner: ownerId },
+      req.body
+    );
+
+    console.log(employee);
 
     if (!employee) {
-      res.status(404).json({
+      return res.status(404).json({
         status: "fail",
         message: "Employee not found"
       });
-    } else {
-      res.status(200).json({
-        status: "success",
-        data: {
-          employee
-        }
-      });
     }
+    res.status(200).json({
+      status: "success",
+      data: {
+        employee
+      }
+    });
   } catch (err) {
-    handleError(err, "updateEmployee", res);
+    handleError(err, "updateCustomerById", res);
   }
 };
 
