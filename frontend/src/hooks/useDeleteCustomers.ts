@@ -4,23 +4,20 @@ const useDeleteCustomer = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const deleteCustomer = async (customerId, token) => {
+  const token = JSON.parse(localStorage.getItem('authUser')).token;
+
+  const deleteCustomer = async (customerId) => {
     setLoading(true);
     try {
       const url = `http://127.0.0.1:8000/api/customers/${customerId}`;
 
-      const res = await fetch(url, {
+      await fetch(url, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       });
-      const data = await res.json();
-
-      if (data.status !== 'success') {
-        throw new Error(data.message);
-      }
     } catch (error) {
       setError(error.message);
     } finally {
