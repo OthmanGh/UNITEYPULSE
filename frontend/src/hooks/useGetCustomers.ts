@@ -10,7 +10,7 @@ const useGetCustomers = () => {
     const getCustomers = async () => {
       setLoading(true);
       try {
-        const url = `${API_BASE_URI}/customers`;
+        const url = `http://127.0.0.1:8000/api/customers`;
 
         const res = await fetch(url, {
           headers: {
