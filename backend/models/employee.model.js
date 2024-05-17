@@ -2,17 +2,15 @@ import mongoose from "mongoose";
 
 const employeeSchema = new mongoose.Schema(
   {
-    profile: {
-      name: {
-        type: String,
-        required: [true, "Name is required"]
-      },
+    name: {
+      type: String,
+      required: [true, "Name is required"]
+    },
 
-      picture: {
-        type: String,
-        default:
-          "https://static.vecteezy.com/system/resources/previews/005/266/979/original/avatar-profile-pink-neon-icon-brick-wall-background-colour-neon-icon-vector.jpg"
-      }
+    picture: {
+      type: String,
+      default:
+        "https://static.vecteezy.com/system/resources/previews/005/266/979/original/avatar-profile-pink-neon-icon-brick-wall-background-colour-neon-icon-vector.jpg"
     },
 
     destination: {
