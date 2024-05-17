@@ -22,10 +22,10 @@ const data: string[] = ['customerId', 'name', 'projectName', 'location', 'budget
 
 const Customers: React.FC = () => {
   const { customers: initialCustomers, loading } = useGetCustomers();
-  const { deleteCustomer } = useDeleteCustomer();
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const { createCustomer, loading: createLoading, error: createError } = useCreateCustomer();
   const [customers, setCustomers] = useState<CustomerData[]>(initialCustomers);
+  const { deleteCustomer } = useDeleteCustomer();
   const [customerData, setCustomerData] = useState<CustomerData>({
     name: '',
     customerId: '',
@@ -77,11 +77,9 @@ const Customers: React.FC = () => {
 
   const handleDelete = async (customerId: string) => {
     try {
-      await deleteCustomer(customerId); // Call deleteCustomer function
+      await deleteCustomer(customerId);
       setCustomers((prevCustomers) => prevCustomers.filter((customer) => customer.customerId !== customerId));
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
