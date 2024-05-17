@@ -6,6 +6,7 @@ import { BiSolidEditAlt as EditIcon } from 'react-icons/bi';
 import { AddIcon } from '../../../utils/icons';
 import { CloseIcon } from '../../../utils/icons';
 import useCreateCustomer from '../../../hooks/useCreateCustomer';
+import useDeleteCustomer from '../../../hooks/useDeleteCustomers';
 
 interface CustomerData {
   name: string;
@@ -21,6 +22,7 @@ const data: string[] = ['customerId', 'name', 'projectName', 'location', 'budget
 
 const Customers: React.FC = () => {
   const { customers: initialCustomers, loading } = useGetCustomers();
+  const { deleteCustomer } = useDeleteCustomer();
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const { createCustomer, loading: createLoading, error: createError } = useCreateCustomer();
   const [customers, setCustomers] = useState<CustomerData[]>(initialCustomers);
@@ -65,13 +67,22 @@ const Customers: React.FC = () => {
           </button>
         </td>
         <td className="px-4 py-2">
-          <button className=" text-dark hover:text-red-500 transition-all duration-500 py-2 px-4 rounded">
+          <button className="text-dark hover:text-red-500 transition-all duration-500 py-2 px-4 rounded" onClick={() => handleDelete(filteredData.customerId)}>
             <DeleteIcon className="text-2xl" />
           </button>
         </td>
       </tr>
     );
   });
+
+  const handleDelete = async (customerId: string) => {
+    try {
+      await deleteCustomer(customerId); // Call deleteCustomer function
+      setCustomers((prevCustomers) => prevCustomers.filter((customer) => customer.customerId !== customerId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
