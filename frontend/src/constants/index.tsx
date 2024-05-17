@@ -34,7 +34,7 @@ export const navLinks = [
 
   {
     id: 'getintouch',
-    title: 'getInTouch',
+    title: 'GetInTouch',
   },
 ];
 
