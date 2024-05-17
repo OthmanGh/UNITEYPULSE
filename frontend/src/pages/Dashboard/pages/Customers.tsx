@@ -221,6 +221,7 @@ const AddCustomerPopup: React.FC<AddCustomerPopupProps> = ({ setShowPopup, setCu
             label="Customer ID"
             id="customerId"
             disabled={isEditing}
+            style="bg-slate-500"
           />
           <InputField
             type="text"
@@ -299,9 +300,10 @@ interface InputFieldProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   disabled?: boolean;
+  style?: string;
 }
 
-const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value, onChange, label, id, disabled = false }) => {
+const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value, onChange, label, id, style, disabled = false }) => {
   return (
     <fieldset className="flex flex-col justify-center items-start">
       <label htmlFor="" className="mb-2 text-[15px] text-slate-500">
@@ -313,7 +315,7 @@ const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value,
         name={name}
         value={value}
         onChange={onChange}
-        className="bg-slate-100 rounded-md px-4 py-4 h-15 text-secondary outline-none"
+        className={` rounded-md px-4 py-4 h-15 text-secondary outline-none ${disabled ? 'bg-gray-500 text-slate-800 cursor-not-allowed' : 'bg-slate-100'}`}
         disabled={disabled}
       />
     </fieldset>
