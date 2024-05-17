@@ -178,11 +178,9 @@ const SendInvitationPopup: React.FC<SendInvitationPopupProps> = ({ setShowPopup,
 
 const Policies = ({ text, title }: { text: string; title: string }) => {
   return (
-    <Tooltip title="click to edit" placement="top">
-      <div className="bg-dark px-4 py-6 rounded-lg text-sm w-full h-[180px] hover:scale-105 transition-all duration-500 hover:bg-secondary  hover:text-gray-200 overflow-y-scroll">
-        <h3 className="text-[15px] text-white mb-3">{title}</h3>
-        <p className="leading-6">{text}</p>
-      </div>
-    </Tooltip>
+    <div className="bg-dark px-4 py-6 rounded-lg text-sm w-full h-[180px] hover:scale-105 transition-all duration-500 hover:bg-secondary  hover:text-gray-200 overflow-y-scroll">
+      <h3 className="text-[15px] text-white mb-3">{title}</h3>
+      <p className="leading-6">{text}</p>
+    </div>
   );
 };
