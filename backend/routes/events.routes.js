@@ -4,7 +4,7 @@ import {
   createEvent,
   updateEvent,
   deleteEvent
-} from "../controllers/eventController";
+} from "../controllers/event.controller.js";
 
 import protectRoute from "../middleware/protect.route.js";
 
