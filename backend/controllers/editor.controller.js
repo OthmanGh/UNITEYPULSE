@@ -60,3 +60,17 @@ export const updateTextContent = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const deleteTextContent = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedContent = await TextContent.findByIdAndDelete(id);
+    if (!deletedContent) {
+      return res.status(404).json({ error: "Text content not found" });
+    }
+    res.json({ message: "Text content deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting text content:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
