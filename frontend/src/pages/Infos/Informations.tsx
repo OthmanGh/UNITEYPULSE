@@ -4,7 +4,7 @@ import '../../App.css'; // Ensure this import is correct
 const Informations = () => {
   const [currentStep, setCurrentStep] = useState(1);
 
-  const steps = ['Register', 'Choose plan', 'Purchase'];
+  const steps = ['Company Information', 'Financial Data', 'Business Operations'];
 
   const handleStepClick = (stepIndex) => {
     setCurrentStep(stepIndex + 1);
@@ -22,7 +22,7 @@ const Informations = () => {
     }
   };
 
-  const stepComponents = [<CompanyInfos />, <CompanyStats />, <CompanyMoney />];
+  const stepComponents = [<CompanyInformation />, <FinancialData />, <BusinessOperation />];
 
   return (
     <div className="h-screen">
@@ -73,6 +73,49 @@ const Informations = () => {
 
 export default Informations;
 
+const CompanyInformation = () => {
+  return (
+    <>
+      <InputField placeholder="Company Name" type="text" label="Company Name" />
+      <InputField placeholder="Address" type="text" label="Address" />
+      <InputField placeholder="Founded In" type="date" label="Founded In" />
+      <InputField placeholder="Website" type="url" label="Website" />
+    </>
+  );
+};
+
+const FinancialData = () => {
+  return (
+    <>
+      <InputField placeholder="Budget" type="number" label="Budget" />
+      <InputField placeholder="Incomes" type="number" label="Incomes" />
+      <InputField placeholder="Expenses" type="number" label="Expenses" />
+      <InputField placeholder="Refunds" type="number" label="Refunds" />
+    </>
+  );
+};
+
+const BusinessOperation = () => {
+  return (
+    <>
+      <InputField placeholder="Number of Customers" type="number" label="Customers" />
+      <InputField placeholder="Sales" type="number" label="Sales" />
+      <InputField placeholder="Number of Products" type="number" label="Products" />
+
+      <fieldset className="flex flex-col justify-center items-start w-[90%]">
+        <label htmlFor="currency" className="mb-2 text-[15px] text-slate-500">
+          Select Status
+        </label>
+        <select className="bg-slate-100 rounded-md px-4 py-4 h-15 text-slate-800 outline-none w-full" id="currency">
+          <option value="usd">US Dollar</option>
+          <option value="euro">Euro</option>
+          <option value="gbp">Sterling</option>
+        </select>
+      </fieldset>
+    </>
+  );
+};
+
 interface InputFieldProps {
   type: string;
   placeholder: string;
@@ -97,44 +140,9 @@ const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value,
         name={name}
         value={value}
         onChange={onChange}
-        className={`rounded-md px-4 py-4 h-15 text-secondary outline-none ${
-          disabled ? 'bg-gray-500 text-slate-800 cursor-not-allowed' : 'bg-slate-100 w-[90%]'
-        }`}
+        className={`rounded-md px-4 w-[90%] py-4 h-15 text-secondary outline-none bg-gray-50`}
         disabled={disabled}
       />
     </fieldset>
-  );
-};
-
-const CompanyInfos = () => {
-  return (
-    <>
-      <InputField placeholder="Company Name" type="text" label="Company" />
-      <InputField placeholder="Company Name" type="text" label="Company" />
-      <InputField placeholder="Company Name" type="text" label="Company" />
-      <InputField placeholder="Company Name" type="text" label="Company" />
-    </>
-  );
-};
-
-const CompanyStats = () => {
-  return (
-    <>
-      <InputField placeholder="Company Name" type="text" label="Company" />
-      <InputField placeholder="Company Name" type="text" label="Company" />
-      <InputField placeholder="Company Name" type="text" label="Company" />
-      <InputField placeholder="Company Name" type="text" label="Company" />
-    </>
-  );
-};
-
-const CompanyMoney = () => {
-  return (
-    <>
-      <InputField placeholder="Company Name" type="text" label="Company" />
-      <InputField placeholder="Company Name" type="text" label="Company" />
-      <InputField placeholder="Company Name" type="text" label="Company" />
-      <InputField placeholder="Company Name" type="text" label="Company" />
-    </>
   );
 };
