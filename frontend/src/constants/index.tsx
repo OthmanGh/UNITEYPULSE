@@ -1,19 +1,13 @@
-import { ReactElement } from 'react';
-import { AiOutlineShoppingCart, AiOutlineCalendar, AiOutlineStock, AiOutlineAreaChart, AiOutlineBarChart } from 'react-icons/ai';
-import { FiShoppingBag, FiEdit, FiPieChart, FiBarChart, FiCreditCard, FiStar, FiShoppingCart } from 'react-icons/fi';
-import { BsKanban, BsBarChart, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
+import { AiOutlineCalendar } from 'react-icons/ai';
+import { FiShoppingBag, FiEdit, FiBarChart } from 'react-icons/fi';
+import { BsKanban, BsBoxSeam } from 'react-icons/bs';
 import { IoMdContacts } from 'react-icons/io';
-import { RiContactsLine, RiStockLine } from 'react-icons/ri';
-import { BiColorFill } from 'react-icons/bi';
-import { GiLouvrePyramid } from 'react-icons/gi';
+import { RiContactsLine } from 'react-icons/ri';
 import { Currency, MonthIcon, TodayIcon, WeekIcon } from '../utils/icons';
 import { MdOutlineSupervisorAccount } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { SiExpensify } from 'react-icons/si';
-import { TiTick } from 'react-icons/ti';
-import { GrLocation } from 'react-icons/gr';
 import { PiWechatLogoFill } from 'react-icons/pi';
-import { FcInvite } from 'react-icons/fc';
 import { SiGoogletagmanager } from 'react-icons/si';
 
 export const navLinks = [

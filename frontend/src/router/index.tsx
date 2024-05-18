@@ -1,29 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import {
-  Auth,
-  Home,
-  Dashboard,
-  General,
-  Employees,
-  Customers,
-  Kanban,
-  Editor,
-  Calendar,
-  ExpenseTracker,
-  Line,
-  Area,
-  Bar,
-  Pie,
-  Financial,
-  ColorMapping,
-  Informations,
-  Manage,
-  Pyramid,
-  Stacked,
-  Chat,
-  Infos,
-  Greet,
-} from '../utils';
+import { Auth, Home, Dashboard, General, Employees, Customers, Kanban, Editor, Calendar, ExpenseTracker, Informations, Manage, Chat, Greet } from '../utils';
 import ProtectedRoute from '../components/ProtectedRoute';
 
 const router = createBrowserRouter([
@@ -52,14 +28,6 @@ const router = createBrowserRouter([
       { path: 'editor', element: <Editor /> },
       { path: 'calendar', element: <Calendar /> },
       { path: 'tracker', element: <ExpenseTracker /> },
-      { path: 'line', element: <Line /> },
-      { path: 'area', element: <Area /> },
-      { path: 'bar', element: <Bar /> },
-      { path: 'pie', element: <Pie /> },
-      { path: 'financial', element: <Financial /> },
-      { path: 'color-mapping', element: <ColorMapping /> },
-      { path: 'pyramid', element: <Pyramid /> },
-      { path: 'stacked', element: <Stacked /> },
       { path: 'chat', element: <Chat /> },
     ],
   },

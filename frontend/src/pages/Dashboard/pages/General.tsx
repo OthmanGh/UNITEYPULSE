@@ -1,5 +1,5 @@
 import { GoDotFill } from 'react-icons/go';
-import { SparklineAreaData, ecomPieChartData, stackedChartData } from '../../../constants';
+import { SparklineAreaData, stackedChartData } from '../../../constants';
 import SparkLine from '../components/Charts/SparkLine';
 import Stacked from '../components/Charts/Stacked';
 import styles from '../../../components';

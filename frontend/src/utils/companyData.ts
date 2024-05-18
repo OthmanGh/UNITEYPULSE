@@ -13,7 +13,7 @@ const formatEarnings = (incomes, expenses, currency) => {
       formattedEarnings = `£${earnings.toFixed(2)}`;
       break;
     default:
-      formattedEarnings = `${earnings.toFixed(2)} ${company.currency.toUpperCase()}`;
+      formattedEarnings = `${earnings?.toFixed(2)} ${currency?.toUpperCase()}`;
   }
 
   return formattedEarnings;

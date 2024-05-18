@@ -6,7 +6,6 @@ import { BsChatLeft } from 'react-icons/bs';
 import { RiNotification3Line } from 'react-icons/ri';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { Tooltip } from '@mui/material';
-import UserProfile from './UserProfile';
 import Notifications from './Notifications';
 
 import { useStateContext } from '../../../contexts/ContextProvider';
@@ -79,7 +78,6 @@ const Navbar = () => {
         </Tooltip>
 
         {isClicked.notification && <Notifications />}
-        {isClicked.userProfile && <UserProfile />}
       </div>
     </div>
   );

@@ -8,8 +8,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { IoReturnUpBack } from 'react-icons/io5';
 import { FiSettings } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
-import { IoMdAdd } from 'react-icons/io';
-import { MdAddBox } from 'react-icons/md';
+
 import { IoMdAddCircleOutline } from 'react-icons/io';
 import { MdToday } from 'react-icons/md';
 import { BsCalendarWeek } from 'react-icons/bs';
