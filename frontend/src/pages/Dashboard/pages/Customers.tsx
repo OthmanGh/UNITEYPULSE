@@ -6,7 +6,8 @@ import { BiSolidEditAlt as EditIcon } from 'react-icons/bi';
 import { AddIcon, CloseIcon } from '../../../utils/icons';
 import useCreateCustomer from '../../../hooks/useCreateCustomer';
 import useDeleteCustomer from '../../../hooks/useDeleteCustomers';
-import useUpdateCustomer from '../../../hooks/useUpdateCustomer'; // Assume you have this hook
+import useUpdateCustomer from '../../../hooks/useUpdateCustomer';
+import ConfirmDeletePopup from '../../../components/ConfirmDeletePopup';
 
 interface CustomerData {
   name: string;
@@ -18,15 +19,16 @@ interface CustomerData {
   location: string;
 }
 
-const data: string[] = ['customerId', 'name', 'projectName', 'location', 'budget', 'status', 'week'];
+const data: string[] = ['customerId', 'name', 'projectName', 'location', 'budget', 'status', 'weeks'];
 
 const Customers: React.FC = () => {
   const { customers: initialCustomers, loading } = useGetCustomers();
   const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState<boolean>(false);
   const { createCustomer, loading: createLoading, error: createError } = useCreateCustomer();
   const [customers, setCustomers] = useState<CustomerData[]>(initialCustomers);
   const { deleteCustomer } = useDeleteCustomer();
-  const { updateCustomer } = useUpdateCustomer(); // Assume you have this hook
+  const { updateCustomer } = useUpdateCustomer();
   const [customerData, setCustomerData] = useState<CustomerData>({
     name: '',
     customerId: '',
@@ -38,6 +40,7 @@ const Customers: React.FC = () => {
   });
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editingCustomerId, setEditingCustomerId] = useState<string | null>(null);
+  const [deleteCustomerId, setDeleteCustomerId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!loading) {
@@ -104,6 +107,24 @@ const Customers: React.FC = () => {
     setShowPopup(true);
   };
 
+  const handleDeleteButtonClick = (customerId: string) => {
+    setDeleteCustomerId(customerId);
+    setShowConfirmDeletePopup(true);
+  };
+
+  const handleCancelDelete = () => {
+    setDeleteCustomerId(null);
+    setShowConfirmDeletePopup(false);
+  };
+
+  const handleConfirmDelete = () => {
+    if (deleteCustomerId) {
+      handleDelete(deleteCustomerId);
+      setDeleteCustomerId(null);
+      setShowConfirmDeletePopup(false);
+    }
+  };
+
   const filteredCustomers = customers.map((customer, index) => {
     const filteredData: any = {};
     for (const key of data) {
@@ -128,8 +149,12 @@ const Customers: React.FC = () => {
             <EditIcon className=" text-dark text-2xl hover:text-blue-500 trasition-all duration-500" />
           </button>
         </td>
+
         <td className="px-4 py-2">
-          <button className="text-dark hover:text-red-500 transition-all duration-500 py-2 px-4 rounded" onClick={() => handleDelete(filteredData.customerId)}>
+          <button
+            className="text-dark hover:text-red-500 transition-all duration-500 py-2 px-4 rounded"
+            onClick={() => handleDeleteButtonClick(filteredData.customerId)}
+          >
             <DeleteIcon className="text-2xl" />
           </button>
         </td>
@@ -178,6 +203,8 @@ const Customers: React.FC = () => {
           isEditing={isEditing}
         />
       )}
+
+      {showConfirmDeletePopup && <ConfirmDeletePopup onCancel={handleCancelDelete} onDeleteConfirm={handleConfirmDelete} />}
     </section>
   );
 };

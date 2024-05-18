@@ -7,6 +7,7 @@ import { Tooltip } from '@mui/material';
 import axios, { AxiosResponse } from 'axios';
 import { MdOutlineDeleteSweep as DeleteIcon } from 'react-icons/md';
 import { BiSolidEditAlt as EditIcon } from 'react-icons/bi';
+import ConfirmDeletePopup from '../../../../components/ConfirmDeletePopup';
 
 interface Transaction {
   _id: string;
@@ -19,8 +20,10 @@ interface Transaction {
 
 const ExpenseTracker: React.FC = () => {
   const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [showDeletePopup, setShowDeletePopup] = useState<boolean>(false); // State to manage delete confirmation popup
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
+  const [transactionToDelete, setTransactionToDelete] = useState<string | null>(null); // State to store the transaction ID to be deleted
 
   useEffect(() => {
     fetchTransactions();
@@ -85,10 +88,15 @@ const ExpenseTracker: React.FC = () => {
     }
   };
 
-  const handleDeleteTransaction = async (id: string): Promise<void> => {
+  const handleDeleteTransaction = async (): Promise<void> => {
     try {
+      if (!transactionToDelete) {
+        console.error('No transaction selected for deletion.');
+        return;
+      }
+
       const token = JSON.parse(localStorage.getItem('authUser') || '').token;
-      const response: AxiosResponse = await axios.delete(`http://127.0.0.1:8000/api/transactions/${id}`, {
+      const response: AxiosResponse = await axios.delete(`http://127.0.0.1:8000/api/transactions/${transactionToDelete}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -96,6 +104,8 @@ const ExpenseTracker: React.FC = () => {
       });
       if (response.status === 204) {
         fetchTransactions();
+        setShowDeletePopup(false);
+        setTransactionToDelete(null);
       } else {
         console.error('Failed to delete transaction');
       }
@@ -198,7 +208,13 @@ const ExpenseTracker: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap">{item.amount}</td>
                   <td className="px-6 py-4 whitespace-nowrap flex items-center gap-2">
                     <Tooltip title="Delete" placement="top">
-                      <DeleteIcon className="cursor-pointer text-red-500 text-2xl" onClick={() => handleDeleteTransaction(item._id)} />
+                      <DeleteIcon
+                        className="cursor-pointer text-red-500 text-2xl"
+                        onClick={() => {
+                          setShowDeletePopup(true);
+                          setTransactionToDelete(item._id);
+                        }}
+                      />
                     </Tooltip>
                     <Tooltip title="Update" placement="top">
                       <EditIcon
@@ -228,6 +244,8 @@ const ExpenseTracker: React.FC = () => {
           }}
         />
       )}
+
+      {showDeletePopup && <ConfirmDeletePopup onDeleteConfirm={handleDeleteTransaction} onCancel={() => setShowDeletePopup(false)} />}
     </section>
   );
 };

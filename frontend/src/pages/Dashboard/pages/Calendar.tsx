@@ -5,6 +5,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import styles from '../../../components';
 import axios from 'axios';
+import ConfirmDeletePopup from '../../../components/ConfirmDeletePopup';
 
 interface Event {
   id: string;
@@ -21,6 +22,8 @@ const Calendar: React.FC = () => {
     description: '',
     type: '',
   });
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<boolean>(false);
+  const [deleteEventId, setDeleteEventId] = useState<string>('');
 
   const fetchEvents = async () => {
     try {
@@ -106,10 +109,9 @@ const Calendar: React.FC = () => {
       console.error('Error deleting event:', error);
     }
   };
-
-  const handleEventFormSubmit = (title: string, description: string, type: string) => {
-    createEvent(title, eventFormData.start, eventFormData.end, description, type);
-    setEventFormData({ title: '', description: '', type: '' });
+  const handleEventDelete = (eventId: string) => {
+    setDeleteEventId(eventId);
+    setShowDeleteConfirmation(true);
   };
 
   return (
@@ -132,14 +134,19 @@ const Calendar: React.FC = () => {
           setShowEventForm(true);
           setEventFormData({ ...eventFormData, start: selectionInfo.start, end: selectionInfo.end });
         }}
-        eventClick={(eventInfo: EventClickArg) => {
-          if (window.confirm(`Are you sure you want to remove the event '${eventInfo.event.title}'?`)) {
-            deleteEvent(eventInfo.event.id);
-          }
-        }}
+        eventClick={(eventInfo: EventClickArg) => handleEventDelete(eventInfo.event.id)}
         eventChange={(eventInfo) => {}}
       />
       {showEventForm && <CreateEventPopup onSubmit={handleEventFormSubmit} onCancel={() => setShowEventForm(false)} />}
+      {showDeleteConfirmation && (
+        <ConfirmDeletePopup
+          onDeleteConfirm={() => {
+            deleteEvent(deleteEventId);
+            setShowDeleteConfirmation(false);
+          }}
+          onCancel={() => setShowDeleteConfirmation(false)}
+        />
+      )}
     </section>
   );
 };

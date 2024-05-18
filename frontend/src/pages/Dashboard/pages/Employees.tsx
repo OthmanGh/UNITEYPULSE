@@ -7,6 +7,7 @@ import useGetEmployees from '../../../hooks/useGetEmployees';
 import useCreateEmployee from '../../../hooks/useCreateEmployees';
 import useUpdateEmployee from '../../../hooks/useUpdateEmployee';
 import useDeleteEmployee from '../../../hooks/useDeleteEmployee';
+import ConfirmDeletePopup from '../../../components/ConfirmDeletePopup';
 
 interface EmployeeData {
   employeeId: string;
@@ -21,7 +22,9 @@ const data: string[] = ['employeeId', 'name', 'destination', 'country', 'hireDat
 
 const Employees: React.FC = () => {
   const { employees: initialEmployees, loading } = useGetEmployees();
-  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [showAddEditPopup, setShowAddEditPopup] = useState<boolean>(false);
+  const [showDeletePopup, setShowDeletePopup] = useState<boolean>(false);
+  const [deleteEmployeeId, setDeleteEmployeeId] = useState<string | null>(null);
   const { createEmployee, loading: createLoading, error: createError } = useCreateEmployee();
   const [employees, setEmployees] = useState<EmployeeData[]>(initialEmployees);
   const { deleteEmployee } = useDeleteEmployee();
@@ -45,20 +48,24 @@ const Employees: React.FC = () => {
   }, [initialEmployees, loading]);
 
   const handleDelete = async (employeeId: string) => {
-    try {
-      await deleteEmployee(employeeId);
-      setEmployees((prevEmployees) => prevEmployees.filter((employee) => employee.employeeId !== employeeId));
-    } catch (error) {
-      console.error('Failed to delete employee', error);
-    }
+    // Set the employee ID to delete and show the delete confirmation popup
+    setDeleteEmployeeId(employeeId);
+    setShowDeletePopup(true);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setEmployeeData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const confirmDelete = async () => {
+    if (deleteEmployeeId) {
+      try {
+        await deleteEmployee(deleteEmployeeId);
+        setEmployees((prevEmployees) => prevEmployees.filter((employee) => employee.employeeId !== deleteEmployeeId));
+      } catch (error) {
+        console.error('Failed to delete employee', error);
+      }
+      // Reset deleteEmployeeId after deletion
+      setDeleteEmployeeId(null);
+    }
+    // Hide the delete confirmation popup
+    setShowDeletePopup(false);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -168,9 +175,9 @@ const Employees: React.FC = () => {
         </table>
       </div>
 
-      {showPopup && (
+      {showAddEditPopup && (
         <AddEmployeePopup
-          setShowPopup={setShowPopup}
+          setShowPopup={setShowAddEditPopup}
           setEmployeeData={setEmployeeData}
           handleSubmit={handleSubmit}
           handleInputChange={handleInputChange}
@@ -178,6 +185,8 @@ const Employees: React.FC = () => {
           isEditing={isEditing}
         />
       )}
+
+      {showDeletePopup && <ConfirmDeletePopup onDeleteConfirm={confirmDelete} onCancel={() => setShowDeletePopup(false)} />}
     </section>
   );
 };

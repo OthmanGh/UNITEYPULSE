@@ -5,15 +5,18 @@ import axios from 'axios';
 import Header from '../components/Header';
 import styles from '../../../components';
 import { Tooltip } from '@mui/material';
+import ConfirmDeletePopup from '../../../components/ConfirmDeletePopup';
 
 interface TextContent {
   _id: string;
   content: string;
 }
 
-const Editor = () => {
+const Editor: React.FC = () => {
   const [text, setText] = useState<string>('<h1>Welcome to the Editor</h1>');
   const [textContents, setTextContents] = useState<TextContent[]>([]);
+  const [showDeletePopup, setShowDeletePopup] = useState<boolean>(false);
+  const [textContentToDelete, setTextContentToDelete] = useState<string | null>(null);
 
   useEffect(() => {
     fetchTextContents();
@@ -51,8 +54,6 @@ const Editor = () => {
     } catch (error) {
       console.error('Error creating text content:', error);
     }
-
-    console.log(text);
   };
 
   const updateTextContent = async (id: string, updatedText: string) => {
@@ -73,15 +74,22 @@ const Editor = () => {
     }
   };
 
-  const deleteTextContent = async (id: string) => {
+  const handleDeleteTextContent = async () => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/editor/${id}`, {
+      if (!textContentToDelete) {
+        console.error('No text content selected for deletion.');
+        return;
+      }
+
+      await axios.delete(`http://127.0.0.1:8000/api/editor/${textContentToDelete}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });
       fetchTextContents();
+      setShowDeletePopup(false);
+      setTextContentToDelete(null);
     } catch (error) {
       console.error('Error deleting text content:', error);
     }
@@ -99,7 +107,10 @@ const Editor = () => {
               key={textContent._id}
               content={textContent.content}
               onUpdate={() => updateTextContent(textContent._id, text)}
-              onDelete={() => deleteTextContent(textContent._id)}
+              onDelete={() => {
+                setShowDeletePopup(true);
+                setTextContentToDelete(textContent._id);
+              }}
             />
           ))}
         </div>
@@ -117,6 +128,8 @@ const Editor = () => {
           onClick={createTextContent}
         />
       </div>
+
+      {showDeletePopup && <ConfirmDeletePopup onDeleteConfirm={handleDeleteTextContent} onCancel={() => setShowDeletePopup(false)} />}
     </section>
   );
 };
@@ -129,14 +142,14 @@ interface TextContentItemProps {
   onDelete: () => void;
 }
 
-const TextContentItem = ({ content, onUpdate, onDelete }: TextContentItemProps) => {
+const TextContentItem: React.FC<TextContentItemProps> = ({ content, onUpdate, onDelete }) => {
   return (
     <div className="p-mb-3 bg-dark p-4 rounded-lg relative">
       <div className="p-card p-4 overflow-auto flex flex-col gap-10">
         <div dangerouslySetInnerHTML={{ __html: content }} className="text-slate-100 text-[14px]" />
-        <div className="p-mt-3 flex gap-2 text-md mt-4  items-end justify-end">
+        <div className="p-mt-3 flex gap-2 text-md mt-4 items-end justify-end">
           <Tooltip title="Edit your text content in the editor below, then click 'Update' to save changes.">
-            <Button label="Update" className="p-button-danger text-green-400 hover:text-green-500  transition-all duration-500 text-sm" onClick={onUpdate} />
+            <Button label="Update" className="p-button-danger text-green-400 hover:text-green-500 transition-all duration-500 text-sm" onClick={onUpdate} />
           </Tooltip>
           <Button label="Delete" className="p-mr-2 text-red-400 hover:text-red-500 transition-all duration-500 text-sm" onClick={onDelete} />
         </div>
