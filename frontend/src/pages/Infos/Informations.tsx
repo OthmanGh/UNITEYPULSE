@@ -1,17 +1,17 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState } from 'react';
 
 interface FormData {
   companyName: string;
   address: string;
   foundedIn: string;
   website: string;
-  budget: number | '';
-  incomes: number | '';
-  expenses: number | '';
-  refunds: number | '';
-  customers: number | '';
-  sales: number | '';
-  products: number | '';
+  budget: string;
+  incomes: string;
+  expenses: string;
+  refunds: string;
+  customers: string;
+  sales: string;
+  products: string;
   currency: string;
 }
 
@@ -35,32 +35,31 @@ const Informations: React.FC = () => {
     currency: 'usd',
   });
 
-  const handleStepClick = (stepIndex: number) => {
+  const handleStepClick = (stepIndex: number): void => {
     setCurrentStep(stepIndex + 1);
   };
 
-  const handleNextStep = () => {
+  const handleNextStep = (): void => {
     if (currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
     }
   };
 
-  const handlePrevStep = () => {
+  const handlePrevStep = (): void => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const { name, value } = e.target;
-    const newValue = name === 'currency' ? value : Number(value);
     setFormData({
       ...formData,
-      [name]: newValue,
+      [name]: value,
     });
   };
 
-  const stepComponents = [
+  const stepComponents: JSX.Element[] = [
     <CompanyInformation formData={formData} handleChange={handleChange} />,
     <FinancialData formData={formData} handleChange={handleChange} />,
     <BusinessOperation formData={formData} handleChange={handleChange} />,
@@ -115,10 +114,19 @@ const Informations: React.FC = () => {
 
 export default Informations;
 
-const CompanyInformation: React.FC<{ formData: FormData; handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void }> = ({
-  formData,
-  handleChange,
-}) => {
+interface InputFieldProps {
+  type: string;
+  placeholder: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  label: string;
+  id?: string;
+  style?: string;
+  disabled?: boolean;
+}
+
+const CompanyInformation: React.FC<InputFieldProps> = ({ formData, handleChange }) => {
   return (
     <>
       <InputField placeholder="Company Name" type="text" label="Company Name" name="companyName" value={formData.companyName} onChange={handleChange} />
@@ -129,10 +137,7 @@ const CompanyInformation: React.FC<{ formData: FormData; handleChange: (e: Chang
   );
 };
 
-const FinancialData: React.FC<{ formData: FormData; handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void }> = ({
-  formData,
-  handleChange,
-}) => {
+const FinancialData: React.FC<InputFieldProps> = ({ formData, handleChange }) => {
   return (
     <>
       <InputField placeholder="Budget" type="number" label="Budget" name="budget" value={formData.budget} onChange={handleChange} />
@@ -143,10 +148,7 @@ const FinancialData: React.FC<{ formData: FormData; handleChange: (e: ChangeEven
   );
 };
 
-const BusinessOperation: React.FC<{ formData: FormData; handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void }> = ({
-  formData,
-  handleChange,
-}) => {
+const BusinessOperation: React.FC<InputFieldProps> = ({ formData, handleChange }) => {
   return (
     <>
       <InputField placeholder="Number of Customers" type="number" label="Customers" name="customers" value={formData.customers} onChange={handleChange} />
@@ -172,17 +174,10 @@ const BusinessOperation: React.FC<{ formData: FormData; handleChange: (e: Change
   );
 };
 
-const InputField: React.FC<{
-  type: string;
-  placeholder: string;
-  name: keyof FormData;
-  value: string | number;
-  onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
-  label: string;
-}> = ({ type, placeholder, name, value, onChange, label }) => {
+const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value, onChange, label, id, style, disabled = false }) => {
   return (
     <fieldset className="flex flex-col justify-center items-start w-full">
-      <label htmlFor={name} className="mb-2 text-[15px] text-slate-400">
+      <label htmlFor={id} className="mb-2 text-[15px] text-slate-400">
         {label}
       </label>
       <input
@@ -191,7 +186,8 @@ const InputField: React.FC<{
         name={name}
         value={value}
         onChange={onChange}
-        className={`rounded-md px-4 w-[90%] py-4 h-15 text-secondary outline-none bg-gray-50`}
+        className={`rounded-md px-4 w-[90%] py-4 h-15 text-secondary outline-none bg-gray-50 ${style}`}
+        disabled={disabled}
       />
     </fieldset>
   );
