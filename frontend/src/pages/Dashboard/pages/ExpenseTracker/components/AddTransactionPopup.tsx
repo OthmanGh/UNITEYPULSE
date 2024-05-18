@@ -94,10 +94,14 @@ const AddTransactionPopup: React.FC<AddTransactionPopupProps> = ({ onAddTransact
             label="Amount"
             id="amount"
           />
-          <div>
-            <label>
+          <div className="text-slate-600 mb-[1px]">
+            <label className="flex flex-col">
               Type:
-              <select value={type} onChange={(e) => setType(e.target.value as 'income' | 'expense')}>
+              <select
+                value={type}
+                className="p-3 rounded-md bg-slate-200 outline-none w-[500px] text-dark"
+                onChange={(e) => setType(e.target.value as 'income' | 'expense')}
+              >
                 <option value="expense">Expense</option>
                 <option value="income">Income</option>
               </select>
