@@ -6,6 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import styles from '../../../components';
 import axios from 'axios';
 import ConfirmDeletePopup from '../../../components/ConfirmDeletePopup';
+import { API_BASE_URI } from '../../../utils';
 
 interface Event {
   id: string;
@@ -29,7 +30,7 @@ const Calendar: React.FC = () => {
     try {
       const token = JSON.parse(localStorage.getItem('authUser') || '').token;
 
-      const response = await axios.get<{ status: string; data: any[] }>('http://127.0.0.1:8000/api/events', {
+      const response = await axios.get<{ status: string; data: any[] }>(`${API_BASE_URI}/events`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -64,7 +65,7 @@ const Calendar: React.FC = () => {
       };
 
       const response = await axios.post<{ status: string; data: any }>(
-        'http://127.0.0.1:8000/api/events',
+        `${API_BASE_URI}/events`,
         {
           title,
           description,
@@ -98,7 +99,7 @@ const Calendar: React.FC = () => {
     try {
       const token = JSON.parse(localStorage.getItem('authUser') || '').token;
 
-      await axios.delete(`http://127.0.0.1:8000/api/events/${eventId}`, {
+      await axios.delete(`${API_BASE_URI}/events/${eventId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
