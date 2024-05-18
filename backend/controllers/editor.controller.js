@@ -1,9 +1,8 @@
-import TextContent from "../models/Editor";
+import TextContent from "../models/editor.model.js";
 import fs from "fs";
 import path from "path";
 
-// Controller function to get text content by ID
-export const getTextContentById = async (req, res) => {
+export const getTextContent = async (req, res) => {
   try {
     const { id } = req.params;
     const content = await TextContent.findById(id);
