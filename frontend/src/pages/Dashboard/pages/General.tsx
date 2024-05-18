@@ -3,8 +3,15 @@ import { SparklineAreaData, earningData, ecomPieChartData, stackedChartData } fr
 import SparkLine from '../components/Charts/SparkLine';
 import Stacked from '../components/Charts/Stacked';
 import styles from '../../../components';
+import { useCompany } from '../../../contexts/CompanyContext';
+import formatEarnings from '../../../utils/companyData';
 
 const General = () => {
+  const { company } = useCompany();
+  console.log(company);
+
+  const earnings = company.incomes - company.expenses;
+
   return (
     <section className={styles.dashboardSection}>
       <div className="grid gap-4 px-4 mt-10 sm:mt-4">
@@ -12,7 +19,7 @@ const General = () => {
           <div className="flex justify-between items-center">
             <div>
               <p className="font-bold text-black-400 text-xl mb-4">Earnings</p>
-              <p className="text-4xl text-gray-50 font-semibold">$83,634.29</p>
+              <p className="text-4xl text-gray-50 font-semibold">{formatEarnings(company.incomes, company.expenses, company.currency)}</p>
             </div>
           </div>
         </div>
