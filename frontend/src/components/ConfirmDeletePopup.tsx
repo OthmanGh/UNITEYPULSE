@@ -18,7 +18,7 @@ const ConfirmDeletePopup: React.FC<ConfirmDeletePopupProps> = ({ onDeleteConfirm
           <button onClick={onDeleteConfirm} className="bg-red-500 hover:bg-red-600 transition-all duration-500 text-white p-3 rounded-md w-full">
             Delete
           </button>
-          <button onClick={onCancel} className="bg-gray-500 hover:bg-gray-600 transition-all duration-500 text-white p-3 rounded-md w-full">
+          <button onClick={() => onCancel()} className="bg-gray-500 hover:bg-gray-600 transition-all duration-500 text-white p-3 rounded-md w-full">
             Cancel
           </button>
         </div>
