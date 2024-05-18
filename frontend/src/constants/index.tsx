@@ -231,7 +231,7 @@ export const SparklineAreaData = {
       backgroundColor: '#40F8FF',
     },
     {
-      label: 'incomes',
+      label: 'revenue',
       data: [6000, 9000, 6000, 2000, 4000],
       borderColor: '#0C356A',
       backgroundColor: '#0C356A',
@@ -269,5 +269,150 @@ export const expenseHistory = [
   {
     time: 'Month',
     Icon: <MonthIcon />,
+  },
+];
+
+export const tableExpenseData = [
+  {
+    date: '2024-05-01',
+    description: 'Shopping',
+    category: 'Expenses',
+    amount: '$50.00',
+  },
+  {
+    date: '2024-05-02',
+    description: 'Gasoline',
+    category: 'Expenses',
+    amount: '$40.00',
+  },
+  {
+    date: '2024-05-03',
+    description: 'Salary',
+    category: 'Earnings',
+    amount: '$1000.00',
+  },
+  {
+    date: '2024-05-04',
+    description: 'Restaurant',
+    category: 'Expenses',
+    amount: '$70.00',
+  },
+  {
+    date: '2024-05-05',
+    description: 'Utilities',
+    category: 'Expenses',
+    amount: '$120.00',
+  },
+
+  {
+    date: '2024-05-01',
+    description: 'Shopping',
+    category: 'Expenses',
+    amount: '$50.00',
+  },
+  {
+    date: '2024-05-02',
+    description: 'Gasoline',
+    category: 'Expenses',
+    amount: '$40.00',
+  },
+  {
+    date: '2024-05-03',
+    description: 'Salary',
+    category: 'Earnings',
+    amount: '$1000.00',
+  },
+  {
+    date: '2024-05-04',
+    description: 'Restaurant',
+    category: 'Expenses',
+    amount: '$70.00',
+  },
+  {
+    date: '2024-05-05',
+    description: 'Utilities',
+    category: 'Expenses',
+    amount: '$120.00',
+  },
+
+  {
+    date: '2024-05-01',
+    description: 'Shopping',
+    category: 'Expenses',
+    amount: '$50.00',
+  },
+  {
+    date: '2024-05-02',
+    description: 'Gasoline',
+    category: 'Expenses',
+    amount: '$40.00',
+  },
+  {
+    date: '2024-05-03',
+    description: 'Salary',
+    category: 'Earnings',
+    amount: '$1000.00',
+  },
+  {
+    date: '2024-05-04',
+    description: 'Restaurant',
+    category: 'Expenses',
+    amount: '$70.00',
+  },
+  {
+    date: '2024-05-05',
+    description: 'Utilities',
+    category: 'Expenses',
+    amount: '$120.00',
+  },
+
+  {
+    date: '2024-05-03',
+    description: 'Salary',
+    category: 'Earnings',
+    amount: '$1000.00',
+  },
+  {
+    date: '2024-05-04',
+    description: 'Restaurant',
+    category: 'Expenses',
+    amount: '$70.00',
+  },
+  {
+    date: '2024-05-05',
+    description: 'Utilities',
+    category: 'Expenses',
+    amount: '$120.00',
+  },
+
+  {
+    date: '2024-05-01',
+    description: 'Shopping',
+    category: 'Expenses',
+    amount: '$50.00',
+  },
+  {
+    date: '2024-05-02',
+    description: 'Gasoline',
+    category: 'Expenses',
+    amount: '$40.00',
+  },
+  {
+    date: '2024-05-03',
+    description: 'Salary',
+    category: 'Earnings',
+    amount: '$1000.00',
+  },
+  {
+    date: '2024-05-04',
+    description: 'Restaurant',
+    category: 'Expenses',
+    amount: '$70.00',
+  },
+  {
+    date: '2024-05-05',
+    description: 'Utilities',
+    category: 'Expenses',
+    amount: '$120.00',
   },
 ];

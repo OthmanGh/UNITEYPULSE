@@ -1,6 +1,8 @@
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 
+import { useTransactions } from '../../../../contexts/TransactionsContext';
+
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 type SparkLineProps = {
@@ -8,10 +10,10 @@ type SparkLineProps = {
   id: string;
   width: string;
   height: string;
-  data: any;
+  options?: any;
 };
 
-const options = {
+const defaultOptions = {
   responsive: true,
   plugins: {
     legend: {
@@ -23,8 +25,34 @@ const options = {
   },
 };
 
-const SparkLine = ({ colors, id, width, height, data }: SparkLineProps) => {
+const SparkLine = ({ colors, id, width, height, options }: SparkLineProps) => {
+  const { incomes, expenses } = useTransactions();
+
+  const incomeData = incomes.map((income) => income.amount);
+  const expenseData = expenses.map((expense) => expense.amount);
+
+  const labels = incomes.map((income) => new Date(income.date).toLocaleDateString());
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: 'expenses',
+        data: expenseData,
+        borderColor: '#042d3e',
+        backgroundColor: '#042d3e',
+      },
+      {
+        label: 'incomes',
+        data: incomeData,
+        borderColor: '#A6F6F1',
+        backgroundColor: '#A6F6F1',
+      },
+    ],
+  };
+
   const lineOptions = {
+    ...defaultOptions,
     ...options,
     maintainAspectRatio: false,
     height: height,

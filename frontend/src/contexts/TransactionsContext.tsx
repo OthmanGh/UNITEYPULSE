@@ -10,11 +10,17 @@ export const TransactionProvider = ({ children }) => {
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const token = JSON.parse(localStorage.getItem('authUser')).token;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/transactions');
+        const response = await axios.get('http://127.0.0.1:8000/api/transactions', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
         const { transactions } = response.data.data;
 
         setTransactions(transactions);
