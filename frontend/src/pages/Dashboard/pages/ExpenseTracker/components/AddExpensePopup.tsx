@@ -6,6 +6,7 @@ interface AddExpensePopupProps {
 }
 
 const AddExpensePopup: React.FC<AddExpensePopupProps> = ({ onAddExpense, onClose }) => {
+  const [name, setName] = useState('');
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
@@ -13,7 +14,9 @@ const AddExpensePopup: React.FC<AddExpensePopupProps> = ({ onAddExpense, onClose
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log('Form submitted');
     const newExpense = {
+      name,
       date,
       description,
       category,
@@ -27,6 +30,7 @@ const AddExpensePopup: React.FC<AddExpensePopupProps> = ({ onAddExpense, onClose
       <div className="bg-white p-8 rounded-lg relative">
         <h2 className="text-2xl font-bold mb-4">Add Expense</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
+          <InputField type="text" placeholder="Enter name" name="name" value={name} onChange={(e) => setName(e.target.value)} label="Name" id="name" />
           <InputField type="date" placeholder="Enter date" name="date" value={date} onChange={(e) => setDate(e.target.value)} label="Date" id="date" />
           <InputField
             type="text"
