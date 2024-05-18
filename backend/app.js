@@ -11,6 +11,7 @@ import connect from "./config/db.js";
 import chatbotRoutes from "./routes/chatbot.routes.js";
 import eventRoutes from "./routes/events.routes.js";
 import expenseRoutes from "./routes/expense.routes.js";
+import editorRoutes from "./routes/editor.routes.js";
 
 app.use(express.json());
 app.use(cookieParser());
@@ -24,6 +25,7 @@ app.use("/api/customers", customerRoutes);
 app.use("/api/chatbot", chatbotRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/expenses", expenseRoutes);
+app.use("/api/editor", editorRoutes);
 
 const PORT = process.env.PORT || 8000;
 server.listen(PORT, err => {
