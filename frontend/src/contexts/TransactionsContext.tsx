@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { API_BASE_URI } from '../utils';
 
 const TransactionContext = createContext();
 
@@ -15,7 +16,7 @@ export const TransactionProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/transactions', {
+        const response = await axios.get(`${API_BASE_URI}/transactions`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',

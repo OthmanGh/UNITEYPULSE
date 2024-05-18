@@ -6,10 +6,8 @@ import { SignupSchema } from '../../../utils/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { AUTH_API_BASE_URL } from '../../../utils';
 
-import { CodeResponse, GoogleLogin, TokenResponse, useGoogleLogin } from '@react-oauth/google';
-import { date } from 'zod';
+import { TokenResponse, useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext';
 

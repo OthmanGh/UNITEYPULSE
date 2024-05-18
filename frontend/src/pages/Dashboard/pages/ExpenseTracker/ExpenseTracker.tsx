@@ -8,6 +8,7 @@ import axios, { AxiosResponse } from 'axios';
 import { MdOutlineDeleteSweep as DeleteIcon } from 'react-icons/md';
 import { BiSolidEditAlt as EditIcon } from 'react-icons/bi';
 import ConfirmDeletePopup from '../../../../components/ConfirmDeletePopup';
+import { API_BASE_URI } from '../../../../utils';
 
 interface Transaction {
   _id: string;
@@ -20,10 +21,10 @@ interface Transaction {
 
 const ExpenseTracker: React.FC = () => {
   const [showPopup, setShowPopup] = useState<boolean>(false);
-  const [showDeletePopup, setShowDeletePopup] = useState<boolean>(false); // State to manage delete confirmation popup
+  const [showDeletePopup, setShowDeletePopup] = useState<boolean>(false);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
-  const [transactionToDelete, setTransactionToDelete] = useState<string | null>(null); // State to store the transaction ID to be deleted
+  const [transactionToDelete, setTransactionToDelete] = useState<string | null>(null);
 
   useEffect(() => {
     fetchTransactions();
@@ -37,7 +38,7 @@ const ExpenseTracker: React.FC = () => {
         return;
       }
 
-      const response: AxiosResponse<{ data: { transactions: Transaction[] } }> = await axios.get('http://127.0.0.1:8000/api/transactions', {
+      const response: AxiosResponse<{ data: { transactions: Transaction[] } }> = await axios.get(`${API_BASE_URI}/transactions`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -70,7 +71,7 @@ const ExpenseTracker: React.FC = () => {
         return;
       }
 
-      const response: AxiosResponse = await axios.post('http://127.0.0.1:8000/api/transactions', newTransaction, {
+      const response: AxiosResponse = await axios.post(`${API_BASE_URI}/api/transactions`, newTransaction, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -96,7 +97,7 @@ const ExpenseTracker: React.FC = () => {
       }
 
       const token = JSON.parse(localStorage.getItem('authUser') || '').token;
-      const response: AxiosResponse = await axios.delete(`http://127.0.0.1:8000/api/transactions/${transactionToDelete}`, {
+      const response: AxiosResponse = await axios.delete(`${API_BASE_URI}/api/transactions/${transactionToDelete}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -128,7 +129,7 @@ const ExpenseTracker: React.FC = () => {
         ...updatedTransaction,
       };
 
-      const response: AxiosResponse = await axios.patch(`http://127.0.0.1:8000/api/transactions/${id}`, transactionToUpdate, {
+      const response: AxiosResponse = await axios.patch(`${API_BASE_URI}/transactions/${id}`, transactionToUpdate, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -216,6 +217,7 @@ const ExpenseTracker: React.FC = () => {
                         }}
                       />
                     </Tooltip>
+
                     <Tooltip title="Update" placement="top">
                       <EditIcon
                         className="cursor-pointer text-2xl text-blue-500 ml-2"

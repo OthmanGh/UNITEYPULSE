@@ -17,8 +17,6 @@ const Message = ({ message }) => {
     ? selectedConversation?.profilePicture
     : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9XYwkxuAsCVT8G1Ql3EMddIFV0nhvukM9Tg&s';
 
-  console.log(profilePic);
-
   const formatedTime = convertTime(message.createdAt);
 
   const bgColor = currentUserMessages ? 'bg-blue-500' : '';

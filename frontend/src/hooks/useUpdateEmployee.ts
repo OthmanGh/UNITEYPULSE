@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { API_BASE_URI } from '../utils';
 
 const useUpdateEmployee = () => {
   const [loading, setLoading] = useState(false);
@@ -11,7 +12,7 @@ const useUpdateEmployee = () => {
     setError(null);
 
     try {
-      const url = `http://127.0.0.1:8000/api/employees/${employeeId}`;
+      const url = `${API_BASE_URI}/employees/${employeeId}`;
       const res = await fetch(url, {
         method: 'PUT',
         headers: {

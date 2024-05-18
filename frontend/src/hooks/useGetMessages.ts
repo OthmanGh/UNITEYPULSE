@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import useConversation from '../store/useConversations';
+import { API_BASE_URI } from '../utils';
 
 const useGetMessages = () => {
   const [loading, setLoading] = useState(false);
@@ -10,7 +11,7 @@ const useGetMessages = () => {
     const getMessages = async () => {
       setLoading(true);
       try {
-        const url = `http://127.0.0.1:8000/api/messages/${selectedConversation._id}`;
+        const url = `${API_BASE_URI}/messages/${selectedConversation._id}`;
 
         const res = await fetch(url, {
           headers: {

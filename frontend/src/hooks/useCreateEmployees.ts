@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { API_BASE_URI } from '../utils';
 
 const useCreateEmployee = () => {
   const [loading, setLoading] = useState(false);
@@ -9,7 +10,7 @@ const useCreateEmployee = () => {
     setLoading(true);
     setError(null);
     try {
-      const url = 'http://127.0.0.1:8000/api/employees';
+      const url = `${API_BASE_URI}/employees`;
       const res = await fetch(url, {
         method: 'POST',
         headers: {

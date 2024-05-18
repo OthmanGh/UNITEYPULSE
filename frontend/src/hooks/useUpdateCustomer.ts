@@ -9,7 +9,7 @@ const useUpdateCustomer = () => {
     setLoading(true);
     try {
       const token = JSON.parse(localStorage.getItem('authUser')).token;
-      const url = `http://127.0.0.1:8000/api/customers/${customerId}`;
+      const url = `${API_BASE_URI}/customers/${customerId}`;
 
       const response = await fetch(url, {
         method: 'PATCH',

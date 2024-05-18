@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { API_BASE_URI } from '../utils';
 
 const useDeleteCustomer = () => {
   const [loading, setLoading] = useState(false);
@@ -9,7 +10,7 @@ const useDeleteCustomer = () => {
   const deleteCustomer = async (customerId) => {
     setLoading(true);
     try {
-      const url = `http://127.0.0.1:8000/api/customers/${customerId}`;
+      const url = `${API_BASE_URI}/customers/${customerId}`;
 
       await fetch(url, {
         method: 'DELETE',

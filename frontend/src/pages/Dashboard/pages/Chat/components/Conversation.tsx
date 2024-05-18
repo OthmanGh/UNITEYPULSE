@@ -11,8 +11,6 @@ const Conversation = ({ conversation, lastIdx }) => {
 
   const isOnline = onlineUsers.includes(conversation._id);
 
-  console.log(selectedConversation);
-
   return (
     <div
       className={`flex flex-row gap-2 items-center hover:bg-secondary rounded p-2 py-1 cursor-pointer ${isSelected ? 'bg-secondary' : ''} `}

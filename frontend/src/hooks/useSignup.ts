@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RequestMethod } from '../services/requestMethods';
-import { AUTH_API_BASE_URL } from '../utils';
+import { API_BASE_URI } from '../utils';
 import { useAuthContext } from '../contexts/AuthContext';
 
 interface SignupData {
@@ -31,7 +31,7 @@ const useSignup = () => {
   const signup = async (data: SignupData) => {
     setLoading(true);
     try {
-      const url = `${AUTH_API_BASE_URL}/signup`;
+      const url = `${API_BASE_URI}/auth/signup`;
 
       const req = await fetch(url, {
         method: RequestMethod.post,
@@ -43,7 +43,6 @@ const useSignup = () => {
       });
 
       const res: SignupResponse = await req.json();
-      // setAuthUser(res);
 
       if (res.status === 'success') {
         localStorage.setItem('authUser', JSON.stringify(res.data));

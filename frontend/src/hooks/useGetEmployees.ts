@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { API_BASE_URI } from '../utils';
 
 const useGetEmployees = () => {
   const [loading, setLoading] = useState(false);
@@ -8,7 +9,7 @@ const useGetEmployees = () => {
     const getEmployees = async () => {
       setLoading(true);
       try {
-        const url = 'http://127.0.0.1:8000/api/employees';
+        const url = `${API_BASE_URI}/employees`;
         const res = await fetch(url, {
           headers: {
             'Content-Type': 'application/json',

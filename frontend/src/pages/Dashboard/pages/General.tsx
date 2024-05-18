@@ -1,5 +1,4 @@
 import { GoDotFill } from 'react-icons/go';
-import { SparklineAreaData, stackedChartData } from '../../../constants';
 import SparkLine from '../components/Charts/SparkLine';
 import Stacked from '../components/Charts/Stacked';
 import styles from '../../../components';
@@ -130,12 +129,12 @@ const General = () => {
               </div>
 
               <div className="mt-5 hidden sm:block">
-                <SparkLine id="line-sparkline" height="400px" width="100px" data={SparklineAreaData} colors={['blue', 'blue']} />
+                <SparkLine id="line-sparkline" height="400px" width="100px" colors={['blue', 'blue']} />
               </div>
             </div>
 
             <div className="mt-10">
-              <Stacked width="320px" height="4000px" data={stackedChartData} id="bar-stacked" />
+              <Stacked width="320px" height="4000px" id="bar-stacked" />
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ const useCreateCustomer = () => {
     setLoading(true);
     try {
       const token = JSON.parse(localStorage.getItem('authUser')).token;
-      const url = `http://127.0.0.1:8000/api/customers`;
+      const url = `${API_BASE_URI}/customers`;
 
       const response = await fetch(url, {
         method: 'POST',

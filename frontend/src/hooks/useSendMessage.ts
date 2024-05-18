@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { RequestMethod } from '../services/requestMethods';
 import useConversation from '../store/useConversations';
+import { API_BASE_URI } from '../utils';
 
 const useSendMessage = () => {
   const [loading, setLoading] = useState(false);
@@ -15,7 +16,7 @@ const useSendMessage = () => {
 
     console.log(selectedConversation);
 
-    const url = `http://127.0.0.1:8000/api/messages/send/${selectedConversation._id}`;
+    const url = `${API_BASE_URI}/messages/send/${selectedConversation._id}`;
 
     setLoading(true);
     try {

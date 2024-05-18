@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RequestMethod } from '../services/requestMethods';
-import { AUTH_API_BASE_URL } from '../utils';
+import { API_BASE_URI } from '../utils';
 import { useAuthContext } from '../contexts/AuthContext';
 
 interface LoginData {
@@ -20,7 +20,6 @@ interface LoginResponse {
 }
 
 const useLogin = () => {
-  const navigator = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<LoginError | null>(null);
   const { setAuthUser } = useAuthContext();
@@ -29,7 +28,7 @@ const useLogin = () => {
     setLoading(true);
 
     try {
-      const url = `${AUTH_API_BASE_URL}/login`;
+      const url = `${API_BASE_URI}/auth/login`;
 
       const req = await fetch(url, {
         method: RequestMethod.post,
@@ -45,8 +44,6 @@ const useLogin = () => {
       if (res.status === 'success') {
         localStorage.setItem('authUser', JSON.stringify(res.data));
         setAuthUser(res.data);
-
-        // navigator('/dashboard');
       } else {
         throw new Error(res.error);
       }
