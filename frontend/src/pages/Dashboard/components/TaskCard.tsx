@@ -76,7 +76,7 @@ const TaskCard = ({ task, deleteTask, updateTask }: TaskCardProps) => {
       style={style}
       {...attributes}
       {...listeners}
-      className="bg-blue-200 p-2.5 h-[100px] min-h-[100px] items-center flex text-left rounded-xl hover:ring-2 hover:ring-inset hover:ring-blue-900  cursor-grab relative"
+      className="bg-secondary text-slate-100 mb-2 p-2 border-l-4 border-l-dark h-[40] hover:bg-extraDark transition-all duration-500"
       onMouseEnter={() => {
         setMouseIsOver(true);
       }}
