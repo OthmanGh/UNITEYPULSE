@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useCompany } from '../../contexts/CompanyContext';
+import { useNavigate } from 'react-router-dom';
 
 interface FormData {
   companyName: string;
@@ -17,8 +20,8 @@ interface FormData {
 
 const Informations: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(1);
-
-  const steps: string[] = ['Company Information', 'Financial Data', 'Business Operations'];
+  const { setCompany } = useCompany();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState<FormData>({
     companyName: '',
@@ -35,15 +38,30 @@ const Informations: React.FC = () => {
     currency: 'usd',
   });
 
+  const steps: string[] = ['Company Information', 'Financial Data', 'Business Operations'];
+  const token = JSON.parse(localStorage.getItem('authUser')).token;
+
   const handleStepClick = (stepIndex: number): void => {
     setCurrentStep(stepIndex + 1);
   };
 
-  const handleNextStep = (): void => {
+  const handleNextStep = async (): void => {
     if (currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
     } else {
-      console.log('Form Data:', formData);
+      try {
+        const response = await axios.post('http://127.0.0.1:8000/api/company', formData, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log('Form Data Submitted Successfully:', response.data);
+        setCompany(response.data.data.company);
+        navigate('/dashboard');
+      } catch (error) {
+        console.error('Error submitting form data:', error);
+      }
     }
   };
 
@@ -92,7 +110,7 @@ const Informations: React.FC = () => {
               <div className="flex flex-row justify-between mt-10">
                 <button
                   type="button"
-                  className="prev-btn hover:bg-primary text-white hover:text-slate-800 p-3 rounded-lg  transition-all duration-500"
+                  className="prev-btn hover:bg-primary text-white hover:text-slate-800 p-3 rounded-lg transition-all duration-500"
                   onClick={handlePrevStep}
                 >
                   Previous
@@ -100,7 +118,7 @@ const Informations: React.FC = () => {
 
                 <button
                   type="button"
-                  className="next-btn w-[90px] hover:bg-primary hover:text-slate-800 p-3  text-primary transition-all rounded-lg duration-500"
+                  className="next-btn w-[90px] hover:bg-primary hover:text-slate-800 p-3 text-primary transition-all rounded-lg duration-500"
                   onClick={handleNextStep}
                 >
                   {currentStep === steps.length ? 'Submit' : 'Next'}
@@ -128,7 +146,10 @@ interface InputFieldProps {
   disabled?: boolean;
 }
 
-const CompanyInformation: React.FC<InputFieldProps> = ({ formData, handleChange }) => {
+const CompanyInformation: React.FC<{ formData: FormData; handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void }> = ({
+  formData,
+  handleChange,
+}) => {
   return (
     <>
       <InputField placeholder="Company Name" type="text" label="Company Name" name="companyName" value={formData.companyName} onChange={handleChange} />
@@ -139,7 +160,10 @@ const CompanyInformation: React.FC<InputFieldProps> = ({ formData, handleChange 
   );
 };
 
-const FinancialData: React.FC<InputFieldProps> = ({ formData, handleChange }) => {
+const FinancialData: React.FC<{ formData: FormData; handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void }> = ({
+  formData,
+  handleChange,
+}) => {
   return (
     <>
       <InputField placeholder="Budget" type="number" label="Budget" name="budget" value={formData.budget} onChange={handleChange} />
@@ -150,7 +174,10 @@ const FinancialData: React.FC<InputFieldProps> = ({ formData, handleChange }) =>
   );
 };
 
-const BusinessOperation: React.FC<InputFieldProps> = ({ formData, handleChange }) => {
+const BusinessOperation: React.FC<{ formData: FormData; handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void }> = ({
+  formData,
+  handleChange,
+}) => {
   return (
     <>
       <InputField placeholder="Number of Customers" type="number" label="Customers" name="customers" value={formData.customers} onChange={handleChange} />
