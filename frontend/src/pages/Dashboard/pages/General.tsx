@@ -1,16 +1,59 @@
 import { GoDotFill } from 'react-icons/go';
-import { SparklineAreaData, earningData, ecomPieChartData, stackedChartData } from '../../../constants';
+import { SparklineAreaData, ecomPieChartData, stackedChartData } from '../../../constants';
 import SparkLine from '../components/Charts/SparkLine';
 import Stacked from '../components/Charts/Stacked';
 import styles from '../../../components';
-import { useCompany } from '../../../contexts/CompanyContext';
 import formatEarnings from '../../../utils/companyData';
+import { MdOutlineSupervisorAccount } from 'react-icons/md';
+import { BsBoxSeam } from 'react-icons/bs';
+import { FiBarChart } from 'react-icons/fi';
+import { HiOutlineRefresh } from 'react-icons/hi';
+import { useCompany } from '../../../contexts/CompanyContext';
 
 const General = () => {
   const { company } = useCompany();
+
   console.log(company);
 
-  const earnings = company.incomes - company.expenses;
+  const earningData = [
+    {
+      icon: <MdOutlineSupervisorAccount />,
+      amount: company?.customers,
+      percentage: '-4%',
+      title: 'Customers',
+      iconColor: '#03C9D7',
+      iconBg: '#E5FAFB',
+      pcColor: false,
+    },
+    {
+      icon: <BsBoxSeam />,
+      amount: company?.products,
+      percentage: '+23%',
+      title: 'Products',
+      iconColor: 'rgb(255, 244, 229)',
+      iconBg: 'rgb(254, 201, 15)',
+      pcColor: true,
+    },
+    {
+      icon: <FiBarChart />,
+      amount: company?.sales,
+      percentage: '+38%',
+      title: 'Sales',
+      iconColor: 'rgb(228, 106, 118)',
+      iconBg: 'rgb(255, 244, 229)',
+
+      pcColor: true,
+    },
+    {
+      icon: <HiOutlineRefresh />,
+      amount: company?.refunds,
+      percentage: '-12%',
+      title: 'Refunds',
+      iconColor: 'rgb(0, 194, 146)',
+      iconBg: 'rgb(235, 250, 242)',
+      pcColor: false,
+    },
+  ];
 
   return (
     <section className={styles.dashboardSection}>
@@ -19,7 +62,7 @@ const General = () => {
           <div className="flex justify-between items-center">
             <div>
               <p className="font-bold text-black-400 text-xl mb-4">Earnings</p>
-              <p className="text-4xl text-gray-50 font-semibold">{formatEarnings(company.incomes, company.expenses, company.currency)}</p>
+              <p className="text-4xl text-gray-50 font-semibold">{formatEarnings(company?.incomes, company?.expenses, company?.currency)}</p>
             </div>
           </div>
         </div>
@@ -71,7 +114,7 @@ const General = () => {
             <div className="border-r-1 border-color m-4 pr-10">
               <div>
                 <p>
-                  <span className="text-lg sm:text-3xl font-semibold text-dark">$33,593</span>
+                  <span className="text-lg sm:text-3xl font-semibold text-dark">{company?.budget}</span>
                   <span className="p-0.5 sm:p-1.5 hover:drop-shadow-xl cursor-pointer rounded-full text-white bg-green-400 ml-3 text-xs">19%</span>
                 </p>
 
@@ -80,7 +123,7 @@ const General = () => {
 
               <div className="mt-8">
                 <p>
-                  <span className="text-lg sm:text-3xl font-semibold text-dark">$105,593</span>
+                  <span className="text-lg sm:text-3xl font-semibold text-dark">{company?.expenses}</span>
                 </p>
 
                 <p className="text-gray-500 mt-1">Expense</p>
