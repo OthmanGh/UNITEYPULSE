@@ -4,20 +4,26 @@ import { Button } from 'primereact/button';
 import axios from 'axios';
 import Header from '../components/Header';
 import styles from '../../../components';
+import { Tooltip } from '@mui/material';
+
+interface TextContent {
+  _id: string;
+  content: string;
+}
 
 const Editor = () => {
-  const [text, setText] = useState('<h1>Welcome to the Editor</h1>');
-  const [textContents, setTextContents] = useState([]);
+  const [text, setText] = useState<string>('<h1>Welcome to the Editor</h1>');
+  const [textContents, setTextContents] = useState<TextContent[]>([]);
 
   useEffect(() => {
     fetchTextContents();
   }, []);
 
-  const token = JSON.parse(localStorage.getItem('authUser')).token;
+  const token: string | null = JSON.parse(localStorage.getItem('authUser') || '').token;
 
   const fetchTextContents = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/editor', {
+      const response = await axios.get<TextContent[]>('http://127.0.0.1:8000/api/editor', {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -47,7 +53,7 @@ const Editor = () => {
     }
   };
 
-  const updateTextContent = async (id, updatedText) => {
+  const updateTextContent = async (id: string, updatedText: string) => {
     try {
       await axios.patch(
         `http://127.0.0.1:8000/api/editor/${id}`,
@@ -65,7 +71,7 @@ const Editor = () => {
     }
   };
 
-  const deleteTextContent = async (id) => {
+  const deleteTextContent = async (id: string) => {
     try {
       await axios.delete(`http://127.0.0.1:8000/api/editor/${id}`, {
         headers: {
@@ -82,35 +88,55 @@ const Editor = () => {
   return (
     <section className={styles.dashboardSection}>
       <Header category="App" title="Editor" />
-      <Ed value={text} className="text-secondary text-3xl" onTextChange={(e) => setText(e.htmlValue)} style={{ height: '50vh' }} />
-      <div className="p-mt-3">
-        <Button label="Create Text Content" className="p-mr-2" onClick={createTextContent} />
+
+      <div>
+        <h2 className="text-secondary font-bold text-2xl mb-2">Content:</h2>
+        <div className="grid grid-cols-3 gap-10 p-4">
+          {textContents.map((textContent) => (
+            <TextContentItem
+              key={textContent._id}
+              content={textContent.content}
+              onUpdate={() => updateTextContent(textContent._id, text)}
+              onDelete={() => deleteTextContent(textContent._id)}
+            />
+          ))}
+        </div>
       </div>
-      <div className="p-mt-3">
-        {textContents.map((textContent) => (
-          <TextContentItem
-            key={textContent._id}
-            content={textContent.content}
-            onUpdate={() => updateTextContent(textContent._id, text)}
-            onDelete={() => deleteTextContent(textContent._id)}
-          />
-        ))}
+
+      <h2 className="text-secondary font-bold text-2xl mb-2 mt-6">Edit:</h2>
+      <div className=" p-4">
+        <Ed value={text} className="text-secondary text-3xl " onTextChange={(e) => setText(e.htmlValue)} style={{ height: '50vh' }} />
+        <p>This is an example of a simple editor component. You can see how it works and integrate it into your own projects.</p>
       </div>
-      <p>This is an example of a simple editor component. You can see how it works and integrate it into your own projects.</p>
+      <div className=" p-4">
+        <Button
+          label="Create Text Content"
+          className="p-mr-2 bg-secondary hover:bg-dark transition-all duration-500 text-slate-100 p-3 rounded-md "
+          onClick={createTextContent}
+        />
+      </div>
     </section>
   );
 };
 
 export default Editor;
 
-const TextContentItem = ({ content, onUpdate, onDelete }) => {
+interface TextContentItemProps {
+  content: string;
+  onUpdate: () => void;
+  onDelete: () => void;
+}
+
+const TextContentItem = ({ content, onUpdate, onDelete }: TextContentItemProps) => {
   return (
-    <div className="p-mb-3">
-      <div className="p-card p-p-4">
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-        <div className="p-mt-3">
-          <Button label="Update" className="p-mr-2" onClick={onUpdate} />
-          <Button label="Delete" className="p-button-danger" onClick={onDelete} />
+    <div className="p-mb-3 bg-dark p-4 rounded-lg relative">
+      <div className="p-card p-4 overflow-auto flex flex-col gap-10">
+        <div dangerouslySetInnerHTML={{ __html: content }} className="text-slate-100 text-[14px]" />
+        <div className="p-mt-3 flex gap-2 text-md mt-4  items-end justify-end">
+          <Tooltip title="Edit your text content in the editor below, then click 'Update' to save changes.">
+            <Button label="Update" className="p-button-danger text-green-400 hover:text-green-500  transition-all duration-500 text-sm" onClick={onUpdate} />
+          </Tooltip>
+          <Button label="Delete" className="p-mr-2 text-red-400 hover:text-red-500 transition-all duration-500 text-sm" onClick={onDelete} />
         </div>
       </div>
     </div>
