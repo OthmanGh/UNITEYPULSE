@@ -66,7 +66,6 @@ const ExpenseTracker: React.FC = () => {
         console.error('Token not found.');
         return;
       }
-      console.log(newTransaction);
 
       const response: AxiosResponse = await axios.post('http://127.0.0.1:8000/api/transactions', newTransaction, {
         headers: {
@@ -119,9 +118,6 @@ const ExpenseTracker: React.FC = () => {
         ...updatedTransaction,
       };
 
-      console.log(transactionToUpdate);
-      console.log(transactionToUpdate);
-
       const response: AxiosResponse = await axios.patch(`http://127.0.0.1:8000/api/transactions/${id}`, transactionToUpdate, {
         headers: {
           'Content-Type': 'application/json',
@@ -144,7 +140,10 @@ const ExpenseTracker: React.FC = () => {
         <Header category="app" title="Transaction Tracker" />
         <button
           className="flex items-center gap-2 bg-secondary text-gray-100 p-3 rounded-md cursor-pointer hover:bg-dark transition-all duration-400"
-          onClick={() => setShowPopup(true)}
+          onClick={() => {
+            setShowPopup(true);
+            setSelectedTransaction(null);
+          }}
         >
           <AddIcon className="text-xl" />
           Add Transaction
@@ -162,24 +161,28 @@ const ExpenseTracker: React.FC = () => {
                     <span>Date</span>
                   </div>
                 </th>
+
                 <th scope="col" className="px-6 py-3 text-left text-gray-800 uppercase tracking-wider">
                   <div className="flex gap-2 items-center">
                     <DescriptionIcon />
                     <span>Description</span>
                   </div>
                 </th>
+
                 <th scope="col" className="px-6 py-3 text-left text-gray-800 uppercase tracking-wider">
                   <div className="flex items-center gap-2">
                     <CategoryIcon />
                     <span>Category</span>
                   </div>
                 </th>
+
                 <th scope="col" className="px-6 py-3 text-left text-gray-800 uppercase tracking-wider">
                   <div className="flex items-center gap-2">
                     <AmountIcon />
                     <span>Amount</span>
                   </div>
                 </th>
+
                 <th scope="col" className="px-6 py-3 text-left text-gray-800 uppercase tracking-wider">
                   <span>Action</span>
                 </th>
@@ -219,7 +222,10 @@ const ExpenseTracker: React.FC = () => {
           transaction={selectedTransaction}
           onAddTransaction={handleAddTransaction}
           onUpdateTransaction={handleUpdateTransaction}
-          onClose={() => setShowPopup(false)}
+          onClose={() => {
+            setShowPopup(false);
+            setSelectedTransaction(null);
+          }}
         />
       )}
     </section>

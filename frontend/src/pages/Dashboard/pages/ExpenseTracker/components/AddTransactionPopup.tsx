@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface AddTransactionPopupProps {
   onAddTransaction: (newTransaction: { date: string; description: string; category: string; amount: number; type: 'income' | 'expense' }) => void;
@@ -23,13 +23,29 @@ const AddTransactionPopup: React.FC<AddTransactionPopupProps> = ({ onAddTransact
   const [amount, setAmount] = useState(transaction ? transaction.amount.toString() : '');
   const [type, setType] = useState(transaction ? transaction.type : 'expense');
 
+  useEffect(() => {
+    if (transaction) {
+      setDate(transaction.date);
+      setDescription(transaction.description);
+      setCategory(transaction.category);
+      setAmount(transaction.amount.toString());
+      setType(transaction.type);
+    } else {
+      setDate('');
+      setDescription('');
+      setCategory('');
+      setAmount('');
+      setType('expense');
+    }
+  }, [transaction]);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newTransaction = {
       date,
       description,
       category,
-      amount: parseFloat(amount), // Convert amount to number
+      amount: parseFloat(amount),
       type,
     };
 
@@ -48,6 +64,7 @@ const AddTransactionPopup: React.FC<AddTransactionPopupProps> = ({ onAddTransact
         <h2 className="text-2xl font-bold mb-4">{transaction ? 'Update Transaction' : 'Add Transaction'}</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
           <InputField type="date" placeholder="Enter date" name="date" value={date} onChange={(e) => setDate(e.target.value)} label="Date" id="date" />
+
           <InputField
             type="text"
             placeholder="Enter description"
@@ -57,6 +74,7 @@ const AddTransactionPopup: React.FC<AddTransactionPopupProps> = ({ onAddTransact
             label="Description"
             id="description"
           />
+
           <InputField
             type="text"
             placeholder="Enter category"
@@ -66,6 +84,7 @@ const AddTransactionPopup: React.FC<AddTransactionPopupProps> = ({ onAddTransact
             label="Category"
             id="category"
           />
+
           <InputField
             type="number"
             placeholder="Enter amount"
@@ -84,10 +103,12 @@ const AddTransactionPopup: React.FC<AddTransactionPopupProps> = ({ onAddTransact
               </select>
             </label>
           </div>
+
           <div className="flex justify-end gap-2">
             <button type="button" onClick={onClose} className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 transition-all duration-500">
               Cancel
             </button>
+
             <button type="submit" className="bg-secondary text-white px-4 py-2 rounded hover:bg-dark transition-all duration-500 ">
               {transaction ? 'Update Transaction' : 'Add Transaction'}
             </button>
