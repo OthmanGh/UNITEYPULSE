@@ -51,6 +51,7 @@ const Editor: React.FC = () => {
         }
       );
       fetchTextContents();
+      setText('');
     } catch (error) {
       console.error('Error creating text content:', error);
     }
