@@ -14,11 +14,13 @@ interface Transaction {
   description: string;
   category: string;
   amount: number;
+  type: 'income' | 'expense';
 }
 
 const ExpenseTracker: React.FC = () => {
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
 
   useEffect(() => {
     fetchTransactions();
@@ -26,13 +28,19 @@ const ExpenseTracker: React.FC = () => {
 
   const fetchTransactions = async (): Promise<void> => {
     try {
-      const token = JSON.parse(localStorage.getItem('authUser') || '').token;
+      const token = JSON.parse(localStorage.getItem('authUser') || '')?.token;
+      if (!token) {
+        console.error('Token not found.');
+        return;
+      }
+
       const response: AxiosResponse<{ data: { transactions: Transaction[] } }> = await axios.get('http://127.0.0.1:8000/api/transactions', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       });
+
       if (response.status === 200) {
         setTransactions(response.data.data.transactions);
       } else {
@@ -46,9 +54,19 @@ const ExpenseTracker: React.FC = () => {
   const handleAddTransaction = async (newTransaction: Transaction): Promise<void> => {
     try {
       const userId = JSON.parse(localStorage.getItem('authUser') || '')._id;
+      if (!userId) {
+        console.error('User ID not found.');
+        return;
+      }
+
       newTransaction.createdBy = userId;
 
       const token = JSON.parse(localStorage.getItem('authUser') || '').token;
+      if (!token) {
+        console.error('Token not found.');
+        return;
+      }
+      console.log(newTransaction);
 
       const response: AxiosResponse = await axios.post('http://127.0.0.1:8000/api/transactions', newTransaction, {
         headers: {
@@ -56,6 +74,7 @@ const ExpenseTracker: React.FC = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       if (response.status === 201) {
         fetchTransactions();
         setShowPopup(false);
@@ -89,7 +108,21 @@ const ExpenseTracker: React.FC = () => {
   const handleUpdateTransaction = async (id: string, updatedTransaction: Transaction): Promise<void> => {
     try {
       const token = JSON.parse(localStorage.getItem('authUser') || '').token;
-      const response: AxiosResponse = await axios.put(`http://127.0.0.1:8000/api/transactions/${id}`, updatedTransaction, {
+      const originalTransaction = transactions.find((transaction) => transaction._id === id);
+      if (!originalTransaction) {
+        console.error('Transaction not found.');
+        return;
+      }
+
+      const transactionToUpdate = {
+        ...originalTransaction,
+        ...updatedTransaction,
+      };
+
+      console.log(transactionToUpdate);
+      console.log(transactionToUpdate);
+
+      const response: AxiosResponse = await axios.patch(`http://127.0.0.1:8000/api/transactions/${id}`, transactionToUpdate, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -165,7 +198,13 @@ const ExpenseTracker: React.FC = () => {
                       <DeleteIcon className="cursor-pointer text-red-500 text-2xl" onClick={() => handleDeleteTransaction(item._id)} />
                     </Tooltip>
                     <Tooltip title="Update" placement="top">
-                      <EditIcon className="cursor-pointer text-2xl text-blue-500 ml-2" onClick={() => handleUpdateTransaction(item._id, item)} />
+                      <EditIcon
+                        className="cursor-pointer text-2xl text-blue-500 ml-2"
+                        onClick={() => {
+                          setShowPopup(true);
+                          setSelectedTransaction(item);
+                        }}
+                      />
                     </Tooltip>
                   </td>
                 </tr>
@@ -175,7 +214,14 @@ const ExpenseTracker: React.FC = () => {
         </div>
       </div>
 
-      {showPopup && <AddTransactionPopup onAddTransaction={handleAddTransaction} onClose={() => setShowPopup(false)} />}
+      {showPopup && (
+        <AddTransactionPopup
+          transaction={selectedTransaction}
+          onAddTransaction={handleAddTransaction}
+          onUpdateTransaction={handleUpdateTransaction}
+          onClose={() => setShowPopup(false)}
+        />
+      )}
     </section>
   );
 };
