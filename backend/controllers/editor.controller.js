@@ -4,14 +4,10 @@ import path from "path";
 
 export const getTextContent = async (req, res) => {
   try {
-    const { id } = req.params;
-    const content = await TextContent.findById(id);
-    if (!content) {
-      return res.status(404).json({ error: "Text content not found" });
-    }
-    res.json(content);
+    const allTextContents = await TextContent.find();
+    res.json(allTextContents);
   } catch (error) {
-    console.error("Error fetching text content:", error);
+    console.error("Error fetching text contents:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
