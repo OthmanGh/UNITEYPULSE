@@ -47,7 +47,7 @@ const ColumnContainer = (props: Props) => {
       style={style}
       className="w-full bg-blue-50 bg-opacity-60 shadow-xl rounded-md overflow-hidden h-[400px] flex flex-col justify-between hover:drop-shadow-md transition-all duration-400"
     >
-      <div className="flex justify-between items-center gap-4 w-full bg-secondary p-3 text-white">
+      <div className="flex justify-between items-center gap-4 w-full mb-4 bg-secondary p-3 text-white">
         <p className="text-blue-100 font-semibold">0</p>
 
         <div
@@ -80,7 +80,7 @@ const ColumnContainer = (props: Props) => {
         </button>
       </div>
 
-      <div className="">
+      <div className="flex flex-col gap-4 justify-start overflow-y-scroll">
         <SortableContext items={tasksIds}>
           {tasks.map((task) => (
             <TaskCard key={task.id} task={task} deleteTask={() => deleteTask(task.id)} updateTask={() => updateTask} />
