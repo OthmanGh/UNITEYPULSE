@@ -16,10 +16,19 @@ class OpenAIChatbot {
 
       const chatHistory = await ChatBotMessage.find({ userId }).exec();
 
-      const messages = chatHistory.map(msg => ({
-        role: msg.role,
-        content: msg.message
-      }));
+      const messages = [];
+
+      messages.push({
+        role: "system",
+        content: "You're a company management assistant"
+      });
+
+      messages.push(
+        ...chatHistory.map(msg => ({
+          role: msg.role,
+          content: msg.message
+        }))
+      );
 
       messages.push({
         role: "user",
