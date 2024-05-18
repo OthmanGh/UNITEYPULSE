@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import { AddIcon, AmountIcon, CategoryIcon, DateIcon, DescriptionIcon } from '../../../../utils/icons';
 import { expenseHistory, tableExpenseData } from '../../../../constants';
 import AddExpensePopup from './components/AddExpensePopup';
+import { Tooltip } from '@mui/material';
 
 const ExpenseTracker = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -12,6 +13,10 @@ const ExpenseTracker = () => {
   const handleAddExpense = (newExpense) => {
     setExpenses([...expenses, newExpense]);
     setShowPopup(false);
+  };
+
+  const handleDeleteExpense = (index) => {
+    setExpenses(expenses.filter((_, i) => i !== index));
   };
 
   return (
@@ -28,15 +33,6 @@ const ExpenseTracker = () => {
       </div>
 
       <div>
-        <div className="flex gap-10 text-dark mt-4 text-lg border-b-2">
-          {expenseHistory.map((t, index) => (
-            <p key={index} className="flex items-center gap-2 p-2">
-              {t.Icon}
-              <span>{t.time}</span>
-            </p>
-          ))}
-        </div>
-
         <div className="overflow-x-auto mt-5 h-[50vh]">
           <table className="min-w-full divide-y divide-gray-200 text-sm">
             <thead className="bg-gray-100 dark:bg-gray-800">
@@ -67,14 +63,20 @@ const ExpenseTracker = () => {
                 </th>
               </tr>
             </thead>
+
             <tbody className="divide-y divide-gray-200 dark:bg-secondary-dark-bg dark:text-gray-200 bg-white">
               {expenses.map((item, index) => (
-                <tr key={index} className="hover:bg-secondary hover:text-white transition-all duration-400 cursor-pointer">
-                  <td className="px-6 py-4 whitespace-nowrap">{item.date}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{item.description}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{item.category}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{item.amount}</td>
-                </tr>
+                <Tooltip key={index} title="Click to delete" placement="top">
+                  <tr
+                    onClick={() => handleDeleteExpense(index)}
+                    className="hover:bg-secondary text-slate-500 hover:text-white transition-all duration-400 cursor-pointer"
+                  >
+                    <td className="px-6 py-4 whitespace-nowrap ">{item.date}</td>
+                    <td className="px-6 py-4 whitespace-nowrap ">{item.description}</td>
+                    <td className="px-6 py-4 whitespace-nowrap ">{item.category}</td>
+                    <td className="px-6 py-4 whitespace-nowrap ">{item.amount}</td>
+                  </tr>
+                </Tooltip>
               ))}
             </tbody>
           </table>
