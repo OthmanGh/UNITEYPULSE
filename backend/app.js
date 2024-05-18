@@ -12,13 +12,14 @@ import chatbotRoutes from "./routes/chatbot.routes.js";
 import eventRoutes from "./routes/events.routes.js";
 import expenseRoutes from "./routes/expense.routes.js";
 import editorRoutes from "./routes/editor.routes.js";
-import companyRoutes from "./routes/companyRoutes.js";
+import companyRoutes from "./routes/company.routes.js";
 
 app.use(
   express.json({
     limit: "50mb"
   })
 );
+
 app.use(cookieParser());
 app.use(cors());
 // app.use(express.limit("50mb"));

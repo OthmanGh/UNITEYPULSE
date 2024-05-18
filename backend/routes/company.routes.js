@@ -1,11 +1,10 @@
 import express from "express";
 import {
   createCompany,
-  getAllCompanies,
   getCompanyById,
   updateCompany,
   deleteCompany
-} from "../controllers/companyController.js";
+} from "../controllers/company.controller.js";
 
 const router = express.Router();
 
