@@ -16,15 +16,14 @@ interface Event {
 
 const Calendar: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
-
   const [showEventForm, setShowEventForm] = useState<boolean>(false);
+  const [showConfirmDelete, setShowConfirmDelete] = useState<boolean>(false);
+  const [eventToDelete, setEventToDelete] = useState<string>('');
   const [eventFormData, setEventFormData] = useState<{ title: string; description: string; type: string }>({
     title: '',
     description: '',
     type: '',
   });
-  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<boolean>(false);
-  const [deleteEventId, setDeleteEventId] = useState<string>('');
 
   const fetchEvents = async () => {
     try {
@@ -106,13 +105,15 @@ const Calendar: React.FC = () => {
       });
 
       setEvents(events.filter((event) => event.id !== eventId));
+      setShowConfirmDelete(false);
     } catch (error) {
       console.error('Error deleting event:', error);
     }
   };
-  const handleEventDelete = (eventId: string) => {
-    setDeleteEventId(eventId);
-    setShowDeleteConfirmation(true);
+
+  const handleEventFormSubmit = (title: string, description: string, type: string) => {
+    createEvent(title, eventFormData.start, eventFormData.end, description, type);
+    setEventFormData({ title: '', description: '', type: '' });
   };
 
   return (
@@ -135,21 +136,14 @@ const Calendar: React.FC = () => {
           setShowEventForm(true);
           setEventFormData({ ...eventFormData, start: selectionInfo.start, end: selectionInfo.end });
         }}
-        eventClick={(eventInfo: EventClickArg) => handleEventDelete(eventInfo.event.id)}
+        eventClick={(eventInfo: EventClickArg) => {
+          setEventToDelete(eventInfo.event.id);
+          setShowConfirmDelete(true);
+        }}
         eventChange={(eventInfo) => {}}
       />
-
-      {showEventForm && <CreateEventPopup onSubmit={createEvent} onCancel={() => setShowEventForm(false)} />}
-
-      {showDeleteConfirmation && (
-        <ConfirmDeletePopup
-          onDeleteConfirm={() => {
-            deleteEvent(deleteEventId);
-            setShowDeleteConfirmation(false);
-          }}
-          onCancel={() => setShowDeleteConfirmation(false)}
-        />
-      )}
+      {showEventForm && <CreateEventPopup onSubmit={handleEventFormSubmit} onCancel={() => setShowEventForm(false)} />}
+      {showConfirmDelete && <ConfirmDeletePopup onDeleteConfirm={() => deleteEvent(eventToDelete)} onCancel={() => setShowConfirmDelete(false)} />}
     </section>
   );
 };
@@ -205,7 +199,7 @@ const CreateEventPopup: React.FC<CreateEventPopupProps> = ({ onSubmit, onCancel 
   );
 };
 
-const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value, onChange, label, id, disabled = false }) => {
+const InputField = ({ type, placeholder, name, value, onChange, label, id, disabled = false }: InputFieldProps) => {
   return (
     <label className="flex flex-col">
       <span className="text-slate-600 mb-[1px]">{label}</span>
@@ -222,3 +216,14 @@ const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value,
     </label>
   );
 };
+
+interface InputFieldProps {
+  type: string;
+  placeholder: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  label: string;
+  id: string;
+  disabled?: boolean;
+}
