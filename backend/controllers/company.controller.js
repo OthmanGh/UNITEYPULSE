@@ -8,6 +8,21 @@ const handleError = (err, functionName, res) => {
   });
 };
 
+export const createCompany = async (req, res) => {
+  try {
+    req.body.user = req.user._id;
+    const company = await Company.create(req.body);
+    res.status(201).json({
+      status: "success",
+      data: {
+        company
+      }
+    });
+  } catch (err) {
+    handleError(err, "createCompany", res);
+  }
+};
+
 export const getCompanyById = async (req, res) => {
   const { id } = req.params;
   const userId = req.user._id;
