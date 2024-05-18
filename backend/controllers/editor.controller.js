@@ -2,6 +2,21 @@ import TextContent from "../models/Editor";
 import fs from "fs";
 import path from "path";
 
+// Controller function to get text content by ID
+export const getTextContentById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const content = await TextContent.findById(id);
+    if (!content) {
+      return res.status(404).json({ error: "Text content not found" });
+    }
+    res.json(content);
+  } catch (error) {
+    console.error("Error fetching text content:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export const createTextContent = async (req, res) => {
   try {
     const { content, images } = req.body;
