@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post("/", protectRoute, createCompany);
 router.get("/:id", protectRoute, getCompanyById);
-router.put("/:id", protectRoute, updateCompany);
+router.patch("/:id", protectRoute, updateCompany);
 router.delete("/:id", protectRoute, deleteCompany);
 
 export default router;
