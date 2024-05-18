@@ -6,11 +6,13 @@ import {
   deleteCompany
 } from "../controllers/company.controller.js";
 
+import protectRoute from "../middleware/protect.route.js";
+
 const router = express.Router();
 
-router.post("/", createCompany);
-router.get("/:id", getCompanyById);
-router.put("/:id", updateCompany);
-router.delete("/:id", deleteCompany);
+router.post("/", protectRoute, createCompany);
+router.get("/:id", protectRoute, getCompanyById);
+router.put("/:id", protectRoute, updateCompany);
+router.delete("/:id", protectRoute, deleteCompany);
 
 export default router;
