@@ -24,11 +24,10 @@ export const createCompany = async (req, res) => {
 };
 
 export const getCompanyById = async (req, res) => {
-  const { id } = req.params;
   const userId = req.user._id;
 
   try {
-    const company = await Company.findOne({ _id: id, user: userId });
+    const company = await Company.findOne({ user: userId });
     if (!company) {
       return res.status(404).json({
         status: "fail",

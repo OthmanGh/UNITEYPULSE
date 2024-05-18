@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 
-const CompanyContext = createContext();
+const CompanyContext = createContext(null);
 
 export const CompanyProvider = ({ children }) => {
   const [company, setCompany] = useState(null);
