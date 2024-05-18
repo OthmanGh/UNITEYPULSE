@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import styles from '../../../components';
 import { Tooltip } from '@mui/material';
 import ConfirmDeletePopup from '../../../components/ConfirmDeletePopup';
+import { API_BASE_URI } from '../../../utils';
 
 interface TextContent {
   _id: string;
@@ -26,7 +27,7 @@ const Editor: React.FC = () => {
 
   const fetchTextContents = async () => {
     try {
-      const response = await axios.get<TextContent[]>('http://127.0.0.1:8000/api/editor', {
+      const response = await axios.get<TextContent[]>(`${API_BASE_URI}/editor`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -41,7 +42,7 @@ const Editor: React.FC = () => {
   const createTextContent = async () => {
     try {
       await axios.post(
-        'http://127.0.0.1:8000/api/editor',
+        `${API_BASE_URI}/editor`,
         { content: text },
         {
           headers: {
@@ -60,7 +61,7 @@ const Editor: React.FC = () => {
   const updateTextContent = async (id: string, updatedText: string) => {
     try {
       await axios.patch(
-        `http://127.0.0.1:8000/api/editor/${id}`,
+        `${API_BASE_URI}/editor/${id}`,
         { content: updatedText },
         {
           headers: {
@@ -82,7 +83,7 @@ const Editor: React.FC = () => {
         return;
       }
 
-      await axios.delete(`http://127.0.0.1:8000/api/editor/${textContentToDelete}`, {
+      await axios.delete(`${API_BASE_URI}/editor/${textContentToDelete}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
