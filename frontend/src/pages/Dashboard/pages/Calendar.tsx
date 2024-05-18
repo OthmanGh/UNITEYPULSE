@@ -16,6 +16,7 @@ interface Event {
 
 const Calendar: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
+
   const [showEventForm, setShowEventForm] = useState<boolean>(false);
   const [eventFormData, setEventFormData] = useState<{ title: string; description: string; type: string }>({
     title: '',
@@ -137,7 +138,9 @@ const Calendar: React.FC = () => {
         eventClick={(eventInfo: EventClickArg) => handleEventDelete(eventInfo.event.id)}
         eventChange={(eventInfo) => {}}
       />
-      {showEventForm && <CreateEventPopup onSubmit={handleEventFormSubmit} onCancel={() => setShowEventForm(false)} />}
+
+      {showEventForm && <CreateEventPopup onSubmit={createEvent} onCancel={() => setShowEventForm(false)} />}
+
       {showDeleteConfirmation && (
         <ConfirmDeletePopup
           onDeleteConfirm={() => {
