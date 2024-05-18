@@ -24,3 +24,18 @@ export const getAllExpenses = async (req, res) => {
     handleError(err, "getAllExpenses", res);
   }
 };
+
+export const createExpense = async (req, res) => {
+  try {
+    req.body.createdBy = req.user._id;
+    const expense = await Expense.create(req.body);
+    res.status(201).json({
+      status: "success",
+      data: {
+        expense
+      }
+    });
+  } catch (err) {
+    handleError(err, "createExpense", res);
+  }
+};
