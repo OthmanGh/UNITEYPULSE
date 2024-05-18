@@ -39,3 +39,28 @@ export const createExpense = async (req, res) => {
     handleError(err, "createExpense", res);
   }
 };
+
+export const deleteExpense = async (req, res) => {
+  const { id } = req.params;
+  const createdBy = req.user._id;
+
+  try {
+    const expense = await Expense.findOneAndDelete({
+      _id: id,
+      createdBy
+    });
+
+    if (!expense) {
+      return res.status(404).json({
+        status: "fail",
+        message: "Expense not found"
+      });
+    }
+    res.status(204).json({
+      status: "success",
+      data: null
+    });
+  } catch (err) {
+    handleError(err, "deleteExpense", res);
+  }
+};
