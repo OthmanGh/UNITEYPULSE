@@ -13,7 +13,7 @@ const router = e.Router();
 
 router.post("/", protectRoute, createTextContent);
 
-router.get("/:id", protectRoute, getTextContent);
+router.get("/", protectRoute, getTextContent);
 
 router.patch("/:id", protectRoute, updateTextContent);
 
