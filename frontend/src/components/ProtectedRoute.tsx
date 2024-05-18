@@ -9,7 +9,9 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const navigator = useNavigate();
 
   useEffect(() => {
-    authUser ? navigator('/dashboard') : navigator('/auth', { replace: true });
+    if (!authUser) {
+      navigator('/auth', { replace: true });
+    }
   }, [authUser, navigator]);
 
   return children;

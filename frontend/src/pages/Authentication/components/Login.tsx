@@ -8,11 +8,12 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useAuthContext } from '../../../contexts/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
   const { loading, error, login } = useLogin();
-
+  const { authUser } = useAuthContext();
   const {
     register,
     handleSubmit,
@@ -47,6 +48,12 @@ const Login = () => {
     onSuccess: handleGoogleAuthSubmit,
     onError: (error) => console.log('Google Login Failed:', error),
   });
+
+  useEffect(() => {
+    if (authUser) {
+      navigate('/dashboard');
+    }
+  }, [authUser]);
 
   return (
     <div className=" h-full w-full flex flex-col items-center justify-center p-5 bg-auth text-light-gray z-10">

@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react';
 import { AddIcon } from '../../../../utils/icons';
 import { Column, Task } from './types';
-import ColumnContainer from '../../components/ColumnContainer';
 import { Id } from 'react-beautiful-dnd';
 import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { createPortal } from 'react-dom';
+
+import ColumnContainer from '../../components/ColumnContainer';
 import TaskCard from '../../components/TaskCard';
 import Header from '../../components/Header';
 

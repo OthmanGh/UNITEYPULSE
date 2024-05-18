@@ -166,25 +166,25 @@ export const links = [
       },
     ],
   },
-  {
-    title: 'Charts',
-    links: [
-      {
-        name: 'line',
-        icon: <AiOutlineStock />,
-      },
+  // {
+  //   title: 'Charts',
+  //   links: [
+  //     {
+  //       name: 'line',
+  //       icon: <AiOutlineStock />,
+  //     },
 
-      {
-        name: 'pie',
-        icon: <FiPieChart />,
-      },
+  //     {
+  //       name: 'pie',
+  //       icon: <FiPieChart />,
+  //     },
 
-      {
-        name: 'pyramid',
-        icon: <GiLouvrePyramid />,
-      },
-    ],
-  },
+  //     {
+  //       name: 'pyramid',
+  //       icon: <GiLouvrePyramid />,
+  //     },
+  //   ],
+  // },
 ];
 
 export const earningData = [

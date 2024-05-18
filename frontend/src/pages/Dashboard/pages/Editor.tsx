@@ -51,6 +51,8 @@ const Editor = () => {
     } catch (error) {
       console.error('Error creating text content:', error);
     }
+
+    console.log(text);
   };
 
   const updateTextContent = async (id: string, updatedText: string) => {
