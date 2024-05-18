@@ -37,13 +37,7 @@ const TaskCard = ({ task, deleteTask, updateTask }: TaskCardProps) => {
   };
 
   if (isDragging) {
-    return (
-      <div
-        ref={setNodeRef}
-        style={style}
-        className="bg-blue-200 p-2.5 h-[100px] min-h-[100px] items-center flex text-left rounded-xl hover:ring-2 cursor-grab relative opacity-50 border-blue-400"
-      ></div>
-    );
+    return <div ref={setNodeRef} style={style} className="bg-secondary p-2.5  items-center flex text-left  hover:ring-2 cursor-grab relative opacity-50"></div>;
   }
 
   const handleEdit = () => {
@@ -76,7 +70,7 @@ const TaskCard = ({ task, deleteTask, updateTask }: TaskCardProps) => {
       style={style}
       {...attributes}
       {...listeners}
-      className="bg-secondary text-slate-100 mb-2 p-2 border-l-4 border-l-dark h-[40] hover:bg-extraDark transition-all duration-500"
+      className="bg-secondary text-slate-100 mb-2 p-2 border-l-4 border-l-dark h-[40] hover:bg-extraDark transition-all duration-500 flex justify-between"
       onMouseEnter={() => {
         setMouseIsOver(true);
       }}
@@ -89,7 +83,7 @@ const TaskCard = ({ task, deleteTask, updateTask }: TaskCardProps) => {
 
       {mouseIsOver && (
         <button
-          className="stroke-white absolute right-4 bg-blue-700 p-2 rounded opacity-60 hover:opacity-100"
+          className="stroke-white right-4  p-1 rounded opacity-60 hover:opacity-100"
           onClick={() => {
             deleteTask(task.id);
           }}
