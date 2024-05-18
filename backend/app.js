@@ -13,10 +13,14 @@ import eventRoutes from "./routes/events.routes.js";
 import expenseRoutes from "./routes/expense.routes.js";
 import editorRoutes from "./routes/editor.routes.js";
 
-app.use(express.json());
+app.use(
+  express.json({
+    limit: "50mb"
+  })
+);
 app.use(cookieParser());
 app.use(cors());
-
+// app.use(express.limit("50mb"));
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
