@@ -102,3 +102,17 @@ const Editor = () => {
 };
 
 export default Editor;
+
+const TextContentItem = ({ content, onUpdate, onDelete }) => {
+  return (
+    <div className="p-mb-3">
+      <div className="p-card p-p-4">
+        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div className="p-mt-3">
+          <Button label="Update" className="p-mr-2" onClick={onUpdate} />
+          <Button label="Delete" className="p-button-danger" onClick={onDelete} />
+        </div>
+      </div>
+    </div>
+  );
+};
