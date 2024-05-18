@@ -47,8 +47,7 @@ const Employees: React.FC = () => {
     }
   }, [initialEmployees, loading]);
 
-  const handleDelete = async (employeeId: string) => {
-    // Set the employee ID to delete and show the delete confirmation popup
+  const handleDelete = (employeeId: string) => {
     setDeleteEmployeeId(employeeId);
     setShowDeletePopup(true);
   };
@@ -61,10 +60,8 @@ const Employees: React.FC = () => {
       } catch (error) {
         console.error('Failed to delete employee', error);
       }
-      // Reset deleteEmployeeId after deletion
       setDeleteEmployeeId(null);
     }
-    // Hide the delete confirmation popup
     setShowDeletePopup(false);
   };
 
@@ -89,6 +86,17 @@ const Employees: React.FC = () => {
       }
     }
 
+    resetEmployeeData();
+  };
+
+  const handleEdit = (employee: EmployeeData) => {
+    setEmployeeData(employee);
+    setIsEditing(true);
+    setEditingEmployeeId(employee.employeeId);
+    setShowAddEditPopup(true);
+  };
+
+  const resetEmployeeData = () => {
     setEmployeeData({
       employeeId: '',
       name: '',
@@ -97,16 +105,14 @@ const Employees: React.FC = () => {
       hireDate: '',
       profilePicture: '',
     });
-    setShowPopup(false);
+    setShowAddEditPopup(false);
     setIsEditing(false);
     setEditingEmployeeId(null);
   };
 
-  const handleEdit = (employee: EmployeeData) => {
-    setEmployeeData(employee);
-    setIsEditing(true);
-    setEditingEmployeeId(employee.employeeId);
-    setShowPopup(true);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setEmployeeData({ ...employeeData, [name]: value });
   };
 
   const filteredEmployees = employees.map((employee, index) => {
@@ -120,7 +126,7 @@ const Employees: React.FC = () => {
     return (
       <tr
         key={index}
-        className={`${index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-100'} hover:bg-secondary hover:bg-opacity-20  transition-all duration-500 text-dark w-full`}
+        className={`${index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-100'} hover:bg-secondary hover:bg-opacity-20 transition-all duration-500 text-dark w-full`}
       >
         <td className="px-4 text-[15px] py-2">{filteredData.employeeId}</td>
         <td className="px-4 text-[15px] py-2">{filteredData.name}</td>
@@ -150,7 +156,7 @@ const Employees: React.FC = () => {
         <Header category="app" title="Employees" />
         <button
           className="flex items-center gap-2 bg-secondary text-gray-100 p-3 rounded-md cursor-pointer hover:bg-dark transition-all duration-400"
-          onClick={() => setShowPopup(true)}
+          onClick={() => setShowAddEditPopup(true)}
         >
           <AddIcon className="text-xl" />
           Add Employee
@@ -161,14 +167,11 @@ const Employees: React.FC = () => {
         <table className="w-full table-auto border-collapse border border-gray-300 text-center">
           <thead>
             <tr className="text-center bg-secondary">
-              <th className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">Employee ID</th>
-              <th className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">Name</th>
-              <th className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">Destination</th>
-              <th className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">Country</th>
-              <th className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">Hire Date</th>
-              <th className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">Profile Picture</th>
-              <th className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">Edit</th>
-              <th className="text-gray-50 capitalize border-r-2 px-4 py-2">Delete</th>
+              {['Employee ID', 'Name', 'Destination', 'Country', 'Hire Date', 'Profile Picture', 'Edit', 'Delete'].map((header, index) => (
+                <th key={index} className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">
+                  {header}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>{filteredEmployees}</tbody>
@@ -198,14 +201,7 @@ interface AddEmployeePopupProps {
   setEmployeeData: (data: any) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
-  employeeData: {
-    employeeId: string;
-    name: string;
-    destination: string;
-    country: string;
-    hireDate: string;
-    profilePicture: string;
-  };
+  employeeData: EmployeeData;
   isEditing: boolean;
 }
 
@@ -230,9 +226,7 @@ const AddEmployeePopup: React.FC<AddEmployeePopupProps> = ({ setShowPopup, setEm
           <InputField type="text" id="name" name="name" label="Name" value={employeeData.name} onChange={handleInputChange} />
           <InputField type="text" id="destination" name="destination" label="Destination" value={employeeData.destination} onChange={handleInputChange} />
           <InputField type="text" id="country" name="country" label="Country" value={employeeData.country} onChange={handleInputChange} />
-
-          {!isEditing && <InputField type="date" id="hireDate" name="hireDate" label="Hire Date" value={employeeData.hireDate} onChange={handleInputChange} />}
-
+          <InputField type="date" id="hireDate" name="hireDate" label="Hire Date" value={employeeData.hireDate} onChange={handleInputChange} />
           <InputField
             type="text"
             id="profilePicture"
@@ -241,7 +235,6 @@ const AddEmployeePopup: React.FC<AddEmployeePopupProps> = ({ setShowPopup, setEm
             value={employeeData.profilePicture}
             onChange={handleInputChange}
           />
-
           <button
             type="submit"
             className="xs:col-span-2 sm:col-span-3 bg-secondary text-gray-100 py-2 px-4 rounded mt-4 hover:bg-dark transition-all duration-400"
@@ -263,10 +256,9 @@ interface InputFieldProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   disabled?: boolean;
-  style?: string;
 }
 
-const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value, onChange, label, id, style, disabled = false }) => {
+const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value, onChange, label, id, disabled = false }) => {
   return (
     <fieldset className="flex flex-col justify-center items-start">
       <label htmlFor={id} className="mb-2 text-[15px] text-slate-500">
