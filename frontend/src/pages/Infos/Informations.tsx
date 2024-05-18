@@ -42,6 +42,8 @@ const Informations: React.FC = () => {
   const handleNextStep = (): void => {
     if (currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
+    } else {
+      console.log('Form Data:', formData);
     }
   };
 
@@ -101,7 +103,7 @@ const Informations: React.FC = () => {
                   className="next-btn w-[90px] hover:bg-primary hover:text-slate-800 p-3  text-primary transition-all rounded-lg duration-500"
                   onClick={handleNextStep}
                 >
-                  Next
+                  {currentStep === steps.length ? 'Submit' : 'Next'}
                 </button>
               </div>
             </div>
@@ -188,6 +190,7 @@ const InputField: React.FC<InputFieldProps> = ({ type, placeholder, name, value,
         onChange={onChange}
         className={`rounded-md px-4 w-[90%] py-4 h-15 text-secondary outline-none bg-gray-50 ${style}`}
         disabled={disabled}
+        required
       />
     </fieldset>
   );
