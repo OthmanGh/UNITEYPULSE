@@ -189,9 +189,9 @@ const ExpenseTracker: React.FC = () => {
               </tr>
             </thead>
 
-            <tbody className="divide-y divide-gray-200 dark:bg-secondary-dark-bg dark:text-gray-200 bg-white">
+            <tbody className="divide-y divide-gray-200 dark:bg-secondary-dark-bg text-slate-500 dark:text-gray-200 bg-white">
               {transactions?.map((item) => (
-                <tr key={item._id}>
+                <tr key={item._id} className="hover:bg-secondary hover:text-white transition-all duration-400 ">
                   <td className="px-6 py-4 whitespace-nowrap">{new Date(item.date).toLocaleDateString()}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{item.description}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{item.category}</td>

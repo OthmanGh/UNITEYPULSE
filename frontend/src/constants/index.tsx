@@ -231,7 +231,7 @@ export const SparklineAreaData = {
       backgroundColor: '#40F8FF',
     },
     {
-      label: 'revenue',
+      label: 'incomes',
       data: [6000, 9000, 6000, 2000, 4000],
       borderColor: '#0C356A',
       backgroundColor: '#0C356A',
