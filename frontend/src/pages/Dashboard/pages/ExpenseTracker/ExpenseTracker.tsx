@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styles from '../../../../components';
 import Header from '../../components/Header';
 import { AddIcon, AmountIcon, CategoryIcon, DateIcon, DescriptionIcon } from '../../../../utils/icons';
-import AddExpensePopup from './components/AddExpensePopup';
+import AddTransactionPopup from './components/AddTransactionPopup';
 import { Tooltip } from '@mui/material';
 import axios, { AxiosResponse } from 'axios';
+import { MdOutlineDeleteSweep as DeleteIcon } from 'react-icons/md';
+import { BiSolidEditAlt as EditIcon } from 'react-icons/bi';
 
-interface Expense {
+interface Transaction {
   _id: string;
   date: string;
   description: string;
@@ -16,84 +18,103 @@ interface Expense {
 
 const ExpenseTracker: React.FC = () => {
   const [showPopup, setShowPopup] = useState<boolean>(false);
-  const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
-    fetchExpenses();
+    fetchTransactions();
   }, []);
 
-  const fetchExpenses = async (): Promise<void> => {
+  const fetchTransactions = async (): Promise<void> => {
     try {
       const token = JSON.parse(localStorage.getItem('authUser') || '').token;
-      const response: AxiosResponse<{ data: { expenses: Expense[] } }> = await axios.get('http://127.0.0.1:8000/api/expenses', {
+      const response: AxiosResponse<{ data: { transactions: Transaction[] } }> = await axios.get('http://127.0.0.1:8000/api/transactions', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       });
       if (response.status === 200) {
-        setExpenses(response.data.data.expenses);
+        setTransactions(response.data.data.transactions);
       } else {
-        console.error('Failed to fetch expenses');
+        console.error('Failed to fetch transactions');
       }
     } catch (error) {
-      console.error('Error fetching expenses:', error);
+      console.error('Error fetching transactions:', error);
     }
   };
 
-  const handleAddExpense = async (newExpense: Expense): Promise<void> => {
+  const handleAddTransaction = async (newTransaction: Transaction): Promise<void> => {
     try {
       const userId = JSON.parse(localStorage.getItem('authUser') || '')._id;
-      newExpense.createdBy = userId;
+      newTransaction.createdBy = userId;
 
       const token = JSON.parse(localStorage.getItem('authUser') || '').token;
 
-      const response: AxiosResponse = await axios.post('http://127.0.0.1:8000/api/expenses', newExpense, {
+      const response: AxiosResponse = await axios.post('http://127.0.0.1:8000/api/transactions', newTransaction, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       });
       if (response.status === 201) {
-        fetchExpenses();
+        fetchTransactions();
         setShowPopup(false);
       } else {
-        console.error('Failed to add expense');
+        console.error('Failed to add transaction');
       }
     } catch (error) {
-      console.error('Error adding expense:', error);
+      console.error('Error adding transaction:', error);
     }
   };
 
-  const handleDeleteExpense = async (id: string): Promise<void> => {
+  const handleDeleteTransaction = async (id: string): Promise<void> => {
     try {
       const token = JSON.parse(localStorage.getItem('authUser') || '').token;
-      const response: AxiosResponse = await axios.delete(`http://127.0.0.1:8000/api/expenses/${id}`, {
+      const response: AxiosResponse = await axios.delete(`http://127.0.0.1:8000/api/transactions/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       });
       if (response.status === 204) {
-        fetchExpenses();
+        fetchTransactions();
       } else {
-        console.error('Failed to delete expense');
+        console.error('Failed to delete transaction');
       }
     } catch (error) {
-      console.error('Error deleting expense:', error);
+      console.error('Error deleting transaction:', error);
+    }
+  };
+
+  const handleUpdateTransaction = async (id: string, updatedTransaction: Transaction): Promise<void> => {
+    try {
+      const token = JSON.parse(localStorage.getItem('authUser') || '').token;
+      const response: AxiosResponse = await axios.put(`http://127.0.0.1:8000/api/transactions/${id}`, updatedTransaction, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 200) {
+        fetchTransactions();
+      } else {
+        console.error('Failed to update transaction');
+      }
+    } catch (error) {
+      console.error('Error updating transaction:', error);
     }
   };
 
   return (
     <section className={styles.dashboardSection}>
       <div className="flex flex-col xs:flex-row items-center justify-between">
-        <Header category="app" title="Expense Tracker" />
+        <Header category="app" title="Transaction Tracker" />
         <button
           className="flex items-center gap-2 bg-secondary text-gray-100 p-3 rounded-md cursor-pointer hover:bg-dark transition-all duration-400"
           onClick={() => setShowPopup(true)}
         >
           <AddIcon className="text-xl" />
-          Add Expense
+          Add Transaction
         </button>
       </div>
 
@@ -126,29 +147,35 @@ const ExpenseTracker: React.FC = () => {
                     <span>Amount</span>
                   </div>
                 </th>
+                <th scope="col" className="px-6 py-3 text-left text-gray-800 uppercase tracking-wider">
+                  <span>Action</span>
+                </th>
               </tr>
             </thead>
 
             <tbody className="divide-y divide-gray-200 dark:bg-secondary-dark-bg dark:text-gray-200 bg-white">
-              {expenses?.map((item) => (
-                <Tooltip key={item._id} title="Click to delete" placement="top">
-                  <tr
-                    onClick={() => handleDeleteExpense(item._id)}
-                    className="hover:bg-secondary text-slate-500 hover:text-white transition-all duration-400 cursor-pointer"
-                  >
-                    <td className="px-6 py-4 whitespace-nowrap">{new Date(item.date).toLocaleDateString()}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{item.description}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{item.category}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{item.amount}</td>
-                  </tr>
-                </Tooltip>
+              {transactions?.map((item) => (
+                <tr key={item._id}>
+                  <td className="px-6 py-4 whitespace-nowrap">{new Date(item.date).toLocaleDateString()}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{item.description}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{item.category}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{item.amount}</td>
+                  <td className="px-6 py-4 whitespace-nowrap flex items-center gap-2">
+                    <Tooltip title="Delete" placement="top">
+                      <DeleteIcon className="cursor-pointer text-red-500 text-2xl" onClick={() => handleDeleteTransaction(item._id)} />
+                    </Tooltip>
+                    <Tooltip title="Update" placement="top">
+                      <EditIcon className="cursor-pointer text-2xl text-blue-500 ml-2" onClick={() => handleUpdateTransaction(item._id, item)} />
+                    </Tooltip>
+                  </td>
+                </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
 
-      {showPopup && <AddExpensePopup onAddExpense={handleAddExpense} onClose={() => setShowPopup(false)} />}
+      {showPopup && <AddTransactionPopup onAddTransaction={handleAddTransaction} onClose={() => setShowPopup(false)} />}
     </section>
   );
 };
