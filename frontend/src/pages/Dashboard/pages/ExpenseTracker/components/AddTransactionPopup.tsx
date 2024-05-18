@@ -59,11 +59,13 @@ const AddTransactionPopup: React.FC<AddTransactionPopupProps> = ({ onAddTransact
             id="amount"
           />
           <div>
-            <span>Type: </span>
-            <select value={type} onChange={(e) => setType(e.target.value)}>
-              <option value="expense">Expense</option>
-              <option value="income">Income</option>
-            </select>
+            <fieldset className="flex flex-col">
+              <span className="text-slate-600 mb-[1px]">Type: </span>
+              <select className="p-3 rounded-md bg-slate-200 outline-none w-[500px] text-dark" value={type} onChange={(e) => setType(e.target.value)}>
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+              </select>
+            </fieldset>
           </div>
           <div className="flex justify-end gap-2">
             <button type="button" onClick={onClose} className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 transition-all duration-500">
