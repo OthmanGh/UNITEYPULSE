@@ -1,15 +1,28 @@
-import { View, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import React, { useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView, ScrollView, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Avatar, Caption, Title, Text, TouchableRipple } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { router } from 'expo-router';
-import { useAuth } from '../../../Context/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Profile = () => {
+  const [userData, setUserData] = useState(null);
   const [selectedItem, setSelectedItem] = useState('');
 
-  const { user } = useAuth();
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const storedUserData = await AsyncStorage.getItem('userData');
+        if (storedUserData) {
+          setUserData(JSON.parse(storedUserData));
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handlePress = (itemName) => {
     setSelectedItem(itemName);
@@ -21,7 +34,7 @@ const Profile = () => {
   return (
     <SafeAreaView>
       <ScrollView className="bg-extraDark  min-h-full">
-        <View>
+        <View className="mt-10">
           <View
             style={
               ([styles.userInfoSection],
@@ -38,17 +51,17 @@ const Profile = () => {
             <View style={{ flexDirection: 'row', marginTop: 15, padding: 10 }}>
               <Avatar.Image
                 source={{
-                  uri: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzZ8fGZhY2V8ZW58MHx8MHx8fDA%3D',
+                  uri: userData?.profilePicture || 'https://example.com/default-profile-picture.jpg',
                 }}
                 size={80}
               />
 
               <View style={{ marginLeft: 20 }}>
                 <Title style={([styles.title], { marginTop: 10, marginBottom: 5 })} className="text-primary-light">
-                  {user?.name}
+                  {userData?.name || 'Name'}
                 </Title>
                 <Caption style={styles.caption} className="text-primary-light">
-                  @othman_id
+                  @{userData?.username || 'username'}
                 </Caption>
               </View>
             </View>

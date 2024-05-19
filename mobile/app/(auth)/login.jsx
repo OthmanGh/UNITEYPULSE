@@ -7,7 +7,7 @@ import CustomButton from '../../components/CustomButton';
 import { API_BASE_URI } from '../../constants/data';
 import { useAuth } from '../../Context/AuthContext';
 import { router } from 'expo-router';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const { login } = useAuth();
@@ -36,8 +36,11 @@ const Login = () => {
       const data = await res.json();
 
       if (data.status === 'success') {
-        await AsyncStorage.setItem('userData', JSON.stringify(data.user));
-
+        if (data.user) {
+          await AsyncStorage.setItem('userData', JSON.stringify(data.user));
+        } else {
+          await AsyncStorage.removeItem('userData');
+        }
         router.replace('/home');
       } else {
         Alert.alert('Login Failed', data.message);
