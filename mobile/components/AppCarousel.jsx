@@ -55,8 +55,9 @@ const styles = StyleSheet.create({
 
   image: {
     width: '80%',
-    height: 200,
+    height: 150,
     borderRadius: 10,
+    objectFit: 'cover',
     marginBottom: 0,
   },
 
