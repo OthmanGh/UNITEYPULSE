@@ -30,8 +30,9 @@ const CustomCarousel = ({ data }) => {
           </TouchableOpacity>
         ))}
       </ScrollView>
+
       <View style={styles.dotsContainer}>
-        {data.map((_, index) => (
+        {data.slice(0, 4).map((_, index) => (
           <TouchableOpacity key={index} onPress={() => handlePress(index)}>
             <View style={[styles.dot, activeIndex === index && styles.activeDot]} />
           </TouchableOpacity>
@@ -45,27 +46,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+
   slide: {
     width: Dimensions.get('window').width,
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   image: {
     width: '80%',
-    height: 250,
+    height: 200,
     borderRadius: 10,
-    marginBottom: 20,
+    marginBottom: 0,
   },
+
   title: {
-    fontSize: 20,
+    fontSize: 5,
     fontWeight: 'bold',
   },
+
   dotsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 3,
+    marginBottom: 10,
   },
+
   dot: {
     width: 8,
     height: 8,
@@ -74,7 +81,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   activeDot: {
-    backgroundColor: 'blue',
+    backgroundColor: '#A6F6F1',
   },
 });
 
