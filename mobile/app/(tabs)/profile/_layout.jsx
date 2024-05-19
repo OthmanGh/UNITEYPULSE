@@ -1,9 +1,7 @@
 import React from 'react';
-import { Stack, SplashScreen } from 'expo-router';
+import { Stack } from 'expo-router';
 
-SplashScreen.preventAutoHideAsync();
-
-const profileLayout = () => {
+const ProfileLayout = () => {
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
@@ -22,4 +20,4 @@ const profileLayout = () => {
   );
 };
 
-export default profileLayout;
+export default ProfileLayout;

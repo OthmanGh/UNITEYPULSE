@@ -12,48 +12,48 @@ const Login = () => {
   const navigation = useNavigation();
 
   const [form, setForm] = useState({
-    email: 'othman@gmail.com', // Default email value
-    password: 'Othman123456', // Default password value
+    email: 'othman@gmail.com',
+    password: 'Othman123456',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { login } = useAuth();
 
-  const submit = async () => {
-    setIsSubmitting(true);
+  // const submit = async () => {
+  //   setIsSubmitting(true);
 
-    console.log(form);
+  //   console.log(form);
 
-    try {
-      const url = `${API_BASE_URI}/auth/login`;
+  //   try {
+  //     const url = `${API_BASE_URI}/auth/login`;
 
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(form),
-      });
+  //     const res = await fetch(url, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(form),
+  //     });
 
-      const data = await res.json();
+  //     const data = await res.json();
 
-      console.log(data);
+  //     console.log(data);
 
-      if (data.status === 'success') {
-        login(data.data); // Set user data with data.data
-        console.log(data);
-        navigation.navigate('(tabs)', { screen: 'home' });
-      } else {
-        Alert.alert('Login Failed', data.message);
-      }
-    } catch (error) {
-      console.log(error);
-      Alert.alert('Error', 'An error occurred. Please try again later.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  //     if (data.status === 'success') {
+  //       login(data.data);
+  //       console.log(data);
+  //       navigation.navigate('(tabs)', { screen: 'home' });
+  //     } else {
+  //       Alert.alert('Login Failed', data.message);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     Alert.alert('Error', 'An error occurred. Please try again later.');
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   return (
     <SafeAreaView className="bg-extraDark h-full">
@@ -72,7 +72,7 @@ const Login = () => {
 
           <FormField title="Password" value={form.password} handleChangeText={(e) => setForm({ ...form, password: e })} otherStyles="mt-7" />
 
-          <CustomButton title="Login" handlePress={submit} containerStyles="mt-14" isLoading={isSubmitting} />
+          <CustomButton title="Login" handlePress={() => navigation.navigate('(tabs)', { screen: 'home' })} containerStyles="mt-14" isLoading={isSubmitting} />
 
           <View className="justify-center pt-5 flex-row gap-2"></View>
         </View>

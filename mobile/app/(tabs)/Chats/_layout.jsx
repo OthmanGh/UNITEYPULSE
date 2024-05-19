@@ -3,13 +3,13 @@ import { Stack, SplashScreen } from 'expo-router';
 
 SplashScreen.preventAutoHideAsync();
 
-const profileLayout = () => {
+const ChatLayout = () => {
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
 
       <Stack.Screen
-        name="editprofile"
+        name="chat"
         options={{
           headerShown: true,
           headerStyle: {
@@ -22,4 +22,4 @@ const profileLayout = () => {
   );
 };
 
-export default profileLayout;
+export default ChatLayout;
