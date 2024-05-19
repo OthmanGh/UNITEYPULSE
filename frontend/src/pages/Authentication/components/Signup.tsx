@@ -10,6 +10,7 @@ import axios from 'axios';
 import { TokenResponse, useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext';
+import { API_BASE_URI } from '../../../utils';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -59,13 +60,14 @@ const Signup = () => {
 
   useEffect(() => {
     const login = async () => {
-      const repsonse = await axios.post(`${AUTH_API_BASE_URL}/signup`, {
+      const repsonse = await axios.post(`${API_BASE_URI}/auth/signup`, {
         email: profile.email,
         name: profile.name,
         profilePicture: profile.picture,
         username: `${Date.now()}_${profile.name}`,
         role: 'owner',
       });
+      console.log(repsonse);
 
       setAuthUser(profile);
       navigate('/dashboard');
