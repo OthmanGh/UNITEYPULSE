@@ -5,16 +5,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-// import CustomButton from '../../components/CustomButton';
-// import BottomSheet from 'reanimated-bottom-sheet';
-// import Animated from 'react-native-reanimated';
 
 const EditProfile = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ margin: 30, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-        {/* <BottomSheet snapPoints={[330, 0]} initialSnap={1} enabledGestureInteraction={true} /> */}
-
         <View style={{ alignItems: 'center' }}>
           <TouchableOpacity>
             <View style={{ height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
@@ -83,8 +78,6 @@ const EditProfile = () => {
           <Ionicons name="location" color="#9999" size={20} style={{ marginRight: 10 }} />
           <TextInput placeholder="City" placeholderTextColor="#9999" style={styles.textInput} autoCorrect={false} />
         </View>
-
-        {/* <CustomButton title="Submit" handlePress={() => {}} containerStyles="w-full mt-10 h-0 p-0" /> */}
       </View>
     </SafeAreaView>
   );

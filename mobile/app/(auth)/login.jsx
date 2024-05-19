@@ -5,18 +5,14 @@ import { logo } from '../../constants/images';
 import FormField from '../../components/FormField';
 import CustomButton from '../../components/CustomButton';
 import { API_BASE_URI } from '../../constants/data';
-import { useAuth } from '../../Context/AuthContext';
 import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
-  const { login } = useAuth();
-
   const [form, setForm] = useState({
     email: 'othman@gmail.com',
     password: 'Othman123',
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const submit = async () => {
@@ -36,14 +32,13 @@ const Login = () => {
       const data = await res.json();
 
       if (data.status === 'success') {
-        if (data.user) {
-          await AsyncStorage.setItem('userData', JSON.stringify(data.user));
-        } else {
-          await AsyncStorage.removeItem('userData');
-        }
+        await AsyncStorage.setItem('authUser', JSON.stringify(data.data));
+
+        console.log(data.data);
         router.replace('/home');
       } else {
         Alert.alert('Login Failed', data.message);
+        await AsyncStorage.removeItem('authUser');
       }
     } catch (error) {
       console.error(error);

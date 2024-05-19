@@ -5,14 +5,8 @@ import { events } from '../../../constants/data';
 import Feather from '@expo/vector-icons/Feather';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import CustomCarousel from '../../../components/AppCarousel';
-import EventCard from '../../../components/Events';
-import { eventsData } from '../../../constants/data';
-import { useAuth } from '../../../Context/AuthContext';
 
 const Home = () => {
-  const { user } = useAuth();
-
-  console.log(user);
   return (
     <SafeAreaView className="bg-extraDark h-full">
       <ScrollView>
@@ -43,8 +37,6 @@ const Home = () => {
           <CustomCarousel data={events} />
         </View>
       </ScrollView>
-
-      {/* <EventCard events={eventsData} /> */}
     </SafeAreaView>
   );
 };
