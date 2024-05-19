@@ -1,4 +1,4 @@
-const API_BASE_URI = 'http://192.168.31.132:8081/api';
+const API_BASE_URI = 'http://192.168.2.213:8000/api';
 
 export { API_BASE_URI };
 
@@ -76,5 +76,48 @@ export const eventsData = [
     description: 'Annual tech conference featuring keynote speakers, workshops, and panel discussions on the latest trends in technology.',
     type: 'Conference',
     date: '2024-06-28T09:00:00.000+00:00',
+  },
+];
+
+export const Messages = [
+  {
+    id: '1',
+    userName: 'Othman',
+    userImg:
+      'https://plus.unsplash.com/premium_photo-1689977968861-9c91dbb16049?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8fDA%3D',
+    messageTime: '4 min ago',
+    messageText: 'Hey there, how are you?',
+  },
+  {
+    id: '2',
+    userName: 'Sarah',
+    userImg:
+      'https://plus.unsplash.com/premium_photo-1693258698597-1b2b1bf943cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww',
+    messageTime: '10 min ago',
+    messageText: 'Hi! I am doing well, thanks for asking.',
+  },
+  {
+    id: '3',
+    userName: 'John',
+    userImg:
+      'https://plus.unsplash.com/premium_photo-1693258698597-1b2b1bf943cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww',
+    messageTime: '25 min ago',
+    messageText: 'Hello! What are you up to today?',
+  },
+  {
+    id: '4',
+    userName: 'Emily',
+    userImg:
+      'https://plus.unsplash.com/premium_photo-1693258698597-1b2b1bf943cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww',
+    messageTime: '1 hour ago',
+    messageText: 'Hey! I just saw that new movie, it was amazing!',
+  },
+  {
+    id: '5',
+    userName: 'David',
+    userImg:
+      'https://plus.unsplash.com/premium_photo-1693258698597-1b2b1bf943cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww',
+    messageTime: '2 hours ago',
+    messageText: 'Hi there! How was your day?',
   },
 ];

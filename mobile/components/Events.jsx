@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 const EventCard = ({ events }) => {
   const formatDate = (dateString) => {
@@ -12,7 +12,7 @@ const EventCard = ({ events }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View className="overflow-scroll">
       {events.map((event, index) => (
         <View key={index} style={styles.card}>
           <Text style={styles.title}>{event.title}</Text>
@@ -25,30 +25,18 @@ const EventCard = ({ events }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    overflow: 'scroll',
-    display: 'block',
-  },
-  card: {
-    backgroundColor: '#176B87',
-    borderRadius: 4,
-    padding: 10,
-    marginBottom: 10,
-    borderLeftColor: 'white',
-    borderLeftWidth: 2,
-  },
   title: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 5,
   },
+
   type: {
     fontSize: 10,
     color: 'white',
     marginBottom: 5,
   },
+
   date: {
     fontSize: 14,
     color: 'lightblue',

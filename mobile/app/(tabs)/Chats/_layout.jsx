@@ -7,16 +7,17 @@ const ChatLayout = () => {
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
-
       <Stack.Screen
         name="chat"
-        options={{
+        options={({ route }) => ({
           headerShown: true,
+          title: route.params?.username || 'Chat',
+          headerTitleAlign: 'center',
           headerStyle: {
             backgroundColor: '#042d3e',
           },
           headerTintColor: 'white',
-        }}
+        })}
       />
     </Stack>
   );

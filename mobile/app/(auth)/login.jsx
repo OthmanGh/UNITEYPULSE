@@ -5,62 +5,57 @@ import { logo } from '../../constants/images';
 import FormField from '../../components/FormField';
 import CustomButton from '../../components/CustomButton';
 import { API_BASE_URI } from '../../constants/data';
-import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../Context/AuthContext';
+import { router } from 'expo-router';
+import { AsyncStorage } from 'react-native';
 
 const Login = () => {
-  const navigation = useNavigation();
+  const { login } = useAuth();
 
   const [form, setForm] = useState({
     email: 'othman@gmail.com',
-    password: 'Othman123456',
+    password: 'Othman123',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { login } = useAuth();
+  const submit = async () => {
+    setIsSubmitting(true);
 
-  // const submit = async () => {
-  //   setIsSubmitting(true);
+    try {
+      const url = `${API_BASE_URI}/auth/login`;
 
-  //   console.log(form);
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
 
-  //   try {
-  //     const url = `${API_BASE_URI}/auth/login`;
+      const data = await res.json();
 
-  //     const res = await fetch(url, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(form),
-  //     });
+      if (data.status === 'success') {
+        await AsyncStorage.setItem('userData', JSON.stringify(data.user));
 
-  //     const data = await res.json();
-
-  //     console.log(data);
-
-  //     if (data.status === 'success') {
-  //       login(data.data);
-  //       console.log(data);
-  //       navigation.navigate('(tabs)', { screen: 'home' });
-  //     } else {
-  //       Alert.alert('Login Failed', data.message);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     Alert.alert('Error', 'An error occurred. Please try again later.');
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
+        router.replace('/home');
+      } else {
+        Alert.alert('Login Failed', data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Error', 'An error occurred. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <SafeAreaView className="bg-extraDark h-full">
       <ScrollView>
         <View className="w-full justify-center h-[85vh] my-6 px-4">
           <Image source={logo} className="w-full h-[150px]" resizeMode="contain" />
-          <Text className="text-2xl text-gray-50 text-semibold mt-0 font-psemibold text-center">Login in to unity paulse</Text>
+          <Text className="text-2xl text-gray-50 font-semibold mt-0 font-psemibold text-center">Login to Unity Pulse</Text>
 
           <FormField
             title="Email"
@@ -70,9 +65,9 @@ const Login = () => {
             keyboardType="email-address"
           />
 
-          <FormField title="Password" value={form.password} handleChangeText={(e) => setForm({ ...form, password: e })} otherStyles="mt-7" />
+          <FormField title="Password" value={form.password} handleChangeText={(e) => setForm({ ...form, password: e })} otherStyles="mt-7" secureTextEntry />
 
-          <CustomButton title="Login" handlePress={() => navigation.navigate('(tabs)', { screen: 'home' })} containerStyles="mt-14" isLoading={isSubmitting} />
+          <CustomButton title="Login" handlePress={submit} containerStyles="mt-14" isLoading={isSubmitting} />
 
           <View className="justify-center pt-5 flex-row gap-2"></View>
         </View>

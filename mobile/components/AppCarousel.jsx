@@ -19,7 +19,7 @@ const CustomCarousel = ({ data }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} className="mt-2">
       <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false} onScroll={handleScroll} ref={scrollViewRef}>
         {data.map((item, index) => (
           <TouchableOpacity key={index} onPress={() => handlePress(index)}>
@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
     marginHorizontal: 5,
   },
+
   activeDot: {
     backgroundColor: '#A6F6F1',
   },

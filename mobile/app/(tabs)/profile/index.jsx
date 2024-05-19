@@ -1,13 +1,15 @@
 import { View, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { logo } from '../../../constants/images';
 import { Avatar, Caption, Title, Text, TouchableRipple } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { router } from 'expo-router';
+import { useAuth } from '../../../Context/AuthContext';
 
-const Profile = ({ navigation }) => {
+const Profile = () => {
   const [selectedItem, setSelectedItem] = useState('');
+
+  const { user } = useAuth();
 
   const handlePress = (itemName) => {
     setSelectedItem(itemName);
@@ -43,7 +45,7 @@ const Profile = ({ navigation }) => {
 
               <View style={{ marginLeft: 20 }}>
                 <Title style={([styles.title], { marginTop: 10, marginBottom: 5 })} className="text-primary-light">
-                  Othman Ghandour
+                  {user?.name}
                 </Title>
                 <Caption style={styles.caption} className="text-primary-light">
                   @othman_id

@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { Tabs } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
-import { AuthProvider } from '../../Context/AuthContext';
+import { AuthProvider, useAuth } from '../../Context/AuthContext';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 const TabsLayout = () => {

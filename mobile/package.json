@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
+    "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/drawer": "^6.6.15",
@@ -26,6 +27,7 @@
     "react-native": "0.74.1",
     "react-native-feather": "^1.1.2",
     "react-native-gesture-handler": "~2.16.1",
+    "react-native-gifted-chat": "^2.4.0",
     "react-native-image-slider-box": "^2.0.7",
     "react-native-paper": "^5.12.3",
     "react-native-reanimated": "~3.10.1",
@@ -35,7 +37,8 @@
     "react-native-snap-carousel": "^3.9.1",
     "react-native-svg": "^15.3.0",
     "react-native-vector-icons": "^10.1.0",
-    "reanimated-bottom-sheet": "^1.0.0-alpha.22"
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "styled-components": "^6.1.11"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

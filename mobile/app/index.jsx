@@ -19,12 +19,12 @@ export default function App() {
 
             <View className="relative mt-5">
               <Text className="text-2xl text-white p-2 font-bold text-center inline-block">
-                Discover Endless Possibilities with <Text className=" text-primary mx-auto inline-block">Unity Paulse</Text>
+                Discover Endless Possibilities with <Text className=" text-primary mx-auto inline-block">Unity Pulse</Text>
               </Text>
             </View>
 
             <Text className="text-[12px]  font-pregular text-gray-100 mt-7 text-center">
-              Where creativity meets innovations: embark on a journey of limitless exploration with UnityPaulse
+              Where creativity meets innovations: embark on a journey of limitless exploration with UnityPulse
             </Text>
 
             <CustomButton title="Continue with Email" handlePress={() => router.push('/login')} containerStyles="w-full mt-7" />
