@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useCompany } from '../../contexts/CompanyContext';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URI } from '../../utils';
 
 interface FormData {
   companyName: string;
@@ -41,6 +42,7 @@ const Informations: React.FC = () => {
   const steps: string[] = ['Company Information', 'Financial Data', 'Business Operations'];
   const token = JSON.parse(localStorage.getItem('authUser')).token;
 
+  console.log(token);
   const handleStepClick = (stepIndex: number): void => {
     setCurrentStep(stepIndex + 1);
   };
@@ -50,7 +52,7 @@ const Informations: React.FC = () => {
       setCurrentStep(currentStep + 1);
     } else {
       try {
-        const response = await axios.post('http://127.0.0.1:8000/api/company', formData, {
+        const response = await axios.post(`${API_BASE_URI}/company`, formData, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
