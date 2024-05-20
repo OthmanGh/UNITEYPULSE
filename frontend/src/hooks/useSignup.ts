@@ -43,10 +43,11 @@ const useSignup = () => {
       });
 
       const res: SignupResponse = await req.json();
+      console.log(res);
 
       if (res.status === 'success') {
         localStorage.setItem('authUser', JSON.stringify(res.data));
-        setAuthUser(res);
+        setAuthUser(res.data._docs);
         navigator('/infos');
       } else {
         throw new Error(res.error);
