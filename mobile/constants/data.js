@@ -46,6 +46,39 @@ export const events = [
   },
 ];
 
+const eventsIcons = [
+  {
+    name: 'Event 1',
+    id: 1,
+    icon: 'manage-accounts',
+  },
+  {
+    name: 'Event 2',
+    id: 2,
+    icon: 'analytics',
+  },
+  {
+    id: 3,
+    name: 'Event 3',
+    icon: 'document',
+  },
+  {
+    name: 'Event 1',
+    id: 1,
+    icon: 'google-circles-communities',
+  },
+  {
+    name: 'Event 2',
+    id: 2,
+    icon: 'tasks',
+  },
+  {
+    id: 3,
+    name: 'Event 3',
+    icon: 'finance',
+  },
+];
+
 export const eventsData = [
   {
     title: 'Company Picnic',
@@ -121,3 +154,14 @@ export const Messages = [
     messageText: 'Hi there! How was your day?',
   },
 ];
+
+export const convertToReadableDate = (isoString) => {
+  const date = new Date(isoString);
+  const options = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+
+  return date.toLocaleDateString('en-US', options);
+};
