@@ -10,12 +10,10 @@ export default function App() {
   return (
     <SafeAreaView className="bg-extraDark h-full">
       <ScrollView contentContainerStyle={{ height: '100%' }}>
-        <View className="w-full justify-center items-center min-h-[100vh] px-4">
+        <View className="w-full justify-center items-center h-[100vh] px-4">
           <Image source={logo} className="w-full h-[150px]" resizeMode="contain" />
 
-          <Image source={onBoardingImage} className="w-full h-[200px] rounded-2xl" />
-
-          <View className="relative mt-5">
+          <View className="relative">
             <Text className="text-2xl text-white p-2 font-bold text-center inline-block">
               Discover Endless Possibilities with <Text className=" text-primary mx-auto inline-block">Unity Pulse</Text>
             </Text>
