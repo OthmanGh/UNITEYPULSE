@@ -7,42 +7,21 @@ export const events = [
     name: 'Event 1',
     id: 1,
     image:
-      'https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29tcGFueXxlbnwwfHwwfHx8MA%3D%3D',
+      'https://images.unsplash.com/photo-1634078111133-a1e12d6131b6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzZ8fG1hbmFnZW1lbnQlMjBzb2Z0d2FyZXxlbnwwfHwwfHx8MA%3D%3D',
   },
 
   {
     name: 'Event 2',
     id: 2,
     image:
-      'https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29tcGFueXxlbnwwfHwwfHx8MA%3D%3D',
+      'https://images.unsplash.com/photo-1580983561371-7f4b242d8ec0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTh8fG1hbmFnZW1lbnQlMjBzb2Z0d2FyZXxlbnwwfHwwfHx8MA%3D%3D',
   },
 
   {
     id: 3,
     name: 'Event 3',
     image:
-      'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29tcGFueXxlbnwwfHwwfHx8MA%3D%3D',
-  },
-
-  {
-    name: 'Event 1',
-    id: 1,
-    image:
-      'https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29tcGFueXxlbnwwfHwwfHx8MA%3D%3D',
-  },
-
-  {
-    name: 'Event 2',
-    id: 2,
-    image:
-      'https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29tcGFueXxlbnwwfHwwfHx8MA%3D%3D',
-  },
-
-  {
-    id: 3,
-    name: 'Event 3',
-    image:
-      'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29tcGFueXxlbnwwfHwwfHx8MA%3D%3D',
+      'https://images.unsplash.com/photo-1573164574572-cb89e39749b4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzh8fG1hbmFnZW1lbnQlMjBzb2Z0d2FyZXxlbnwwfHwwfHx8MA%3D%3D',
   },
 ];
 
