@@ -49,29 +49,25 @@ const Signup = () => {
           },
         })
         .then((res) => {
-          setProfile(res.data);
-          console.log(res.data);
+          setProfile(res);
         })
         .catch((err) => console.log(err));
     }
   }, [user]);
 
-  console.log(profile);
-
   useEffect(() => {
     const login = async () => {
       const repsonse = await axios.post(`${API_BASE_URI}/auth/signup`, {
-        email: profile.email,
-        name: profile.name,
-        profilePicture: profile.picture,
-        username: `${Date.now()}_${profile.name}`,
+        email: profile.data.email,
+        name: profile.data.name,
+        profilePicture: profile.data.picture,
+        username: `${Date.now()}_${profile.data.name}`,
         role: 'owner',
       });
-      console.log(repsonse);
 
-      setAuthUser(profile);
-      navigate('/dashboard');
-      localStorage.setItem('authUser', JSON.stringify({ status: 'success', ...profile }));
+      setAuthUser(repsonse.data.data);
+      navigate('/infos');
+      localStorage.setItem('authUser', JSON.stringify({ status: 'success', ...repsonse.data.data }));
     };
 
     if (profile) {
