@@ -161,7 +161,7 @@ const UserMessage = ({ message, user }: { message: string; user: any }) => {
     <div className="chat chat-start flex">
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
-          <img alt="User Avatar" src={user?.profilePicture || user?.picture} />
+          <img alt="User Avatar" src={user?.profilePicture} />
         </div>
       </div>
 

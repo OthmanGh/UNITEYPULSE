@@ -239,6 +239,7 @@ const AddCustomerPopup: React.FC<AddCustomerPopupProps> = ({ setShowPopup, setCu
             label="Customer Name"
             id="customerName"
           />
+
           <InputField
             type="text"
             placeholder="Customer ID"
