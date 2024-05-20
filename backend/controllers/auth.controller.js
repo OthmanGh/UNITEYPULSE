@@ -21,6 +21,7 @@ export const signup = async (req, res, next) => {
         confirmPassword: req.body.confirmPassword
       });
     } else {
+      console.log(req.body);
       newUser = await User.create({
         name: req.body.name,
         username: req.body.username,
@@ -37,11 +38,16 @@ export const signup = async (req, res, next) => {
     }
 
     const token = generateToken(newUser._id);
+    console.log(token);
+
+    const userObject = newUser.toObject();
+
+    const { password, __v, ...userData } = userObject;
 
     return res.status(201).json({
       status: "success",
       data: {
-        user: newUser,
+        ...userData,
         token: token
       }
     });
