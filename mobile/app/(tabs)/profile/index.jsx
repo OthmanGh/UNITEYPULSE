@@ -6,22 +6,23 @@ import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Profile = () => {
-  const [userData, setUserData] = useState(null);
   const [selectedItem, setSelectedItem] = useState('');
 
+  const [authUser, setAuthUser] = useState(null);
+
   useEffect(() => {
-    const fetchUserData = async () => {
+    const getAuthUser = async () => {
       try {
-        const storedUserData = await AsyncStorage.getItem('userData');
-        if (storedUserData) {
-          setUserData(JSON.parse(storedUserData));
+        const jsonValue = await AsyncStorage.getItem('authUser');
+        if (jsonValue != null) {
+          setAuthUser(JSON.parse(jsonValue));
         }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
+      } catch (e) {
+        console.error("Error reading 'authUser' from AsyncStorage", e);
       }
     };
 
-    fetchUserData();
+    getAuthUser();
   }, []);
 
   const handlePress = (itemName) => {
@@ -51,17 +52,17 @@ const Profile = () => {
             <View style={{ flexDirection: 'row', marginTop: 15, padding: 10 }}>
               <Avatar.Image
                 source={{
-                  uri: userData?.profilePicture || 'https://example.com/default-profile-picture.jpg',
+                  uri: authUser?.profilePicture,
                 }}
                 size={80}
               />
 
               <View style={{ marginLeft: 20 }}>
                 <Title style={([styles.title], { marginTop: 10, marginBottom: 5 })} className="text-primary-light">
-                  {userData?.name || 'Name'}
+                  {authUser?.name || 'Name'}
                 </Title>
                 <Caption style={styles.caption} className="text-primary-light">
-                  @{userData?.username || 'username'}
+                  @{authUser?.username || 'username'}
                 </Caption>
               </View>
             </View>
