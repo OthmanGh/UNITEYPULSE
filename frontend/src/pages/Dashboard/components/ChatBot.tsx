@@ -7,6 +7,7 @@ import BotIcon from '../../../assets/aiBot.png';
 import { RequestMethod } from '../../../services/requestMethods';
 import notificationSound from '../../../assets/notification.mp3';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URI } from '../../../utils';
 
 const ChatBot = () => {
   const navigator = useNavigate();
@@ -47,11 +48,12 @@ const ChatBot = () => {
     if (!inputMessage.trim()) return;
 
     setMessages((prevMessages) => [...prevMessages, { message: inputMessage, sender: 'user' }]);
+    console.log(messages);
     setInputMessage('');
     setLoadingMessageIndex(messages.length);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/chatbot', {
+      const response = await fetch(`${API_BASE_URI}/chatbot`, {
         method: RequestMethod.post,
         headers: {
           'Content-Type': 'application/json',
@@ -159,7 +161,7 @@ const UserMessage = ({ message, user }: { message: string; user: any }) => {
     <div className="chat chat-start flex">
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
-          <img alt="User Avatar" src={user.profilePicture} />
+          <img alt="User Avatar" src={user?.profilePicture || user?.picture} />
         </div>
       </div>
 
