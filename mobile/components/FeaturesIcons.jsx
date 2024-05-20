@@ -68,7 +68,7 @@ const FeaturesIcons = () => {
                 <TouchableOpacity className="bg-half-transparent rounded-full p-3" onPress={() => console.log('Event clicked')}>
                   <IconComponent name={event.icon} size={30} color="#64CCC5" />
                 </TouchableOpacity>
-                <Text className="mt-20 text-white text-[10px]">{event.name}</Text>
+                <Text className="mt-20  text-slate-200 text-[10px]">{event.name}</Text>
               </View>
             </View>
           );
