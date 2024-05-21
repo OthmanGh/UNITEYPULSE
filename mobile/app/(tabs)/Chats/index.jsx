@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 import { Container, Card, UserInfo, UserImg, UserImgWrapper, TextSection, UserInfoText, PostTime, UserName, MessageText } from '../../styles/MessageStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_BASE_URI } from '../../../constants/data';
+import { convertToReadableDate } from '../../../constants/data';
 
 const Chats = () => {
   const router = useRouter();
@@ -11,6 +12,8 @@ const Chats = () => {
   const [filteredMessages, setFilteredMessages] = useState([]);
   const [authUser, setAuthUser] = useState(null);
   const [usersForSidebar, setUsersForSideBar] = useState([]);
+
+  console.log(authUser);
 
   useEffect(() => {
     const getAuthUser = async () => {
@@ -58,34 +61,35 @@ const Chats = () => {
   };
 
   const renderItem = ({ item }) => (
-    <Card className="bg-half-transparent p-4 rounded-xl mt-6 h-[100px]" onPress={() => router.push(`/chats/chat?userId=${item._id}`)}>
-      <UserInfo>
-        <UserImgWrapper>
-          <UserImg source={{ uri: item.profilePicture }} />
-        </UserImgWrapper>
-        <TextSection>
-          <UserInfoText>
+    <Card
+      className="flex flex-col mb-3 bg-half-transparent items-center justify-center px-6 rounded-xl h-[100px]"
+      onPress={() => router.push(`/chats/chat?userId=${item._id}`)}
+    >
+      <View className="flex flex-row gap-3 items-center ">
+        <UserImg className="w-12 h-12 rounded-full mt-2" source={{ uri: item.profilePicture }} />
+        <TextSection className="flex flex-col justify-center gap-[3px] self-center mt-10">
+          <View className="flex flex-row justify-between w-[88%] ">
             <UserName className="text-primary-light">{item.name}</UserName>
-            <PostTime>{item.createdAt}</PostTime>
-          </UserInfoText>
-          <MessageText className="text-primary">{item.email}</MessageText>
+            <PostTime className="text-slate-200 self-center text-[10px]">{convertToReadableDate(item.createdAt)}</PostTime>
+          </View>
+          <MessageText className="text-primary text-[12px]">{item.email}</MessageText>
         </TextSection>
-      </UserInfo>
+      </View>
     </Card>
   );
 
   return (
-    <Container>
-      <StatusBar barStyle="light-content" />
+    <View className="bg-extraDark p-4 mt-7">
+      <StatusBar barStyle="light-content" backgroundColor="#042d3e" />
       <TextInput
-        className="w-full p-3 rounded-lg placeholder:text-slate-200 border-slate-200 border-[1px] mt-4"
-        placeholder="Search by name"
+        className="w-full p-3 rounded-lg placeholder:text-slate-200 border-slate-200 border-[1px] mt-8 mb-8"
+        placeholder="Search Users"
         placeholderTextColor={'rgb(226 232 240)'}
         value={search}
         onChangeText={handleSearch}
       />
       <FlatList data={filteredMessages} className="flex flex-col" keyExtractor={(item) => item._id.toString()} renderItem={renderItem} />
-    </Container>
+    </View>
   );
 };
 

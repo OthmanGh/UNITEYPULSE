@@ -4,8 +4,10 @@ import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
 import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
 import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Audio } from 'expo-av'; // Import Audio from expo-av
 import { API_BASE_URI } from '../../../constants/data';
 import io from 'socket.io-client';
+import notificationSound from '../../../assets/sounds/notification.mp3';
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
@@ -13,6 +15,25 @@ const Chat = () => {
   const { userId } = route.params;
   const [authUser, setAuthUser] = useState(null);
   const [socket, setSocket] = useState(null);
+  const [sound, setSound] = useState(null);
+
+  console.log(route.params);
+  console.log(authUser);
+
+  async function loadSound() {
+    const { sound } = await Audio.Sound.createAsync(notificationSound);
+    setSound(sound);
+  }
+
+  useEffect(() => {
+    loadSound();
+
+    return () => {
+      if (sound) {
+        sound.unloadAsync();
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const getAuthUser = async () => {
@@ -42,7 +63,7 @@ const Chat = () => {
 
   useEffect(() => {
     if (socket) {
-      socket.on('newMessage', (newMessage) => {
+      socket.on('newMessage', async (newMessage) => {
         const formattedMessage = {
           _id: newMessage._id,
           text: newMessage.message,
@@ -50,13 +71,16 @@ const Chat = () => {
           user: {
             _id: newMessage.senderId,
             name: newMessage.senderName,
-            avatar: newMessage.senderAvatar,
           },
         };
         setMessages((previousMessages) => GiftedChat.append(previousMessages, [formattedMessage]));
+
+        if (sound) {
+          await sound.replayAsync();
+        }
       });
     }
-  }, [socket]);
+  }, [socket, sound]);
 
   useEffect(() => {
     if (!authUser || !userId) return;
@@ -78,7 +102,6 @@ const Chat = () => {
           user: {
             _id: msg.senderId,
             name: msg.senderName,
-            avatar: msg.senderAvatar,
           },
         }));
 
@@ -101,7 +124,6 @@ const Chat = () => {
       user: {
         _id: authUser._id,
         name: authUser.name,
-        avatar: authUser.avatar,
       },
     };
 
@@ -115,7 +137,6 @@ const Chat = () => {
       });
     }
 
-    // Save message to server
     try {
       const res = await fetch(`${API_BASE_URI}/api/messages/send/${userId}`, {
         method: 'POST',
@@ -134,7 +155,6 @@ const Chat = () => {
         throw new Error(savedMessage.error);
       }
 
-      // Update the message with correct _id from the server
       setMessages((previousMessages) =>
         previousMessages.map((msg) => {
           if (msg._id === newMessage._id) {
@@ -152,12 +172,30 @@ const Chat = () => {
     <Bubble
       {...props}
       wrapperStyle={{
-        right: { backgroundColor: '#64CCC5' },
-        left: { backgroundColor: 'white' },
+        right: {
+          backgroundColor: '#64CCC5',
+          marginBottom: 10, // Adjusts the margin between bubbles
+          padding: 5, // Optional: adjust padding to make the bubbles look better
+          maxWidth: '80%', // Adjusts the width of the bubbles
+        },
+        left: {
+          backgroundColor: 'white',
+          marginBottom: 10,
+          padding: 7,
+          maxWidth: '90%',
+        },
       }}
       textStyle={{
         right: {
           color: '#fff',
+        },
+      }}
+      containerToNextStyle={{
+        right: {
+          marginBottom: 2,
+        },
+        left: {
+          marginBottom: 2,
         },
       }}
     />
