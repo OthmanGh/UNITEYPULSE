@@ -5,12 +5,14 @@ import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
 import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_BASE_URI } from '../../../constants/data';
+import io from 'socket.io-client';
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const route = useRoute();
   const { userId } = route.params;
   const [authUser, setAuthUser] = useState(null);
+  const [socket, setSocket] = useState(null);
 
   useEffect(() => {
     const getAuthUser = async () => {
@@ -28,6 +30,35 @@ const Chat = () => {
   }, []);
 
   useEffect(() => {
+    if (authUser && userId) {
+      const newSocket = io(API_BASE_URI, {
+        query: { userId: authUser._id },
+      });
+      setSocket(newSocket);
+
+      return () => newSocket.close();
+    }
+  }, [authUser, userId]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('newMessage', (newMessage) => {
+        const formattedMessage = {
+          _id: newMessage._id,
+          text: newMessage.message,
+          createdAt: new Date(newMessage.createdAt),
+          user: {
+            _id: newMessage.senderId,
+            name: newMessage.senderName,
+            avatar: newMessage.senderAvatar,
+          },
+        };
+        setMessages((previousMessages) => GiftedChat.append(previousMessages, [formattedMessage]));
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
     if (!authUser || !userId) return;
 
     const getMessages = async () => {
@@ -39,8 +70,6 @@ const Chat = () => {
           },
         });
         const fetchedMessages = await res.json();
-
-        console.log(fetchedMessages);
 
         const formattedMessages = fetchedMessages.map((msg) => ({
           _id: msg._id,
@@ -65,6 +94,28 @@ const Chat = () => {
   const sendMessage = async (messageText) => {
     if (!authUser || !userId) return;
 
+    const newMessage = {
+      _id: Math.random().toString(36).substring(7),
+      text: messageText,
+      createdAt: new Date(),
+      user: {
+        _id: authUser._id,
+        name: authUser.name,
+        avatar: authUser.avatar,
+      },
+    };
+
+    setMessages((previousMessages) => GiftedChat.append(previousMessages, [newMessage]));
+
+    if (socket) {
+      socket.emit('sendMessage', {
+        message: messageText,
+        receiverId: userId,
+        senderId: authUser._id,
+      });
+    }
+
+    // Save message to server
     try {
       const res = await fetch(`${API_BASE_URI}/api/messages/send/${userId}`, {
         method: 'POST',
@@ -83,18 +134,15 @@ const Chat = () => {
         throw new Error(savedMessage.error);
       }
 
-      const newMessage = {
-        _id: savedMessage._id,
-        text: savedMessage.message,
-        createdAt: new Date(savedMessage.createdAt),
-        user: {
-          _id: authUser._id,
-          name: authUser.name,
-          avatar: authUser.avatar,
-        },
-      };
-
-      setMessages((previousMessages) => GiftedChat.append(previousMessages, [newMessage]));
+      // Update the message with correct _id from the server
+      setMessages((previousMessages) =>
+        previousMessages.map((msg) => {
+          if (msg._id === newMessage._id) {
+            return { ...msg, _id: savedMessage._id };
+          }
+          return msg;
+        })
+      );
     } catch (error) {
       console.error('Error sending message', error);
     }
