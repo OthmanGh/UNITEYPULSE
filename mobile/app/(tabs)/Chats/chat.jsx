@@ -1,90 +1,152 @@
-import { Text, View } from 'react-native';
 import React, { useEffect, useCallback, useState } from 'react';
+import { View } from 'react-native';
 import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
+import { useRoute } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_BASE_URI } from '../../../constants/data';
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
+  const route = useRoute();
+  const { userId } = route.params;
+  const [authUser, setAuthUser] = useState(null);
 
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: 'Hello developer',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-          avatar:
-            'https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww',
-        },
-      },
-      {
-        _id: 2,
-        text: 'Hello developer',
-        createdAt: new Date(),
-        user: {
-          _id: 1,
-          name: 'React Native',
-          avatar:
-            'https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww',
-        },
-      },
-    ]);
+    const getAuthUser = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem('authUser');
+        if (jsonValue != null) {
+          setAuthUser(JSON.parse(jsonValue));
+        }
+      } catch (e) {
+        console.error("Error reading 'authUser' from AsyncStorage", e);
+      }
+    };
+
+    getAuthUser();
   }, []);
 
-  const renderBubble = (props) => {
-    return (
-      <Bubble
-        {...props}
-        wrapperStyle={{
-          right: '#64CCC5',
+  useEffect(() => {
+    if (!authUser || !userId) return;
 
-          left: '#041d29',
-        }}
-        textStyle={{
-          right: {
-            color: '#fff',
+    const getMessages = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URI}/api/messages/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${authUser.token}`,
+            'Content-Type': 'application/json',
           },
-        }}
-      />
-    );
+        });
+        const fetchedMessages = await res.json();
+
+        console.log(fetchedMessages);
+
+        const formattedMessages = fetchedMessages.map((msg) => ({
+          _id: msg._id,
+          text: msg.message,
+          createdAt: new Date(msg.createdAt),
+          user: {
+            _id: msg.senderId,
+            name: msg.senderName,
+            avatar: msg.senderAvatar,
+          },
+        }));
+
+        setMessages(formattedMessages.reverse());
+      } catch (error) {
+        console.error('Error fetching messages', error);
+      }
+    };
+
+    getMessages();
+  }, [authUser, userId]);
+
+  const sendMessage = async (messageText) => {
+    if (!authUser || !userId) return;
+
+    try {
+      const res = await fetch(`${API_BASE_URI}/api/messages/send/${userId}`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${authUser.token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: messageText,
+        }),
+      });
+
+      const savedMessage = await res.json();
+
+      if (savedMessage.error) {
+        throw new Error(savedMessage.error);
+      }
+
+      const newMessage = {
+        _id: savedMessage._id,
+        text: savedMessage.message,
+        createdAt: new Date(savedMessage.createdAt),
+        user: {
+          _id: authUser._id,
+          name: authUser.name,
+          avatar: authUser.avatar,
+        },
+      };
+
+      setMessages((previousMessages) => GiftedChat.append(previousMessages, [newMessage]));
+    } catch (error) {
+      console.error('Error sending message', error);
+    }
   };
 
-  const renderSend = (props) => {
-    return (
-      <Send {...props}>
-        <View>
-          <MaterialCommunityIcons
-            name="send-circle"
-            size={32}
-            color="#64CCC5"
-            style={{
-              marginBottom: 5,
-              marginRight: 5,
-            }}
-          />
-        </View>
-      </Send>
-    );
-  };
+  const renderBubble = (props) => (
+    <Bubble
+      {...props}
+      wrapperStyle={{
+        right: { backgroundColor: '#64CCC5' },
+        left: { backgroundColor: 'white' },
+      }}
+      textStyle={{
+        right: {
+          color: '#fff',
+        },
+      }}
+    />
+  );
 
-  const scrollToBottom = () => {
-    return <FontAwesome name="angle-double-down" size={22} color="#333" />;
-  };
+  const renderSend = (props) => (
+    <Send {...props}>
+      <View>
+        <MaterialCommunityIcons
+          name="send-circle"
+          size={32}
+          color="#64CCC5"
+          style={{
+            marginBottom: 5,
+            marginRight: 5,
+          }}
+        />
+      </View>
+    </Send>
+  );
 
-  const onSend = useCallback((messages = []) => {
-    setMessages((previousMessages) => GiftedChat.append(previousMessages, messages));
-  }, []);
+  const scrollToBottom = () => <FontAwesome name="angle-double-down" size={22} color="#333" />;
+
+  const onSend = useCallback(
+    (messages = []) => {
+      const newMessage = messages[0];
+      sendMessage(newMessage.text);
+    },
+    [authUser, userId]
+  );
 
   return (
     <GiftedChat
       messages={messages}
       onSend={(messages) => onSend(messages)}
       user={{
-        _id: 1,
+        _id: authUser ? authUser._id : 1,
       }}
       renderBubble={renderBubble}
       alwaysShowSend
