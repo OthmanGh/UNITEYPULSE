@@ -6,11 +6,14 @@ export const Container = styled.View`
   padding-right: 20px;
   padding-top: 40px;
   align-items: center;
-  background-color: #ffffff;
+  color: rgb(226 232 240);
+  background-color: #041d29;
 `;
 
 export const Card = styled.TouchableOpacity`
   width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
 `;
 
 export const UserInfo = styled.View`
@@ -36,14 +39,11 @@ export const TextSection = styled.View`
   padding-left: 0;
   margin-left: 10px;
   width: 300px;
-  border-bottom-width: 1px;
-  border-bottom-color: #cccccc;
 `;
 
 export const UserInfoText = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 5px;
 `;
 
 export const UserName = styled.Text`
