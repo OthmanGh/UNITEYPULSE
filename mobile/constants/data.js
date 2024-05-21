@@ -6,22 +6,19 @@ export const events = [
   {
     name: 'Event 1',
     id: 1,
-    image:
-      'https://images.unsplash.com/photo-1634078111133-a1e12d6131b6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzZ8fG1hbmFnZW1lbnQlMjBzb2Z0d2FyZXxlbnwwfHwwfHx8MA%3D%3D',
+    image: 'https://wallpapercave.com/wp/wp10701716.jpg',
   },
 
   {
     name: 'Event 2',
     id: 2,
-    image:
-      'https://images.unsplash.com/photo-1580983561371-7f4b242d8ec0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTh8fG1hbmFnZW1lbnQlMjBzb2Z0d2FyZXxlbnwwfHwwfHx8MA%3D%3D',
+    image: 'https://wallpaperaccess.com/full/1930875.jpg',
   },
 
   {
     id: 3,
     name: 'Event 3',
-    image:
-      'https://images.unsplash.com/photo-1573164574572-cb89e39749b4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzh8fG1hbmFnZW1lbnQlMjBzb2Z0d2FyZXxlbnwwfHwwfHx8MA%3D%3D',
+    image: 'https://i.pinimg.com/originals/5e/cf/6b/5ecf6bd8170f61a20560a7332d8c7b91.jpg',
   },
 ];
 
