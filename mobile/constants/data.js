@@ -6,7 +6,7 @@ export const events = [
   {
     name: 'Event 1',
     id: 1,
-    image: 'https://wallpapercave.com/wp/wp2351114.jpg',
+    image: 'https://wallpaperaccess.com/full/1533626.jpg',
   },
 
   {
