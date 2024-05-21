@@ -5,7 +5,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { events } from '../../../constants/data';
 import CustomCarousel from '../../../components/AppCarousel';
 import { API_BASE_URI } from '../../../constants/data';
-import { MaterialIcons, Ionicons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import FeaturesIcons from '../../../components/FeaturesIcons';
 import SearchBar from '../../../components/SearchBar';
 import CalendarEvents from '../../../components/CalendarEvents';
@@ -51,6 +50,8 @@ const Home = () => {
   }, [authUser]);
 
   const filteredEvents = calendarEvents.filter((event) => event.title.toLowerCase().includes(searchQuery.toLowerCase()));
+
+  console.log(authUser);
 
   return (
     <SafeAreaView className="bg-extraDark h-full">
