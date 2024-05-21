@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ImageBackground, TextInput, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const EditProfile = () => {
+  const [authUser, setAuthUser] = useState(null);
+
+  useEffect(() => {
+    const getAuthUser = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem('authUser');
+        if (jsonValue != null) {
+          setAuthUser(JSON.parse(jsonValue));
+        }
+      } catch (e) {
+        console.error("Error reading 'authUser' from AsyncStorage", e);
+      }
+    };
+
+    getAuthUser();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ margin: 30, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -15,7 +33,7 @@ const EditProfile = () => {
             <View style={{ height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
               <ImageBackground
                 source={{
-                  uri: 'https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGRpZ2l0YWwlMjBtYXJrZXRpbmd8ZW58MHx8MHx8fDA%3D',
+                  uri: authUser?.profilePicture,
                 }}
                 style={{ height: 100, width: 100, borderRadius: 15 }}
                 imageStyle={{ borderRadius: 15 }}

@@ -19,7 +19,7 @@ const Login = () => {
     setIsSubmitting(true);
 
     try {
-      const url = `${API_BASE_URI}/auth/login`;
+      const url = `${API_BASE_URI}/api/auth/login`;
 
       const res = await fetch(url, {
         method: 'POST',

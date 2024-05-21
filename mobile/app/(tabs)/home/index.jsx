@@ -33,7 +33,7 @@ const Home = () => {
     if (!authUser) return;
     const getEvent = async () => {
       try {
-        const res = await fetch(`${API_BASE_URI}/events`, {
+        const res = await fetch(`${API_BASE_URI}/api/events`, {
           headers: {
             Authorization: `Bearer ${authUser.token}`,
             'Content-Type': 'application/json',
