@@ -13,19 +13,11 @@
 
 #### Business Owner:
 
-- As a business owner, I should be able to track attendance, manage leaves, and evaluate employee performance within the system.
-
 - As a business owner, I should be able to define and update company policies such as code of conduct, HR policies, etc., ensuring all employees are aware and compliant.
 
-- As a business owner, I should define clear goals and objectives for individual employees or teams.
+- As a business owner, I need to schedule and manage team meetings, including sending invites, setting agendas, and tracking attendance, to facilitate effective communication and collaboration.
 
-#### Project Manager:
-
-- As a project manager, I need to schedule and manage team meetings, including sending invites, setting agendas, and tracking attendance, to facilitate effective communication and collaboration.
-
-- As a project manager, I need to manage project budgets, track expenses, and approve expenses submitted by team members, ensuring projects stay within budget constraints.
-
-- As a project manager, I need to allocate resources efficiently across projects, ensuring that tasks are appropriately assigned based on team members' skills and availability to optimize productivity.
+- As a business owner, I need to manage project budgets, track expenses, and approve expenses submitted by team members, ensuring projects stay within budget constraints.
 
 #### Employee:
 
@@ -35,7 +27,7 @@
 
 - As an employee, I have to be able to request flexible work arrangements such as remote work, flexible hours, or job sharing, supported by the company's policies and systems for managing work arrangements.
 
-  <br><br>
+<br><br>
 
 <!-- Tech stack -->
 <img src="./readme/title3.svg"/>
