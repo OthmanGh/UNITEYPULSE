@@ -31,7 +31,7 @@ const Sidebar = () => {
             >
               <img src={Logo} className="w-[25%]" alt="" />
               <p className="text-lg">
-                <span>UNITY</span> <span className="text-secondary">PAULSE</span>
+                <span>UNITY</span> <span className="text-secondary">PULSE</span>
               </p>
             </Link>
 
