@@ -83,11 +83,11 @@
 
 ### Business Owners Screens (Web)
 
-| Login screen                                  | Signup screen                          | Hero screen                                 |
-| --------------------------------------------- | -------------------------------------- | ------------------------------------------- |
-| ![Landing](./readme/demo/LoginPage.gif)       | ![fsdaf](./readme/demo/SingupPage.gif) | ![fsdaf](./readme/demo/landingPage_gif.gif) |
-| Landing Screen                                | Menu Screen                            | Order Screen                                |
-| ![Landing](./readme/demo/landingPage_all.gif) | ![fsdaf](./readme/demo/1440x1024.png)  | ![fsdaf](./readme/demo/1440x1024.png)       |
+| Login screen                                  | Signup screen                               | Hero screen                                 |
+| --------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| ![Landing](./readme/demo/LoginPage.gif)       | ![fsdaf](./readme/demo/SingupPage.gif)      | ![fsdaf](./readme/demo/landingPage_gif.gif) |
+| Landing Screen                                | Company Info Screen                         | Order Screen                                |
+| ![Landing](./readme/demo/landingPage_all.gif) | ![fsdaf](./readme/demo/companyInfoPage.gif) | ![fsdaf](./readme/demo/1440x1024.png)       |
 
 <br><br>
 
