@@ -40,13 +40,19 @@
 <!-- Tech stack -->
 <img src="./readme/title3.svg"/>
 
-### Coffee Express is built using the following technologies:
+### Unity Pulse is built using the following technologies:
 
-- This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
-- For persistent storage (database), the app uses the [Hive](https://hivedb.dev/) package which allows the app to create a custom storage schema and save it to a local database.
-- To send local push notifications, the app uses the [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications) package which supports Android, iOS, and macOS.
-  - 🚨 Currently, notifications aren't working on macOS. This is a known issue that we are working to resolve!
-- The app uses the font ["Work Sans"](https://fonts.google.com/specimen/Work+Sans) as its main font, and the design of the app adheres to the material design guidelines.
+- This project uses the [React](https://react.dev/) library for building the user interface. React is a powerful JavaScript library for building dynamic and responsive web applications.
+
+- The backend of the application is powered by [Express](https://expressjs.com/), a fast and minimalist web framework for Node.js, which allows for robust routing and middleware capabilities.
+
+- For persistent storage (database), the application uses [MongoDB](https://www.mongodb.com/), a NoSQL database that provides flexible and scalable data management.
+
+- The mobile app is developed using [React Native](https://reactnative.dev/), a framework that allows for the development of cross-platform mobile applications using a single codebase.
+
+- For styling, the application utilizes [Tailwind CSS](https://tailwindcss.com/), a utility-first CSS framework that enables rapid and efficient UI development.
+
+- To enable real-time communication and live chatting, the application incorporates [Socket.IO](https://socket.io/), a library that enables low-latency, bidirectional, and event-based communication between the browser and server.
 
 <br><br>
 
