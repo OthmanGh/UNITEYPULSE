@@ -56,14 +56,14 @@ const Login = () => {
   }, [authUser]);
 
   return (
-    <div className=" h-full w-full flex flex-col items-center justify-center p-5 bg-auth text-light-gray z-10">
+    <div className="h-full w-full flex flex-col items-center justify-center p-5 bg-auth text-light-gray z-10">
       <form className="flex flex-col items-start justify-center gap-4 w-[90%] sm:w-2/3" onSubmit={handleSubmit(onSubmit)}>
         <Header text="Login" />
 
         <InputField
           name="email"
           id="email"
-          placeholder="example@gmail.com"
+          placeholder="Enter your email..."
           labelText="Email"
           type="email"
           classes="w-full"
@@ -75,7 +75,7 @@ const Login = () => {
         <InputField
           name="password"
           id="password"
-          placeholder="Pass1234.."
+          placeholder="Enter your password..."
           labelText="Password"
           type="password"
           classes="w-full flex-2"

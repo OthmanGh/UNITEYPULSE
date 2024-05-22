@@ -57,7 +57,7 @@ const Signup = () => {
 
   useEffect(() => {
     const login = async () => {
-      const repsonse = await axios.post(`${API_BASE_URI}/auth/signup`, {
+      const response = await axios.post(`${API_BASE_URI}/auth/signup`, {
         email: profile.data.email,
         name: profile.data.name,
         profilePicture: profile.data.picture,
@@ -65,9 +65,9 @@ const Signup = () => {
         role: 'owner',
       });
 
-      setAuthUser(repsonse.data.data);
+      setAuthUser(response.data.data);
       navigate('/infos');
-      localStorage.setItem('authUser', JSON.stringify({ status: 'success', ...repsonse.data.data }));
+      localStorage.setItem('authUser', JSON.stringify({ status: 'success', ...response.data.data }));
     };
 
     if (profile) {
@@ -84,7 +84,7 @@ const Signup = () => {
           <InputField
             name="name"
             id="name"
-            placeholder="Othman..."
+            placeholder="Enter your name..."
             labelText="Name"
             type="text"
             classes="w-full"
@@ -96,7 +96,7 @@ const Signup = () => {
           <InputField
             name="username"
             id="username"
-            placeholder="Othman..."
+            placeholder="Enter your username..."
             labelText="Username"
             type="text"
             classes="w-full"
@@ -109,7 +109,7 @@ const Signup = () => {
         <InputField
           name="email"
           id="email"
-          placeholder="example@gmail.com"
+          placeholder="Enter your email..."
           labelText="Email"
           type="email"
           classes="w-full"
@@ -121,7 +121,7 @@ const Signup = () => {
         <InputField
           name="password"
           id="password"
-          placeholder="Pass1234.."
+          placeholder="Enter your password..."
           labelText="Password"
           type="password"
           classes="w-full flex-2"
@@ -133,7 +133,7 @@ const Signup = () => {
         <InputField
           name="confirmPassword"
           id="confirmPassword"
-          placeholder="Pass1234.."
+          placeholder="Confirm your password..."
           labelText="Confirm Password"
           type="password"
           classes="w-full flex-2"
@@ -142,7 +142,7 @@ const Signup = () => {
           error={errors.confirmPassword}
         />
         {!isSubmitting && errors.confirmPassword && <span className="text-red-500 text-sm">{errors.confirmPassword.message}</span>}
-        {password !== '' && password !== watch('confirmPassword') && <span className="text-red-500 text-sm mt-[-10px]">Passwords don't match</span>}
+        {password !== '' && password !== watch('confirmPassword') && <span className="text-primary-light text-sm mt-[-10px]">Passwords don't match</span>}
       </form>
 
       <div className="flex flex-col gap-5 mt-10 w-[90%] sm:w-2/3">
@@ -152,7 +152,7 @@ const Signup = () => {
 
       <SubmitBtn text="Create Account" isSubmitting={isSubmitting || loading} onSubmit={handleSubmit(onSubmit)} />
 
-      {error && <span className="text-red-500 text-sm mt-2">{error.message}</span>}
+      {error && <span className="text-primary-light text-sm mt-2">{error.message}</span>}
     </div>
   );
 };
