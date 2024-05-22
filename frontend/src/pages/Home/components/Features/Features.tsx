@@ -73,7 +73,7 @@ const Card = ({ title, text, Icon, buttonText }: CardProps) => {
       <p className="hidden xs:block text-center text-gray-300 w-[80%] mx-auto leading-6 text-sm">{text}</p>
       <Button
         onClick={handleSubmit}
-        classes="text-dark hover:text-primary hover:bg-transparent border-primary border-[2px] text-[14px] hover:primary-light mx-auto px-4 font-semibold py-3 rounded-md hover:bg-primary hover:text-dark transition-all duration-500 mt-6 mb-2 bg-primary"
+        classes="text-dark hover:text-primary hover:bg-transparent border-primary border-[2px] text-[12px] hover:primary-light mx-auto px-4 font-semibold py-3 rounded-md hover:bg-primary hover:text-dark transition-all duration-500 mt-6 mb-2 bg-primary"
         text="Start now"
       />
     </div>

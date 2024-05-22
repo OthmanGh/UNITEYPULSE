@@ -8,6 +8,11 @@ import { Currency } from '../utils/icons';
 import { SiExpensify } from 'react-icons/si';
 import { PiWechatLogoFill } from 'react-icons/pi';
 import { SiGoogletagmanager } from 'react-icons/si';
+import { FaMoneyBillTransfer } from 'react-icons/fa6';
+import { SiGooglemessages } from 'react-icons/si';
+import { IoDocument } from 'react-icons/io5';
+import { IoAnalyticsSharp } from 'react-icons/io5';
+import { FaTasks } from 'react-icons/fa';
 
 export const navLinks = [
   {
@@ -54,42 +59,42 @@ export const featuresCard: FeatureCard[] = [
   {
     Icon: Currency,
     title: 'Employee Management',
-    text: 'Streamline employee management processes with user roles and permissions, employee profiles, attendance tracking, leave management, and performance evaluation',
+    text: 'Streamline employee management processes with user roles and permissions, employee profiles, attendance tracking, leave management.',
     buttonText: 'Get Started',
   },
 
   {
-    Icon: Currency,
-    title: 'Employee Management',
-    text: 'Streamline employee management processes with user roles and permissions, employee profiles, attendance tracking, leave management, and performance evaluation',
+    Icon: FaMoneyBillTransfer,
+    title: 'Finance Tracking',
+    text: 'Keep your finances in check with expense tracking, budget management, invoicing, and seamless integration with accounting software.',
     buttonText: 'Get Started',
   },
 
   {
-    Icon: Currency,
-    title: 'Employee Management',
-    text: 'Streamline employee management processes with user roles and permissions, employee profiles, attendance tracking, leave management, and performance evaluation',
+    Icon: FaTasks,
+    title: 'Task Manager',
+    text: 'Create, assign, and track tasks efficiently using our intuitive task management tools. Set deadlines, prioritize tasks, and collaborate with team members effortlessly.',
     buttonText: 'Get Started',
   },
 
   {
-    Icon: Currency,
-    title: 'Employee Management',
-    text: 'Streamline employee management processes with user roles and permissions, employee profiles, attendance tracking, leave management, and performance evaluation',
+    Icon: SiGooglemessages,
+    title: 'Communication Tools',
+    text: 'Foster effective communication and collaboration with internal messaging systems, announcement boards, and integration with video conferencing tools.',
     buttonText: 'Get Started',
   },
 
   {
-    Icon: Currency,
-    title: 'Employee Management',
-    text: 'Streamline employee management processes with user roles and permissions, employee profiles, attendance tracking, leave management, and performance evaluation',
+    Icon: IoDocument,
+    title: 'Document Management',
+    text: 'Centralize your document repository, manage permissions, and ensure version control for easy access and collaboration on documents.',
     buttonText: 'Get Started',
   },
 
   {
-    Icon: Currency,
-    title: 'Employee Management',
-    text: 'Streamline employee management processes with user roles and permissions, employee profiles, attendance tracking, leave management, and performance evaluation',
+    Icon: IoAnalyticsSharp,
+    title: 'Analytics and Insights',
+    text: "Gain valuable insights into your company's performance with customizable dashboards, reports, and predictive analytics for informed decision-making.",
     buttonText: 'Get Started',
   },
 ];
