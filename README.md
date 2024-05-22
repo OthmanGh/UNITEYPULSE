@@ -85,7 +85,7 @@
 
 | Login screen                            | Signup screen                          | Landing screen                              |
 | --------------------------------------- | -------------------------------------- | ------------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/SingupPage.gif) | ![fsdaf](./readme/demo/landingPage_gif.gif) |
+| ![Landing](./readme/demo/LoginPage.gif) | ![fsdaf](./readme/demo/SingupPage.gif) | ![fsdaf](./readme/demo/landingPage_gif.gif) |
 | Home screen                             | Menu Screen                            | Order Screen                                |
 | ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png)  | ![fsdaf](./readme/demo/1440x1024.png)       |
 
