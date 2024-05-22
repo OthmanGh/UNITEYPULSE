@@ -45,7 +45,7 @@ const Getintouch: React.FC = () => {
 
   return (
     <section id="getintouch" className="min-h-[100vh] p-12 bg-gray-200 shadow-2xl">
-      <h2 className="text-center text-md xs:text-xl  sm:text-3xl font-extrabold text-gray-700 mb-10">Get in Touch</h2>
+      <h2 className="text-center text-md xs:text-xl sm:text-3xl font-extrabold text-gray-700 mb-10">Get in Touch</h2>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -53,7 +53,7 @@ const Getintouch: React.FC = () => {
       >
         <Input
           label="Full Name"
-          placeholder="Jon Smith"
+          placeholder="John Smith"
           type="text"
           nameInput="fullName"
           register={register}
@@ -66,20 +66,20 @@ const Getintouch: React.FC = () => {
 
         <Input
           label="Email"
-          placeholder="example@example.com"
+          placeholder="john.smith@example.com"
           type="text"
           nameInput="email"
           register={register}
           error={errors.email}
           classParent=""
           classLabel="mb-2"
-          classInput="w-full px-4 py-2 rounded-md h-[45px] outline-none bg-half-transparent  text-primary"
+          classInput="w-full px-4 py-2 rounded-md h-[45px] outline-none bg-half-transparent text-primary"
           required
         />
 
         <select
           {...register('referralSource', { required: 'Please select an option' })}
-          className="w-full px-4 py-2 rounded-md h-[45px] bg-gray-100 placeholder:text-gray-300  outline-none bg-half-transparent text-primary"
+          className="w-full px-4 py-2 rounded-md h-[45px] bg-gray-100 placeholder:text-gray-300 outline-none bg-half-transparent text-primary"
         >
           <option className="bg-white text-black" value="">
             Select an option
@@ -99,7 +99,7 @@ const Getintouch: React.FC = () => {
           {...register('message', { required: 'Please enter a message' })}
           className="w-full rounded-md p-2 outline-none bg-half-transparent text-primary"
           rows={4}
-          placeholder="Message...."
+          placeholder="Enter your message here..."
         ></textarea>
         {errors.message && <span className="text-primary-light text-sm mt-[-30px]">{errors.message.message}</span>}
 
