@@ -89,11 +89,15 @@
 | Landing Screen                                | Customers Screen                          | Manage Screen                               |
 | ![Landing](./readme/demo/landingPage_all.gif) | ![fsdaf](./readme/demo/CustomersPage.gif) | ![fsdaf](./readme/demo/ManagePage.gif)      |
 
-| Employees screen                                   | Calendar screen                              | Editor Screen                              |
-| -------------------------------------------------- | -------------------------------------------- | ------------------------------------------ |
-| ![Landing](./readme/demo/EmployeesPage.gif)        | ![fsdaf](./readme/demo/CalendarPage.gif)     | ![fsdaf](./readme/demo/EditorPage.gif)     |
-| Dashboard Screen                                   | Transactions Screen                          | Chat Screen                                |
-| ![Landing](./readme/demo/DashboardGeneralPage.gif) | ![fsdaf](./readme/demo/TransactionsPage.gif) | ![fsdaf](./readme/demo/ChattingScreen.gif) |
+| Employees screen                                   | Calendar screen                              | Editor Screen                               |
+| -------------------------------------------------- | -------------------------------------------- | ------------------------------------------- |
+| ![Landing](./readme/demo/EmployeesPage.gif)        | ![fsdaf](./readme/demo/CalendarPage.gif)     | ![fsdaf](./readme/demo/EditorPage.gif)      |
+| Dashboard Screen                                   | Transactions Screen                          | Company Info Screen                         |
+| ![Landing](./readme/demo/DashboardGeneralPage.gif) | ![fsdaf](./readme/demo/TransactionsPage.gif) | ![fsdaf](./readme/demo/companyInfoPage.gif) |
+
+| Chat screen                                  | Chatbot Screen                              |
+| -------------------------------------------- | ------------------------------------------- |
+| ![Landing](./readme/demo/ChattingScreen.gif) | ![Landing](./readme/demo/ChatbotScreen.gif) |
 
 <br><br>
 
