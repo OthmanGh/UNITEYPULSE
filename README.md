@@ -73,16 +73,6 @@
 <!-- Implementation -->
 <img src="./readme/title6.svg"/>
 
-### User Screens (Mobile)
-
-| OnBoarding Screen                              | Login Screen                                  | Home Screen                                  |
-| ---------------------------------------------- | --------------------------------------------- | -------------------------------------------- |
-| ![Landing](./readme/demo/OnboardingScreen.jpg) | ![fsdaf](./readme/demo/LoginScreenMobile.gif) | ![fsdaf](./readme/demo/HomeScreenMobile.gif) |
-
-| Profile Screen                            | Users Screen                                    | Chat Screen                             |
-| ----------------------------------------- | ----------------------------------------------- | --------------------------------------- |
-| ![fsdaf](./readme/demo/ProfileScreen.jpg) | ![Landing](./readme/demo/UsersScreenMobile.gif) | ![fsdaf](https://placehold.co/900x1600) |
-
 ### Business Owners Screens (Web)
 
 | Login screen                                  | Signup screen                             | Hero screen                                 |
@@ -101,6 +91,16 @@
 | -------------------------------------------- | ------------------------------------------- |
 | ![Landing](./readme/demo/ChattingScreen.gif) | ![Landing](./readme/demo/ChatbotScreen.gif) |
 
+### Employee Screens (Mobile)
+
+| OnBoarding Screen                              | Login Screen                                  | Home Screen                                  |
+| ---------------------------------------------- | --------------------------------------------- | -------------------------------------------- |
+| ![Landing](./readme/demo/OnboardingScreen.jpg) | ![fsdaf](./readme/demo/LoginScreenMobile.gif) | ![fsdaf](./readme/demo/HomeScreenMobile.gif) |
+
+| Profile Screen                            | Users Screen                                    | Chat Screen                                    |
+| ----------------------------------------- | ----------------------------------------------- | ---------------------------------------------- |
+| ![fsdaf](./readme/demo/ProfileScreen.jpg) | ![Landing](./readme/demo/UsersScreenMobile.gif) | ![fsdaf](./readme/demo/LiveChattingScreen.gif) |
+
 <br><br>
 
 <!-- Prompt Engineering -->
@@ -108,7 +108,7 @@
 
 ### Mastering AI Interaction: Unveiling the Power of Prompt Engineering:
 
-- This project uses advanced prompt engineering techniques to optimize the interaction with natural language processing models. By skillfully crafting input instructions, we tailor the behavior of the models to achieve precise and efficient language understanding and generation for various tasks and preferences.
+- This project harnesses advanced prompt engineering techniques to optimize AI interactions. Utilizing OpenAI's ChatGPT-3.5 model, we swiftly generate examples based on user-created labels, expediting ML model creation. Seamlessly integrating human-AI collaboration, our approach empowers businesses with real-time, insightful assistance, revolutionizing operations.
 
 <br><br>
 
