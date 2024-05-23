@@ -75,11 +75,13 @@
 
 ### User Screens (Mobile)
 
-| OnBoarding Screen                              | Register screen                         | Landing screen                          | Loading screen                          |
-| ---------------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| ![Landing](./readme/demo/OnboardingScreen.jpg) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
-| Home screen                                    | Menu Screen                             | Order Screen                            | Checkout Screen                         |
-| ![Landing](https://placehold.co/900x1600)      | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
+| OnBoarding Screen                              | Login Screen                                  | Home Screen                                  |
+| ---------------------------------------------- | --------------------------------------------- | -------------------------------------------- |
+| ![Landing](./readme/demo/OnboardingScreen.jpg) | ![fsdaf](./readme/demo/LoginScreenMobile.gif) | ![fsdaf](./readme/demo/HomeScreenMobile.gif) |
+
+| Profile Screen                            | Users Screen                                    | Chat Screen                             |
+| ----------------------------------------- | ----------------------------------------------- | --------------------------------------- |
+| ![fsdaf](./readme/demo/ProfileScreen.jpg) | ![Landing](./readme/demo/UsersScreenMobile.gif) | ![fsdaf](https://placehold.co/900x1600) |
 
 ### Business Owners Screens (Web)
 
