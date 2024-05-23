@@ -95,16 +95,16 @@ const General = () => {
             <div className="flex items-center gap-4">
               <p className="flex items-center gap-1 text-red-400 hover:drop-shadow-xl">
                 <span>
-                  <GoDotFill />
+                  <GoDotFill className="text-[#042d3e]" />
                 </span>
-                <span className="text-sm xs:text-xl text-red-500">Expense</span>
+                <span className="text-sm xs:text-xl text-[#042d3e]">Expense</span>
               </p>
 
               <p className="flex items-center gap-2 text-green-500 hover:drop-shadow-xl">
                 <span>
-                  <GoDotFill />
+                  <GoDotFill className="text-[#90d8d3]" />
                 </span>
-                <span className="text-sm xs:text-xl">Budget</span>
+                <span className="text-sm xs:text-xl  text-[#90d8d3]">Budget</span>
               </p>
             </div>
           </div>
