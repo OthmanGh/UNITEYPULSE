@@ -86,8 +86,8 @@
 | Login screen                                  | Signup screen                             | Hero screen                                 |
 | --------------------------------------------- | ----------------------------------------- | ------------------------------------------- |
 | ![Landing](./readme/demo/LoginPage.gif)       | ![fsdaf](./readme/demo/SingupPage.gif)    | ![fsdaf](./readme/demo/landingPage_gif.gif) |
-| Landing Screen                                | Customers Screen                          | Order Screen                                |
-| ![Landing](./readme/demo/landingPage_all.gif) | ![fsdaf](./readme/demo/CustomersPage.gif) | ![fsdaf](./readme/demo/1440x1024.png)       |
+| Landing Screen                                | Customers Screen                          | Manage Screen                               |
+| ![Landing](./readme/demo/landingPage_all.gif) | ![fsdaf](./readme/demo/CustomersPage.gif) | ![fsdaf](./readme/demo/ManagePage.gif)      |
 
 <br><br>
 
