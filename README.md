@@ -117,7 +117,79 @@
 
 ### Efficient AI Deployment: Unleashing the Potential with AWS Integration:
 
-- This project leverages AWS deployment strategies to seamlessly integrate and deploy natural language processing models. With a focus on scalability, reliability, and performance, we ensure that AI applications powered by these models deliver robust and responsive solutions for diverse use cases.
+This project utilizes AWS deployment. Next, we'll go through the steps of launching a Node.js Express server on AWS EC2:
+
+The initial step involves creating an AWS account and accessing the AWS Management Console, where you can proceed to set up your virtual server instance using the EC2 service.
+
+Establish a connection to the EC2 instance using PuTTY:
+
+1. **Convert .pem to .ppk Using PuTTYgen:**
+
+   - Use PuTTYgen to convert your .pem key file to a .ppk key file.
+
+2. **Connect Using PuTTY:**
+
+   - Launch PuTTY and enter the public IPv4 address of your EC2 instance.
+   - In the credentials section, specify the .ppk key file you generated in the previous step.
+
+3. **Update and Upgrade Packages:**
+
+   - Run the following commands to update and upgrade packages on your EC2 instance:
+
+     ```
+     sudo apt update
+     sudo apt upgrade
+     ```
+
+4. **Install Node.js and NPM:**
+
+   - Use the following command to install Node.js and NPM:
+     ```
+     sudo apt-get install -y nodejs npm
+     ```
+
+5. **Install git and Clone the Repository:**
+
+   - Use the following commands to install git and clone the repository:
+     ```
+     sudo apt-get install git
+     git clone https://github.com/OthmanGh/UNITY-PULSE.git
+     cd UNITY-PULSE/backend/
+     ```
+
+6. **Create .env File:**
+
+   - Use the following command to create and edit a new .env file:
+     ```
+     nano .env
+     ```
+   - Inside the .env file, add your environment variables as shown below:
+     ```
+     # Add your environment variables:
+     MONGODB_URI=your_uri
+     PORT=your_port
+     JWT_SECRET=your-secret
+     OPENAI_API_KEY=your_key
+     ```
+
+7. **Install Dependencies:**
+
+   - Run the following command to install the dependencies for your Node.js application:
+
+     ```
+     npm install
+     ```
+
+8. **Start the Server:**
+
+   - To launch your Node.js Express server, use the following command:
+     ```
+     npm start
+     ```
+
+9. **Fetching From Server:**
+   - Below is an example of fetching from the server:
+     ![AWS Image](./readme/demo/aws.png)
 
 <br><br>
 
