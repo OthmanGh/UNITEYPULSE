@@ -40,4 +40,4 @@ export {
   Chat,
 };
 
-export const API_BASE_URI = 'http://192.168.0.103:8000/api';
+export const API_BASE_URI = 'http://15.188.246.97:8000/api';
