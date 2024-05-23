@@ -15,7 +15,7 @@ interface EmployeeData {
   destination: string;
   country: string;
   hireDate: string;
-  profilePicture: string;
+  // profilePicture: string;
 }
 
 const data: string[] = ['employeeId', 'name', 'destination', 'country', 'hireDate', 'profilePicture'];
@@ -35,7 +35,7 @@ const Employees: React.FC = () => {
     destination: '',
     country: '',
     hireDate: '',
-    profilePicture: '',
+    // profilePicture: '',
   });
 
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -103,7 +103,7 @@ const Employees: React.FC = () => {
       destination: '',
       country: '',
       hireDate: '',
-      profilePicture: '',
+      // profilePicture: '',
     });
     setShowAddEditPopup(false);
     setIsEditing(false);
@@ -133,9 +133,9 @@ const Employees: React.FC = () => {
         <td className="px-4 text-[15px] py-2">{filteredData.destination}</td>
         <td className="px-4 text-[15px] py-2">{filteredData.country}</td>
         <td className="px-4 text-[15px] py-2">{new Date(filteredData.hireDate).toLocaleDateString()}</td>
-        <td className="px-4 text-[15px] py-2">
+        {/* <td className="px-4 text-[15px] py-2">
           <img src={filteredData.profilePicture} alt="pic" className="w-12 rounded-full mx-auto" />
-        </td>
+        </td> */}
         <td className="px-4 text-[15px] py-2">
           <button className="py-2 px-4" onClick={() => handleEdit(employee)}>
             <EditIcon className="text-dark text-2xl hover:text-blue-500 transition-all duration-500" />
@@ -167,7 +167,7 @@ const Employees: React.FC = () => {
         <table className="w-full table-auto border-collapse border border-gray-300 text-center">
           <thead>
             <tr className="text-center bg-secondary">
-              {['Employee ID', 'Name', 'Destination', 'Country', 'Hire Date', 'Profile Picture', 'Edit', 'Delete'].map((header, index) => (
+              {['Employee ID', 'Name', 'Destination', 'Country', 'Hire Date', 'Edit', 'Delete'].map((header, index) => (
                 <th key={index} className="text-gray-50 capitalize border-r-2 border-black px-4 py-2">
                   {header}
                 </th>
@@ -227,14 +227,14 @@ const AddEmployeePopup: React.FC<AddEmployeePopupProps> = ({ setShowPopup, setEm
           <InputField type="text" id="destination" name="destination" label="Destination" value={employeeData.destination} onChange={handleInputChange} />
           <InputField type="text" id="country" name="country" label="Country" value={employeeData.country} onChange={handleInputChange} />
           <InputField type="date" id="hireDate" name="hireDate" label="Hire Date" value={employeeData.hireDate} onChange={handleInputChange} />
-          <InputField
+          {/* <InputField
             type="text"
             id="profilePicture"
             name="profilePicture"
             label="Profile Picture URL"
             value={employeeData.profilePicture}
             onChange={handleInputChange}
-          />
+          /> */}
           <button
             type="submit"
             className="xs:col-span-2 sm:col-span-3 bg-secondary text-gray-100 py-2 px-4 rounded mt-4 hover:bg-dark transition-all duration-400"
