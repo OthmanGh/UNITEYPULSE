@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, TextInput, View, StyleSheet, StatusBar } from 'react-native';
+import { FlatList, TextInput, View, Text, Image, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Container, Card, UserInfo, UserImg, UserImgWrapper, TextSection, UserInfoText, PostTime, UserName, MessageText } from '../../styles/MessageStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_BASE_URI } from '../../../constants/data';
 import { convertToReadableDate } from '../../../constants/data';
@@ -61,21 +60,21 @@ const Chats = () => {
   };
 
   const renderItem = ({ item }) => (
-    <Card
+    <TouchableOpacity
       className="flex flex-col mb-3 bg-half-transparent items-center justify-center px-6 rounded-xl h-[100px]"
       onPress={() => router.push(`/chats/chat?userId=${item._id}`)}
     >
-      <View className="flex flex-row gap-3 items-center ">
-        <UserImg className="w-12 h-12 rounded-full mt-2" source={{ uri: item.profilePicture }} />
-        <TextSection className="flex flex-col justify-center gap-[3px] self-center mt-10">
-          <View className="flex flex-row justify-between w-[88%] ">
-            <UserName className="text-primary-light">{item.name}</UserName>
-            <PostTime className="text-slate-200 self-center text-[10px]">{convertToReadableDate(item.createdAt)}</PostTime>
+      <View className="flex flex-row gap-3 items-center">
+        <Image className="w-12 h-12 rounded-full mt-2" source={{ uri: item.profilePicture }} />
+        <View className="flex flex-col justify-center gap-[3px] self-center mt-10">
+          <View className="flex flex-row justify-between w-[88%]">
+            <Text className="text-primary-light">{item.name}</Text>
+            <Text className="text-slate-200 self-center text-[10px]">{convertToReadableDate(item.createdAt)}</Text>
           </View>
-          <MessageText className="text-primary text-[12px]">{item.email}</MessageText>
-        </TextSection>
+          <Text className="text-primary text-[12px]">{item.email}</Text>
+        </View>
       </View>
-    </Card>
+    </TouchableOpacity>
   );
 
   return (

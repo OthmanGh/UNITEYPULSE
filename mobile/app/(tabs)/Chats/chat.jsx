@@ -4,7 +4,7 @@ import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
 import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
 import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Audio } from 'expo-av'; // Import Audio from expo-av
+import { Audio } from 'expo-av';
 import { API_BASE_URI } from '../../../constants/data';
 import io from 'socket.io-client';
 import notificationSound from '../../../assets/sounds/notification.mp3';
@@ -174,9 +174,9 @@ const Chat = () => {
       wrapperStyle={{
         right: {
           backgroundColor: '#64CCC5',
-          marginBottom: 10, // Adjusts the margin between bubbles
-          padding: 5, // Optional: adjust padding to make the bubbles look better
-          maxWidth: '80%', // Adjusts the width of the bubbles
+          marginBottom: 10,
+          padding: 5,
+          maxWidth: '80%',
         },
         left: {
           backgroundColor: 'white',

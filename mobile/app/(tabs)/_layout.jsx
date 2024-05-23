@@ -45,7 +45,6 @@ const TabsLayout = () => {
           ),
         }}
       />
-
       <Tabs.Screen
         name="chats"
         options={{
