@@ -71,7 +71,7 @@ const ExpenseTracker: React.FC = () => {
         return;
       }
 
-      const response: AxiosResponse = await axios.post(`${API_BASE_URI}/api/transactions`, newTransaction, {
+      const response: AxiosResponse = await axios.post(`${API_BASE_URI}/transactions`, newTransaction, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -97,7 +97,7 @@ const ExpenseTracker: React.FC = () => {
       }
 
       const token = JSON.parse(localStorage.getItem('authUser') || '').token;
-      const response: AxiosResponse = await axios.delete(`${API_BASE_URI}/api/transactions/${transactionToDelete}`, {
+      const response: AxiosResponse = await axios.delete(`${API_BASE_URI}/transactions/${transactionToDelete}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
