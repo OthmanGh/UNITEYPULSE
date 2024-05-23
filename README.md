@@ -89,11 +89,11 @@
 | Landing Screen                                | Customers Screen                          | Manage Screen                               |
 | ![Landing](./readme/demo/landingPage_all.gif) | ![fsdaf](./readme/demo/CustomersPage.gif) | ![fsdaf](./readme/demo/ManagePage.gif)      |
 
-| Employees screen                              | Calendar screen                           | Hero screen                                 |
-| --------------------------------------------- | ----------------------------------------- | ------------------------------------------- |
-| ![Landing](./readme/demo/EmployeesPage.gif)   | ![fsdaf](./readme/demo/CalendarPage.gif)  | ![fsdaf](./readme/demo/landingPage_gif.gif) |
-| Landing Screen                                | Customers Screen                          | Manage Screen                               |
-| ![Landing](./readme/demo/landingPage_all.gif) | ![fsdaf](./readme/demo/CustomersPage.gif) | ![fsdaf](./readme/demo/ManagePage.gif)      |
+| Employees screen                              | Calendar screen                           | Editor Screen                          |
+| --------------------------------------------- | ----------------------------------------- | -------------------------------------- |
+| ![Landing](./readme/demo/EmployeesPage.gif)   | ![fsdaf](./readme/demo/CalendarPage.gif)  | ![fsdaf](./readme/demo/EditorPage.gif) |
+| Landing Screen                                | Customers Screen                          | Manage Screen                          |
+| ![Landing](./readme/demo/landingPage_all.gif) | ![fsdaf](./readme/demo/CustomersPage.gif) | ![fsdaf](./readme/demo/ManagePage.gif) |
 
 <br><br>
 
