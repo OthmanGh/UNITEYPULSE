@@ -75,17 +75,25 @@
 
 ### Business Owners Screens (Web)
 
-| Login screen                                  | Signup screen                             | Hero screen                                 |
-| --------------------------------------------- | ----------------------------------------- | ------------------------------------------- |
-| ![Landing](./readme/demo/LoginPage.gif)       | ![fsdaf](./readme/demo/SingupPage.gif)    | ![fsdaf](./readme/demo/landingPage_gif.gif) |
-| Landing Screen                                | Customers Screen                          | Manage Screen                               |
-| ![Landing](./readme/demo/landingPage_all.gif) | ![fsdaf](./readme/demo/CustomersPage.gif) | ![fsdaf](./readme/demo/ManagePage.gif)      |
+| Login screen                                  | Signup screen                             |
+| --------------------------------------------- | ----------------------------------------- |
+| ![Landing](./readme/demo/LoginPage.gif)       | ![fsdaf](./readme/demo/SingupPage.gif)    |
+| Landing Screen                                | Customers Screen                          |
+| ![Landing](./readme/demo/landingPage_all.gif) | ![fsdaf](./readme/demo/CustomersPage.gif) |
 
-| Employees screen                                   | Calendar screen                              | Editor Screen                               |
-| -------------------------------------------------- | -------------------------------------------- | ------------------------------------------- |
-| ![Landing](./readme/demo/EmployeesPage.gif)        | ![fsdaf](./readme/demo/CalendarPage.gif)     | ![fsdaf](./readme/demo/EditorPage.gif)      |
-| Dashboard Screen                                   | Transactions Screen                          | Company Info Screen                         |
-| ![Landing](./readme/demo/DashboardGeneralPage.gif) | ![fsdaf](./readme/demo/TransactionsPage.gif) | ![fsdaf](./readme/demo/companyInfoPage.gif) |
+| Hero screen                                 | Manage Screen                          |
+| ------------------------------------------- | -------------------------------------- |
+| ![fsdaf](./readme/demo/landingPage_gif.gif) | ![fsdaf](./readme/demo/ManagePage.gif) |
+
+| Employees screen                                   | Calendar screen                              |
+| -------------------------------------------------- | -------------------------------------------- |
+| ![Landing](./readme/demo/EmployeesPage.gif)        | ![fsdaf](./readme/demo/CalendarPage.gif)     |
+| Dashboard Screen                                   | Transactions Screen                          |
+| ![Landing](./readme/demo/DashboardGeneralPage.gif) | ![fsdaf](./readme/demo/TransactionsPage.gif) |
+
+| Editor Screen                          | Company Info Screen                         |
+| -------------------------------------- | ------------------------------------------- |
+| ![fsdaf](./readme/demo/EditorPage.gif) | ![fsdaf](./readme/demo/companyInfoPage.gif) |
 
 | Chat screen                                  | Chatbot Screen                              |
 | -------------------------------------------- | ------------------------------------------- |
@@ -93,13 +101,17 @@
 
 ### Employee Screens (Mobile)
 
-| OnBoarding Screen                              | Login Screen                                  | Home Screen                                  |
-| ---------------------------------------------- | --------------------------------------------- | -------------------------------------------- |
-| ![Landing](./readme/demo/OnboardingScreen.jpg) | ![fsdaf](./readme/demo/LoginScreenMobile.gif) | ![fsdaf](./readme/demo/HomeScreenMobile.gif) |
+| OnBoarding Screen                                                             | Profile Screen                                                          |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| ![OnBoarding](./readme/demo/OnboardingScreen.jpg){ width=300px height=500px } | ![Profile](./readme/demo/ProfileScreen.jpg){ width=300px height=500px } |
 
-| Profile Screen                            | Users Screen                                    | Chat Screen                                    |
-| ----------------------------------------- | ----------------------------------------------- | ---------------------------------------------- |
-| ![fsdaf](./readme/demo/ProfileScreen.jpg) | ![Landing](./readme/demo/UsersScreenMobile.gif) | ![fsdaf](./readme/demo/LiveChattingScreen.gif) |
+| Login Screen                                                              | Users Screen                                                              |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| ![Login](./readme/demo/LoginScreenMobile.gif){ width=300px height=500px } | ![Users](./readme/demo/UsersScreenMobile.gif){ width=300px height=500px } |
+
+| Home Screen                                                             | Chat Screen                                                               |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| ![Home](./readme/demo/HomeScreenMobile.gif){ width=300px height=500px } | ![Chat](./readme/demo/LiveChattingScreen.gif){ width=300px height=500px } |
 
 <br><br>
 
@@ -109,6 +121,20 @@
 ### Mastering AI Interaction: Unveiling the Power of Prompt Engineering:
 
 - This project harnesses advanced prompt engineering techniques to optimize AI interactions. Utilizing OpenAI's ChatGPT-3.5 model, we swiftly generate examples based on user-created labels, expediting ML model creation. Seamlessly integrating human-AI collaboration, our approach empowers businesses with real-time, insightful assistance, revolutionizing operations.
+
+  <img src="./readme/demo/promptAi.png" style="margin-right: 20px;" />
+<br><br>
+
+<!-- Unit Testing -->
+<img src="./readme/title9.svg"/>
+
+### Precision in Development: Harnessing the Power of Unit Testing:
+
+Unit testing is pivotal at our company, ensuring API reliability and code quality. By rigorously testing individual components, we catch bugs early and fortify our software solutions for seamless user experiences.
+
+<div style="display: flex; align-items: center;">
+  <img src="./readme/demo/unitTests.png" style="margin-right: 20px;" />
+</div>
 
 <br><br>
 
@@ -193,43 +219,64 @@ Establish a connection to the EC2 instance using PuTTY:
 
 <br><br>
 
-<!-- Unit Testing -->
-<img src="./readme/title9.svg"/>
-
-### Precision in Development: Harnessing the Power of Unit Testing:
-
-- This project employs rigorous unit testing methodologies to ensure the reliability and accuracy of code components. By systematically evaluating individual units of the software, we guarantee a robust foundation, identifying and addressing potential issues early in the development process.
-
-<br><br>
-
 <!-- How to run -->
 <img src="./readme/title10.svg"/>
 
-> To set up Coffee Express locally, follow these steps:
+> To set up Unity Pulse locally, follow these steps:
 
-### Prerequisites
+## Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+Before you begin, ensure you have met the following requirements:
 
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
+- **Node.js**: Make sure you have Node.js installed. If not, you can download it from the [official website](https://nodejs.org/).
+- **npm**: npm should be installed along with Node.js. Verify the installation by running `npm -v` in your terminal.
+- **MongoDB**: Ensure MongoDB is installed and running on your local machine or accessible through a cloud service.
+- **OpenAI API Key**: Obtain your API key from OpenAI.
 
-### Installation
+## Environment Variables
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+Create a `.env` file in the backend directory and populate it with the following information:
 
-1. Get a free API Key at [example](https://example.com)
-2. Clone the repo
-   git clone [github](https://github.com/your_username_/Project-Name.git)
-3. Install NPM packages
-   ```sh
+```plaintext
+MONGODB_URI=your_mongodb_uri
+PORT=your_port
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRESIN=your_jwt_expiry_time
+CLIENT_ID=915727470406-your_client_id
+CLIENT_SECRET=your_client_secret
+OPENAI_KEY=your_openai_key
+```
+
+# Installation
+
+To set up the project, follow these steps:
+
+1. **Install Dependencies**
+
+   ```bash
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
 
-Now, you should be able to run Coffee Express locally and explore its features.
+2. **Start the Backend Server**
+
+   - Navigate to the Backend Directory: `cd UINITY-PULSE/backend`
+   - Start the Backend Server: `npm start`
+
+3. **Start the Frontend Application**
+
+   - Navigate to the Frontend Directory: `cd UINITY-PULSE/frontend`
+     ```bash
+     npm start
+     npm run dev
+     ```
+
+4. **Start the React Native Expo Mobile Application**
+
+   - Navigate to the Mobile Directory: `cd UINITY-PULSE/mobile-directory`
+
+   - Start the Expo server:
+     ```bash
+     npx expo start
+     ```
+
+Feel free to dive in and explore Unity Pulse's features on your local setup 😁!
