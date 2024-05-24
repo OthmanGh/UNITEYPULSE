@@ -1,5 +1,5 @@
 import e from "express";
-import { sendMessage } from "./../controllers/chatbotController.js";
+import { sendMessage } from "./../controllers/chatbot.controller.js";
 
 const router = e.Router();
 

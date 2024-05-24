@@ -31,7 +31,7 @@ class OpenAIChatbot {
       );
 
       messages.push({
-        role: "user",
+        role: "assistent",
         content: message
       });
 
