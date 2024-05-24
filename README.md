@@ -101,17 +101,17 @@
 
 ### Employee Screens (Mobile)
 
-| OnBoarding Screen                                                         | Profile Screen                                                      |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| ![OnBoarding](./readme/demo/OnboardingScreen.jpg){ width=300 height=500 } | ![Profile](./readme/demo/ProfileScreen.jpg){ width=300 height=500 } |
+| OnBoarding Screen                                 | Profile Screen                              |
+| ------------------------------------------------- | ------------------------------------------- |
+| ![OnBoarding](./readme/demo/OnboardingScreen.jpg) | ![Profile](./readme/demo/ProfileScreen.jpg) |
 
-| Login Screen                                                          | Users Screen                                                          |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| ![Login](./readme/demo/LoginScreenMobile.gif){ width=300 height=500 } | ![Users](./readme/demo/UsersScreenMobile.gif){ width=300 height=500 } |
+| Login Screen                                  | Users Screen                                  |
+| --------------------------------------------- | --------------------------------------------- |
+| ![Login](./readme/demo/LoginScreenMobile.gif) | ![Users](./readme/demo/UsersScreenMobile.gif) |
 
-| Home Screen                                                         | Chat Screen                                                           |
-| ------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| ![Home](./readme/demo/HomeScreenMobile.gif){ width=300 height=500 } | ![Chat](./readme/demo/LiveChattingScreen.gif){ width=300 height=500 } |
+| Home Screen                                 | Chat Screen                                   |
+| ------------------------------------------- | --------------------------------------------- |
+| ![Home](./readme/demo/HomeScreenMobile.gif) | ![Chat](./readme/demo/LiveChattingScreen.gif) |
 
 <br><br>
 
