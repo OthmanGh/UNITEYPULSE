@@ -48,7 +48,7 @@
 
 <br><br>
 
-<!-- UI UX -->
+<!-- UI UX
 <img src="./readme/title4.svg"/>
 
 > We designed Unity Pulse using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
@@ -59,11 +59,11 @@
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
 | ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
 
-<br><br>
+<br><br> -->
 
 <!-- Database Design -->
 <img src="./readme/title5.svg"/>
-
+ 
 ### Architecting Data Excellence: Innovative Database Design Strategies:
 
 <img src="./readme/demo/dataBaseSchema.png"/>
@@ -75,43 +75,49 @@
 
 ### Business Owners Screens (Web)
 
-| Login screen                                  | Signup screen                             |
-| --------------------------------------------- | ----------------------------------------- |
-| ![Landing](./readme/demo/LoginPage.gif)       | ![fsdaf](./readme/demo/SingupPage.gif)    |
-| Landing Screen                                | Customers Screen                          |
-| ![Landing](./readme/demo/landingPage_all.gif) | ![fsdaf](./readme/demo/CustomersPage.gif) |
+| Hero screen                                   | Landing screen                              |
+| --------------------------------------------- | ------------------------------------------- |
+| ![Landing](./readme/demo/HeroSection.gif)     | ![fsdaf](./readme/demo/LandingPage.gif)     |
+| Login Screen (Google)                         | Signup Screen (Google)                      |
+| ![Landing](./readme/demo/LoginWithGoogle.gif) | ![fsdaf](./readme/demo/SigupWithGoogle.gif) |
 
-| Hero screen                                 | Manage Screen                          |
-| ------------------------------------------- | -------------------------------------- |
-| ![fsdaf](./readme/demo/landingPage_gif.gif) | ![fsdaf](./readme/demo/ManagePage.gif) |
+| Login screen                      | Signup Screen                      |
+| --------------------------------- | ---------------------------------- |
+| ![fsdaf](./readme/demo/Login.gif) | ![fsdaf](./readme/demo/Signup.gif) |
 
-| Employees screen                                   | Calendar screen                              |
-| -------------------------------------------------- | -------------------------------------------- |
-| ![Landing](./readme/demo/EmployeesPage.gif)        | ![fsdaf](./readme/demo/CalendarPage.gif)     |
-| Dashboard Screen                                   | Transactions Screen                          |
-| ![Landing](./readme/demo/DashboardGeneralPage.gif) | ![fsdaf](./readme/demo/TransactionsPage.gif) |
+| Dashboard Screen                        | Company Infos screen                      |
+| --------------------------------------- | ----------------------------------------- |
+| ![Landing](./readme/demo/Dashboard.gif) | ![fsdaf](./readme/demo/Company-Infos.gif) |
 
-| Editor Screen                          | Company Info Screen                         |
-| -------------------------------------- | ------------------------------------------- |
-| ![fsdaf](./readme/demo/EditorPage.gif) | ![fsdaf](./readme/demo/companyInfoPage.gif) |
+| Employees Screen                      | Transactions Screen                      |
+| ------------------------------------- | ---------------------------------------- |
+| ![fsdaf](./readme/demo/Employees.gif) | ![fsdaf](./readme/demo/Transactions.gif) |
 
-| Chat screen                                  | Chatbot Screen                              |
-| -------------------------------------------- | ------------------------------------------- |
-| ![Landing](./readme/demo/ChattingScreen.gif) | ![Landing](./readme/demo/ChatbotScreen.gif) |
+| Calendar Screen                      | Manage Screen Screen               |
+| ------------------------------------ | ---------------------------------- |
+| ![fsdaf](./readme/demo/Calendar.gif) | ![fsdaf](./readme/demo/Manage.gif) |
+
+| Editor Screen                      | Customers Info Screen                 |
+| ---------------------------------- | ------------------------------------- |
+| ![fsdaf](./readme/demo/Editor.gif) | ![fsdaf](./readme/demo/Customers.gif) |
+
+| Chat screen                            | Chatbot Screen                        |
+| -------------------------------------- | ------------------------------------- |
+| ![Landing](./readme/demo/Chatting.gif) | ![Landing](./readme/demo/chatbot.gif) |
 
 ### Employee Screens (Mobile)
 
-| OnBoarding Screen                                 | Profile Screen                              |
-| ------------------------------------------------- | ------------------------------------------- |
-| ![OnBoarding](./readme/demo/OnboardingScreen.jpg) | ![Profile](./readme/demo/ProfileScreen.jpg) |
+| OnBoarding Screen                              | Login Screen                              |
+| ---------------------------------------------- | ----------------------------------------- |
+| ![OnBoarding](./readme/demo/onBoardingGif.gif) | ![Profile](./readme/demo/LoginScreen.gif) |
 
-| Login Screen                                  | Users Screen                                  |
-| --------------------------------------------- | --------------------------------------------- |
-| ![Login](./readme/demo/LoginScreenMobile.gif) | ![Users](./readme/demo/UsersScreenMobile.gif) |
+| Home Screen                                  | Users Screen                                  |
+| -------------------------------------------- | --------------------------------------------- |
+| ![Login](./readme/demo/homeScreenMobile.gif) | ![Users](./readme/demo/UsersScreenMobile.gif) |
 
-| Home Screen                                 | Chat Screen                                   |
-| ------------------------------------------- | --------------------------------------------- |
-| ![Home](./readme/demo/HomeScreenMobile.gif) | ![Chat](./readme/demo/LiveChattingScreen.gif) |
+| Profile Screen                        | Chat Screen                               |
+| ------------------------------------- | ----------------------------------------- |
+| ![Home](./readme/demo/ProfileGif.gif) | ![Chat](./readme/demo/ChattingMobile.gif) |
 
 <br><br>
 
@@ -122,7 +128,9 @@
 
 - This project harnesses advanced prompt engineering techniques to optimize AI interactions. Utilizing OpenAI's ChatGPT-3.5 model, we swiftly generate examples based on user-created labels, expediting ML model creation. Seamlessly integrating human-AI collaboration, our approach empowers businesses with real-time, insightful assistance, revolutionizing operations.
 
-  <img src="./readme/demo/promptAi.png" style="margin-right: 20px;" />
+  <img src="./readme/demo/ai model 1.png" style="margin-bottom: 20px;" />
+  <img src="./readme/demo/ai model 2 .png" style="margin-bottom: 20px;" />
+
 <br><br>
 
 <!-- Unit Testing -->
@@ -279,4 +287,4 @@ To set up the project, follow these steps:
      npx expo start
      ```
 
-Feel free to dive in and explore Unity Pulse's features on your local setup 😁!
+Feel free to dive in and explore Unity Pulse's features on your local setup !
